@@ -3,9 +3,7 @@
 <head>
   <title>Simple Calculator</title>
 </head>
-<body>  
-  <h2>Meters per stroke from User metrics</h2>
-  <h2>User Watts <input id="num1" type="number" placeholder="watts"> </h2>
+<h2>User Watts <input id="num1" type="number" placeholder="watts"> </h2>
   <h2>500m Split (seconds)  <input id="num2" type="number" placeholder="split"> </h2>                                                                  </h2>
   <h2>Full Effort Cadence <input id="num3" type="number" placeholder="feCadence"> </h2>                                                   </h2>
   <h2>Pull Length (m)  <input id="num4" type="number" placeholder="pullLength">  </h2>                                                             </h2>
@@ -13,6 +11,9 @@
   
   <br> 
 
+<!-- This is an html comment: 6.11 finish formatting boxes and then add 
+ buttons for calculating pull force and meters per stroke. Add a button for 
+ calculating watts from split and cadence. Add comment boxes-->
 
   <button style="width: 200px; height: 50px;"
    onclick="calculate('+')">Go</button>
@@ -25,6 +26,7 @@
   <h2 id="pullForce">Pull Force: </h2>
   <h2 id="mtrsPer">Meters per Stroke: </h2>
 
+  
   <script>
     function calculate(operator) {
       const a = Number(document.getElementById("num1").value);
