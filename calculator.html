@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!--Use css for colors etc.-->
+<!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>
 <head>
   <title>Simple Calculator</title>
 </head>
-<h2>User Watts <input id="num1" type="number" placeholder="watts"> </h2>
+  <h2>User Watts <input id="num1" type="number" placeholder="watts"> </h2>
   <h2>500m Split (seconds)  <input id="num2" type="number" placeholder="split"> </h2>                                                                  </h2>
   <h2>Full Effort Cadence <input id="num3" type="number" placeholder="feCadence"> </h2>                                                   </h2>
   <h2>Pull Length (m)  <input id="num4" type="number" placeholder="pullLength">  </h2>                                                             </h2>
@@ -25,20 +27,19 @@
   <!--6.11 add formulas and logic following DPS spreadsheet and flow diagram -->
   <!-- logic is as for demographic fePower (watts), feSplit (seconds), 
    and pullLenght-->
-
   <!-- Enter estimated feCadence, to calculate DPS and woPower--> 
-
   <!-- report 500m woSplit v. feSplit %difference and decide if is OK to continue with
    DPS as calculated -->
-
   <!-- if not instruct how to revise with feSplit timed piece  -->
   </html>
   <script>
     function calculate(operator) {
+<!--these are the input values to be renamed-->      
       const a = Number(document.getElementById("num1").value);
       const b = Number(document.getElementById("num2").value);
+      const c = Number(document.getElementById("num3").value);
+   
       let result;
-
       if (operator === "+") result = a + b;
       if (operator === "-") result = a - b;
       if (operator === "*") result = a * b;
