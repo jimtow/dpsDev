@@ -1,0 +1,7 @@
+17Jun: A simple app embodies most of spreadsheet to calibrate a new machine.
+
+Enter user watts, 500m split time.
+
+Row to 500m split time with full effort at selected cadence with estimated DPS.
+
+Estimate effort, revise DPS and row to 500m.
