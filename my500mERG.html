@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <!--Use css for colors etc.-->
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
-<html>
-<head>
-  <title>Simple Calculator</title>
-</head>
+<html>  
+<body></body>
 
-  <h2>User Watts <input id="num1" type="number" placeholder="watts"> </h2>
-  <h2>500m Split (seconds)  <input id="num2" type="number" placeholder="split"> </h2>                                                                 
-  <h2>Full Effort Cadence <input id="num3" type="number" placeholder="feCadence"> </h2>                                                  
-  <h2>Pull Length (m)  <input id="num4" type="number" placeholder="pullLength">  </h2>                                                            
-  <h2>Percent Drive <input id="num5" type="number" placeholder="percentDrive">  </h2>                                                              
+  <h3>User Watts <input id="num1" type="number" placeholder="watts"> </h3>
+  <h3>500m Split (seconds)  <input id="num2" type="number" placeholder="split"> </h3>                                                                 
+  <h3>Full Effort Cadence <input id="num3" type="number" placeholder="feCadence"> </h3>                                                  
+  <!--<h2>Pull Length (m)  <input id="num4" type="number" placeholder="pullLength">  </h2> -->                                                           
+  <!--<h2>Percent Drive <input id="num5" type="number" placeholder="percentDrive">  </h2>                                                              
   
   <br> 
 
   <button style="width: 200px; height: 50px;"
    onclick="calculate('+')">Go</button>
   
-  <!--<button onclick="calculate('-')">-</button> -->
+  <--<button onclick="calculate('-')">-</button> -->
   <!--<button onclick="calculate('*')">*</button> -->
   <!--<button onclick="calculate('/')">/</button> -->
 
-  <h2 style="color: red;" id="result">Result: </h2>
-  <h2 style="color: blue;" id="pullForce">Pull Force: </h2>
-  <h2 id="mtrsPer">Meters per Stroke: </h2>
+  <h2 style="color: red;">Row to Split (seconds) </h2>
+    
+  <h3 style="color: blue;" id="pcEffort">% Full Effort </h3>
+  <h3 id="mtrsPer">Meters per Stroke: </h3>
 
   <!--6.11 add formulas and logic following DPS spreadsheet and flow diagram -->
   <!-- logic is as for demographic fePower (watts), feSplit (seconds), 
@@ -32,7 +31,7 @@
   <!-- report 500m woSplit v. feSplit %difference and decide if is OK to continue with
    DPS as calculated -->
   <!-- if not instruct how to revise with feSplit timed piece  -->
-  </html>
+  
   <script>
     function calculate(operator) {
 <!--these are the input values to be renamed-->      
