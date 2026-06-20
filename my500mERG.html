@@ -25,15 +25,21 @@
    <!--<button onclick="calculate('-')">-</button> -->
   <!--<button onclick="calculate('*')">*</button> -->
   <!--<button onclick="calculate('/')">/</button> -->
+
   <h3> Meters per Stroke:     OTW Speed:</h3>
   <p> Row to 500m FE 500m split time at FE cadence. This is your performance w this machineand settings.</p>
   <h3>Full Effort OTW seconds <input id="feOTW" style="width:100px; height: 30px"; 
      type="number" placeholder="feOTWtime"> </h3>
-
-  <h3 style="color: green;">Row Full Effort </h3>
   <div style="display: inline-block; font: size 20px;" >Time</div>
+   document.getElementById("result").textContent = "Value: " + value;
   <div style="display: inline-block; font-size:20px;">Distance</div>
   <div style="display: inline-block; font-size:20px;">Watt-min</div>
+
+  
+
+  <!--   from chatGPT 
+    const value = 42;
+    document.body.innerHTML += `<p>Value: ${value}</p>`;-->
 
   
   
