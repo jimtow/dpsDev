@@ -30,7 +30,7 @@
   <p> Row to 500m FE 500m split time at FE cadence. This is your performance w this machineand settings.</p>
   <h3>Full Effort OTW seconds <input id="feOTW" style="width:100px; height: 30px"; 
      type="number" placeholder="feOTWtime"> </h3>
-  <div style="display: inline-block; font: size 20px;" >Time</div>
+  <div style="display: inline-block; font-size: 20px;" >Time</div>
   <div style="display: inline-block; font-size:20px;">Distance</div>
   <div style="display: inline-block; font-size:20px;">Watt-min</div>
   <p id="result"></p>
@@ -38,9 +38,9 @@
   <script>
     function calculate(operator) {
 <!--these are the input values to be renamed-->      
-      const a = Number(document.getElementById("num1").value);
-      const b = Number(document.getElementById("num2").value);
-      const c = Number(document.getElementById("num3").value);
+      const a = Number(document.getElementById("feWatts").value);
+      const b = Number(document.getElementById("feSplit").value);
+      const c = Number(document.getElementById("feOTW").value);
    
       let result;
       if (operator === "+") result = a + b;
