@@ -33,22 +33,7 @@
   <div style="display: inline-block; font: size 20px;" >Time</div>
   <div style="display: inline-block; font-size:20px;">Distance</div>
   <div style="display: inline-block; font-size:20px;">Watt-min</div>
-  <h3>document.getElementById("result").textContent = "Test: " + pcFe;</h3>
-  
-
-  <!--   from chatGPT 
-    const value = 42;
-    document.body.innerHTML += `<p>Value: ${value}</p>`;-->
-
-  
-  
-  <!--6.11 add formulas and logic following DPS spreadsheet and flow diagram -->
-  <!-- logic is as for demographic fePower (watts), feSplit (seconds), 
-   and pullLenght-->
-  <!-- Enter estimated feCadence, to calculate DPS and woPower--> 
-  <!-- report 500m woSplit v. feSplit %difference and decide if is OK to continue with
-   DPS as calculated -->
-  <!-- if not instruct how to revise with feSplit timed piece  -->
+  <p id="result"></p>
   
   <script>
     function calculate(operator) {
