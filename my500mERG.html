@@ -13,7 +13,7 @@
 </h3>
 
  <h3>
-   Full Effort Sustainable Cadence 
+   Full Effort (FE) Sustainable Cadence 
     <input id="feCdnc" style="width:100px; height: 30px;" type="number" placeholder="feCadence"> 
    est DPS 
     <input id="estDPS" style="width:100px; height: 30px;" type="number" placeholder="estDPS">
@@ -23,15 +23,10 @@
   
   <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
  
-  <h2 style="color: red;">Row to Split (seconds) </h2>
-  <p>Row with sustainable full-effort to the above 500m split time. </p>
-  <p> Stop, note the possible revised DPS.</p>
-  <p>Row a new piece at the same FE cadence to the (new) 500m split time. </p>
-  <p>The 500m split time is now due to the current rowing machine and settings.</p>
-  
-  <!--<span style="display: inline;">First</span>-->
-  <!--<span style="display: inline;">Second</span>-->
-
+  <h2 style="color: red;">Row to the 500m Split (seconds) </h2>
+  <p>Row with a sustainable full-effort to the above 500m split time. </p>
+  <p> Note your Perceived Effort</p>
+ 
   <h3> 
     % full effort <input id="pcFe" style="width:100px; height: 30px;"  
     type="number" placeholder="%">  
@@ -39,22 +34,20 @@
     <button style="width: 60px; height: 40px;
     " onclick="calculate('+')">Go</button> 
   </h3>
-  <h3>Meters per Stroke: ??   "OTW" Speed: ?? </h3>
+  <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3>
   <!--<button onclick="calculate('-')">-</button> -->
   <!--<button onclick="calculate('*')">*</button> -->
   <!--<button onclick="calculate('/')">/</button> -->
 
-  
-  <p> Row to 500m FE 500m split time at FE cadence. This is your performance w this machineand settings.</p>
+  <h2 style="color: green;">Row to the 500m Split time (seconds) </h2>
+  <p> Row at the FE cadence. Note time (seconds)</p>
   <h3>
     Full Effort OTW seconds <input id="feOTW" style="width:100px; height: 30px;"
      type="number" placeholder="feOTWtime"> 
     </h3>
-
-  <div style="display: inline-block; font-size: 20px;" >Time</div>
-  <div style="display: inline-block; font-size:20px;">Distance</div>
-  <div style="display: inline-block; font-size:20px;">Watt-min</div>
-  <p id="result"></p>
+  <p>This is your performance w this machine and settings. </p>
+  <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
+  
 <br>  
   <script>
     function calculate(operator) {
