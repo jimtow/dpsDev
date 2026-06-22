@@ -4,11 +4,20 @@
 <html>   
 <body></body>
   <!--calibrate with full effort sustainable cadence and intial guess at DPS -->
-  <h3>User Watts <input id="feWatts" style="width:100px; height: 30px"; type="number" placeholder="feWatts"> 
-    500m Split (seconds) <input id="feSplit" style="width:100px; height: 30px";type="number" placeholder="feSplit"></h3 >   
-    
-  <h3>Full Effort Sustainable Cadence <input id="feCdnc" style="width:100px; height: 30px"; type="number" placeholder="feCadence"> 
-    est DPS <input id="estDPS"  style="width:100px; height: 30px"; type="number" placeholder="estDPS">    </h3>                                                  
+
+<h3>
+  User Watts
+  <input id="feWatts" style="width:100px; height:30px;" type="number" placeholder="Watts">
+  500m Split (seconds)
+  <input id="feSplit" style="width:100px; height:30px;" type="number" placeholder="Seconds">
+</h3>
+
+ <h3>
+   Full Effort Sustainable Cadence 
+    <input id="feCdnc" style="width:100px; height: 30px;" type="number" placeholder="feCadence"> 
+   est DPS 
+    <input id="estDPS" style="width:100px; height: 30px;" type="number" placeholder="estDPS">
+  </h3>                                                  
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
   
@@ -19,21 +28,25 @@
   <p> Stop, note the possible revised DPS.</p>
   <p>Row a new piece at the same FE cadence to the (new) 500m split time. </p>
   <p>The 500m split time is now due to the current rowing machine and settings.</p>
-  <h3> % full effort <input id="pcFe" style="width:100px; height: 30px";   type="number" placeholder="%"> </h3>
+  <h3> 
+    % full effort <input id="pcFe" style="width:100px; height: 30px;"  
+    type="number" placeholder="%"> 
+  </h3>
   <br>
-  <span> <button style="width: 60px; height: 40px;" onclick="calculate('+')">Go</button> </span>
-  <h3>Meters per Stroke: ??   OTW Speed: ?? </h3>
+  <button style="width: 60px; height: 40px;
+    " onclick="calculate('+')">Go</button> 
+  <h3>Meters per Stroke: ??   "OTW" Speed: ?? </h3>
    
-  <!--<h3>Meters per Stroke: ??   OTW Speed: ?? </h3>
-
-   <!--<button onclick="calculate('-')">-</button> -->
+  <!--<button onclick="calculate('-')">-</button> -->
   <!--<button onclick="calculate('*')">*</button> -->
   <!--<button onclick="calculate('/')">/</button> -->
 
   
   <p> Row to 500m FE 500m split time at FE cadence. This is your performance w this machineand settings.</p>
-  <h3>Full Effort OTW seconds <input id="feOTW" style="width:100px; height: 30px"; 
-     type="number" placeholder="feOTWtime"> </h3>
+  <h3>
+    Full Effort OTW seconds <input id="feOTW" style="width:100px; height: 30px;"
+     type="number" placeholder="feOTWtime"> 
+    </h3>
 
   <div style="display: inline-block; font-size: 20px;" >Time</div>
   <div style="display: inline-block; font-size:20px;">Distance</div>
