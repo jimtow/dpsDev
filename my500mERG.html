@@ -32,9 +32,11 @@
     type="number" placeholder="%">  
 
     <button style="width: 60px; height: 40px;
-    " onclick="calculate('+')">Go</button> 
+    " onclick="calculate('Go')">Go</button> 
   </h3>
   <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3>
+  <p id="result"></p>
+
   <!--<button onclick="calculate('-')">-</button> -->
   <!--<button onclick="calculate('*')">*</button> -->
   <!--<button onclick="calculate('/')">/</button> -->
@@ -46,8 +48,6 @@
     placeholder="enter DPS"> 
   </h3>   
 
-
-
   <h2 style="color: green;">Row! </h2>
   <p> Row at any cadence</p>
   <h3>
@@ -58,14 +58,13 @@
      type="number" placeholder="otwSec">  
 
     <button style="width: 60px; height: 40px;
-    " onclick="calculate('+')">Go</button> 
+    " onclick="calculate('Row')">Row</button> 
 
     </h3>
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
 
-  <p id="result"></p>
-  <h3> %result??</h3>
+  <h3> end </h3>
   
 <br>  
   <script>
@@ -77,8 +76,8 @@
       const c = Number(document.getElementById("feOTW").value);
    
       let result;
-      if (operator === "+") result = a + b;
-      if (operator === "-") result = a - b;
+      if (operator === "Go") result = a + b;
+      if (operator === "Row") result = a - b;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
 
