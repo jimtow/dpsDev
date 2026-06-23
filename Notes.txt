@@ -1,7 +1,18 @@
-17Jun: A simple app embodies most of spreadsheet to calibrate a new machine.
+Remember this folder is a repo !!
 
-Enter user watts, 500m split time.
+<!DOCTYPE html>
+<html>
+<body>
 
-Row to 500m split time with full effort at selected cadence with estimated DPS.
+<p>The result is: <span id="result"></span></p>
 
-Estimate effort, revise DPS and row to 500m.
+<script>
+    let x = 5;
+    let y = 10;
+    let sum = x + y;
+
+    document.getElementById("result").textContent = sum;
+</script>
+
+</body>
+</html>
