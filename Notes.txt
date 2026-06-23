@@ -1,18 +1,9 @@
 Remember this folder is a repo !!
 
-<!DOCTYPE html>
-<html>
-<body>
+Working well. Open/edit local folders. Commit/sync often from Visual Studio Code.
 
-<p>The result is: <span id="result"></span></p>
+GitHub URL??
 
-<script>
-    let x = 5;
-    let y = 10;
-    let sum = x + y;
+https:// jimtow.github.io/dpsDev/
 
-    document.getElementById("result").textContent = sum;
-</script>
 
-</body>
-</html>
