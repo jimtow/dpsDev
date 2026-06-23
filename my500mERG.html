@@ -8,19 +8,19 @@
 <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
-  placeholder="feWatts">
+  placeholder="90">
   500m Split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
-  placeholder="Seconds">
+  placeholder="180">
 </h3>
 
  <h3>
    Full Effort (FE) Sustainable Cadence 
     <input id="feCadn" style="width:100px; height: 30px;" type="number" 
-    placeholder="feCadn"> 
-   est DPS 
+    placeholder="30"> 
+   est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number" 
-    placeholder="estDPS">
+    placeholder="8">
   </h3>                                                  
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
@@ -33,7 +33,7 @@
  
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="%">  
+    type="number" placeholder="100">  
 
     <button style="width: 60px; height: 40px;
     " onclick="calculate('Go')">Go</button> 
@@ -86,7 +86,7 @@
       const h = Number(document.getElementById("otwSec").value);
    
       let result;
-      if (operator === "Go") result = a + b;
+      if (operator === "Go") result =  500/(c * (b/60));     
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";

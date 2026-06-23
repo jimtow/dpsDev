@@ -4,6 +4,20 @@ Working well. Open/edit local folders. Commit/sync often from Visual Studio Code
 
 GitHub URL??
 
-https:// jimtow.github.io/dpsDev/
+jimtow.github.io/dpsDev/ seems to get me to web-app 
+
+https:// jimtow.github.io/dpsDev/    has trouble
+
+
+
+calculations:
+
+meters per stroke = #strokes/500 meters
+
+# strokes = cadence * time = (strokes/min)*min = (strokes/min)*(min/sec)*sec 
+
+meters per stroke = (cadence*seconds/60)/500 = cadence*splitseconds(500/60)
+ 
+
 
 
