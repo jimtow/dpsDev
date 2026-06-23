@@ -63,10 +63,14 @@
     </h3>
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
+
+  <p id="result"></p>
+  <h3> %result??</h3>
   
 <br>  
   <script>
     function calculate(operator) {
+
 <!--these are the input values to be renamed-->      
       const a = Number(document.getElementById("feWatts").value);
       const b = Number(document.getElementById("feSplit").value);
