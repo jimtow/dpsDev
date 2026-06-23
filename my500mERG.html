@@ -7,16 +7,20 @@
 
 <h3>
   User Watts
-  <input id="feWatts" style="width:100px; height:30px;" type="number" placeholder="Watts">
+  <input id="feWatts" style="width:100px; height:30px;" type="number" 
+  placeholder="feWatts">
   500m Split (seconds)
-  <input id="feSplit" style="width:100px; height:30px;" type="number" placeholder="Seconds">
+  <input id="feSplit" style="width:100px; height:30px;" type="number" 
+  placeholder="Seconds">
 </h3>
 
  <h3>
    Full Effort (FE) Sustainable Cadence 
-    <input id="feCdnc" style="width:100px; height: 30px;" type="number" placeholder="feCadence"> 
+    <input id="feCadn" style="width:100px; height: 30px;" type="number" 
+    placeholder="feCadn"> 
    est DPS 
-    <input id="estDPS" style="width:100px; height: 30px;" type="number" placeholder="estDPS">
+    <input id="estDPS" style="width:100px; height: 30px;" type="number" 
+    placeholder="estDPS">
   </h3>                                                  
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
@@ -28,7 +32,7 @@
   <p> Note your Perceived Effort</p>
  
   <h3> 
-    % full effort <input id="pcFe" style="width:100px; height: 30px;"  
+    % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" placeholder="%">  
 
     <button style="width: 60px; height: 40px;
@@ -44,17 +48,17 @@
   <!-- use revised or known distance per stroke -->
   <h3>
    Distance per Stroke (revised or known)
-    <input id="distPerStroke" style="width:100px; height: 30px;" type="number" 
+    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
     placeholder="enter DPS"> 
   </h3>   
 
   <h2 style="color: green;">Row! </h2>
   <p> Row at any cadence</p>
   <h3>
-    @cadence<input id="rowCadence" style="width:100px; height: 30px;"
+    @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" placeholder="otwCad"> 
 
-     for (seconds) <input id="rowSeconds" style="width:100px; height: 30px;"
+     for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
     <button style="width: 60px; height: 40px;
@@ -73,11 +77,16 @@
 <!--these are the input values to be renamed-->      
       const a = Number(document.getElementById("feWatts").value);
       const b = Number(document.getElementById("feSplit").value);
-      const c = Number(document.getElementById("feOTW").value);
+      const c = Number(document.getElementById("feCadn").value);
+      const d = Number(document.getElementById("estDPS").value);
+      const e= Number(document.getElementById("pcFeff").value);
+      const f = Number(document.getElementById("mPstr").value);
+      const g = Number(document.getElementById("otwCadn").value);
+      const h = Number(document.getElementById("otwSec").value);
    
       let result;
       if (operator === "Go") result = a + b;
-      if (operator === "Row") result = a - b;
+      if (operator === "Row") result = a + b;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
 
