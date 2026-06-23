@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <!--Use css for colors etc. xx-->
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
-<html>  
+<html>   
 <body></body>
   <!--calibrate with full effort sustainable cadence and intial guess at DPS -->
-  <h3>User Watts <input id="feWatts" type="number" placeholder="feWatts"> 500m Split (seconds) <input id="feSplit" type="number" placeholder="feSplit"></h3 >                                                           
-  <h3>Full Effort Sustainable Cadence <input id="feCdnc" type="number" placeholder="feCadence"> </h3>                                                  
-  <h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>     
-  
-  <!--<h2>Pull Length (m)  <input id="num4" type="number" placeholder="pullLength">  </h2> -->                                                           
-  <!--<h2>Percent Drive <input id="num5" type="number" placeholder="percentDrive">  </h2>                                                              
-  
-  <br> 
 
-  <button style="width: 200px; height: 50px;"
-   onclick="calculate('+')">Go</button>
+<h3>
+  User Watts
+  <input id="feWatts" style="width:100px; height:30px;" type="number" placeholder="Watts">
+  500m Split (seconds)
+  <input id="feSplit" style="width:100px; height:30px;" type="number" placeholder="Seconds">
+</h3>
+
+ <h3>
+   Full Effort (FE) Sustainable Cadence 
+    <input id="feCdnc" style="width:100px; height: 30px;" type="number" placeholder="feCadence"> 
+   est DPS 
+    <input id="estDPS" style="width:100px; height: 30px;" type="number" placeholder="estDPS">
+  </h3>                                                  
   
-  <--<button onclick="calculate('-')">-</button> -->
+  <!--<input type="text" style="width: 300px; height: 40px;"> -->
+  
+  <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
+ 
+  <h2 style="color: red;">Row FE to the 500m Split (seconds) </h2>
+  <p>Row with a sustainable full-effort to the above 500m split time. </p>
+  <p> Note your Perceived Effort</p>
+ 
+  <h3> 
+    % full effort <input id="pcFe" style="width:100px; height: 30px;"  
+    type="number" placeholder="%">  
+
+    <button style="width: 60px; height: 40px;
+    " onclick="calculate('+')">Go</button> 
+  </h3>
+  <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3>
+  <!--<button onclick="calculate('-')">-</button> -->
   <!--<button onclick="calculate('*')">*</button> -->
   <!--<button onclick="calculate('/')">/</button> -->
-  
-  <h2 style="color: red;">Row to Split (seconds) </h2>
-  <p>Row with sustainable full-effort to the above 500m split time. </p>
-  <p> Stop, note the possible revised DPS.</p>
-  <p>Row a new piece at the same FE cadence to the (new) 500m split time. </p>
-  <p>The 500m split time is now due to the current rowing machine and settings.</p>
-    
-  <h3> % full effort <input id="pcFe" type="number" placeholder="%"> </h3>
-  <h3> Meters per Stroke: </h3>
-  <h3> OTW Speed: </h3>
-  <h2 style="color: green;">Row at FE cadence </h2>
-  <h2> STOP @ (seconds)</h2>
-  
-  <div style="display: inline-block; font-size:24px;" >Time</div>
-  <div style="display: inline-block; font-size:24px;">Distance</div>
-  <div style="display: inline-block;">Watt-min</div>
 
+  <!-- use revised or known distance per stroke -->
+  <h3>
+   Distance per Stroke (revised or known)
+    <input id="distPerStroke" style="width:100px; height: 30px;" type="number" 
+    placeholder="enter DPS"> 
+  </h3>   
+
+
+
+  <h2 style="color: green;">Row! </h2>
+  <p> Row at any cadence</p>
+  <h3>
+    @cadence<input id="rowCadence" style="width:100px; height: 30px;"
+     type="number" placeholder="otwCad"> 
+
+     for (seconds) <input id="rowSeconds" style="width:100px; height: 30px;"
+     type="number" placeholder="otwSec">  
+
+    <button style="width: 60px; height: 40px;
+    " onclick="calculate('+')">Go</button> 
+
+    </h3>
+  <p>This is your performance w this machine and settings. </p>
+  <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
   
-  
-  <!--6.11 add formulas and logic following DPS spreadsheet and flow diagram -->
-  <!-- logic is as for demographic fePower (watts), feSplit (seconds), 
-   and pullLenght-->
-  <!-- Enter estimated feCadence, to calculate DPS and woPower--> 
-  <!-- report 500m woSplit v. feSplit %difference and decide if is OK to continue with
-   DPS as calculated -->
-  <!-- if not instruct how to revise with feSplit timed piece  -->
-  
+<br>  
   <script>
     function calculate(operator) {
 <!--these are the input values to be renamed-->      
-      const a = Number(document.getElementById("num1").value);
-      const b = Number(document.getElementById("num2").value);
-      const c = Number(document.getElementById("num3").value);
+      const a = Number(document.getElementById("feWatts").value);
+      const b = Number(document.getElementById("feSplit").value);
+      const c = Number(document.getElementById("feOTW").value);
    
       let result;
       if (operator === "+") result = a + b;
