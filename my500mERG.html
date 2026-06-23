@@ -38,9 +38,7 @@
     <button style="width: 60px; height: 40px;
     " onclick="calculate('Go')">Go</button> 
   </h3>
-  <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3>
-  
-   document.getElementById("result").textContent = "Result: " + result;
+  <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3> 
   
   <p id="result"></p>
 
@@ -93,7 +91,7 @@
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
 
-      document.getElementById("result").textContent = "Result: " + result;
+      document.getElementById("result").textContent = result;
     }
   </script>
 <body></body>
