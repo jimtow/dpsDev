@@ -24,34 +24,26 @@
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
   <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
- 
-  <h2 style="color: red;">Row FE to the 500m Split (seconds) </h2>
-  <p>Row with a sustainable full-effort to the above 500m split time. </p>
+   
+  <p>Row with a sustainable full-effort to the 500m split time. </p>
+  <h2 style="color: red;">Row FE to the 500m Split (seconds) [start a timer] </h2>
   <p> Note your Perceived Effort</p>
- 
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="100">  
+    type="number" placeholder="?">  
+    <button style="width: 90px; height: 40px;
+    " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
+ 
+  <h3>Distance per Stroke: <span id="result"    ></span> "OTW" Speed: ?? </h3> 
+  
 
-    <button style="width: 60px; height: 40px;
-    " onclick="calculate('Go')">Go</button> 
-  </h3>
-  <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3> 
-   
-  <p id="result"></p>
-
-  <!--<button onclick="calculate('-')">-</button> -->
-  <!--<button onclick="calculate('*')">*</button> -->
-  <!--<button onclick="calculate('/')">/</button> -->
-
-  <!-- use revised or known distance per stroke -->
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
     placeholder="enter DPS">
   </h3>   
 
-  <h2 style="color: green;">Row! </h2>
+  <h2 style="color: green;">Workout! </h2>
   <p> Row at any cadence</p>
   <h3>
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
@@ -60,8 +52,8 @@
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
-    <button style="width: 60px; height: 40px;
-    " onclick="calculate('Row')">Row</button> 
+    <button style="width: 90px; height: 40px;
+    " onclick="calculate('Workout!')">Workout!</button> 
 
     </h3>
   <p>This is your performance w this machine and settings. </p>
@@ -72,9 +64,7 @@
 <br>  
   <script>
     function calculate(operator) {
-
 <!--these are the input values to be renamed-->   
-
       const a = Number(document.getElementById("feWatts").value);
       const b = Number(document.getElementById("feSplit").value);
       const c = Number(document.getElementById("feCadn").value);
@@ -85,7 +75,7 @@
       const h = Number(document.getElementById("otwSec").value);
 
       let result;
-      if (operator === "Go") result = 30000/(c * b);  
+      if (operator === "Row(500m)") result = e*300/(c * b);  
         result = Number(result.toFixed(1)); 
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;

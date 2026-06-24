@@ -1,3 +1,18 @@
+If by "run an HTML script inside an HTML script" you mean execute JavaScript code from one <script> inside another, there are several approaches.
+
+1. Put the code in a function and call it
+<script>
+function myFunction() {
+    console.log("Hello from function");
+}
+</script>
+
+<script>
+myFunction();
+</script>
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Remember this folder is a repo !!
 
 Working well. Open/edit local folders. Commit/sync often from Visual Studio Code.
