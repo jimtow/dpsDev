@@ -37,9 +37,8 @@
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
  
-  <h3>Distance per Stroke: <span id="result"    ></span> "OTW" Speed: ?? </h3> 
+ <h3>Distance per Stroke: <span id="result"></span></h3> 
   
-
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
@@ -77,8 +76,10 @@
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       let result;
-      if (operator === "Row(500m)") result = e*300/(c * b);  
-        result = Number(result.toFixed(1)); 
+      if (operator === "Row(500m)")       {
+        result = e*300/(c * b);
+        result = Number(result.toFixed(1));
+          }
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
