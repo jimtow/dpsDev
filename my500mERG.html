@@ -4,27 +4,25 @@
 <html>   
 <body></body>
   <!--calibrate with full effort sustainable cadence and intial guess at DPS -->
-
 <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
-  placeholder="90">
+  placeholder="? watts">
   500m Split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
-  placeholder="180">
+  placeholder="? seconds">
 </h3>
 
- <h3>
+<h3>
    Full Effort (FE) Sustainable Cadence 
     <input id="feCadn" style="width:100px; height: 30px;" type="number" 
-    placeholder="30"> 
+    placeholder="? cadence"> 
    est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number" 
     placeholder="8">
-  </h3>                                                  
+ </h3>                                                  
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
-  
   <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
  
   <h2 style="color: red;">Row FE to the 500m Split (seconds) </h2>
@@ -39,7 +37,7 @@
     " onclick="calculate('Go')">Go</button> 
   </h3>
   <h3>Distance per Stroke: ??   "OTW" Speed: ?? </h3> 
-  
+   
   <p id="result"></p>
 
   <!--<button onclick="calculate('-')">-</button> -->
@@ -50,7 +48,7 @@
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
-    placeholder="enter DPS"> 
+    placeholder="enter DPS">
   </h3>   
 
   <h2 style="color: green;">Row! </h2>
@@ -68,14 +66,15 @@
     </h3>
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
-
+<!--const num = Number(value.toFixed(1));-->
   <h3> end </h3>
   
 <br>  
   <script>
     function calculate(operator) {
 
-<!--these are the input values to be renamed-->      
+<!--these are the input values to be renamed-->   
+
       const a = Number(document.getElementById("feWatts").value);
       const b = Number(document.getElementById("feSplit").value);
       const c = Number(document.getElementById("feCadn").value);
@@ -84,9 +83,10 @@
       const f = Number(document.getElementById("mPstr").value);
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
-   
+
       let result;
-      if (operator === "Go") result =  500/(c * (b/60));     
+      if (operator === "Go") result = 30000/(c * b);  
+        result = Number(result.toFixed(1)); 
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
