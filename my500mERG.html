@@ -27,6 +27,9 @@
    
   <p>Row with a sustainable full-effort to the 500m split time. </p>
   <h2 style="color: red;">Row FE to the 500m Split (seconds) [start a timer] </h2>
+  <h1 id="timer">0</h1>
+  
+  
   <p> Note your Perceived Effort</p>
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
@@ -73,16 +76,18 @@
       const f = Number(document.getElementById("mPstr").value);
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
-
       let result;
       if (operator === "Row(500m)") result = e*300/(c * b);  
         result = Number(result.toFixed(1)); 
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
-
       document.getElementById("result").textContent = result;
     }
   </script>
+<!-- add a named timer script (function) here and call on buttton click !!-->
+
+
+
 <body></body>
 </html>
