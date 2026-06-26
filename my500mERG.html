@@ -45,6 +45,7 @@
     
   </span>         Watts:<span id="watts"></span> </h3>
 
+<!-- begin page 2 -->
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
@@ -71,6 +72,10 @@
   <h3> end </h3>
   
 <br>  
+
+<!--add a workout script here-->
+
+
   <script>
     function calculate(operator) {
 <!--these are the input values to be renamed-->   
@@ -86,10 +91,9 @@
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
         watts =  (e/100)*a;       }
+
         result = Number(result.toFixed(1));
-      if (operator === "Row") result = g + h;
-      if (operator === "*") result = a * b;
-      if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
+
       document.getElementById("result").textContent = result;
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
     }
@@ -118,5 +122,6 @@
       update();
     }
   </script>
+
 <body></body>
 </html>
