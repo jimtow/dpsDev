@@ -36,8 +36,9 @@
     type="number" placeholder="?">  
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
- 
-  <h3>Distance per Stroke: <span id="result"></span><span>Use</span></h3>    
+  
+  <h3>Distance per Stroke: <span id="result1"> </span><span id = "result2"></span></h3>  
+
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
@@ -74,15 +75,18 @@
       const f = Number(document.getElementById("mPstr").value);
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
-      let result;
+      let result1,result2;
       if (operator === "Row(500m)")       {
-        result = e*300/(c * b);
-        result = Number(result.toFixed(1));
+        result1 = e*300/(c * b);
+        result1 = Number(result.toFixed(1));
+        result2 = 500/b;
+        result2 = Number(result2.toFixed(1));
           }
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
-      document.getElementById("result").textContent = result;
+      document.getElementById("result1").textContent = result;
+      document.getElementById("result2").textContent = result2;
     }
   </script>
 <!-- add a named timer script (function) here and call on buttton click !!-->
