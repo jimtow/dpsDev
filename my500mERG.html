@@ -7,16 +7,16 @@
 <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
-  placeholder="? watts">
+  placeholder="100">
   500m Split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
-  placeholder="? seconds">
+  placeholder="180">
 </h3>
 
 <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
     <input id="feCadn" style="width:100px; height: 30px;" type="number" 
-    placeholder="? cadence"> 
+    placeholder="30"> 
    est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number" 
     placeholder="8">
@@ -33,7 +33,7 @@
   <p> Note your Perceived Effort</p>
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="?">  
+    type="number" placeholder="100">  
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
   
@@ -85,7 +85,7 @@
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
-      document.getElementById("result1").textContent = result;
+      document.getElementById("result1").textContent = result1;
       document.getElementById("result2").textContent = result2;
     }
   </script>
