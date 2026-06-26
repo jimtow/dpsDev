@@ -7,19 +7,19 @@
 <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
-  placeholder="100">
+  placeholder="?">
   500m Split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
-  placeholder="180">
+  placeholder="?">
 </h3>
 
 <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
-    <input id="feCadn" style="width:100px; height: 30px;" type="number" 
-    placeholder="30"> 
+    <input id="feCadn" style="width:100px; height: 30px;" type="number"
+    placeholder="?"> 
    est DPS (meters/stroke)
-    <input id="estDPS" style="width:100px; height: 30px;" type="number" 
-    placeholder="8">
+    <input id="estDPS" style="width:100px; height: 30px;" type="number"
+    placeholder="?">
  </h3>                                                  
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
@@ -33,16 +33,16 @@
   <p> Note your Perceived Effort</p>
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="100">  
+    type="number" placeholder="?">  
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
   
-  <h3>Distance per Stroke: <span id="result1"> </span><span id = "result2"></span></h3>  
+  <h3> Distance per Stroke: <span id="result"></span>  Watts:<span id="watts"></span> </h3>
 
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
-    placeholder="enter DPS">
+    placeholder="?">
   </h3>   
 
   <h2 style="color: green;">Workout! </h2>
@@ -58,6 +58,7 @@
     " onclick="calculate('Workout!')">Workout!</button> 
 
     </h3>
+
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
 <!--const num = Number(value.toFixed(1));-->
@@ -75,18 +76,16 @@
       const f = Number(document.getElementById("mPstr").value);
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
-      let result1,result2;
+      let result, watts;
       if (operator === "Row(500m)")       {
-        result1 = e*300/(c * b);
-        result1 = Number(result.toFixed(1));
-        result2 = 500/b;
-        result2 = Number(result2.toFixed(1));
-          }
+        result = (e/100)*30000/(c * b);
+        watts =  (e/100)*a;       }
+        result = Number(result.toFixed(1));
       if (operator === "Row") result = g + h;
       if (operator === "*") result = a * b;
       if (operator === "/") result = b !== 0 ? a / b : "Cannot divide by zero";
-      document.getElementById("result1").textContent = result1;
-      document.getElementById("result2").textContent = result2;
+      document.getElementById("result").textContent = result;
+      document.getElementById("watts").textContent = Number(watts.toFixed(1));
     }
   </script>
 <!-- add a named timer script (function) here and call on buttton click !!-->
