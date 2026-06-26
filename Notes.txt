@@ -12,6 +12,54 @@ myFunction();
 </script>
 
 
+in this case, myfunction is the metronome script in cGPTimer.html
+
+
+<!doctype html>
+<html>
+<body>
+  <h1 id="timer">0</h1>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+
+  <script>
+    let seconds = 0;
+    let interval = null;
+
+    function update() {
+      document.getElementById("timer").textContent = seconds;
+    }
+
+    function start() {
+      if (interval) return;
+      interval = setInterval(() => {
+        seconds++;
+        update();
+      }, 1000);
+    }
+
+    function stop() {
+      clearInterval(interval);
+      interval = null;
+    }
+
+    function reset() {
+      stop();
+      seconds = 0;
+      update();
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Remember this folder is a repo !!
 

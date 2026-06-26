@@ -29,6 +29,10 @@
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds) </h2>
   <!--from cGPTimer.html in folder-->
   <h1 id="timer">0</h1>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+
     
   <p> Note your Perceived Effort</p>
   <h3> 
@@ -37,7 +41,9 @@
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
   
-  <h3> Distance per Stroke: <span id="result"></span>  Watts:<span id="watts"></span> </h3>
+  <h3> Distance per Stroke: <span id="result">
+    
+  </span>         Watts:<span id="watts"></span> </h3>
 
   <h3>
    Distance per Stroke (revised or known)
@@ -89,8 +95,28 @@
     }
   </script>
 <!-- add a named timer script (function) here and call on buttton click !!-->
-
-
-
+  <script>
+    let seconds = 0;
+    let interval = null;
+    function update() {
+      document.getElementById("timer").textContent = seconds;
+    }
+    function start() {
+      if (interval) return;
+      interval = setInterval(() => {
+        seconds++;
+        update();
+      }, 1000);
+    }
+    function stop() {
+      clearInterval(interval);
+      interval = null;
+    }
+    function reset() {
+      stop();
+      seconds = 0;
+      update();
+    }
+  </script>
 <body></body>
 </html>
