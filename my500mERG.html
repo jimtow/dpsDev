@@ -17,7 +17,42 @@
   page1: Quick start with links to:
   page2: "Timed Trial"
   page3  "Workout!"
-  page4: "Stroke Energy"-->
+  page4: "Stroke Energy"
+  Hide one section and show the other with JavaScript.
+
+<div id="page1">
+    <h2>Page 1</h2>
+    <button onclick="showPage2()">Next</button>
+</div>
+
+<div id="page2" style="display:none;">
+    <h2>Page 2</h2>
+    <button onclick="showPage1()">Back</button>
+</div>
+
+<script>
+function showPage2() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+}
+
+function showPage1() {
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page1").style.display = "block";
+}
+</script>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  -->
 
 </div>
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
