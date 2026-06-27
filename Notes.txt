@@ -1,3 +1,15 @@
+
+
+HERE: <div  id = "page 1" > 
+...
+until  </div>  defines a the block named page 1
+
+<div is mean for grouping block level elements
+
+a block-level element is a single line with elements
+
+
+
 Option 2: One HTML file with two "screens"
 
 Hide one section and show the other with JavaScript.
