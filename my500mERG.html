@@ -3,7 +3,9 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body></body>
-<div id = "page 1">
+<div id = "page1">
+  <h2>Page 1</h2>
+  <button onclick=""showPage2()">Next</button>"
   <!--
   my500mERG enables personal workout metrics for any erg and settings. my500mErg is a 
   simple   calculator for a 500m split time and a workout at any cadence. It is based 
@@ -18,45 +20,36 @@
   page2: "Timed Trial"
   page3  "Workout!"
   page4: "Stroke Energy"
+  
   Hide one section and show the other with JavaScript.
 
-<div id="page1">
+  <div id="page1">
     <h2>Page 1</h2>
     <button onclick="showPage2()">Next</button>
-</div>
+  </div>
 
-<div id="page2" style="display:none;">
+  <div id="page2" style="display:none;">
     <h2>Page 2</h2>
     <button onclick="showPage1()">Back</button>
-</div>
+  </div>
 
-<script>
-function showPage2() {
+  <script>
+  function showPage2() {
     document.getElementById("page1").style.display = "none";
     document.getElementById("page2").style.display = "block";
-}
+  }
 
-function showPage1() {
+  function showPage1() {
     document.getElementById("page2").style.display = "none";
     document.getElementById("page1").style.display = "block";
-}
-</script>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  -->
+  }
+  </script-->
 
 </div>
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "page 2">
+<div id = "page2">
+  <h2>Page 2</h2>
+    <button onclick="showPage1()">Back</button>
   <h3>
   <!--page 2 -->
   User Watts
@@ -138,6 +131,20 @@ function showPage1() {
  <!-- return to page 1, 2, or 3 -->
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+ <script>
+  function showPage2() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+  }
+
+  function showPage1() {
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page1").style.display = "block";
+  }
+  </script>
+
+
 
 <!--a script for page 3 -->
 
