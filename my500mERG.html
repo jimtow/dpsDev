@@ -3,7 +3,8 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body></body>
-  <!--  
+<div id = "page 1">
+  <!--
   my500mERG enables personal workout metrics for any erg and settings. my500mErg is a 
   simple   calculator for a 500m split time and a workout at any cadence. It is based 
   on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
@@ -17,7 +18,11 @@
   page2: "Timed Trial"
   page3  "Workout!"
   page4: "Stroke Energy"-->
-<h3>
+
+</div>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "page 2">
+  <h3>
   <!--page 2 -->
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
@@ -25,16 +30,16 @@
   500m Split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
   placeholder="?">
-</h3>
+  </h3>
 
-<h3>
+  <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
     <input id="feCadn" style="width:100px; height: 30px;" type="number"
     placeholder="?"> 
    est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number"
     placeholder="?">
- </h3>                                                  
+  </h3>                                                  
   
   <!--<input type="text" style="width: 300px; height: 40px;"> -->
   <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
@@ -58,8 +63,10 @@
   </span>         Watts:<span id="watts"></span> </h3>
 
 <!-- go to "Re-Start(page 1), "Workout!(page 3)" or "Machine (page 4)" -->
+</div>
 
-<!-- page 3 -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
+<div id="page 3">
   <h2 style="color: green;">Workout! </h2>
   <p> Row at any cadence</p>
   
@@ -85,15 +92,17 @@
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
 <!--const num = Number(value.toFixed(1));-->
-  <h3> end </h3>
+  <h3> end 
 
+  </h3>
 <!-- go to "Re-Start", "Timed Trial" or "Machine (page 4)" -->
+</div>
 
 <!-- page 4: erg resistance and watts-min per stroke 
  enter pull length, percent drive, cadence -->
  <!-- return to page 1, 2, or 3 -->
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--> 
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 
 <!--a script for page 3 -->
 
