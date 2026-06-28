@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!--Use css for colors etc. xx-->
-<!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body>
-
+ <button onclick="showtimedtrial()"> Next</button>
 <div id = "page1">
 <p>
   my500mERG enables personal workout metrics for any erg and settings. <br> my500mErg is a
@@ -20,14 +18,14 @@
 
 </p>
 
-  <button onclick="showPage2()"> Next</button>
+ 
 
-  </div>
+</div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx   timed trial xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
 <div id = "timedtrial">
-  <h2>Page 2</h2>
+  <h2>timedtrial</h2>
     <button onclick="showPage1()">Back</button>
   <h3>
   <!--page 2 -->
@@ -48,10 +46,6 @@
     placeholder="?">
   </h3>                                                  
   
-  <!--<input type="text" style="width: 300px; height: 40px;"> -->
-  <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
-  <!--<p>Row with a sustainable full-effort to the 500m split time. </p>-->
-
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds) </h2>
   <!--from cGPTimer.html in folder-->
   <h1 id="timer">0</h1>
@@ -115,7 +109,7 @@
 <!--call these from the body --> 
  <script>
 
-  function showPage1() {
+  function showpage1() {
     document.getElementById("workout").style.display = "none";
     document.getElementById("timedtrial").style.display = "none";
     document.getElementById("page1").style.display = "block";}
