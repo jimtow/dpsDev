@@ -25,7 +25,7 @@
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
-<div id = "timedtrial" style="display:none;">
+<div id = "timedtrial" style ="display:none;">
   <h2>timed trial</h2>
   <h3>
   User Watts
@@ -45,10 +45,6 @@
     placeholder="?">
   </h3>                                                  
   
-  <!--<input type="text" style="width: 300px; height: 40px;"> -->
-  <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
-  <!--<p>Row with a sustainable full-effort to the 500m split time. </p>-->
-
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds) </h2>
   <!--from cGPTimer.html in folder-->
   <h1 id="timer">0</h1>
@@ -73,10 +69,9 @@
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
-<div id="workout">
-  <h2>Workout</h2>
+<div id="workout" style ="display:none;">
+   <h2>Workout</h2> 
   <p> Row at any cadence</p>
-  
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
@@ -84,16 +79,13 @@
   </h3>  
 
   <h3>
-
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" placeholder="otwCad"> 
-
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Workout!')">Workout!</button>
-
     </h3>
 
   <p>This is your performance w this machine and settings. </p>
