@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!--Use css for colors etc. xx-->
+<!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body>
  <button onclick="showtimedtrial()"> Next</button>
@@ -14,25 +16,21 @@
   accessible <br>
 
   page1: Quick start with links to: page2: "Timed Trial" 
-  page3  "Workout!" page4: "Stroke Energy" 
+  page3  "Workout!" page4: "Stroke En
 
-</p>
+  </div>
 
- 
-
-</div>
-
-<!-- xxxxxxxxxxxxxxxxxxxxxxxx   timed trial xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
 <div id = "timedtrial">
-  <h2>timedtrial</h2>
+  <h2>timed trial</h2>
     <button onclick="showPage1()">Back</button>
   <h3>
   <!--page 2 -->
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
   placeholder="?">
-  500m Split (seconds)
+  500m split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
   placeholder="?">
   </h3>
@@ -46,6 +44,10 @@
     placeholder="?">
   </h3>                                                  
   
+  <!--<input type="text" style="width: 300px; height: 40px;"> -->
+  <!--<h3>est DPS <input id="estDPS" type="number" placeholder="estDPS"> </h3>  -->   
+  <!--<p>Row with a sustainable full-effort to the 500m split time. </p>-->
+
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds) </h2>
   <!--from cGPTimer.html in folder-->
   <h1 id="timer">0</h1>
@@ -61,7 +63,8 @@
     " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
   
   <h3> Distance per Stroke: <span id="result">
-  </span>         Watts:<span id="watts"></span> </h3>
+  </span>         Watts:<span id="watts"></span> 
+  </h3>
 
 <!-- go to "Re-Start(page 1), "Workout!(page 3)" or "Machine (page 4)" -->
 </div>
@@ -109,7 +112,7 @@
 <!--call these from the body --> 
  <script>
 
-  function showpage1() {
+  function showPage1() {
     document.getElementById("workout").style.display = "none";
     document.getElementById("timedtrial").style.display = "none";
     document.getElementById("page1").style.display = "block";}
