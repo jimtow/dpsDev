@@ -2,30 +2,31 @@
 <!--Use css for colors etc. xx-->
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
-<body></body>
+<body>
 
 <div id = "page1">
-<h3>
-  my500mERG enables personal workout metrics for any erg and settings. my500mErg is a 
-  simple   calculator for a 500m split time and a workout at any cadence. It is based 
+<p>
+  my500mERG enables personal workout metrics for any erg and settings. <br> my500mErg is a
+  simple calculator for a 500m split time and a workout at any cadence. <br> It is based 
   on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
-  the rower. The rower inputs their watts, 500m split time, sustainable cadence, and 
-  estimated distance per stroke. The calculator then computes the distance per stroke 
-  and watts for a workout with any cadence and duration. It also includes a timer for 
-  tracking the workout duration. The calculator is designed to be user-friendly and 
-  accessible 
+  the rower. <br> The rower estimates FE watts, 500m split time, sustainable cadence, <br> and 
+  and an estimated distance per stroke. <br> my500mErg then computes the distance per stroke 
+  and watts for a workout with any cadence and duration. <br> m5500mErg also includes a timer for 
+  tracking the workout duration. <br> my500mErg is designed to be user-friendly and 
+  accessible <br>
 
   page1: Quick start with links to: page2: "Timed Trial" 
   page3  "Workout!" page4: "Stroke Energy" 
 
-  </h3>
+</p>
 
   <button onclick="showPage2()"> Next</button>
 
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "page2">
+
+<div id = "timedtrial">
   <h2>Page 2</h2>
     <button onclick="showPage1()">Back</button>
   <h3>
@@ -72,7 +73,7 @@
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
-<div id="page 3">
+<div id="workout">
   <h2 style="color: green;">Workout! </h2>
   <p> Row at any cadence</p>
   
@@ -102,24 +103,35 @@
 
   </h3>
 <!-- go to "Re-Start", "Timed Trial" or "Machine (page 4)" -->
-</div>
+  </div>
 
 <!-- page 4: erg resistance and watts-min per stroke 
  enter pull length, percent drive, cadence -->
  <!-- return to page 1, 2, or 3 -->
+</body>
+
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 <!--call these from the body --> 
  <script>
-  function showPage2() {
-    document.getElementById("page1").style.display = "none";
-    document.getElementById("page2").style.display = "block";
-  }
 
   function showPage1() {
-    document.getElementById("page2").style.display = "none";
-    document.getElementById("page1").style.display = "block";
+    document.getElementById("workout").style.display = "none";
+    document.getElementById("timedtrial").style.display = "none";
+    document.getElementById("page1").style.display = "block";}
+
+  function showtimedtrial() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("workout").style.display = "none";
+    document.getElementById("timedtrial").style.display = "block";
   }
+
+  function showworkout() {  
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("timedtrial").style.display = "none";
+    document.getElementById("workout").style.display = "block";
+  }
+
   </script>
 
 
