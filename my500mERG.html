@@ -3,10 +3,9 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body></body>
-<div id = "page1">
-  <h2>Page 1</h2>
-  <button onclick=""showPage2()">Next</button>"
-  <!--
+
+<div id = "page1">  
+  <h3>
   my500mERG enables personal workout metrics for any erg and settings. my500mErg is a 
   simple   calculator for a 500m split time and a workout at any cadence. It is based 
   on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
@@ -20,32 +19,17 @@
   page2: "Timed Trial"
   page3  "Workout!"
   page4: "Stroke Energy"
-  
   Hide one section and show the other with JavaScript.
+
+</h3>
 
   <div id="page1">
     <h2>Page 1</h2>
     <button onclick="showPage2()">Next</button>
   </div>
 
-  <div id="page2" style="display:none;">
-    <h2>Page 2</h2>
-    <button onclick="showPage1()">Back</button>
-  </div>
-
-  <script>
-  function showPage2() {
-    document.getElementById("page1").style.display = "none";
-    document.getElementById("page2").style.display = "block";
-  }
-
-  function showPage1() {
-    document.getElementById("page2").style.display = "none";
-    document.getElementById("page1").style.display = "block";
-  }
-  </script-->
-
 </div>
+
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "page2">
   <h2>Page 2</h2>
@@ -131,7 +115,7 @@
  <!-- return to page 1, 2, or 3 -->
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-
+<!--call these from the body --> 
  <script>
   function showPage2() {
     document.getElementById("page1").style.display = "none";
