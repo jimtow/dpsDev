@@ -4,20 +4,18 @@
 <html>   
 <body>
  <div id = "page1">
-<p>
-  my500mERG enables personal workout metrics for any erg and settings. <br> my500mErg is a
-  simple calculator for a 500m split time and a workout at any cadence. <br> It is based 
+ .fixed-paragraph {width:500px, height:200px;}
+<p class = "fixed-paragraph">
+  my500mERG enables personal workout metrics for any erg and settings. my500mErg is a
+  simple calculator for a 500m split time and a workout at any cadence. It is based 
   on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
-  the rower. <br> The rower estimates FE watts, 500m split time, sustainable cadence, <br> and 
-  and an estimated distance per stroke. <br> my500mErg then computes the distance per stroke 
-  and watts for a workout with any cadence and duration. <br> m5500mErg also includes a timer for 
-  tracking the workout duration. <br> my500mErg is designed to be user-friendly and 
-  accessible <br>
+  the rower. The rower estimates FE watts, 500m split time, sustainable cadence, and 
+  and an estimated distance per stroke.  my500mErg then computes the distance per stroke 
+  and watts for a workout with any cadence and duration. m5500mErg also includes a timer for 
+  tracking the workout duration. my500mErg is designed to be user-friendly and 
+  accessible
+ </p>
 
-  page1: Quick start with links to: page2: "Timed Trial" 
-  page3  "Workout!" page4: "Stroke Energy" </p>
-  <br>
-  </p>
   <button onclick="showtimedtrial()">Timed Trial</button>
   <button onclick="showworkout()">Workout</button>
   </div>
@@ -63,8 +61,8 @@
   </h3>
 
   <button onclick="showPage1()">ReStart</button>
+  <button onclick="showtimedtrial()">Workout!</button>
 
-<!-- go to "Re-Start(page 1), "Workout!(page 3)" or "Machine (page 4)" -->
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
@@ -93,9 +91,8 @@
   <h3> end 
 
   </h3>
-<!-- go to "Re-Start", "Timed Trial" or "Machine (page 4)" -->
  <button onclick="showPage1()">ReStart</button>
- <button onclick="showtimedtrial">Timed Trial</button>
+ <button onclick="showtimedtrial()">Timed Trial</button>
   </div>
 
 <!-- page 4: erg resistance and watts-min per stroke 
