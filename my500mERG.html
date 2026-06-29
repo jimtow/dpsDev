@@ -64,8 +64,7 @@
   <button onclick="showReady()">Row!</button>
 
 </div>
-
-<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
 <div id="Row" style ="display:none;">
    <h2>Row!</h2> 
   <p> Row at any cadence</p>
@@ -88,30 +87,28 @@
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
 <!--const num = Number(value.toFixed(1));-->
-  <h3> end 
 
-  </h3>
  <button onclick="showReadyAll()">ReStart</button>
  <button onclick="showReady()">Ready</button>
-  </div>
+</div>
 
-<div id = "myErgset"  style = "display:none;"></div>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
+<div id = "myErgset"  style = "display:none;">
   <h2>myergset</h2> 
   <p> Row at any cadence</p>
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
-  </h3>  
 
+  </h3>  
  <!-- enter pull length, percent drive, cadencereturn to page 1, 2, or 3 -->
+</div>
 
 </body>
 
-
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
  <script>
-  
   function showReadyAll() {
     document.getElementById("Row!").style.display = "none";
     document.getElementById("Ready!").style.display = "none";
