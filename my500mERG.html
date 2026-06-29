@@ -6,7 +6,7 @@
  .fixed-paragraph {width:200px, height:200px;}
 <p class = "fixed-paragraph" style = "width:50%;">
 
-  my500mERG enables personal workout metrics for any erg and settings. my500mErg is a
+  my500mERG enables personal Row! metrics for any erg and settings. my500mErg is a
   simple calculator for a 500m split time and a workout at any cadence. It is based 
   on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
   the rower. The rower estimates FE watts, 500m split time, sustainable cadence, and 
@@ -16,13 +16,13 @@
   accessible
  </p>
 
-  <button onclick="showtimedtrial()">Ready</button>
-  <button onclick="showworkout()">Workout</button>
+  <button onclick="showReady!()">Ready</button>
+  <button onclick="showRow!()">Row!</button>
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
-<div id = "timedtrial" style ="display:none;">
+<div id = "Ready!" style ="display:none;">
   <h2>Ready</h2>
   <h3>
   User Watts
@@ -61,13 +61,13 @@
   </h3>
 
   <button onclick="showReadyAll()">ReStart</button>
-  <button onclick="showtimedtrial()">Row!</button>
+  <button onclick="showReady!()">Row!</button>
 
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
-<div id="workout" style ="display:none;">
-   <h2>Workout</h2> 
+<div id="Row!" style ="display:none;">
+   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
    Distance per Stroke (revised or known)
@@ -92,12 +92,20 @@
 
   </h3>
  <button onclick="showReadyAll()">ReStart</button>
- <button onclick="showtimedtrial()">Ready</button>
+ <button onclick="showReady()">Ready</button>
   </div>
 
-<!-- page 4: erg resistance and watts-min per stroke 
- enter pull length, percent drive, cadence -->
- <!-- return to page 1, 2, or 3 -->
+<div id = "myErgset"  style = "display:none;"></div>
+  <h2>myergset</h2> 
+  <p> Row at any cadence</p>
+  <h3>
+   Distance per Stroke (revised or known)
+    <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
+    placeholder="?">
+  </h3>  
+
+ <!-- enter pull length, percent drive, cadencereturn to page 1, 2, or 3 -->
+
 </body>
 
 
@@ -105,20 +113,29 @@
  <script>
   
   function showReadyAll() {
-    document.getElementById("workout").style.display = "none";
-    document.getElementById("timedtrial").style.display = "none";
+    document.getElementById("Row!").style.display = "none";
+    document.getElementById("Ready!").style.display = "none";
+    document.getElementById("myErgset").style.display = "none";
     document.getElementById("ReadyAll").style.display = "block";}
 
-  function showtimedtrial() {
+  function showReady() {
     document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("workout").style.display = "none";
-    document.getElementById("timedtrial").style.display = "block";
+    document.getElementById("Row!").style.display = "none";
+    document.getElementById("myErgset").style.display = "none";
+    document.getElementById("Ready!").style.display = "block";
   }
 
-  function showworkout() {  
+  function showRow() {  
     document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("timedtrial").style.display = "none";
-    document.getElementById("workout").style.display = "block";
+    document.getElementById("Ready!").style.display = "none";
+    document.getElementById("myErgset").style.display = "none"; 
+    document.getElementById("Row!").style.display = "block";
+  }
+
+function myErgset() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready!").style.display = "none";
+    document.getElementById("Row!").style.display = "block";
   }
 
   </script>
@@ -141,6 +158,8 @@
       const f = Number(document.getElementById("mPstr").value);
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
+      const i = Number(document.getElementById("mPstr1").value);
+
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
