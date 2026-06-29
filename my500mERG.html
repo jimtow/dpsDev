@@ -161,8 +161,8 @@
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
-const j = Number(document.getElementById("mPstr1").value);
-const k = Number(document.getElementById("mPstr1").value);
+const j = Number(document.getElementById("fe10Cadence").value);
+const k = Number(document.getElementById("wo10Cadence").value);
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
@@ -176,8 +176,11 @@ const k = Number(document.getElementById("mPstr1").value);
 
 <!--timer script (function)-->
   <script>
-    <!--add a 10stroke  that takes a cadence-based value and resets -->  
+    <!--add a 10stroke  that takes a cadence-based value and resets. add j,k constant values when available -->  
         let seconds = 0;
+        let fe10Second = 10*60/30;
+        let wo10Second = 10*60/30;
+        
     let interval = null;
 
     function update() {
