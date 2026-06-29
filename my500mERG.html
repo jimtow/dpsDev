@@ -161,6 +161,7 @@
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
+      const j = Number(document.getElementById("woCadn").value);
 
       let result, watts;
       if (operator === "Row(500m)")       {
@@ -173,9 +174,11 @@
     }
   </script>
 
-<!--timer script (function) modify to enable two timers?-->
+<!--timer script modifyto update a timer2 element at 10-stroke intervals-->
   <script>
     let seconds = 0;
+    let fe10strSeconds = 10*60/(i);
+    let wo10strSeconds = 10*60/(j);
     let interval = null;
     function update() {
       document.getElementById("timer1").textContent = seconds;
