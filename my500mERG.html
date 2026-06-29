@@ -40,9 +40,15 @@
   </h3>
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
-    <!--from cGPTimer.html in folder-->
+  
+  <!--from cGPTimer.html in folder modify to reset after cadence-based
+    10 stroke interval span result (in red?) ahead of main cumulative 
+    "timer1" 
+  
+  -->
+  
   <p> add a 10stroke timer here</p>
-  <h1 id="timer">0</h1>
+  <h1 id="timer1">0</h1>
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>
@@ -81,9 +87,12 @@
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
-    <button style="width: 90px; height: 40px;
+
+  <button style="width: 90px; height: 40px;
     " onclick="calculate('Row!')">Row!</button>
-    </h3>
+  </h3>
+  
+  <p>add a 10stroke timer here</p>
 
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
@@ -169,7 +178,7 @@
     let seconds = 0;
     let interval = null;
     function update() {
-      document.getElementById("timer").textContent = seconds;
+      document.getElementById("timer1").textContent = seconds;
     }
     function start() {
       if (interval) return;
