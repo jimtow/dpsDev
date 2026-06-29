@@ -2,7 +2,7 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body>
- <div id = "ReaadyAll">
+ <div id = "ReadyAll">
  .fixed-paragraph {width:200px, height:200px;}
 <p class = "fixed-paragraph" style = "width:50%;">
 
@@ -16,14 +16,14 @@
   accessible
  </p>
 
-  <button onclick="showtimedtrial()">Timed Trial</button>
+  <button onclick="showtimedtrial()">Ready</button>
   <button onclick="showworkout()">Workout</button>
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
 <div id = "timedtrial" style ="display:none;">
-  <h2>timed trial</h2>
+  <h2>Ready</h2>
   <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
@@ -60,8 +60,8 @@
   </span>         Watts:<span id="watts"></span> 
   </h3>
 
-  <button onclick="showReaadyAll()">ReStart</button>
-  <button onclick="showtimedtrial()">Workout!</button>
+  <button onclick="showReadyAll()">ReStart</button>
+  <button onclick="showtimedtrial()">Row!</button>
 
 </div>
 
@@ -82,7 +82,7 @@
      type="number" placeholder="otwSec">  
 
     <button style="width: 90px; height: 40px;
-    " onclick="calculate('Workout!')">Workout!</button>
+    " onclick="calculate('Row!')">Row!</button>
     </h3>
 
   <p>This is your performance w this machine and settings. </p>
@@ -91,8 +91,8 @@
   <h3> end 
 
   </h3>
- <button onclick="showReaadyAll()">ReStart</button>
- <button onclick="showtimedtrial()">Timed Trial</button>
+ <button onclick="showReadyAll()">ReStart</button>
+ <button onclick="showtimedtrial()">Ready</button>
   </div>
 
 <!-- page 4: erg resistance and watts-min per stroke 
@@ -104,19 +104,19 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
  <script>
   
-  function showReaadyAll() {
+  function showReadyAll() {
     document.getElementById("workout").style.display = "none";
     document.getElementById("timedtrial").style.display = "none";
-    document.getElementById("ReaadyAll").style.display = "block";}
+    document.getElementById("ReadyAll").style.display = "block";}
 
   function showtimedtrial() {
-    document.getElementById("ReaadyAll").style.display = "none";
+    document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("workout").style.display = "none";
     document.getElementById("timedtrial").style.display = "block";
   }
 
   function showworkout() {  
-    document.getElementById("ReaadyAll").style.display = "none";
+    document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("timedtrial").style.display = "none";
     document.getElementById("workout").style.display = "block";
   }
