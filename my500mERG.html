@@ -2,8 +2,7 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body>
- <div id = "ReadyAll">
- .fixed-paragraph {width:200px, height:200px;}
+ <div id = "Ready">
 <p class = "fixed-paragraph" style = "width:50%;">
 
   my500mERG enables personal Row! metrics for any erg and settings. my500mErg is a
@@ -16,13 +15,14 @@
   accessible
  </p>
 
-  <button onclick="showReady()">Ready</button>
+  <button onclick="showReadyAll()">ReadyAll</button>
   <button onclick="showRow()">Row!</button>
+  <button onclick="showErgset()">myErgset</button>
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
-<div id = "Ready" style ="display:none;">
+<div id = "ReadyALL" style ="display:none;">
   <h2>Ready</h2>
   <h3>
   User Watts
@@ -93,9 +93,8 @@
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
-<div id = "myErgset"  style = "display:none;">
-  <h2>myergset</h2> 
-  <p> Row at any cadence</p>
+<div id = "Ergset"  style = "display:none;">
+  <h2>myErgset</h2> 
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
@@ -112,38 +111,33 @@
   function showReadyAll() {
     document.getElementById("Row!").style.display = "none";
     document.getElementById("Ready!").style.display = "none";
-    document.getElementById("myErgset").style.display = "none";
-    document.getElementById("ReadyAll").style.display = "block";}
+    document.getElementById("Ergset").style.display = "none";
+    document.getElementById("ReadyAll").style.display = "block";
+  }
 
   function showReady() {
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Row").style.display = "none";
-    document.getElementById("myErgset").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
     document.getElementById("Ready").style.display = "block";
   }
 
   function showRow() {  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
-    document.getElementById("myErgset").style.display = "none"; 
+    document.getElementById("Ergset").style.display = "none"; 
     document.getElementById("Row").style.display = "block";
+  }
 
-function myErgset() {  
+  function myErgset() {  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
-    document.getElementById("myErgset").style.display = "block";
+    document.getElementById("Ergset").style.display = "block";
   }
 
-  </script>
+</script>
 
-
-
-<!--a script for page 3 -->
-
-<!-- a script for page 4-->
-
-<!-- page 2 script -->
 <script>
     function calculate(operator) {
 <!--these are the input values to be renamed-->   
