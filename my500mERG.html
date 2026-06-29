@@ -25,18 +25,18 @@
   <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
-  placeholder="?">
+  placeholder="120">
   500m split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
-  placeholder="?">
+  placeholder="180">
   </h3>
   <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
     <input id="feCadn" style="width:100px; height: 30px;" type="number"
-    placeholder="?"> 
+    placeholder="28"> 
    est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number"
-    placeholder="?">
+    placeholder="5">
   </h3>
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
@@ -57,7 +57,7 @@
   
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="?">  
+    type="number" placeholder="99">  
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> 
   </h3>
@@ -78,7 +78,7 @@
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
-    placeholder="?">
+    placeholder="5">
   </h3>  
 
   <h3>
@@ -109,7 +109,7 @@
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
-    placeholder="?">
+    placeholder="5">
 
   </h3>  
  <!-- enter pull length, percent drive, cadencereturn to page 1, 2, or 3 -->
@@ -161,8 +161,7 @@
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
-const j = Number(document.getElementById("fe10Cadence").value);
-const k = Number(document.getElementById("wo10Cadence").value);
+
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
@@ -176,11 +175,8 @@ const k = Number(document.getElementById("wo10Cadence").value);
 
 <!--timer script (function)-->
   <script>
-    <!--add a 10stroke  that takes a cadence-based value and resets. add j,k constant values when available -->  
+    <!--add a 10stroke  that takes a cadence-based value and resets -->  
         let seconds = 0;
-        let fe10Second = 10*60/30;
-        let wo10Second = 10*60/30;
-        
     let interval = null;
 
     function update() {
