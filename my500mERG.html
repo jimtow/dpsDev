@@ -16,13 +16,13 @@
   accessible
  </p>
 
-  <button onclick="showReady!()">Ready</button>
-  <button onclick="showRow!()">Row!</button>
+  <button onclick="showReady()">Ready</button>
+  <button onclick="showRow()">Row!</button>
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
-<div id = "Ready!" style ="display:none;">
+<div id = "Ready" style ="display:none;">
   <h2>Ready</h2>
   <h3>
   User Watts
@@ -61,17 +61,17 @@
   </h3>
 
   <button onclick="showReadyAll()">ReStart</button>
-  <button onclick="showReady!()">Row!</button>
+  <button onclick="showReady()">Row!</button>
 
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
-<div id="Row!" style ="display:none;">
+<div id="Row" style ="display:none;">
    <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
    Distance per Stroke (revised or known)
-    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
+    <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
   </h3>  
 
@@ -100,7 +100,7 @@
   <p> Row at any cadence</p>
   <h3>
    Distance per Stroke (revised or known)
-    <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
+    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
   </h3>  
 
@@ -120,22 +120,22 @@
 
   function showReady() {
     document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("Row!").style.display = "none";
+    document.getElementById("Row").style.display = "none";
     document.getElementById("myErgset").style.display = "none";
-    document.getElementById("Ready!").style.display = "block";
+    document.getElementById("Ready").style.display = "block";
   }
 
   function showRow() {  
     document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("Ready!").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
     document.getElementById("myErgset").style.display = "none"; 
-    document.getElementById("Row!").style.display = "block";
-  }
+    document.getElementById("Row").style.display = "block";
 
 function myErgset() {  
     document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("Ready!").style.display = "none";
-    document.getElementById("Row!").style.display = "block";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("myErgset").style.display = "block";
   }
 
   </script>
