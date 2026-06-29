@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--Note: <h2> is text size tag with <input> "set" inside>-->
+<html>   
+<body>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "Ready">
+<p class = "fixed-paragraph" style = "width:50%;">
+  my500mERG enables personal Row! metrics for any erg and settings. my500mErg is a
+  simple calculator for a 500m split time and a workout at any cadence. It is based 
+  on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
+  the rower. The rower estimates FE watts, 500m split time, sustainable cadence, and 
+  and an estimated distance per stroke.  my500mErg then computes the distance per stroke 
+  and watts for a workout with any cadence and duration. m5500mErg also includes a timer for 
+  tracking the workout duration. my500mErg is designed to be user-friendly and 
+  accessible
+ </p>
+  <button onclick="showReadyAll()">ReadyAll</button>
+  <button onclick="showRow()">Row!</button>
+  <button onclick="showErgset()">myErgset</button>
+  </div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "ReadyAll" style ="display:none;">
+  <h2>ReadyAll</h2>
+  <h3>
+  User Watts
+  <input id="feWatts" style="width:100px; height:30px;" type="number" 
+  placeholder="?">
+  500m split (seconds)
+  <input id="feSplit" style="width:100px; height:30px;" type="number" 
+  placeholder="?">
+  </h3>
+  <h3>
+   Full Effort (FE) Sustainable Cadence (SC) 
+    <input id="feCadn" style="width:100px; height: 30px;" type="number"
+    placeholder="?"> 
+   est DPS (meters/stroke)
+    <input id="estDPS" style="width:100px; height: 30px;" type="number"
+    placeholder="?">
+  </h3>
+
+  <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
+  
+  <!--from cGPTimer.html in folder modify to reset after cadence-based
+    10 stroke interval span result (in red?) ahead of main cumulative 
+    "timer1" 
+  
+  -->
+  
+  <p> add a 10stroke timer here</p>
+  <h1 id="timer1">0</h1>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+    
+  <p> Note your Perceived Effort</p>
+  
+  <h3> 
+    % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
+    type="number" placeholder="?">  
+    <button style="width: 90px; height: 40px;
+    " onclick="calculate('Row(500m)')">Row(500m)</button> 
+  </h3>
+  
+  <h3> Distance per Stroke: <span id="result">
+  </span>         Watts:<span id="watts"></span> 
+  </h3>
+
+  <button onclick="showReady()">Ready</button>
+  <button onclick="showRow()">Row!</button>
+  <button onclick="showErgset()">myErgset</button>
+</div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
+<div id="Row" style ="display:none;">
+   <h2>Row!</h2> 
+  <p> Row at any cadence</p>
+  <h3>
+   Distance per Stroke (revised or known)
+    <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
+    placeholder="?">
+  </h3>  
+
+  <h3>
+    @cadence<input id="otwCadn" style="width:100px; height: 30px;"
+     type="number" placeholder="otwCad"> 
+     for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
+     type="number" placeholder="otwSec">  
+
+
+  <button style="width: 90px; height: 40px;
+    " onclick="calculate('Row!')">Row!</button>
+  </h3>
+  
+  <p>add a 10stroke timer here</p>
+
+  <p>This is your performance w this machine and settings. </p>
+  <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
+  <!--const num = Number(value.toFixed(1));-->
+ 
+  <button onclick="showReady()">Ready</button>
+  <button onclick="showReadyAll()">ReadyAll</button>
+  <button onclick="showErgset()">myErgset</button>
+</div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
+<div id = "Ergset"  style = "display:none;">
+  <h2>myErgset</h2> 
+  <h3>
+   Distance per Stroke (revised or known)
+    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
+    placeholder="?">
+
+  </h3>  
+ <!-- enter pull length, percent drive, cadencereturn to page 1, 2, or 3 -->
+</div>
+
+</body>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+ <script>
+  function showReadyAll() {
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    document.getElementById("ReadyAll").style.display = "block";
+  }
+
+  function showReady() {
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Ready").style.display = "block";
+  }
+
+  function showRow() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Ergset").style.display = "none"; 
+    document.getElementById("Row").style.display = "block";
+  }
+
+  function myErgset() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "block";
+  }
+
+</script>
+
+<script>
+    function calculate(operator) {
+<!--these are the input values to be renamed-->   
+      const a = Number(document.getElementById("feWatts").value);
+      const b = Number(document.getElementById("feSplit").value);
+      const c = Number(document.getElementById("feCadn").value);
+      const d = Number(document.getElementById("estDPS").value);
+      const e= Number(document.getElementById("pcFeff").value);
+      const f = Number(document.getElementById("mPstr").value);
+      const g = Number(document.getElementById("otwCadn").value);
+      const h = Number(document.getElementById("otwSec").value);
+      const i = Number(document.getElementById("mPstr1").value);
+
+      let result, watts;
+      if (operator === "Row(500m)")       {
+        result = (e/100)*30000/(c * b);
+        watts =  (e/100)*a;       }
+        result = Number(result.toFixed(1));
+        watts 
+      document.getElementById("result").textContent = result;
+      document.getElementById("watts").textContent = Number(watts.toFixed(1));
+    }
+  </script>
+
+<!--timer script (function) modify to enable two timers?-->
+  <script>
+    let seconds = 0;
+    let interval = null;
+    function update() {
+      document.getElementById("timer1").textContent = seconds;
+    }
+    function start() {
+      if (interval) return;
+      interval = setInterval(() => {
+        seconds++;
+        update();
+      }, 1000);
+    }
+    function stop() {
+      clearInterval(interval);
+      interval = null;
+    }
+    function reset() {
+      stop();
+      seconds = 0;
+      update();
+    }
+  <!--add a 10stroke function (timer2) that takes a cadence-based value and resets
+    with a if statement ?? -->  
+  </script>
+
+<body></body>
+</html>

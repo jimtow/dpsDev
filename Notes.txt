@@ -1,3 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Function Example</title>
+</head>
+<body>
+
+<p id="result"></p>
+
+<script>
+    // Input constants
+    const watts = 250;
+    const time = 60;
+
+    // Function
+    function calculateWork(watts, time) {
+        return watts * time;
+    }
+
+    // Call the function
+    const work = calculateWork(watts, time);
+
+    // Display the result
+    document.getElementById("result").textContent =
+        "Work = " + work;
+</script>
+
+</body>
+</html>
+Example 2: Constants from HTML input boxes
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Function Inputs</title>
+</head>
+<body>
+
+Watts:
+<input id="watts" type="number" value="250">
+
+Time (seconds):
+<input id="time" type="number" value="60">
+
+<button onclick="calculate()">Calculate</button>
+
+<p id="result"></p>
+
+<script>
+function calculate() {
+
+    // Read values from the HTML
+    const watts = Number(document.getElementById("watts").value);
+    const time = Number(document.getElementById("time").value);
+
+    // Call another function
+    const work = calculateWork(watts, time);
+
+    // Display the result
+    document.getElementById("result").textContent =
+        "Work = " + work + " joules";
+}
+
+function calculateWork(watts, time) {
+    return watts * time;
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 HERE: <div  id = "page 1" > 
