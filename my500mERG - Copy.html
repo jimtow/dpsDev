@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--Note: <h2> is text size tag with <input> "set" inside>-->
+<html>   
+<body>
+ <div id = "ReaadyAll">
+ .fixed-paragraph {width:200px, height:200px;}
+<p class = "fixed-paragraph" style = "width:50%;">
+
+  my500mERG enables personal workout metrics for any erg and settings. my500mErg is a
+  simple calculator for a 500m split time and a workout at any cadence. It is based 
+  on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
+  the rower. The rower estimates FE watts, 500m split time, sustainable cadence, and 
+  and an estimated distance per stroke.  my500mErg then computes the distance per stroke 
+  and watts for a workout with any cadence and duration. m5500mErg also includes a timer for 
+  tracking the workout duration. my500mErg is designed to be user-friendly and 
+  accessible
+ </p>
+
+  <button onclick="showtimedtrial()">Timed Trial</button>
+  <button onclick="showworkout()">Workout</button>
+  </div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+
+<div id = "timedtrial" style ="display:none;">
+  <h2>timed trial</h2>
+  <h3>
+  User Watts
+  <input id="feWatts" style="width:100px; height:30px;" type="number" 
+  placeholder="?">
+  500m split (seconds)
+  <input id="feSplit" style="width:100px; height:30px;" type="number" 
+  placeholder="?">
+  </h3>
+
+  <h3>
+   Full Effort (FE) Sustainable Cadence (SC) 
+    <input id="feCadn" style="width:100px; height: 30px;" type="number"
+    placeholder="?"> 
+   est DPS (meters/stroke)
+    <input id="estDPS" style="width:100px; height: 30px;" type="number"
+    placeholder="?">
+  </h3>                                                  
+  
+  <h2 style="color: red;">Row FE SC to the 500m Split (seconds) </h2>
+  <!--from cGPTimer.html in folder-->
+  <h1 id="timer">0</h1>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+    
+  <p> Note your Perceived Effort</p>
+  <h3> 
+    % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
+    type="number" placeholder="?">  
+    <button style="width: 90px; height: 40px;
+    " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
+  
+  <h3> Distance per Stroke: <span id="result">
+  </span>         Watts:<span id="watts"></span> 
+  </h3>
+
+  <button onclick="showReaadyAll()">ReStart</button>
+  <button onclick="showtimedtrial()">Workout!</button>
+
+</div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  page 3   ---------------------------------------------------------------->
+<div id="workout" style ="display:none;">
+   <h2>Workout</h2> 
+  <p> Row at any cadence</p>
+  <h3>
+   Distance per Stroke (revised or known)
+    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
+    placeholder="?">
+  </h3>  
+
+  <h3>
+    @cadence<input id="otwCadn" style="width:100px; height: 30px;"
+     type="number" placeholder="otwCad"> 
+     for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
+     type="number" placeholder="otwSec">  
+
+    <button style="width: 90px; height: 40px;
+    " onclick="calculate('Workout!')">Workout!</button>
+    </h3>
+
+  <p>This is your performance w this machine and settings. </p>
+  <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
+<!--const num = Number(value.toFixed(1));-->
+  <h3> end 
+
+  </h3>
+ <button onclick="showReaadyAll()">ReStart</button>
+ <button onclick="showtimedtrial()">Timed Trial</button>
+  </div>
+
+<!-- page 4: erg resistance and watts-min per stroke 
+ enter pull length, percent drive, cadence -->
+ <!-- return to page 1, 2, or 3 -->
+</body>
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+ <script>
+  
+  function showReaadyAll() {
+    document.getElementById("workout").style.display = "none";
+    document.getElementById("timedtrial").style.display = "none";
+    document.getElementById("ReaadyAll").style.display = "block";}
+
+  function showtimedtrial() {
+    document.getElementById("ReaadyAll").style.display = "none";
+    document.getElementById("workout").style.display = "none";
+    document.getElementById("timedtrial").style.display = "block";
+  }
+
+  function showworkout() {  
+    document.getElementById("ReaadyAll").style.display = "none";
+    document.getElementById("timedtrial").style.display = "none";
+    document.getElementById("workout").style.display = "block";
+  }
+
+  </script>
+
+
+
+<!--a script for page 3 -->
+
+<!-- a script for page 4-->
+
+<!-- page 2 script -->
+<script>
+    function calculate(operator) {
+<!--these are the input values to be renamed-->   
+      const a = Number(document.getElementById("feWatts").value);
+      const b = Number(document.getElementById("feSplit").value);
+      const c = Number(document.getElementById("feCadn").value);
+      const d = Number(document.getElementById("estDPS").value);
+      const e= Number(document.getElementById("pcFeff").value);
+      const f = Number(document.getElementById("mPstr").value);
+      const g = Number(document.getElementById("otwCadn").value);
+      const h = Number(document.getElementById("otwSec").value);
+      let result, watts;
+      if (operator === "Row(500m)")       {
+        result = (e/100)*30000/(c * b);
+        watts =  (e/100)*a;       }
+        result = Number(result.toFixed(1));
+        watts 
+      document.getElementById("result").textContent = result;
+      document.getElementById("watts").textContent = Number(watts.toFixed(1));
+    }
+  </script>
+
+<!--timer script (function)-->
+  <script>
+    let seconds = 0;
+    let interval = null;
+    function update() {
+      document.getElementById("timer").textContent = seconds;
+    }
+    function start() {
+      if (interval) return;
+      interval = setInterval(() => {
+        seconds++;
+        update();
+      }, 1000);
+    }
+    function stop() {
+      clearInterval(interval);
+      interval = null;
+    }
+    function reset() {
+      stop();
+      seconds = 0;
+      update();
+    }
+  </script>
+
+<body></body>
+</html>
