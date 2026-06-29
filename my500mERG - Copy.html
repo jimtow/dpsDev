@@ -46,9 +46,9 @@
     "timer1" 
   
   -->
-  
+  <h1 id="timer">0</h1>
   <p> add a 10stroke timer here</p>
-  <h1 id="timer1">0</h1>
+
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>
@@ -173,13 +173,16 @@
     }
   </script>
 
-<!--timer script (function) modify to enable two timers?-->
+<!--timer script (function)-->
   <script>
-    let seconds = 0;
+    <!--add a 10stroke  that takes a cadence-based value and resets -->  
+        let seconds = 0;
     let interval = null;
+
     function update() {
-      document.getElementById("timer1").textContent = seconds;
+      document.getElementById("timer").textContent = seconds;
     }
+
     function start() {
       if (interval) return;
       interval = setInterval(() => {
@@ -187,18 +190,19 @@
         update();
       }, 1000);
     }
+
     function stop() {
       clearInterval(interval);
       interval = null;
     }
+
     function reset() {
       stop();
       seconds = 0;
       update();
     }
-  <!--add a 10stroke function (timer2) that takes a cadence-based value and resets
-    with a if statement ?? -->  
+
+
   </script>
 
-<body></body>
 </html>
