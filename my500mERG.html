@@ -2,7 +2,7 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body>
- <div id = "page1">
+ <div id = "ReaadyAll">
  .fixed-paragraph {width:200px, height:200px;}
 <p class = "fixed-paragraph" style = "width:50%;">
 
@@ -60,7 +60,7 @@
   </span>         Watts:<span id="watts"></span> 
   </h3>
 
-  <button onclick="showPage1()">ReStart</button>
+  <button onclick="showReaadyAll()">ReStart</button>
   <button onclick="showtimedtrial()">Workout!</button>
 
 </div>
@@ -91,7 +91,7 @@
   <h3> end 
 
   </h3>
- <button onclick="showPage1()">ReStart</button>
+ <button onclick="showReaadyAll()">ReStart</button>
  <button onclick="showtimedtrial()">Timed Trial</button>
   </div>
 
@@ -104,19 +104,19 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
  <script>
   
-  function showPage1() {
+  function showReaadyAll() {
     document.getElementById("workout").style.display = "none";
     document.getElementById("timedtrial").style.display = "none";
-    document.getElementById("page1").style.display = "block";}
+    document.getElementById("ReaadyAll").style.display = "block";}
 
   function showtimedtrial() {
-    document.getElementById("page1").style.display = "none";
+    document.getElementById("ReaadyAll").style.display = "none";
     document.getElementById("workout").style.display = "none";
     document.getElementById("timedtrial").style.display = "block";
   }
 
   function showworkout() {  
-    document.getElementById("page1").style.display = "none";
+    document.getElementById("ReaadyAll").style.display = "none";
     document.getElementById("timedtrial").style.display = "none";
     document.getElementById("workout").style.display = "block";
   }
