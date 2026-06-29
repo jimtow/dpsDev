@@ -2,9 +2,9 @@
 <!--Note: <h2> is text size tag with <input> "set" inside>-->
 <html>   
 <body>
- <div id = "Ready">
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "Ready">
 <p class = "fixed-paragraph" style = "width:50%;">
-
   my500mERG enables personal Row! metrics for any erg and settings. my500mErg is a
   simple calculator for a 500m split time and a workout at any cadence. It is based 
   on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
@@ -14,16 +14,14 @@
   tracking the workout duration. my500mErg is designed to be user-friendly and 
   accessible
  </p>
-
   <button onclick="showReadyAll()">ReadyAll</button>
   <button onclick="showRow()">Row!</button>
   <button onclick="showErgset()">myErgset</button>
   </div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxx   page 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-
-<div id = "ReadyALL" style ="display:none;">
-  <h2>Ready</h2>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "ReadyAll" style ="display:none;">
+  <h2>ReadyAll</h2>
   <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
@@ -32,7 +30,6 @@
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
   placeholder="?">
   </h3>
-
   <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
     <input id="feCadn" style="width:100px; height: 30px;" type="number"
@@ -40,30 +37,34 @@
    est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number"
     placeholder="?">
-  </h3>                                                  
-  
-  <h2 style="color: red;">Row FE SC to the 500m Split (seconds) </h2>
-  <!--from cGPTimer.html in folder-->
+  </h3>
+
+  <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
+    <!--from cGPTimer.html in folder-->
   <h1 id="timer">0</h1>
+
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>
     
   <p> Note your Perceived Effort</p>
+  
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" placeholder="?">  
     <button style="width: 90px; height: 40px;
-    " onclick="calculate('Row(500m)')">Row(500m)</button> </h3>
+    " onclick="calculate('Row(500m)')">Row(500m)</button> 
+  </h3>
   
   <h3> Distance per Stroke: <span id="result">
   </span>         Watts:<span id="watts"></span> 
   </h3>
 
-  <button onclick="showReadyAll()">ReStart</button>
-  <button onclick="showReady()">Row!</button>
-
+  <button onclick="showReady()">Ready</button>
+  <button onclick="showRow()">Row!</button>
+  <button onclick="showErgset()">myErgset</button>
 </div>
+
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
 <div id="Row" style ="display:none;">
    <h2>Row!</h2> 
@@ -86,10 +87,11 @@
 
   <p>This is your performance w this machine and settings. </p>
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
-<!--const num = Number(value.toFixed(1));-->
-
- <button onclick="showReadyAll()">ReStart</button>
- <button onclick="showReady()">Ready</button>
+  <!--const num = Number(value.toFixed(1));-->
+ 
+  <button onclick="showReady()">Ready</button>
+  <button onclick="showReadyAll()">ReadyAll</button>
+  <button onclick="showErgset()">myErgset</button>
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
@@ -109,8 +111,8 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
  <script>
   function showReadyAll() {
-    document.getElementById("Row!").style.display = "none";
-    document.getElementById("Ready!").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
     document.getElementById("ReadyAll").style.display = "block";
   }
