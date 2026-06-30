@@ -1,0 +1,56 @@
+Here is a simple HTML + JavaScript repeating timer. It counts up to a set number of seconds, then starts over automatically.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Repeating Timer</h2>
+
+<p>Repeat every <input id="limit" type="number" value="10"> seconds</p>
+
+<h1 id="display">0</h1>
+
+<button onclick="startTimer()">Start</button>
+<button onclick="stopTimer()">Stop</button>
+<button onclick="resetTimer()">Reset</button>
+
+<script>
+let seconds = 0;
+let timer = null;
+
+function startTimer() {
+  if (timer !== null) return; // prevents multiple timers
+
+  timer = setInterval(function () {
+    seconds++;
+
+    const limit = Number(document.getElementById("limit").value);
+
+    if (seconds > limit) {
+      seconds = 1; // restart timer
+    }
+
+    document.getElementById("display").textContent = seconds;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  timer = null;
+}
+
+function resetTimer() {
+  stopTimer();
+  seconds = 0;
+  document.getElementById("display").textContent = seconds;
+}
+</script>
+
+</body>
+</html>
+
+The key line is:
+
+setInterval(function () {
+
+That repeats the code every 1000 milliseconds, which is 1 second.
