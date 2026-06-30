@@ -3,40 +3,42 @@
 <html>   
 <body>
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "Ready">
+<div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
-  my500mERG enables personal Row! metrics for any erg and settings. my500mErg is a
-  simple calculator for a 500m split time and a workout at any cadence. It is based 
-  on the concept of a sustainable full-effort (FE) with a sustainable cadence (SC) for 
-  the rower. The rower estimates FE watts, 500m split time, sustainable cadence, and 
-  and an estimated distance per stroke.  my500mErg then computes the distance per stroke 
-  and watts for a workout with any cadence and duration. m5500mErg also includes a timer for 
-  tracking the workout duration. my500mErg is designed to be user-friendly and 
-  accessible
+  my500mERG provides On-the-Water equivalent metrics for any Erg and settings based 
+  on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
+  FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
+  equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
+  also includes a timer for tracking the workout duration. my500mErg is designed to be user-friendly 
+  and accessible
  </p>
-  <button onclick="showReadyAll()">ReadyAll</button>
+  <button onclick="showReady()">Ready</button>
   <button onclick="showRow()">Row!</button>
   <button onclick="showErgset()">myErgset</button>
   </div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "ReadyAll" style ="display:none;">
-  <h2>ReadyAll</h2>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ready xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<!--500m "timed trial" to determine rowing machine and settings based on-the-water
+based distance per stroke. Distance per stroke is fixed during a workout because we
+must assume fixed pull force as calculated in myErgsettings -->
+<div id = "Ready" style ="display:none;">
+  <h2>Ready</h2>
+  <p>Determine full effort distance per stroke (dps)</p>
   <h3>
   User Watts
   <input id="feWatts" style="width:100px; height:30px;" type="number" 
-  placeholder="120">
+  placeholder="?">
   500m split (seconds)
   <input id="feSplit" style="width:100px; height:30px;" type="number" 
-  placeholder="180">
+  placeholder="?">
   </h3>
   <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
     <input id="feCadn" style="width:100px; height: 30px;" type="number"
-    placeholder="28"> 
+    placeholder="?"> 
    est DPS (meters/stroke)
     <input id="estDPS" style="width:100px; height: 30px;" type="number"
-    placeholder="5">
+    placeholder="?">
   </h3>
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
@@ -57,7 +59,7 @@
   
   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="99">  
+    type="number" placeholder="?">  
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> 
   </h3>
@@ -66,19 +68,23 @@
   </span>         Watts:<span id="watts"></span> 
   </h3>
 
-  <button onclick="showReady()">Ready</button>
+  <button onclick="showReadyAll()">ReadyAll</button>
   <button onclick="showRow()">Row!</button>
   <button onclick="showErgset()">myErgset</button>
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
 <div id="Row" style ="display:none;">
+  <!--row to a "stop" time using stopwatch timers 
+  or manual stop at fe dps cadence.  
+  Calculate distance based on time and feCadence !! -->
    <h2>Row!</h2> 
+   <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
-    placeholder="5">
+    placeholder="?">
   </h3>  
 
   <h3>
@@ -86,7 +92,6 @@
      type="number" placeholder="otwCad"> 
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
-
 
   <button style="width: 90px; height: 40px;
     " onclick="calculate('Row!')">Row!</button>
@@ -109,10 +114,17 @@
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
-    placeholder="5">
+    placeholder="?">
+
+    <p class = "fixed-paragraph" style = "width:50%;">
+    add pull length, percent drive, fe cadence for pull force 
+    and mechanical watts per stroke </p>
 
   </h3>  
- <!-- enter pull length, percent drive, cadencereturn to page 1, 2, or 3 -->
+  <button onclick="showReadyAll()">ReadyAll</button>
+  <button onclick="showReady()">Ready</button>
+ 
+
 </div>
 
 </body>
@@ -120,27 +132,30 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
  <script>
   function showReadyAll() {
+    document.getElementById("ReadyAll").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
-    document.getElementById("ReadyAll").style.display = "block";
+   
   }
 
   function showReady() {
     document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
-    document.getElementById("Ready").style.display = "block";
+    
   }
 
   function showRow() {  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
-    document.getElementById("Ergset").style.display = "none"; 
     document.getElementById("Row").style.display = "block";
+    document.getElementById("Ergset").style.display = "none"; 
+    
   }
 
-  function myErgset() {  
+  function showErgset() {  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
