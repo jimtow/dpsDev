@@ -1,3 +1,12 @@
+the web app needs two timers: a 10 stroke timer and a split timer
+
+the 10 stroke timer stops and resets after time for 10 strokes at fe cadence
+
+the split timer stops the "timed trial"  at the FE split time (only for the rower 
+to estimate %full effort for the timed trial)
+
+HOW TO AUTOMATICALLY STOP AND RESET AT A FIXED INTERVAL??
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +43,13 @@ function updateDisplay() {
 function startStopwatch() {
     if (timer !== null) return;   // Already running
 
+//UPDATE DISPLAY
     startTime = Date.now();
 
     timer = setInterval(updateDisplay, 100);
 }
 
+MODIFY TO AUTOSTOP AND RESET AT SPECIFIED TIME
 function stopStopwatch() {
     if (timer === null) return;
 
@@ -61,6 +72,7 @@ function resetStopwatch() {
 
 </body>
 </html>
+
 If you only need the elapsed time in your JavaScript
 
 A Stopwatch object is even simpler:

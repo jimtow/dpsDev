@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Stopwatch</title>
+</head>
+<body>
+
+<h2>Stopwatch</h2>
+
+<p id="display">00:00.0</p>
+
+<button onclick="startStopwatch()">Start</button>
+<button onclick="stopStopwatch()">Stop</button>
+<button onclick="resetStopwatch()">Reset</button>
+
+<script>
+let startTime = 0;
+let elapsedTime = 0;
+let timer = null;
+
+function updateDisplay() {
+    const currentTime = Date.now() - startTime + elapsedTime;
+
+    const minutes = Math.floor(currentTime / 60000);
+    const seconds = Math.floor((currentTime % 60000) / 1000);
+    const tenths = Math.floor((currentTime % 1000) / 100);
+
+    document.getElementById("display").textContent =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0") + "." +
+        tenths;
+}
+
+function startStopwatch() {
+    if (timer !== null) return;   // Already running
+
+    startTime = Date.now();
+
+    timer = setInterval(updateDisplay, 100);
+}
+
+function stopStopwatch() {
+    if (timer === null) return;
+
+    clearInterval(timer);
+    timer = null;
+
+    elapsedTime += Date.now() - startTime;
+}
+
+function resetStopwatch() {
+    clearInterval(timer);
+    timer = null;
+
+    startTime = 0;
+    elapsedTime = 0;
+
+    document.getElementById("display").textContent = "00:00.0";
+}
+</script>
+
+</body>
+</html>
