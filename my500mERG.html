@@ -106,12 +106,16 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
 <div id = "Ergset"  style = "display:none;">
   <h2>myErgset</h2> 
+  <p> Only enter value for machine pull length here to avoid
+  changing previous constants </p>
+
   <h3>
-   Distance per Stroke (revised or known)
-    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
-    placeholder="5">
+   Pull Length (mtrs)
+    <input id="pullMtrs" style="width:100px; height: 30px;" type="number" 
+    placeholder="1">
 
   </h3>  
+  
  <!-- enter pull length, percent drive, cadencereturn to page 1, 2, or 3 -->
 </div>
 
@@ -140,7 +144,8 @@
     document.getElementById("Row").style.display = "block";
   }
 
-  function myErgset() {  
+  function myErgset() {
+    <div  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
@@ -161,7 +166,7 @@
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
-
+      const j = Number(document.getElementById("pullMtrs").value);
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
