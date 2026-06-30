@@ -111,19 +111,15 @@ must assume fixed pull force as calculated in myErgsettings -->
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
 <div id = "Ergset"  style = "display:none;">
   <h2>myErgset</h2> 
+  <p> Only enter value for machine pull length here to avoid
+  changing previous constants </p>
+
   <h3>
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
-    placeholder="?">
-
-    <p class = "fixed-paragraph" style = "width:50%;">
-    add pull length, percent drive, fe cadence for pull force 
-    and mechanical watts per stroke </p>
+    placeholder="???">
 
   </h3>  
-  <button onclick="showReadyAll()">ReadyAll</button>
-  <button onclick="showReady()">Ready</button>
- 
 
 </div>
 
@@ -176,7 +172,6 @@ must assume fixed pull force as calculated in myErgsettings -->
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
-
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
