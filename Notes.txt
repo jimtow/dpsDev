@@ -1,3 +1,6 @@
+ONLY ONE TIMER WITH A STROKE COUNT
+
+
 the web app needs two timers: a 10 stroke timer and a split timer
 
 the 10 stroke timer stops and resets after time for 10 strokes at fe cadence
