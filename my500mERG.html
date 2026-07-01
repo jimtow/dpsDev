@@ -105,8 +105,13 @@ must assume fixed pull force as calculated in myErgsettings -->
   <button onclick="reset()">Reset</button> -->
     
   <p>This is your performance w this machine and settings. </p>
+
+  <!-- calculate running distance, Watt-min and OTW speed inside the timer function
+   but remember to declare (let) the distance related constants !!
+   User gets to stop workout based on time, distance, energy expenditure-->
+
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
-  <!--const num = Number(value.toFixed(1));-->
+
  
   <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
