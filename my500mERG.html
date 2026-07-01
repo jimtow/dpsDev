@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!--Note: <h2> is text size tag with <input> "set" inside>-->
+<!--pull and push this 6/30.15.20.B-->
 <html>   
 <body>
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
-  my500mERG provides On-the-Water equivalent metrics for any Erg and settings based 
+  my500mERG provides On-the-Water (otw3) equivalent metrics for any Erg and settings based 
   on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
   FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
@@ -35,9 +35,6 @@ must assume fixed pull force as calculated in myErgsettings -->
   <h3>
    Full Effort (FE) Sustainable Cadence (SC) 
     <input id="feCadn" style="width:100px; height: 30px;" type="number"
-    placeholder="?"> 
-   est DPS (meters/stroke)
-    <input id="estDPS" style="width:100px; height: 30px;" type="number"
     placeholder="?">
   </h3>
 
@@ -48,16 +45,15 @@ must assume fixed pull force as calculated in myErgsettings -->
     "timer1" 
   
   -->
+   <p> STROKES:Elapsed Time</p> 
   <h1 id="timer">0</h1>
-  <p> add a 10stroke timer here</p>
-
+  <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>
     
-  <p> Note your Perceived Effort</p>
-  
-  <h3> 
+  <p> Note ROWERS Perceived Effort</p>
+   <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" placeholder="?">  
     <button style="width: 90px; height: 40px;
@@ -82,14 +78,16 @@ must assume fixed pull force as calculated in myErgsettings -->
    <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
-   Distance per Stroke (revised or known)
+   <!--Startt here without need for "Ready" calibrations step --> 
+   Distance per Stroke (Estimated or Known)
     <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
   </h3>  
 
   <h3>
+    <!--OTW Workout otwSec at otwCadn-->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
-     type="number" placeholder="otwCad"> 
+     type="number" placeholder="otwCadn"> 
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
@@ -161,17 +159,19 @@ must assume fixed pull force as calculated in myErgsettings -->
 </script>
 
 <script>
+  // careful here values are local to the function and must be passed to the 
+  // function or declared as global variables !!
     function calculate(operator) {
 <!--these are the input values to be renamed-->   
       const a = Number(document.getElementById("feWatts").value);
       const b = Number(document.getElementById("feSplit").value);
       const c = Number(document.getElementById("feCadn").value);
-      const d = Number(document.getElementById("estDPS").value);
       const e= Number(document.getElementById("pcFeff").value);
       const f = Number(document.getElementById("mPstr").value);
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
+
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
@@ -185,30 +185,53 @@ must assume fixed pull force as calculated in myErgsettings -->
 
 <!--timer script (function)-->
   <script>
-    <!--add a 10stroke  that takes a cadence-based value and resets -->  
+    <!--DISPLAY STROKES -->  
+        let interval = null;
         let seconds = 0;
-    let interval = null;
+        let old = 0;
+        let strokes = 0;
+        let c = Number(document.getElementById("feCadn").value); // strokes/min
+        let strokesec = 5;
 
     function update() {
-      document.getElementById("timer").textContent = seconds;
-    }
+      let c = Number(document.getElementById("feCadn").value); // strokes/min
 
-    function start() {
-      if (interval) return;
-      interval = setInterval(() => {
-        seconds++;
-        update();
-      }, 1000);
+        document.getElementById("timer").textContent =
+        String(strokes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+    
     }
+    function start() {
+      let c = Number(document.getElementById("feCadn").value); // strokes/min
+      if (interval) return;
+        interval = setInterval(() => {
+        seconds++;
+        strokesec = 60/c;
+      
+        if (seconds-old >= strokesec) {
+          strokes++
+          update();
+          old = seconds;
+        }
+        update();
+        }, 1000);
+      }
 
     function stop() {
+    let c = Number(document.getElementById("feCadn").value); // strokes/min
       clearInterval(interval);
       interval = null;
+      //seconds = 0;
+      //old = 0;
+      //strokes = 0;
     }
 
     function reset() {
+      let c = Number(document.getElementById("feCadn").value); // strokes/min
       stop();
       seconds = 0;
+      old = 0;
+      strokes = 0;
       update();
     }
 

@@ -78,16 +78,14 @@ must assume fixed pull force as calculated in myErgsettings -->
    <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
-   <!--Startt here without need for "Ready" calibrations step --> 
-   Distance per Stroke (Estimated or Known)
+   Distance per Stroke (revised or known)
     <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
   </h3>  
 
   <h3>
-    <!--OTW Workout otwSec at otwCadn-->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
-     type="number" placeholder="otwCadn"> 
+     type="number" placeholder="otwCad"> 
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
@@ -159,8 +157,6 @@ must assume fixed pull force as calculated in myErgsettings -->
 </script>
 
 <script>
-  // careful here values are local to the function and must be passed to the 
-  // function or declared as global variables !!
     function calculate(operator) {
 <!--these are the input values to be renamed-->   
       const a = Number(document.getElementById("feWatts").value);
@@ -171,7 +167,6 @@ must assume fixed pull force as calculated in myErgsettings -->
       const g = Number(document.getElementById("otwCadn").value);
       const h = Number(document.getElementById("otwSec").value);
       const i = Number(document.getElementById("mPstr1").value);
-
       let result, watts;
       if (operator === "Row(500m)")       {
         result = (e/100)*30000/(c * b);
