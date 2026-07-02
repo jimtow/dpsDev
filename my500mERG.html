@@ -134,19 +134,30 @@ must assume fixed pull force as calculated in myErgsettings -->
         let strokes = 0;
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
+
+
    
-   /* function rtRow() {}
+   /*    
+   funtion ergSets() {}
+      07.02.14.20
+      use: feCadn, pull Length
+      to calculatte: pullForce, mechWatts
+
+        pullForce = feWatts * 60 / (.7356 * feCadn * pullLength)
+        Is this circular?
+        mechWatts = .7356 * pullForce * pullLength * feCadn / 60
+   
+   OTW. . .
+   function rtRow() {}
       use: otwCadn, xdpsMtrs, otwSec, mechWatts per stroke
       (xdpsMtrs is manually entered per TT or previous known value !!)
       to calculate: rt distance, mechWatt-hrs, userWatt-hrs and cadence and speed
 
+        otwWatts = .7356 * pullForce * pullLength* otwCadn / 60
+        otwWork = otwWatts * seconds/3600
+
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
-
-      funtion ergSets() {}
-      use: feCadn, pull Length
-      to calculatte: pullForce, mechWatts
-
    */
    
    
