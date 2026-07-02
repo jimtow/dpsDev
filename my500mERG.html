@@ -50,7 +50,7 @@ must assume fixed pull force as calculated in myErgsettings -->
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" placeholder="?">  
     <button style="width: 90px; height: 40px;
-    " onclick="calculate('Row(500m)')">Row(500m)</button> 
+    " onclick="calculateTT('Row(500m)')">Row(500m)</button> 
   </h3>
   <h3> Distance per Stroke: <span id="dpsMtrs">
   </span>         Watts:<span id="watts"></span> 
@@ -72,7 +72,7 @@ must assume fixed pull force as calculated in myErgsettings -->
   <h3>
    <!--Startt here without need for "Ready" calibrations step --> 
    Distance per Stroke (Estimated or Known)
-    <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
+    <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
   </h3>  
 
@@ -127,17 +127,30 @@ must assume fixed pull force as calculated in myErgsettings -->
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 <!--timer script (function)-->
   <script>
-    <!--DISPLAY STROKES -->  
+    // initialize function variables
         let interval = null;
         let seconds = 0;
         let old = 0;
         let strokes = 0;
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
-        //let stopSeconds = 20;  // reset in ErgSet
+   
+   /* function rtRow() {}
+      use: otwCadn, dpsMtrs, otwSec
+      to calculate: rt distance, speed, and watt-hrs
 
+      const otwCadn = Number(document.getElementById("otwCadn").value);
+      const otwSec = Number(document.getElementById("otwSec").value);
+
+      funtion ergSets() {}
+      use: feWatts, feCadn, pull Length,
+      to calculatte: pullForce, mechWatts
+
+   */
+   
+   
     function update() {
-//      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
+        // display current values this format
         document.getElementById("timer").textContent =
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
@@ -163,9 +176,7 @@ must assume fixed pull force as calculated in myErgsettings -->
 //      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       clearInterval(interval);
       interval = null;
-      //seconds = 0;
-      //old = 0;
-      //strokes = 0;
+      
     }
     function reset() {
 //      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
@@ -204,22 +215,21 @@ function showReadyAll() {
     }
 // careful here values are local to the function and must be passed to the 
   // function or declared as global variables !!
-    function calculate(operator) {
+    function calculateTT(operator) {
     //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
       const feSplit = Number(document.getElementById("feSplit").value);
       const feCadn = Number(document.getElementById("feCadn").value);
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const mPstr = Number(document.getElementById("mPstr").value);
-      const otwCadn = Number(document.getElementById("otwCadn").value);
-      const otwSec = Number(document.getElementById("otwSec").value);
-      const mPstr1 = Number(document.getElementById("mPstr1").value);
+     
+      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       let dpsMtrs, watts;
       if (operator === "Row(500m)")       {
         dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
         watts =  (pcFeff/100)*feWatts;      
        }
-      dpsMtrs = Number(dpsMtrs.toFixed(1));
+        dpsMtrs = Number(dpsMtrs.toFixed(1));
         //watts 
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
