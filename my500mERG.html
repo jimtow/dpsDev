@@ -118,7 +118,7 @@ must assume fixed pull force as calculated in myErgsettings -->
 
   <h3>
    Distance per Stroke (revised or known)
-    <input id="mPstr" style="width:100px; height: 30px;" type="number" 
+    <input id="dspMtrs" style="width:100px; height: 30px;" type="number" 
     placeholder="???">
   </h3>  
 </div>
@@ -136,14 +136,15 @@ must assume fixed pull force as calculated in myErgsettings -->
         let strokesec = 5;
    
    /* function rtRow() {}
-      use: otwCadn, dpsMtrs, otwSec
-      to calculate: rt distance, speed, and watt-hrs
+      use: otwCadn, xdpsMtrs, otwSec, mechWatts per stroke
+      (xdpsMtrs is manually entered per TT or previous known value !!)
+      to calculate: rt distance, mechWatt-hrs, userWatt-hrs and cadence and speed
 
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
 
       funtion ergSets() {}
-      use: feWatts, feCadn, pull Length,
+      use: feCadn, pull Length
       to calculatte: pullForce, mechWatts
 
    */
@@ -221,8 +222,7 @@ function showReadyAll() {
       const feSplit = Number(document.getElementById("feSplit").value);
       const feCadn = Number(document.getElementById("feCadn").value);
       const pcFeff= Number(document.getElementById("pcFeff").value);
-      const mPstr = Number(document.getElementById("mPstr").value);
-     
+      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       let dpsMtrs, watts;
       if (operator === "Row(500m)")       {
