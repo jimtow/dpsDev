@@ -52,7 +52,7 @@ must assume fixed pull force as calculated in myErgsettings -->
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> 
   </h3>
-  <h3> Distance per Stroke: <span id="result">
+  <h3> Distance per Stroke: <span id="dpsMtrs">
   </span>         Watts:<span id="watts"></span> 
   </h3>
 
@@ -214,13 +214,14 @@ function showReadyAll() {
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
       const mPstr1 = Number(document.getElementById("mPstr1").value);
-      let result, watts;
+      let dpsMtrs, watts;
       if (operator === "Row(500m)")       {
-        result = (pcFeff/100)*30000/(feCadn * feSplit);
-        watts =  (pcFeff/100)*feWatts;       }
-        result = Number(result.toFixed(1));
-        watts 
-      document.getElementById("result").textContent = result;
+        dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
+        watts =  (pcFeff/100)*feWatts;      
+       }
+      dpsMtrs = Number(dpsMtrs.toFixed(1));
+        //watts 
+      document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
     }  
   

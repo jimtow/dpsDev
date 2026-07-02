@@ -39,19 +39,12 @@ must assume fixed pull force as calculated in myErgsettings -->
   </h3>
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
-  
-  <!--from cGPTimer.html in folder modify to reset after cadence-based
-    10 stroke interval span result (in red?) ahead of main cumulative 
-    "timer1" 
-  
-  -->
    <p> STROKES:Elapsed Time</p> 
   <h1 id="timer">0</h1>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
-  <button onclick="start()">Start</button>
+  <button onclick="startTT()">Start</button>
   <button onclick="stop()">Stop</button>
-  <button onclick="reset()">Reset</button>
-    
+  <button onclick="reset()">Reset</button>    
   <p> Note ROWERS Perceived Effort</p>
    <h3> 
     % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
@@ -59,8 +52,7 @@ must assume fixed pull force as calculated in myErgsettings -->
     <button style="width: 90px; height: 40px;
     " onclick="calculate('Row(500m)')">Row(500m)</button> 
   </h3>
-  
-  <h3> Distance per Stroke: <span id="result">
+  <h3> Distance per Stroke: <span id="dpsMtrs">
   </span>         Watts:<span id="watts"></span> 
   </h3>
 
@@ -78,14 +70,16 @@ must assume fixed pull force as calculated in myErgsettings -->
    <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
-   Distance per Stroke (revised or known)
+   <!--Startt here without need for "Ready" calibrations step --> 
+   Distance per Stroke (Estimated or Known)
     <input id="mPstr1" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
   </h3>  
 
   <h3>
+    <!--OTW Workout otwSec at otwCadn-->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
-     type="number" placeholder="otwCad"> 
+     type="number" placeholder="otwCadn"> 
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
@@ -93,11 +87,23 @@ must assume fixed pull force as calculated in myErgsettings -->
     " onclick="calculate('Row!')">Row!</button>
   </h3>
   
-  <p>add a 10stroke timer here</p>
+  <!--add the cadence based strokes : elapsed time same as on "Ready" page
+  on stop  calculate distance based on time and cadence using dps from "Ready"-->
 
+  <!-- <h1 id="timer">0</h1>
+  MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button> -->
+    
   <p>This is your performance w this machine and settings. </p>
+
+  <!-- calculate running distance, Watt-min and OTW speed inside the timer function
+   but remember to declare (let) the distance related constants !!
+   User gets to stop workout based on time, distance, energy expenditure-->
+
   <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
-  <!--const num = Number(value.toFixed(1));-->
+
  
   <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
@@ -114,70 +120,11 @@ must assume fixed pull force as calculated in myErgsettings -->
    Distance per Stroke (revised or known)
     <input id="mPstr" style="width:100px; height: 30px;" type="number" 
     placeholder="???">
-
   </h3>  
-
 </div>
-
 </body>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
- <script>
-  function showReadyAll() {
-    document.getElementById("ReadyAll").style.display = "block";
-    document.getElementById("Row").style.display = "none";
-    document.getElementById("Ready").style.display = "none";
-    document.getElementById("Ergset").style.display = "none";
-   
-  }
-
-  function showReady() {
-    document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("Ready").style.display = "block";
-    document.getElementById("Row").style.display = "none";
-    document.getElementById("Ergset").style.display = "none";
-    
-  }
-
-  function showRow() {  
-    document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("Ready").style.display = "none";
-    document.getElementById("Row").style.display = "block";
-    document.getElementById("Ergset").style.display = "none"; 
-    
-  }
-
-  function showErgset() {  
-    document.getElementById("ReadyAll").style.display = "none";
-    document.getElementById("Ready").style.display = "none";
-    document.getElementById("Row").style.display = "none";
-    document.getElementById("Ergset").style.display = "block";
-  }
-
-</script>
-
-<script>
-    function calculate(operator) {
-<!--these are the input values to be renamed-->   
-      const a = Number(document.getElementById("feWatts").value);
-      const b = Number(document.getElementById("feSplit").value);
-      const c = Number(document.getElementById("feCadn").value);
-      const e= Number(document.getElementById("pcFeff").value);
-      const f = Number(document.getElementById("mPstr").value);
-      const g = Number(document.getElementById("otwCadn").value);
-      const h = Number(document.getElementById("otwSec").value);
-      const i = Number(document.getElementById("mPstr1").value);
-      let result, watts;
-      if (operator === "Row(500m)")       {
-        result = (e/100)*30000/(c * b);
-        watts =  (e/100)*a;       }
-        result = Number(result.toFixed(1));
-        watts 
-      document.getElementById("result").textContent = result;
-      document.getElementById("watts").textContent = Number(watts.toFixed(1));
-    }
-  </script>
-
 <!--timer script (function)-->
   <script>
     <!--DISPLAY STROKES -->  
@@ -185,52 +132,99 @@ must assume fixed pull force as calculated in myErgsettings -->
         let seconds = 0;
         let old = 0;
         let strokes = 0;
-        let c = Number(document.getElementById("feCadn").value); // strokes/min
+        let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
+        //let stopSeconds = 20;  // reset in ErgSet
 
     function update() {
-      let c = Number(document.getElementById("feCadn").value); // strokes/min
-
+//      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         document.getElementById("timer").textContent =
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
-    
-    }
-    function start() {
-      let c = Number(document.getElementById("feCadn").value); // strokes/min
+      }
+    function startTT() {
+      // values must be initialized for each function !!
+      let feSplit = Number(document.getElementById("feSplit").value); // strokes/min
+      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
-        strokesec = 60/c;
-      
-        if (seconds-old >= strokesec) {
+        strokesec = 60/feCadn;
+      if (seconds-old >= strokesec) {
           strokes++
           update();
           old = seconds;
         }
         update();
+        if (seconds>= feSplit){stop();}
         }, 1000);
       }
-
-    function stop() {
-    let c = Number(document.getElementById("feCadn").value); // strokes/min
+     function stop() {
+//      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       clearInterval(interval);
       interval = null;
       //seconds = 0;
       //old = 0;
       //strokes = 0;
     }
-
     function reset() {
-      let c = Number(document.getElementById("feCadn").value); // strokes/min
+//      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       stop();
       seconds = 0;
       old = 0;
       strokes = 0;
       update();
     }
+function showReadyAll() {
+    document.getElementById("ReadyAll").style.display = "block";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    }
 
+  function showReady() {
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "block";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    }
 
+  function showRow() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "block";
+    document.getElementById("Ergset").style.display = "none"; 
+    }
+
+  function showErgset() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "block";
+    }
+// careful here values are local to the function and must be passed to the 
+  // function or declared as global variables !!
+    function calculate(operator) {
+    //these are input values to be renamed  
+      const feWatts = Number(document.getElementById("feWatts").value);
+      const feSplit = Number(document.getElementById("feSplit").value);
+      const feCadn = Number(document.getElementById("feCadn").value);
+      const pcFeff= Number(document.getElementById("pcFeff").value);
+      const mPstr = Number(document.getElementById("mPstr").value);
+      const otwCadn = Number(document.getElementById("otwCadn").value);
+      const otwSec = Number(document.getElementById("otwSec").value);
+      const mPstr1 = Number(document.getElementById("mPstr1").value);
+      let dpsMtrs, watts;
+      if (operator === "Row(500m)")       {
+        dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
+        watts =  (pcFeff/100)*feWatts;      
+       }
+      dpsMtrs = Number(dpsMtrs.toFixed(1));
+        //watts 
+      document.getElementById("dpsMtrs").textContent = dpsMtrs;
+      document.getElementById("watts").textContent = Number(watts.toFixed(1));
+    }  
+  
   </script>
 
 </html>
