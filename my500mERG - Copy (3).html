@@ -42,7 +42,7 @@ must assume fixed pull force as calculated in myErgsettings -->
    <p> STROKES:Elapsed Time</p> 
   <h1 id="timer">0</h1>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
-  <button onclick="startTT()">Start</button>
+  <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>    
   <p> Note ROWERS Perceived Effort</p>
@@ -134,7 +134,6 @@ must assume fixed pull force as calculated in myErgsettings -->
         let strokes = 0;
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
-        //let stopSeconds = 20;  // reset in ErgSet
 
     function update() {
 //      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
@@ -142,9 +141,7 @@ must assume fixed pull force as calculated in myErgsettings -->
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
       }
-    function startTT() {
-      // values must be initialized for each function !!
-      let feSplit = Number(document.getElementById("feSplit").value); // strokes/min
+    function start() {
       let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       if (interval) return;
         interval = setInterval(() => {
@@ -156,7 +153,6 @@ must assume fixed pull force as calculated in myErgsettings -->
           old = seconds;
         }
         update();
-        if (seconds>= feSplit){stop();}
         }, 1000);
       }
      function stop() {
