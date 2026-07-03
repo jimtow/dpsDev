@@ -40,7 +40,7 @@ must assume fixed pull force as calculated in myErgsettings -->
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
    <p> STROKES:Elapsed Time</p> 
-  <h1 id="timer">0</h1>
+  <h1 id="timerTT">0</h1>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
   <button onclick="startTT()">Start</button>
   <button onclick="stop()">Stop</button>
@@ -83,12 +83,12 @@ must assume fixed pull force as calculated in myErgsettings -->
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
+   <h1 id="timerWO">0</h1>
   <p> STROKE COUNT:ELAPSED TIME:DISTANCE:MECHWORK:USERWORK</p>
   
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>
-    
   <button style="width: 90px; height: 40px;
     " onclick="calculate('Row!')">Row!</button>
   </h3>
@@ -126,7 +126,7 @@ must assume fixed pull force as calculated in myErgsettings -->
 </body>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-<!--timer script (function)-->
+<!--timerTT script (function)-->
   <script>
     // initialize function variables
         let interval = null;
@@ -162,7 +162,7 @@ must assume fixed pull force as calculated in myErgsettings -->
    */
     function update() {
         // display current values this format
-        document.getElementById("timer").textContent =
+        document.getElementById("timerTT").textContent =
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
       }

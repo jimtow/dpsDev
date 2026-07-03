@@ -1,6 +1,6 @@
-Be sure to "save and commit" changes before trying to push to github
-If editing in a local (desktop) folder using VS code to open, 
-be sure to sync with the local git repo folder
+WORK IN DESKTOP FOLDER
+COPY (VIEW:>EXPLORER) TO LOCAL REPO\
+COMMIT AND PUSH OR SYNC
 
 Only one timer, add a count each stroke interval.
 
