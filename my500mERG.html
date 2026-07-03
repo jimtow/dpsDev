@@ -40,9 +40,9 @@ must assume fixed pull force as calculated in myErgsettings -->
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
    <p> STROKES:Elapsed Time</p> 
-  <h1 id="timerTT">0</h1>
+  <h1 id="timer">0</h1>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
-  <button onclick="startTT()">Start</button>
+  <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>    
   <p> Note ROWERS Perceived Effort</p>
@@ -70,7 +70,7 @@ must assume fixed pull force as calculated in myErgsettings -->
    <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
-   <!--Startt here without need for "Ready" calibrations step --> 
+   <!--Start here without need for "Ready" calibrations step --> 
    Distance per Stroke (Estimated or Known)
     <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
     placeholder="?">
@@ -83,10 +83,10 @@ must assume fixed pull force as calculated in myErgsettings -->
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
-   <h1 id="timerWO">0</h1>
+   <h1 id="timer">0</h1>
   <p> STROKE COUNT:ELAPSED TIME:DISTANCE:MECHWORK:USERWORK</p>
   
-  <button onclick="start()">Start</button>
+  <button onclick="start()">StartWO</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>
   <button style="width: 90px; height: 40px;
@@ -126,9 +126,9 @@ must assume fixed pull force as calculated in myErgsettings -->
 </body>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-<!--timerTT script (function)-->
+<!--timer script (function)-->
   <script>
-    // initialize function variables
+ // initialize function variables
         let interval = null;
         let seconds = 0;
         let old = 0;
@@ -136,8 +136,8 @@ must assume fixed pull force as calculated in myErgsettings -->
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
 
-
-   
+    
+      
    /*    
    funtion ergSets() {}
       07.02.14.20
@@ -160,13 +160,14 @@ must assume fixed pull force as calculated in myErgsettings -->
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
    */
+    
     function update() {
         // display current values this format
-        document.getElementById("timerTT").textContent =
+        document.getElementById("timer").textContent =
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
       }
-    function startTT() {
+    function start() {
       // values must be initialized for each function !!
       let feSplit = Number(document.getElementById("feSplit").value); // strokes/min
       let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
@@ -197,6 +198,7 @@ must assume fixed pull force as calculated in myErgsettings -->
       strokes = 0;
       update();
     }
+   
 function showReadyAll() {
     document.getElementById("ReadyAll").style.display = "block";
     document.getElementById("Row").style.display = "none";
