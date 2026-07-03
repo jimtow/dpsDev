@@ -83,6 +83,12 @@ must assume fixed pull force as calculated in myErgsettings -->
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
+  <p> STROKE COUNT:ELAPSED TIME:DISTANCE:MECHWORK:USERWORK</p>
+  
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+    
   <button style="width: 90px; height: 40px;
     " onclick="calculate('Row!')">Row!</button>
   </h3>
@@ -90,11 +96,6 @@ must assume fixed pull force as calculated in myErgsettings -->
   <!--add the cadence based strokes : elapsed time same as on "Ready" page
   on stop  calculate distance based on time and cadence using dps from "Ready"-->
 
-  <!-- <h1 id="timer">0</h1>
-  MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME
-  <button onclick="start()">Start</button>
-  <button onclick="stop()">Stop</button>
-  <button onclick="reset()">Reset</button> -->
     
   <p>This is your performance w this machine and settings. </p>
 
@@ -148,8 +149,6 @@ must assume fixed pull force as calculated in myErgsettings -->
       to calculatte: pullForce, mechWatts
 
    */
-   
-   
     function update() {
         // display current values this format
         document.getElementById("timer").textContent =
@@ -234,7 +233,25 @@ function showReadyAll() {
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
     }  
-  
-  </script>
+ 
+ /* function calculateRow(operator) {
+    //these are input values to be renamed  
+      const feWatts = Number(document.getElementById("feWatts").value);
+    //  const feSplit = Number(document.getElementById("feSplit").value);
+      const feCadn = Number(document.getElementById("feCadn").value);
+    //  const pcFeff= Number(document.getElementById("pcFeff").value);
+    //  const dspMtrs = Number(document.getElementById("dspMtrs").value);     
+      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+    //  let watts;
+      if (operator === "Row")       {
+        //dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
+        watts = feWatts;  
+       }
+   */ 
+//      document.getElementById("watts").textContent = 
+//      Number(watts.toFixed(1));
+
+      
+</script>
 
 </html>
