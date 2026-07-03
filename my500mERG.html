@@ -40,7 +40,7 @@ must assume fixed pull force as calculated in myErgsettings -->
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
    <p> STROKES:Elapsed Time</p> 
-  <h1 id="timerTT">0</h1>
+  <h1 id="timer">0</h1>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
@@ -83,7 +83,7 @@ must assume fixed pull force as calculated in myErgsettings -->
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
-   <h1 id="timerTT">0</h1>
+   <h1 id="timer">0</h1>
   <p> STROKE COUNT:ELAPSED TIME:DISTANCE:MECHWORK:USERWORK</p>
   
   <button onclick="start()">StartWO</button>
@@ -135,9 +135,6 @@ must assume fixed pull force as calculated in myErgsettings -->
         let strokes = 0;
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
-
-    
-      
    /*    
    funtion ergSets() {}
       07.02.14.20
@@ -160,10 +157,11 @@ must assume fixed pull force as calculated in myErgsettings -->
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
    */
-    
+    // update TT and add updateWO?? same timerTT function ??
+
     function update() {
-        // display current values this format
-        document.getElementById("timerTT").textContent =
+        // display current values in this format 
+        document.getElementById("timer").textContent =
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
       }
@@ -177,6 +175,7 @@ must assume fixed pull force as calculated in myErgsettings -->
         strokesec = 60/feCadn;
       if (seconds-old >= strokesec) {
           strokes++
+          //TT or WO
           update();
           old = seconds;
         }
@@ -196,6 +195,7 @@ must assume fixed pull force as calculated in myErgsettings -->
       seconds = 0;
       old = 0;
       strokes = 0;
+      // TT or WO?
       update();
     }
    
@@ -226,8 +226,11 @@ function showReadyAll() {
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "block";
     }
-// careful here values are local to the function and must be passed to the 
-  // function or declared as global variables !!
+
+/*
+add OTW WO values to calculateTT because cannot rename ID for this funtion
+do not show the WO metrics on the TT screen as ?
+*/
     function calculateTT(operator) {
     //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
