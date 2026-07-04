@@ -135,7 +135,8 @@ must assume fixed pull force as calculated in myErgsettings -->
         let strokes = 0;
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
-   /*    
+   /*
+   // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
    funtion ergSets() {}
       07.02.14.20
       use: feCadn, pull Length
@@ -144,20 +145,37 @@ must assume fixed pull force as calculated in myErgsettings -->
         pullForce = feWatts * 60 / (.7356 * feCadn * pullLength)
         Is this circular?
         mechWatts = .7356 * pullForce * pullLength * feCadn / 60
-   
-   OTW. . .
+   */
+   /* OTW. . .
    function rtRow() {}
-      use: otwCadn, xdpsMtrs, otwSec, mechWatts per stroke
-      (xdpsMtrs is manually entered per TT or previous known value !!)
-      to calculate: rt distance, mechWatt-hrs, userWatt-hrs and cadence and speed
+      //use: otwCadn, xdpsMtrs, otwSec, mechWatts per stroke
+      //(xdpsMtrs is manually entered per TT or previous known value !!)
+      //to calculate: rt distance, mechWatt-hrs, userWatt-hrs and cadence and speed
 
-        otwWatts = .7356 * pullForce * pullLength* otwCadn / 60
-        otwWork = otwWatts * seconds/3600
+      // mech watts !!
+      //otwMechwatts = .7356 * pullForce * pullLength* otwCadn / 60
+      //otwWork = otwWatts * seconds/3600
 
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
+
+      if (feCadn >= 5)       {
+        // re calculate Workout metrics
+        otwCadn = otwSplit;
+        otwStrokes = (otwCadn * otwSplit) / 60;
+        otwDist = xdpsMtrs * otwStrokes ;
+        // ADD OTW MECHWATTS AND WORK
+       }
+    
+     // prepare for html display
+      document.getElementById("otwStrokes").textContent = Number(otwStrokes.toFixed(0));  
+      document.getElementById("otwSplit").textContent = Number(otwSplit.toFixed(0));  
+      document.getElementById("otwDist").textContent = Number(otwDist.toFixed(1));
+    // ADD OTW MECH WATTS AND WORK
+
+
    */
-    // update TT and add updateWO?? same timerTT function ??
+  
 
     function update() {
         // display current values in this format 
@@ -250,23 +268,6 @@ do not show the WO metrics on the TT screen as ?
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
     }  
  
- /* function calculateRow(operator) {
-    //these are input values to be renamed  
-      const feWatts = Number(document.getElementById("feWatts").value);
-    //  const feSplit = Number(document.getElementById("feSplit").value);
-      const feCadn = Number(document.getElementById("feCadn").value);
-    //  const pcFeff= Number(document.getElementById("pcFeff").value);
-    //  const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
-    //  let watts;
-      if (operator === "Row")       {
-        //dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
-        watts = feWatts;  
-       }
-   */ 
-//      document.getElementById("watts").textContent = 
-//      Number(watts.toFixed(1));
-
       
 </script>
 
