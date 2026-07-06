@@ -39,7 +39,7 @@ must assume fixed pull force as calculated in myErgsettings -->
   </h3>
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
-   <p> STROKES:Elapsed Time</p> 
+   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
   <h1 id="timer">0</h1>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
   <button onclick="start()">Start</button>
@@ -83,8 +83,9 @@ must assume fixed pull force as calculated in myErgsettings -->
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
-   <h1 id="timer">0</h1>
-  <p> STROKE COUNT:ELAPSED TIME:DISTANCE:MECHWORK:USERWORK</p>
+   <h1 id="otwtimer">0</h1>
+  <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
+  
   
   <button onclick="start()">StartWO</button>
   <button onclick="stop()">Stop</button>
@@ -103,8 +104,7 @@ must assume fixed pull force as calculated in myErgsettings -->
    but remember to declare (let) the distance related constants !!
    User gets to stop workout based on time, distance, energy expenditure-->
 
-  <h3> Time ?? Distance ?? Watt-min ?? "OTW" Speed: ?? </h3>
-
+ <p> STROKES: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p>   
  
   <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
@@ -129,12 +129,20 @@ must assume fixed pull force as calculated in myErgsettings -->
 <!--timer script (function)-->
   <script>
  // initialize function variables
+        // FOR TT 
         let interval = null;
         let seconds = 0;
         let old = 0;
         let strokes = 0;
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
+        // FOR OTW WORKOUT 
+        let otwDist = 0;
+        let otwCadn = 0;
+        let otwSpeed = 0;
+        let otwDistance = 0;
+        let mechWatthrs = 0;
+        let userWatthrs = 0;
    /*
    // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
    funtion ergSets() {}
@@ -175,14 +183,17 @@ must assume fixed pull force as calculated in myErgsettings -->
 
 
    */
-  
-
     function update() {
-        // display current values in this format 
+        // Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:
+
         document.getElementById("timer").textContent =
         String(strokes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0");
+        String(otwDistance).padStart(2, "0") + ":" +
+        String(otwCadn).padStart(2, "0") + ":" +
+        String(otwSpeed).padStart(2, "0") + ":" +
+        String(mechWatthrs).padStart(2, "0") + ":" +
+        String(userWatthrs).padStart(2, "0");
         // ADD UPDATED VALUES HERE AND UPDATE ACCORDING TO TT OR ROW!
 
       }
