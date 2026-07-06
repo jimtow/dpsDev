@@ -23,19 +23,19 @@ based distance per stroke. Distance per stroke is fixed during a workout because
 must assume fixed pull force as calculated in myErgsettings -->
 <div id = "Ready" style ="display:none;">
   <h2>Ready</h2>
-  <p>Determine full effort distance per stroke (dps)</p>
+  <p>Determine full effort distance per stroke (dps) and ERG resistance</p>
   <h3>
   User Watts
-  <input id="feWatts" style="width:100px; height:30px;" type="number" 
+  <input id="feWatts" style="width:80px; height:30px;" type="number" 
   placeholder="?">
   500m split (seconds)
-  <input id="feSplit" style="width:100px; height:30px;" type="number" 
+  <input id="feSplit" style="width:80px; height:30px;" type="number" 
   placeholder="?">
   </h3>
   <h3>
-   Full Effort (FE) Sustainable Cadence (SC) 
-    <input id="feCadn" style="width:100px; height: 30px;" type="number"
-    placeholder="?">
+     500m Sustainable Cadence 
+      <input id="feCadn" style="width:80px; height: 30px;" type="number"
+      placeholder="?">
   </h3>
 
   <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
@@ -77,15 +77,19 @@ must assume fixed pull force as calculated in myErgsettings -->
   </h3>  
 
   <h3>
-    <!--OTW Workout otwSec at otwCadn-->
+    <!--OTW Workout otwSec at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" placeholder="otwCadn"> 
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
      type="number" placeholder="otwSec">  
 
-   <h1 id="otwtimer">0</h1>
-  <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
+  <p>This is your performance w this machine and settings. </p>
   
+  <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
+
+  <h1 id="otwtimer">0</h1>
+
+   <p> Well Rowed !!</p> 
   
   <button onclick="start()">StartWO</button>
   <button onclick="stop()">Stop</button>
@@ -94,17 +98,6 @@ must assume fixed pull force as calculated in myErgsettings -->
     " onclick="calculate('Row!')">Row!</button>
   </h3>
   
-  <!--add the cadence based strokes : elapsed time same as on "Ready" page
-  on stop  calculate distance based on time and cadence using dps from "Ready"-->
-
-    
-  <p>This is your performance w this machine and settings. </p>
-
-  <!-- calculate running distance, Watt-min and OTW speed inside the timer function
-   but remember to declare (let) the distance related constants !!
-   User gets to stop workout based on time, distance, energy expenditure-->
-
- <p> STROKES: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p>   
  
   <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
@@ -137,35 +130,35 @@ must assume fixed pull force as calculated in myErgsettings -->
         let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
         // FOR OTW WORKOUT 
-        let otwDist = 0;
+     let otwDist = 0;
         let otwCadn = 0;
         let otwSpeed = 0;
         let otwDistance = 0;
         let mechWatthrs = 0;
         let userWatthrs = 0;
-   /*
-   // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
-   funtion ergSets() {}
-      07.02.14.20
-      use: feCadn, pull Length
-      to calculatte: pullForce, mechWatts
 
-        pullForce = feWatts * 60 / (.7356 * feCadn * pullLength)
-        Is this circular?
-        mechWatts = .7356 * pullForce * pullLength * feCadn / 60
-   */
-   /* OTW. . .
-   function rtRow() {}
-      //use: otwCadn, xdpsMtrs, otwSec, mechWatts per stroke
-      //(xdpsMtrs is manually entered per TT or previous known value !!)
-      //to calculate: rt distance, mechWatt-hrs, userWatt-hrs and cadence and speed
+        let mechWatts = 0;                // per stroke
+        let xdpsMtrs = 0;                 // TT or pre-determined entry
+  
 
-      // mech watts !!
-      //otwMechwatts = .7356 * pullForce * pullLength* otwCadn / 60
+   /* OTW. . WORKOUT
+    THIS IS THE WORKOUT SCRIPT USING xdpsMtrs, otwCadn, and otwSec AS ENTRY VALUES
+    TO REPORT TIME AND DISTANCE, WORK.
+
+    Calculate pull-force for machine and settings at Timed Trial. Pass by argument. Need to add
+    a pullLength entry to TT page !!
+
+   function rtRow(pullForce) {}
+      
+      pullForce = 1.3954 * 60 * feWatts /(pullLength * otwCadn 
+ 
+      //otwMechwatts = .7356 * pullForce * pullLength * otwCadn / 60
+ 
       //otwWork = otwWatts * seconds/3600
 
       const otwCadn = Number(document.getElementById("otwCadn").value);
       const otwSec = Number(document.getElementById("otwSec").value);
+   
       // UPDATE !! 
       if (feCadn >= 5)       {
         // re calculate Workout metrics
@@ -281,8 +274,20 @@ do not show the WO metrics on the TT screen as ?
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
     }  
- 
+/*
+   // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
+   funtion ergSets() {}
+      07.02.14.20
+      use: feCadn, pull Length
+      to calculatte: pullForce, mechWatts
+
+        pullForce = feWatts * 60 / (.7356 * feCadn * pullLength)
+        Is this circular?
+        mechWatts = .7356 * pullForce * pullLength * feCadn / 60
+   */ 
       
 </script>
 
 </html>
+
+
