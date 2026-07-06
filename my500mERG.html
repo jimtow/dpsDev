@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+z<!DOCTYPE html>
 <!--pull and push this 6/30.15.20.B-->
 <html>   
 <body>
@@ -261,8 +261,8 @@ function showReadyAll() {
     }
 
 /*
-add OTW WO values to calculateTT because cannot rename ID for this funtion
-do not show the WO metrics on the TT screen as ?
+Calculate TT does all the work when Row(500) is tapped and percieved effort
+is estimated for the Timed Trial. dpsMtrs, pullForce
 */
     function calculateTT(operator) {
     //these are input values to be renamed  
@@ -272,15 +272,22 @@ do not show the WO metrics on the TT screen as ?
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
-      let dpsMtrs, watts;
+      const pullLength = Number(document.getElementById("pullLength").value);
+
+      let dpsMtrs, watts;                                 
       if (operator === "Row(500m)")       {
         dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
         watts =  (pcFeff/100)*feWatts;      
+        // add pull force and mechWatts to report line in the update() function
+        //pullForce = feWatts * 60 / (.7356 * feCadn * pullLength);
+        //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
+
        }
         dpsMtrs = Number(dpsMtrs.toFixed(1));
         //watts 
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = Number(watts.toFixed(1));
+
     }  
 /*
    // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
