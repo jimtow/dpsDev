@@ -1,4 +1,4 @@
-z<!DOCTYPE html>
+<!DOCTYPE html>
 <!--pull and push this 6/30.15.20.B-->
 <html>   
 <body>
@@ -25,7 +25,7 @@ replaced paceholder with value for convenience
 -->
 <div id = "Ready" style ="display:none;">
   <h2>Ready</h2>
-  <p>Determine full effort distance per stroke (dps) and ERG resistance</p>
+ <!-- <p>Determine full effort distance per stroke (dps) and ERG resistance</p>   --> 
   <h3>
   User Watts
   <input id="feWatts" style="width:60px; height:30px;" type="number" 
@@ -38,30 +38,31 @@ replaced paceholder with value for convenience
      500m Sustainable Cadence 
       <input id="feCadn" style="width:60px; height: 30px;" type="number"
       value="28">
-
      Stroke Length (m) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
-      placeholder="4">
-
-
+      value="4">
   </h3>
-
-  <h2 style="color: red;">Row FE SC to the 500m Split (seconds)   </h2>
-   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
-  <h1 id="timer">0</h1>
+  <h3 style="color: black;">Row FE SC to the 500m Split (seconds)   </h3>
+  
+  <h4 id="timer">0</h4>
   <!--MODIFIED TIMER TO SHOW STROKE COUNT AND ELAPSED TIME-->
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>    
   <p> Note ROWERS Perceived Effort</p>
    <h3> 
-    % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" placeholder="?">  
+    Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
+    type="number" value="100">  
     <button style="width: 90px; height: 40px;
-    " onclick="calculateTT('Row(500m)')">Row(500m)</button> 
+    " onclick="calculateTT('Row(500m)')">Enter</button> 
   </h3>
-  <h3> Distance per Stroke: <span id="dpsMtrs">
-  </span>         Watts:<span id="watts"></span> 
+  <!--calculate and display resistance here. It is based on demographic
+  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
+  --> 
+  
+  <h3>     Mtrs/Stroke: <span id="dpsMtrs">  </span> 
+           Watts:<span id="watts"> </span> 
+           ERGpull(lbs):<span id = "pullForce"></span>
   </h3>
 
   <button onclick="showReadyAll()">ReadyAll</button>
@@ -74,8 +75,8 @@ replaced paceholder with value for convenience
   <!--row to a "stop" time using stopwatch timers 
   or manual stop at fe dps cadence.  
   Calculate distance based on time and feCadence !! -->
-   <h2>Row!</h2> 
-   <p> row with FE effort and cadence</p>
+  <h2>Row!</h2> 
+  <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
    <!--Start here without need for "Ready" calibrations step --> 
@@ -147,6 +148,7 @@ replaced paceholder with value for convenience
 
         let mechWatts = 0;                // per stroke
         let xdpsMtrs = 0;                 // TT or pre-determined entry
+        let pullForce = 0;
   
 
    /* OTW. . WORKOUT
@@ -175,30 +177,29 @@ replaced paceholder with value for convenience
         otwDist = xdpsMtrs * otwStrokes ;
         // ADD OTW MECHWATTS AND WORK
        }
-    
      // prepare for html display
       document.getElementById("otwStrokes").textContent = Number(otwStrokes.toFixed(0));  
       document.getElementById("otwSplit").textContent = Number(otwSplit.toFixed(0));  
       document.getElementById("otwDist").textContent = Number(otwDist.toFixed(1));
     // ADD OTW MECH WATTS AND WORK
-
-
    */
-    function update() {
-        // Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:
 
-        document.getElementById("timer").textContent =
-        String(strokes).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0") + ":" +
-        String(otwDistance).padStart(2, "0") + ":" +
-        String(otwCadn).padStart(2, "0") + ":" +
-        String(otwSpeed).padStart(2, "0") + ":" +
-        String(mechWatthrs).padStart(2, "0") + ":" +
-        String(userWatthrs).padStart(2, "0");
-        // ADD UPDATED VALUES HERE AND UPDATE ACCORDING TO TT OR ROW!
+ 
+   function update() {
+      document.getElementById("timer").innerHTML =
+        "Strokes: " + strokes +
+        " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
 
+        "OTW Distance: " + otwDistance +
+        " &nbsp;&nbsp; OTW Cadence: " + otwCadn + "<br>" +
+
+        "  OTW Speed:  " + otwSpeed +
+        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs + "<br>" +
+
+        "userWatt-hrs: " + userWatthrs;
       }
-    function start() {
+
+      function start() {
       // values must be initialized for each function !!
       let feSplit = Number(document.getElementById("feSplit").value); // strokes/min
       let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
@@ -274,20 +275,23 @@ is estimated for the Timed Trial. dpsMtrs, pullForce
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       const pullLength = Number(document.getElementById("pullLength").value);
 
-      let dpsMtrs, watts;                                 
-      if (operator === "Row(500m)")       {
+
+      let dpsMtrs, watts, pullForce;                                 
+      if (operator === "Row(500m)")  {
+        pullForce = 1.3954 * 60 * feWatts /(pullLength * feCadn) 
         dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
         watts =  (pcFeff/100)*feWatts;      
         // add pull force and mechWatts to report line in the update() function
-        //pullForce = feWatts * 60 / (.7356 * feCadn * pullLength);
         //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
 
        }
+        pullForce = Number(pullForce.toFixed(1));
         dpsMtrs = Number(dpsMtrs.toFixed(1));
+        watts = Number(watts.toFixed(1));
         //watts 
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
-      document.getElementById("watts").textContent = Number(watts.toFixed(1));
-
+      document.getElementById("watts").textContent = watts;
+      document.getElementById("pullForce").textContent = pullForce;
     }  
 /*
    // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
