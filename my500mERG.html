@@ -80,41 +80,39 @@ replaced paceholder with value for convenience
   or manual stop at fe dps cadence.  
   Calculate distance based on time and feCadence !! -->
   <h2>Row!</h2> 
-  <p> row with FE effort and cadence</p>
   <p> Row at any cadence</p>
   <h3>
    <!--Start here without need for "Ready" calibrations step --> 
    Distance per Stroke (Estimated or Known)
     <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
-    placeholder="?">
+    value="6">
   </h3>  
 
   <h3>
     <!--OTW Workout otwSec at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
-     type="number" placeholder="otwCadn"> 
+     type="number" value="28"> 
      for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
-     type="number" placeholder="otwSec">  
+     type="number" value="180">  
 
   <p>This is your performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
+ <button onclick="start()">StartWO</button>
+  <button onclick="stop()">StopWO</button>
+  <button onclick="reset()">Reset</button>
 
-  <h1 id="otwtimer">0</h1>
+  <h1 id="otwtimer"></h1>
 
    <p> Well Rowed !!</p> 
   
-  <button onclick="start()">StartWO</button>
-  <button onclick="stop()">Stop</button>
-  <button onclick="reset()">Reset</button>
-  <button style="width: 90px; height: 40px;
-    " onclick="calculate('Row!')">Row!</button>
   </h3>
   
- 
-  <button onclick="showReady()">Ready</button>
+ <h3> <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
-  <button onclick="showErgset()">myErgset</button>
+
+  </h3>
+  
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
@@ -154,7 +152,35 @@ replaced paceholder with value for convenience
         let xdpsMtrs = 0;                 // TT or pre-determined entry
         let pullForce = 0;
   
+ function calculateTT(operator) {
+    //these are input values to be renamed  
+      const feWatts = Number(document.getElementById("feWatts").value);
+      const feSplit = Number(document.getElementById("feSplit").value);
+      const feCadn = Number(document.getElementById("feCadn").value);
+      const pcFeff= Number(document.getElementById("pcFeff").value);
+      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
+      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      const pullLength = Number(document.getElementById("pullLength").value);
 
+
+      let dpsMtrs, watts, pullForce;                                 
+      if (operator === "Row(500m)")  {
+      /*TT uses published demographics and timed trial with estimate of full
+      effort on completion */ 
+        dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
+        watts =  (pcFeff/100)*feWatts;  
+        //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
+        pullForce = 60 * watts /(pullLength * feCadn) 
+        //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
+         }
+        pullForce = Number(pullForce.toFixed(1));
+        dpsMtrs = Number(dpsMtrs.toFixed(1));
+        watts = Number(watts.toFixed(1));
+      
+        document.getElementById("dpsMtrs").textContent = dpsMtrs;
+        document.getElementById("watts").textContent = watts;
+        document.getElementById("pullForce").textContent = pullForce;
+      }  
    /* OTW. . WORKOUT
     THIS IS THE WORKOUT SCRIPT USING xdpsMtrs, otwCadn, and otwSec AS ENTRY VALUES
     TO REPORT TIME AND DISTANCE, WORK.
@@ -188,7 +214,12 @@ replaced paceholder with value for convenience
     // ADD OTW MECH WATTS AND WORK
    */
   /* update() displays running values during TT or row */
- 
+  
+   function calculateRow(){}
+
+
+
+
    function update() {
       /* calculate rt each stroke values (mechWatthrs, userWatthrs) */
       document.getElementById("timer").innerHTML =
@@ -204,20 +235,22 @@ replaced paceholder with value for convenience
         "userWatt-hrs: " + userWatthrs;
       }
 
+    // generalize here for either TT or WO by   
+
       function start() {
       //  update();
       // values must be initialized for each function !!
-      let feSplit = Number(document.getElementById("feSplit").value); // strokes/min
-      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
-      let feWatts = Number(document.getElementById("feWatts").value); // strokes/min
+      let split = Number(document.getElementById("feSplit").value); // strokes/min
+      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+      let watts = Number(document.getElementById("feWatts").value); // strokes/min
 
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
-        strokesec = 60/feCadn;
+        strokesec = 60/cadn;
       if (seconds-old >= strokesec) {
           strokes++
-                userWatthrs = feWatts * seconds / 3600;
+                userWatthrs = watts * seconds / 3600;
                 userWatthrs = Number(userWatthrs.toFixed(2));
           //TT or WO
           update();
@@ -275,35 +308,7 @@ function showReadyAll() {
 Calculate TT does all the work when Row(500) is tapped and percieved effort
 is estimated for the Timed Trial. dpsMtrs, pullForce
 */
-    function calculateTT(operator) {
-    //these are input values to be renamed  
-      const feWatts = Number(document.getElementById("feWatts").value);
-      const feSplit = Number(document.getElementById("feSplit").value);
-      const feCadn = Number(document.getElementById("feCadn").value);
-      const pcFeff= Number(document.getElementById("pcFeff").value);
-      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
-      const pullLength = Number(document.getElementById("pullLength").value);
-
-
-      let dpsMtrs, watts, pullForce;                                 
-      if (operator === "Row(500m)")  {
-      /*TT uses published demographics and timed trial with estimate of full
-      effort on completion */ 
-        dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
-        watts =  (pcFeff/100)*feWatts;  
-        //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
-        pullForce = 60 * watts /(pullLength * feCadn) 
-        //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-         }
-        pullForce = Number(pullForce.toFixed(1));
-        dpsMtrs = Number(dpsMtrs.toFixed(1));
-        watts = Number(watts.toFixed(1));
-      
-        document.getElementById("dpsMtrs").textContent = dpsMtrs;
-        document.getElementById("watts").textContent = watts;
-        document.getElementById("pullForce").textContent = pullForce;
-      }  
+   
 /*
    // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
    funtion ergSets() {}
