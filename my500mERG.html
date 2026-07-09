@@ -138,13 +138,12 @@ replaced paceholder with value for convenience
         let seconds = 0;
         let old = 0;
         let strokes = 0;
-        let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
+        //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
         // FOR OTW WORKOUT 
-        let otwDist = 0;
+        let otwDistance = 0;
         let otwCadn = 0;
         let otwSpeed = 0;
-        let otwDistance = 0;
         let mechWatthrs = 0;
         let userWatthrs = 0;
 
@@ -153,31 +152,39 @@ replaced paceholder with value for convenience
         let pullForce = 0;
  // FINAL METRICS 
  function calculateTT() {
-    //these are input values to be renamed  
+      //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
       const feSplit = Number(document.getElementById("feSplit").value);
       const feCadn = Number(document.getElementById("feCadn").value);
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       const pullLength = Number(document.getElementById("pullLength").value);
+
+      let otwSeconds = 0;
+      let otwSpeed = 0;
+      let mechWatthrs = 0;
+      let userWatthrs = 0;
+      //let pullForce = 0;
+      let otwDistance = 0;
+      let mechWatts = 0;
 
       let dpsMtrs, watts, pullForce;                                 
       /*TT uses published demographics and timed trial with estimate of full
       effort on completion */ 
-        dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
-        watts =  (pcFeff/100)*feWatts;  
-        //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
-        pullForce = 60 * watts /(pullLength * feCadn) 
-        //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
+      dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
+      watts =  (pcFeff/100)*feWatts;  
+      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
+      pullForce = 60 * watts /(pullLength * feCadn) 
+      //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
          
-        pullForce = Number(pullForce.toFixed(1));
-        dpsMtrs = Number(dpsMtrs.toFixed(1));
-        watts = Number(watts.toFixed(1));
-        // to show on documetn
-        document.getElementById("dpsMtrs").textContent = dpsMtrs;
-        document.getElementById("watts").textContent = watts;
-        document.getElementById("pullForce").textContent = pullForce;
+      pullForce = Number(pullForce.toFixed(1));
+      dpsMtrs = Number(dpsMtrs.toFixed(1));
+      watts = Number(watts.toFixed(1));
+      // to show on documetn
+      document.getElementById("dpsMtrs").textContent = dpsMtrs;
+      document.getElementById("watts").textContent = watts;
+      document.getElementById("pullForce").textContent = pullForce;
       }  
 // FINAL METRICS   
    function calculateRow(){
@@ -187,7 +194,7 @@ replaced paceholder with value for convenience
       let mechWatthrs = 0;
       let userWatthrs = 0;
       let pullForce = 0;
-      let woDist = 0;
+      let otwDistance = 0;
       let mechWatts = 0;
 
       const otwCadn = Number(document.getElementById("otwCadn").value); 
