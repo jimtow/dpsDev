@@ -89,11 +89,11 @@ replaced paceholder with value for convenience
   </h3>  
 
   <h3>
-    <!--OTW Workout otwSec at otwCadn with dpsMtrs -->
+    <!--OTW Workout otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
-     for (seconds) <input id="otwSec" style="width:100px; height: 30px;"
-     type="number" value="180">  
+     Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
+     type="number" value="500">  
 
   <p>This is your performance w this machine and settings. </p>
   
@@ -183,7 +183,7 @@ replaced paceholder with value for convenience
    
    function calculateRow(){
   //FOR OTW WORKOUT 
-      let otwDist = 0;
+      let otwSeconds = 0;
       let otwSpeed = 0;
       let mechWatthrs = 0;
       let userWatthrs = 0;
@@ -195,7 +195,7 @@ replaced paceholder with value for convenience
       // xdpsMtrs is entered here manually from pre-determined valuee 
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       // row to time!! (or speed ??)
-      const otwSec = Number(document.getElementById("otwSec").value);
+      const otwDist = Number(document.getElementById("otwDist").value);
   /*
       CALCULATE RUNNING AND FINAL WORKOUT METRICS}                             
   
