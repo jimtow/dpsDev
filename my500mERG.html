@@ -98,7 +98,7 @@ replaced paceholder with value for convenience
   <p>This is your performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
- <button onclick="start()">StartWO</button>
+  <button onclick="start()">StartWO</button>
   <button onclick="stop()">StopWO</button>
   <button onclick="reset()">Reset</button>
 
@@ -162,7 +162,6 @@ replaced paceholder with value for convenience
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       const pullLength = Number(document.getElementById("pullLength").value);
 
-
       let dpsMtrs, watts, pullForce;                                 
       if (operator === "Row(500m)")  {
       /*TT uses published demographics and timed trial with estimate of full
@@ -176,48 +175,50 @@ replaced paceholder with value for convenience
         pullForce = Number(pullForce.toFixed(1));
         dpsMtrs = Number(dpsMtrs.toFixed(1));
         watts = Number(watts.toFixed(1));
-      
+        // to show on documetn
         document.getElementById("dpsMtrs").textContent = dpsMtrs;
         document.getElementById("watts").textContent = watts;
         document.getElementById("pullForce").textContent = pullForce;
       }  
-   /* OTW. . WORKOUT
-    THIS IS THE WORKOUT SCRIPT USING xdpsMtrs, otwCadn, and otwSec AS ENTRY VALUES
-    TO REPORT TIME AND DISTANCE, WORK.
-
-    Calculate pull-force for machine and settings at Timed Trial. Pass by argument. Need to add
-    a pullLength entry to TT page !!
-
-   function rtRow(pullForce) {}
-      
-      pullForce = 1.3954 * 60 * feWatts /(pullLength * otwCadn 
- 
-      //otwMechwatts = .7356 * pullForce * pullLength * otwCadn / 60
- 
-      //otwWork = otwWatts * seconds/3600
-
-      const otwCadn = Number(document.getElementById("otwCadn").value);
-      const otwSec = Number(document.getElementById("otwSec").value);
    
-      // UPDATE !! 
-      if (feCadn >= 5)       {
-        // re calculate Workout metrics
-        otwCadn = otwSplit;
-        otwStrokes = (otwCadn * otwSplit) / 60;
-        otwDist = xdpsMtrs * otwStrokes ;
-        // ADD OTW MECHWATTS AND WORK
-       }
-     // prepare for html display
-      document.getElementById("otwStrokes").textContent = Number(otwStrokes.toFixed(0));  
-      document.getElementById("otwSplit").textContent = Number(otwSplit.toFixed(0));  
-      document.getElementById("otwDist").textContent = Number(otwDist.toFixed(1));
-    // ADD OTW MECH WATTS AND WORK
-   */
-  /* update() displays running values during TT or row */
+   function calculateRow(){
+  //FOR OTW WORKOUT 
+        let otwDist = 0;
+      //  let otwCadn = 0;
+      //  let otwSpeed = 0;
+        let mechWatthrs = 0;
+        let userWatthrs = 0;
+
+      //  let mechWatts = 0;                // per stroke
+      //  let xdpsMtrs = 0;                 // TT or pre-determined entry
+      let pullForce = 0;
+
+      const otwCadn = Number(document.getElementById("otwCadn").value); 
+      // xdpsMtrs is entered here manually from pre-determined valuee 
+      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      const otwSec = Number(document.getElementById("otwSec").value);
+
+      let woDist, otwSpeed, mechWatts;
   
-   function calculateRow(){}
-
-
+  /*
+   // CALCULATE RUNNING AND FINAL WORKOUT METRICS}
+      // from Row 
+  
+      //let woDist, otwSpeed, mechWatts                                
+  /*  
+        ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
+        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
+        
+      calculate and show real-time with timer updates (similar to TT)
+        stroke#, time, distance, etc.
+        
+      show final metrics on Row html
+        distance, time, cadence, mechWatt-hrs,  
+    */
+        //document.getElementById("mechWatthrs").textContent = mechWatthrs;
+        //document.getElementById("watts").textContent = watts;
+        //document.getElementById("pullForce").textContent = pullForce;
+      }  
 
 
    function update() {
