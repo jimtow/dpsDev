@@ -217,7 +217,31 @@ replaced paceholder with value for convenience
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
+  // EITHER TT or WO  BY NAME (??)
+   function start() {
+      // values must be initialized for each function !!
+      let split = Number(document.getElementById("feSplit").value); // strokes/min
+      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+      let watts = Number(document.getElementById("feWatts").value); // strokes/min
+      if (interval) return;
+        interval = setInterval(() => {
+        seconds++;
+        strokesec = 60/cadn;
+      if (seconds-old >= strokesec) {
+          strokes++
+                userWatthrs = watts * seconds / 3600;
+                userWatthrs = Number(userWatthrs.toFixed(2));
+      //TT or WO HERE!!!!!
+          update();
+          old = seconds;
+        }
+        // FIX UPDATE TO STOP ON DISTANCE
+        update();
+        if (seconds>= feSplit){stop();}
+        }, 1000);
+      }
 
+// UPDATE THE RT DISPLAY      
    function update() {
       /* calculate rt each stroke values (mechWatthrs, userWatthrs) */
       document.getElementById("timer").innerHTML =
@@ -233,32 +257,6 @@ replaced paceholder with value for convenience
         "userWatt-hrs: " + userWatthrs;
       }
 
-    // generalize here for either TT or WO by   
-
-      function start() {
-      //  update();
-      // values must be initialized for each function !!
-      let split = Number(document.getElementById("feSplit").value); // strokes/min
-      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-      let watts = Number(document.getElementById("feWatts").value); // strokes/min
-
-      if (interval) return;
-        interval = setInterval(() => {
-        seconds++;
-        strokesec = 60/cadn;
-      if (seconds-old >= strokesec) {
-          strokes++
-                userWatthrs = watts * seconds / 3600;
-                userWatthrs = Number(userWatthrs.toFixed(2));
-      
-          //TT or WO
-          update();
-          old = seconds;
-        }
-        update();
-        if (seconds>= feSplit){stop();}
-        }, 1000);
-      }
      function stop() {
 //      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       clearInterval(interval);
