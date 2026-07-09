@@ -138,12 +138,13 @@ replaced paceholder with value for convenience
         let seconds = 0;
         let old = 0;
         let strokes = 0;
-        //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
+        let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
         // FOR OTW WORKOUT 
-        let otwDistance = 0;
+        let otwDist = 0;
         let otwCadn = 0;
         let otwSpeed = 0;
+        let otwDistance = 0;
         let mechWatthrs = 0;
         let userWatthrs = 0;
 
@@ -152,36 +153,33 @@ replaced paceholder with value for convenience
         let pullForce = 0;
  // FINAL METRICS 
  function calculateTT() {
-      //these are input values to be renamed  
+    
+      //these are input values to be renamed  for TT
       const feWatts = Number(document.getElementById("feWatts").value);
       const feSplit = Number(document.getElementById("feSplit").value);
       const feCadn = Number(document.getElementById("feCadn").value);
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       const pullLength = Number(document.getElementById("pullLength").value);
 
-      let otwSeconds = 0;
-      let otwSpeed = 0;
-      let mechWatthrs = 0;
-      let userWatthrs = 0;
-      //let pullForce = 0;
-      let otwDistance = 0;
-      let mechWatts = 0;
-
-      let dpsMtrs, watts, pullForce;                                 
+      let split = Number(document.getElementById("feSplit").value); // strokes/min
+      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+      let watts = Number(document.getElementById("feWatts").value); // strokes/min
+      
+      let dpsMtrs, pullForce;  
+                                     
       /*TT uses published demographics and timed trial with estimate of full
       effort on completion */ 
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
       //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
       pullForce = 60 * watts /(pullLength * feCadn) 
-      //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-         
       pullForce = Number(pullForce.toFixed(1));
+      //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
-      // to show on documetn
+      // to show on document
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
@@ -194,7 +192,7 @@ replaced paceholder with value for convenience
       let mechWatthrs = 0;
       let userWatthrs = 0;
       let pullForce = 0;
-      let otwDistance = 0;
+      let woDist = 0;
       let mechWatts = 0;
 
       const otwCadn = Number(document.getElementById("otwCadn").value); 
@@ -203,9 +201,9 @@ replaced paceholder with value for convenience
       // row to time!! (or speed ??)
       const otwDist = Number(document.getElementById("otwDist").value);
   /*
-      CALCULATE RUNNING AND FINAL WORKOUT METRICS}                             
+      CALCULATE RUNNING AND FINAL WORKOUT METRICS                            
   
-    calculate and show real-time with timer updates (similar to TT)
+      calculate and show real-time with timer updates (similar to TT)
         strokes, seconds, distance, cadence, speed, mechWatthrs, userWatthrs
           
         mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
@@ -217,16 +215,17 @@ replaced paceholder with value for convenience
 
       ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
+
+
     */
         //document.getElementById("mechWatthrs").textContent = mechWatthrs;
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
+  // EITHER TT or WO  BY NAME (??)
    function start() {
       // values must be initialized for each function !!
-      let split = Number(document.getElementById("feSplit").value); // strokes/min
-      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-      let watts = Number(document.getElementById("feWatts").value); // strokes/min
+     
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
@@ -235,8 +234,6 @@ replaced paceholder with value for convenience
           strokes++
                 userWatthrs = watts * seconds / 3600;
                 userWatthrs = Number(userWatthrs.toFixed(2));
-                /* otwDist, otwCadn, otwSpeed, mechWatthrs */
-
       //TT or WO HERE!!!!!
           update();
           old = seconds;
@@ -247,8 +244,8 @@ replaced paceholder with value for convenience
         }, 1000);
       }
 
-// UPDATE THE RT DISPLAY      
-   function update() {
+// UPDATE THE RT DISPLAY   
+    function update() {
       /* calculate rt each stroke values (mechWatthrs, userWatthrs) */
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
