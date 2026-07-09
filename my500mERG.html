@@ -183,30 +183,23 @@ replaced paceholder with value for convenience
    
    function calculateRow(){
   //FOR OTW WORKOUT 
-        let otwDist = 0;
-      //  let otwCadn = 0;
-      //  let otwSpeed = 0;
-        let mechWatthrs = 0;
-        let userWatthrs = 0;
-
-      //  let mechWatts = 0;                // per stroke
-      //  let xdpsMtrs = 0;                 // TT or pre-determined entry
+      let otwDist = 0;
+      let otwSpeed = 0;
+      let mechWatthrs = 0;
+      let userWatthrs = 0;
       let pullForce = 0;
+      let woDist = 0;
+      let mechWatts = 0;
 
       const otwCadn = Number(document.getElementById("otwCadn").value); 
       // xdpsMtrs is entered here manually from pre-determined valuee 
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      // row to time!! (or speed ??)
       const otwSec = Number(document.getElementById("otwSec").value);
-
-      let woDist, otwSpeed, mechWatts;
-  
   /*
-   // CALCULATE RUNNING AND FINAL WORKOUT METRICS}
-      // from Row 
+      CALCULATE RUNNING AND FINAL WORKOUT METRICS}                             
   
-      //let woDist, otwSpeed, mechWatts                                
-  /*  
-        ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
+      ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
         mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
         
       calculate and show real-time with timer updates (similar to TT)
