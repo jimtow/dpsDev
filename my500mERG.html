@@ -244,7 +244,11 @@ save another test change
 
 // UPDATE THE RT DISPLAY      
    function update() {
-      /* calculate rt each stroke values (mechWatthrs, userWatthrs) */
+      /* calculate rt stroke values (mechWatthrs, userWatthrs, etc) 
+      all these in calculateTT and calculateRow functions independently
+      so that updates work for either.
+      
+      So that on Start either TT or Row pages are updated*/
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
