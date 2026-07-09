@@ -210,14 +210,11 @@ replaced paceholder with value for convenience
 
       ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
-
-
     */
         //document.getElementById("mechWatthrs").textContent = mechWatthrs;
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
-  // EITHER TT or WO  BY NAME (??)
    function start() {
       // values must be initialized for each function !!
       let split = Number(document.getElementById("feSplit").value); // strokes/min
@@ -231,6 +228,8 @@ replaced paceholder with value for convenience
           strokes++
                 userWatthrs = watts * seconds / 3600;
                 userWatthrs = Number(userWatthrs.toFixed(2));
+                /* otwDist, otwCadn, otwSpeed, mechWatthrs */
+
       //TT or WO HERE!!!!!
           update();
           old = seconds;
