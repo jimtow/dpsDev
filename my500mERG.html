@@ -199,20 +199,25 @@ replaced paceholder with value for convenience
   /*
       CALCULATE RUNNING AND FINAL WORKOUT METRICS}                             
   
-      ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
+    calculate and show real-time with timer updates (similar to TT)
+        strokes, seconds, distance, cadence, speed, mechWatthrs, userWatthrs
+          
         mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
+        userWatthrs = watts * seconds / 3600;
+        userWatthrs = Number(userWatthrs.toFixed(2));
         
-      calculate and show real-time with timer updates (similar to TT)
-        stroke#, time, distance, etc.
-        
-      show final metrics on Row html
+    show final metrics on Row html
         distance, time, cadence, mechWatt-hrs,  
+
+      ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
+       mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
+
+
     */
         //document.getElementById("mechWatthrs").textContent = mechWatthrs;
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
-
 
    function update() {
       /* calculate rt each stroke values (mechWatthrs, userWatthrs) */
