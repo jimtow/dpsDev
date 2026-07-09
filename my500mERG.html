@@ -151,8 +151,8 @@ replaced paceholder with value for convenience
         let mechWatts = 0;                // per stroke
         let xdpsMtrs = 0;                 // TT or pre-determined entry
         let pullForce = 0;
-  
- function calculateTT(operator) {
+ // FINAL METRICS 
+ function calculateTT() {
     //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
       const feSplit = Number(document.getElementById("feSplit").value);
@@ -163,7 +163,6 @@ replaced paceholder with value for convenience
       const pullLength = Number(document.getElementById("pullLength").value);
 
       let dpsMtrs, watts, pullForce;                                 
-      if (operator === "Row(500m)")  {
       /*TT uses published demographics and timed trial with estimate of full
       effort on completion */ 
         dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
@@ -171,7 +170,7 @@ replaced paceholder with value for convenience
         //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
         pullForce = 60 * watts /(pullLength * feCadn) 
         //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-         }
+         
         pullForce = Number(pullForce.toFixed(1));
         dpsMtrs = Number(dpsMtrs.toFixed(1));
         watts = Number(watts.toFixed(1));
@@ -180,9 +179,9 @@ replaced paceholder with value for convenience
         document.getElementById("watts").textContent = watts;
         document.getElementById("pullForce").textContent = pullForce;
       }  
-   
+// FINAL METRICS   
    function calculateRow(){
-  //FOR OTW WORKOUT 
+      //FOR OTW WORKOUT 
       let otwSeconds = 0;
       let otwSpeed = 0;
       let mechWatthrs = 0;
@@ -251,6 +250,7 @@ replaced paceholder with value for convenience
           strokes++
                 userWatthrs = watts * seconds / 3600;
                 userWatthrs = Number(userWatthrs.toFixed(2));
+      
           //TT or WO
           update();
           old = seconds;
