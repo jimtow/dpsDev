@@ -223,8 +223,7 @@ save another test change
   // EITHER TT or WO  BY NAME (??)
    function start() {
       /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
-      TT AND ROW ARE FOR FINAL VALUES !!
-      STROKES, SECONDS, OTWDIST, OTWCADN, OTWSPEED, MECHwATTHRS, USERWATTHRS
+      UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
       let split = Number(document.getElementById("feSplit").value); // strokes/min
       let cadn = Number(document.getElementById("feCadn").value); // strokes/min
@@ -236,18 +235,20 @@ save another test change
       if (seconds-old >= strokesec) {
           strokes++
           otwDist = 1;
-          otwCadn = 1;
-          // OTWSPEED
-          // MECHWATTHRS
-          // USERWATTHRS
+          otwCadn = 2;
+          otwSpeed = 3;
+          mechWatthrs = 4;
+          //userWatthrs = 5;
           userWatthrs = watts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
       //TT or WO HERE!!!!!
           update();
           old = seconds;
         }
-        // FIX UPDATE TO STOP ON DISTANCE
+        // FIX TO STOP ON DISTANCE
+        // if (otwDist>= ??)
         update();
+        // executes every 1000ms or stops at feSplit
         if (seconds>= feSplit){stop();}
         }, 1000);
       }
