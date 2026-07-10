@@ -225,31 +225,7 @@ save another test change
       /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
-      
       */
-      // define current page
-/*
-The simplest solution is to save the current block when you switch:.
-let currentBlock = document.getElementById("Ready");
-function showReady() {
-    currentBlock = document.getElementById("Ready");
-}
-function showRow() {
-    currentBlock = document.getElementById("Row");
-}
-console.log(currentBlock.id); // "Ready" or "Row"
-This lets you write:
-if (currentBlock.id === "Row") {
-    dpsMtrs = 1;
-}
-This approach is straightforward and avoids searching the DOM each time.
- */
-
-/*
-       // READY OR ROW
-      if (currentBlock.id === "Ready"){
-        dpsMtrs = 0;}
- */ 
 
       let split = Number(document.getElementById("feSplit").value); // strokes/min
       let cadn = Number(document.getElementById("feCadn").value); // strokes/min
@@ -327,7 +303,6 @@ This approach is straightforward and avoids searching the DOM each time.
     }
    
 function showReadyAll() {
-    currentBlock = document.getElementById("ReadyAll");
     document.getElementById("ReadyAll").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
@@ -335,15 +310,13 @@ function showReadyAll() {
     }
 
   function showReady() {
-    currentBlock = document.getElementById("Ready");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
     }
 
-  function showRow() { 
-    currentBlock = document.getElementById("Row"); 
+  function showRow() {  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
@@ -356,7 +329,6 @@ function showReadyAll() {
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "block";
     }
-  
 
 /*
 Calculate TT does all the work when Row(500) is tapped and percieved effort
