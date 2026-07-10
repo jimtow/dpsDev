@@ -10,7 +10,7 @@
   on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
   FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
-  also includes a timer for tracking the workout duration. my500mErg is designed to be user-friendly 
+  also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
   7.10.08.07
  </p>
@@ -226,9 +226,15 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
+
       let split = Number(document.getElementById("feSplit").value); // strokes/min
       let cadn = Number(document.getElementById("feCadn").value); // strokes/min
       let watts = Number(document.getElementById("feWatts").value); // strokes/min
+      let otwDist = 0;  
+      let otwCadn = 0;
+      let otwSpeed = 0;
+      let mechWatthrs = 0;
+      
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
@@ -237,15 +243,19 @@ save another test change
           strokes++
           userWatthrs = watts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
+
           // ROW VALUES BASED ON dpsMtrs (=0 if TT)
-          otwDist = dpsMtrs * 1;
-          otwCadn = dpsMtrs * 2;
-          otwSpeed =dpsMtrs * 3;
-          mechWatthrs =dpsMtrs * 4;
-          
-          
-      //TT or WO HERE!!!!!
+          /* obtain values from the Row html block. Make sure dpsMtrs always
+          is 0 in TT (set as constant 0 in TT and constant 1 in Row (xdpsMtrs is
+          the input value))
+          // MUST calculateRow TO OBTAIN VALUES !!!
+          otwDist = dpsMtrs * xdpsMtrs * strokes;
+          otwCadn = dpsMtrs * value;
+          otwSpeed =dpsMtrs * value;
+          mechWatthrs =dpsMtrs * value;        
           update();
+          */
+
           old = seconds;
         }
         // FIX TO STOP ON DISTANCE
