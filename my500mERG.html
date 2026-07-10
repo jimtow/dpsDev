@@ -12,7 +12,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  7.10.08.00
+  7.10.08.07
  </p>
   <button onclick="showReady()">Ready</button>
   <button onclick="showRow()">Row!</button>
@@ -190,7 +190,7 @@ save another test change
       let mechWatthrs = 0;
       let userWatthrs = 0;
       let pullForce = 0;
-      let woDist = 0;
+      //let woDist = 0;
       let mechWatts = 0;
 
       const otwCadn = Number(document.getElementById("otwCadn").value); 
@@ -222,7 +222,10 @@ save another test change
       }  
   // EITHER TT or WO  BY NAME (??)
    function start() {
-      // values must be initialized for each function !!
+      /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
+      TT AND ROW ARE FOR FINAL VALUES !!
+      STROKES, SECONDS, OTWDIST, OTWCADN, OTWSPEED, MECHwATTHRS, USERWATTHRS
+      */
       let split = Number(document.getElementById("feSplit").value); // strokes/min
       let cadn = Number(document.getElementById("feCadn").value); // strokes/min
       let watts = Number(document.getElementById("feWatts").value); // strokes/min
@@ -232,8 +235,13 @@ save another test change
         strokesec = 60/cadn;
       if (seconds-old >= strokesec) {
           strokes++
-                userWatthrs = watts * seconds / 3600;
-                userWatthrs = Number(userWatthrs.toFixed(2));
+          otwDist = 1;
+          otwCadn = 1;
+          // OTWSPEED
+          // MECHWATTHRS
+          // USERWATTHRS
+          userWatthrs = watts * seconds / 3600;
+          userWatthrs = Number(userWatthrs.toFixed(2));
       //TT or WO HERE!!!!!
           update();
           old = seconds;
@@ -255,7 +263,7 @@ save another test change
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
       // distance only after TT show cadence
-        "OTW Distance: " + otwDistance +
+        "OTW Distance: " + otwDist +
         " &nbsp;&nbsp; OTW Cadence: " + otwCadn + "<br>" +
       // speed only after TT show mechWatthrs 
         "  OTW Speed:  " + otwSpeed +
