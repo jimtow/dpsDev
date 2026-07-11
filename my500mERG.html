@@ -226,7 +226,7 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-      if (block.id = "Ready"){dpsMtrs=0;
+  /*    if (block.id = "Ready"){dpsMtrs=0;
         let split = Number(document.getElementById("feSplit").value); // strokes/min
         let cadn = Number(document.getElementById("feCadn").value); // strokes/min
         let watts = Number(document.getElementById("feWatts").value); // strokes/min
@@ -245,7 +245,7 @@ save another test change
         mechWatthrs =dpsMtrs * 7;         //tbd
       }
       
-      
+    */  
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
@@ -257,7 +257,7 @@ save another test change
 
           // ROW VALUES BASED ON dpsMtrs (=0 if TT)
           /* obtain values from the Row html block. Make sure dpsMtrs always
-          is 0 in TT (set as constant 0 in TT and constant 1 in Row (xdpsMtrs is
+          is 0 in TT (sset as constant 0 in TT and constant 1 in Row (xdpsMtrs is
           the input value))
           // MUST calculateRow TO OBTAIN VALUES !!!
           otwDist = dpsMtrs * xdpsMtrs * strokes;
