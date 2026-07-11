@@ -229,14 +229,18 @@ save another test change
     let split = Number(document.getElementById("feSplit").value); // strokes/min
     let cadn = Number(document.getElementById("feCadn").value); // strokes/min
     let watts = Number(document.getElementById("feWatts").value); // strokes/min 
-   
+    //let otwDist = 0;
+    //let otwCadn = cadn;
+    //let otwSpeed = 0;
+    //let mechWatthrs = 0;
+
     /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
         let split = Number(document.getElementById("feSplit").value); // strokes/min
         let cadn = Number(document.getElementById("feCadn").value); // strokes/min
         let watts = Number(document.getElementById("feWatts").value); // strokes/min
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
       let otwDist = 0;
-      let otwCadn = feCadn;
+      let otwCadn = cadn;
       let otwSpeed = 0;
       let mechWatthrs = 0;
           }
@@ -258,6 +262,8 @@ save another test change
         strokesec = 60/cadn;
       if (seconds-old >= strokesec) {
           strokes++
+          otwCadn = cadn;
+        
           userWatthrs = watts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
 

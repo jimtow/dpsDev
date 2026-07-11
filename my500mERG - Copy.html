@@ -226,15 +226,32 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-
-      let split = Number(document.getElementById("feSplit").value); // strokes/min
-      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-      let watts = Number(document.getElementById("feWatts").value); // strokes/min
-      let otwDist = 0;  
-      let otwCadn = 0;
+    let split = Number(document.getElementById("feSplit").value); // strokes/min
+    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+    let watts = Number(document.getElementById("feWatts").value); // strokes/min 
+   
+    /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
+        let split = Number(document.getElementById("feSplit").value); // strokes/min
+        let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+        let watts = Number(document.getElementById("feWatts").value); // strokes/min
+        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
+      let otwDist = 0;
+      let otwCadn = feCadn;
       let otwSpeed = 0;
       let mechWatthrs = 0;
+          }
+      */
+  /*    if (currentBlock.id = "Row"){dpsMtrs = 1;
+        let woDist = Number(document.getElementById("otwDist").value); // strokes/min
+        let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
+        let otwWatts = Number(document.getElementById("feWatts").value); // strokes/min
+        otwDist = dpsMtrs * xdpsMtrs * strokes;
+        otwCadn = dpsMtrs * 5;            //tbd
+        otwSpeed =dpsMtrs * 6;            //tbd
+        mechWatthrs =dpsMtrs * 7;         //tbd
+      }
       
+    */  
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
@@ -246,7 +263,7 @@ save another test change
 
           // ROW VALUES BASED ON dpsMtrs (=0 if TT)
           /* obtain values from the Row html block. Make sure dpsMtrs always
-          is 0 in TT (set as constant 0 in TT and constant 1 in Row (xdpsMtrs is
+          is 0 in TT (sset as constant 0 in TT and constant 1 in Row (xdpsMtrs is
           the input value))
           // MUST calculateRow TO OBTAIN VALUES !!!
           otwDist = dpsMtrs * xdpsMtrs * strokes;
@@ -255,14 +272,11 @@ save another test change
           mechWatthrs =dpsMtrs * value;        
           update();
           */
-
           old = seconds;
+          update();
+          if (seconds>= split){stop();}
         }
-        // FIX TO STOP ON DISTANCE
-        // if (otwDist>= ??)
-        update();
-        // executes every 1000ms or stops at feSplit
-        if (seconds>= feSplit){stop();}
+        // executes every 1000ms or stops at feSplit    
         }, 1000);
       }
 
@@ -303,6 +317,7 @@ save another test change
     }
    
 function showReadyAll() {
+    let currentBlock = document.getElementById("ReadyAll");
     document.getElementById("ReadyAll").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
@@ -310,6 +325,7 @@ function showReadyAll() {
     }
 
   function showReady() {
+    let currentBlock = document.getElementById("Ready");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
@@ -317,6 +333,7 @@ function showReadyAll() {
     }
 
   function showRow() {  
+    let currentBlock = document.getElementById("Row");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
