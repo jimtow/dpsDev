@@ -264,11 +264,34 @@ save another test change
       // update at each stroke  
       if (seconds-old >= strokesec) {
           strokes++
+        // RT CALCULATIONS GO HERE !!!
+        // console.log(currentBlock.id);
+        if (currentBlock.id === "Ready"){
+          dpsMtrs=0;
           otwCadn = cadn;
-        
           userWatthrs = watts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
+        }
 
+
+        /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
+        let split = Number(document.getElementById("feSplit").value); // strokes/min
+        let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+        let watts = Number(document.getElementById("feWatts").value); // strokes/min
+        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
+      let otwDist = 0;
+      let otwCadn = cadn;
+      let otwSpeed = 0;
+      let mechWatthrs = 0;
+          }
+      */
+
+
+
+
+
+
+        
           // ROW VALUES BASED ON dpsMtrs (=0 if TT)
           /* obtain values from the Row html block. Make sure dpsMtrs always
           is 0 in TT (sset as constant 0 in TT and constant 1 in Row (xdpsMtrs is
@@ -325,7 +348,7 @@ save another test change
     }
    
 function showReadyAll() {
-    let currentBlock = document.getElementById("ReadyAll");
+    currentBlock = document.getElementById("ReadyAll");
     document.getElementById("ReadyAll").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
@@ -333,7 +356,7 @@ function showReadyAll() {
     }
 
   function showReady() {
-    let currentBlock = document.getElementById("Ready");
+    currentBlock = document.getElementById("Ready");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
@@ -341,7 +364,7 @@ function showReadyAll() {
     }
 
   function showRow() {  
-    let currentBlock = document.getElementById("Row");
+    currentBlock = document.getElementById("Row");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
