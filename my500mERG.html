@@ -226,16 +226,22 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-  /*    if (block.id = "Ready"){dpsMtrs=0;
+    let split = Number(document.getElementById("feSplit").value); // strokes/min
+    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+    let watts = Number(document.getElementById("feWatts").value); // strokes/min 
+   
+    /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
         let split = Number(document.getElementById("feSplit").value); // strokes/min
         let cadn = Number(document.getElementById("feCadn").value); // strokes/min
         let watts = Number(document.getElementById("feWatts").value); // strokes/min
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        let otwSpeed = 0;
-        let mechWatthrs = 0;
-    
-      }
-      if (block.id = "Row"){dpsMtrs = 1;
+      let otwDist = 0;
+      let otwCadn = feCadn;
+      let otwSpeed = 0;
+      let mechWatthrs = 0;
+          }
+      */
+  /*    if (currentBlock.id = "Row"){dpsMtrs = 1;
         let woDist = Number(document.getElementById("otwDist").value); // strokes/min
         let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
         let otwWatts = Number(document.getElementById("feWatts").value); // strokes/min
