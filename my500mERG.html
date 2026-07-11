@@ -225,39 +225,35 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-    //let otwDist = 0;
-    //let otwCadn = cadn;
-    //let otwSpeed = 0;
-    //let mechWatthrs = 0;
+    // working 07.11.1040
     //READY
     let split = Number(document.getElementById("feSplit").value); // strokes/min
     let cadn = Number(document.getElementById("feCadn").value); // strokes/min
     let watts = Number(document.getElementById("feWatts").value); // strokes/min
     //ROW
     let xdpsMtrs = Number(document.getElementById("xdpsMtrs").value); // strokes/min
-    let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
-    let otwDist = Number(document.getElementById("otwDist").value); // strokes/min
+    let woCadn = Number(document.getElementById("otwCadn").value); // strokes/min
+    let woDist = Number(document.getElementById("otwDist").value); // strokes/min
+    //let otwWatts = Number(document.getElementById("feWatts").value); // strokes/min
 
+    let otwSpeed = 0;
+    let mechWatthrs = 0;
     // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-  
-      /*  let otwDist = 0;
-      let otwCadn = cadn;
-      let otwSpeed = 0;
-      let mechWatthrs = 0;
-          }
-      */
-  /*    if (currentBlock.id = "Row"){dpsMtrs = 1;
-        let woDist = Number(document.getElementById("otwDist").value); // strokes/min
-        let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
-        let otwWatts = Number(document.getElementById("feWatts").value); // strokes/min
+
+    // LET TO INITIALIZE VARARIBLES MUST BE AT START OF FUNCTION
+    
+    if (currentBlock.id === "Ready"){dpsMtrs = 0;
+      otwDist = 0;
+      otwCadn = cadn;
+          }    
+    if (currentBlock.id === "Row"){dpsMtrs = 1;
         otwDist = dpsMtrs * xdpsMtrs * strokes;
         otwCadn = dpsMtrs * 5;            //tbd
         otwSpeed =dpsMtrs * 6;            //tbd
         mechWatthrs =dpsMtrs * 7;         //tbd
       }
       
-    */  
-      if (interval) return;
+     if (interval) return;
       // timer loop
         interval = setInterval(() => {
         seconds++;
