@@ -257,9 +257,11 @@ save another test change
       
     */  
       if (interval) return;
+      // timer loop
         interval = setInterval(() => {
         seconds++;
         strokesec = 60/cadn;
+      // update at each stroke  
       if (seconds-old >= strokesec) {
           strokes++
           otwCadn = cadn;
