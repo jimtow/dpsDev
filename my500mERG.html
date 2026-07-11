@@ -220,26 +220,27 @@ save another test change
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
-  // EITHER TT or WO  BY NAME (??)
    function start() {
       /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-    let split = Number(document.getElementById("feSplit").value); // strokes/min
-    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-    let watts = Number(document.getElementById("feWatts").value); // strokes/min 
     //let otwDist = 0;
     //let otwCadn = cadn;
     //let otwSpeed = 0;
     //let mechWatthrs = 0;
+    //READY
+    let split = Number(document.getElementById("feSplit").value); // strokes/min
+    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+    let watts = Number(document.getElementById("feWatts").value); // strokes/min
+    //ROW
+    let xdpsMtrs = Number(document.getElementById("xdpsMtrs").value); // strokes/min
+    let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
+    let otwDist = Number(document.getElementById("otwDist").value); // strokes/min
 
-    /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
-        let split = Number(document.getElementById("feSplit").value); // strokes/min
-        let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-        let watts = Number(document.getElementById("feWatts").value); // strokes/min
-        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-      let otwDist = 0;
+    // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
+  
+      /*  let otwDist = 0;
       let otwCadn = cadn;
       let otwSpeed = 0;
       let mechWatthrs = 0;
@@ -267,6 +268,11 @@ save another test change
         // RT CALCULATIONS GO HERE !!!
         // console.log(currentBlock.id);
         if (currentBlock.id === "Ready"){
+          //LET DOES NOT WORK IN THE TIMER LOOP!!
+          //let split = Number(document.getElementById("feSplit").value); // strokes/min
+          //let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+          //let watts = Number(document.getElementById("feWatts").value); // strokes/min
+                 
           dpsMtrs=0;
           otwCadn = cadn;
           userWatthrs = watts * seconds / 3600;
