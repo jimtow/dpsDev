@@ -1,9 +1,11 @@
-WORK IN DESKTOP FOLDER
-COPY (VIEW:>EXPLORER) TO LOCAL REPO\
-COMMIT AND PUSH OR SYNC
+Assume demographic 500m watts and split.
 
-Only one timer, add a count each stroke interval.
+Estimate effort and adjust to get DPS for this machine.
 
-timer stops the "timed trial"  at the FE split time (only for the rower 
-to estimate %full effort for the timed trial)
+Error is in combined demographic and effort estimates. 100pc 500m split effort means user has a good handle on their fitness and the machine settings are "appropriate" to an OTW experience.
 
+If the machine settings are "heavy" the user will have more effort to match the demographic metrics 
+
+Start with assuming demographics are correct. Meters per stroke will be similarly correct for the machine and settings. Equivalent to a faster or slower "boat". This is a gamification problem.
+
+How do we "standardize" to a common boat type? Same meters per stroke for all? Easy but . . .weak rower on a heavy machine has no chance. If a weak rower gets in a heavy boat they need a calibration break. More effort to hit their demographic means more DPS. Now everybody is rowing to their "ideal" demographic regardless of machine or setting. This is not a "handicap" just an OTW correction.

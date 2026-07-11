@@ -12,7 +12,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  7.10.08.07
+  7.10.08.08
  </p>
   <button onclick="showReady()">Ready</button>
   <button onclick="showRow()">Row!</button>
@@ -221,14 +221,93 @@ save another test change
         //document.getElementById("pullForce").textContent = pullForce;
       }  
   // EITHER TT or WO  BY NAME (??)
+
+
+
+
    function start() {
-      /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
-      NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
-      UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!   
-      */
-     // currentBlock.id set by button call function
-      if (currentBlock.id === "Ready"){
-        dpsMtrs = 0;}
+      let interval = null;
+      let seconds = 0;
+      let old = 0;
+      let strokes = 0;
+      let strokesec = 0;
+
+      let dpsMtrs = 0;
+      let otwDist = 0;
+      let otwCadn = 0;
+      let otwSpeed = 0;
+      let mechWatthrs = 0;
+      let userWatthrs = 0;
+
+  /*
+    UPDATE ALL CLOCK VALUES HERE AT EACH STROKE.
+    SELECT BETWEEN READY/TT AND ROW.
+  */
+
+  if (currentBlock.id === "Ready") {
+    dpsMtrs = 0;
+  } else if (currentBlock.id === "Row") {
+    dpsMtrs = 1;
+  }
+
+  const split = Number(document.getElementById("feSplit").value);
+  const cadn = Number(document.getElementById("feCadn").value);
+  const watts = Number(document.getElementById("feWatts").value);
+
+  if (!Number.isFinite(split) || split <= 0) {
+    console.error("feSplit must be a number greater than zero.");
+    return;
+  }
+
+  if (!Number.isFinite(cadn) || cadn <= 0) {
+    console.error("feCadn must be a number greater than zero.");
+    return;
+  }
+
+  if (!Number.isFinite(watts) || watts < 0) {
+    console.error("feWatts must be a valid number.");
+    return;
+  }
+
+  if (interval) return;
+
+  strokesec = 60 / cadn;
+
+  interval = setInterval(() => {
+    seconds++;
+
+    // Update user watt-hours every second
+    userWatthrs = watts * seconds / 3600;
+    userWatthrs = Number(userWatthrs.toFixed(2));
+
+    // Update stroke-dependent values
+    if (seconds - old >= strokesec) {
+      strokes++;
+
+      otwDist = dpsMtrs * xdpsMtrs * strokes;
+      otwCadn = dpsMtrs * cadn;
+
+      old = seconds;
+    }
+
+    update();
+
+    // Stop when elapsed seconds reach the split value
+    if (seconds >= split) {
+      stop();
+    }
+  }, 1000);
+}
+    
+
+      if (currentBlock.id === "Ready") {
+        dpsMtrs = 0;
+      }
+      
+      if (currentBlock.id === "Row") {
+        dpsMtrs = 1;
+      }
+
       let split = Number(document.getElementById("feSplit").value); // strokes/min
       let cadn = Number(document.getElementById("feCadn").value); // strokes/min
       let watts = Number(document.getElementById("feWatts").value); // strokes/min
@@ -237,14 +316,20 @@ save another test change
       let otwSpeed = 0;
       let mechWatthrs = 0;
       
+      
       if (interval) return;
         interval = setInterval(() => {
         seconds++;
         strokesec = 60/cadn;
       if (seconds-old >= strokesec) {
           strokes++
+
+          otwDist = dpsMtrs * xdpsMtrs * strokes;
+
+
           userWatthrs = watts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
+
 
           // ROW VALUES BASED ON dpsMtrs (=0 if TT)
           /* obtain values from the Row html block. Make sure dpsMtrs always
@@ -259,14 +344,15 @@ save another test change
           */
 
           old = seconds;
-        }
+        
         // FIX TO STOP ON DISTANCE
         // if (otwDist>= ??)
-        update();
+        if (seconds >= split){stop();  }
+        update(); } ,1000);
         // executes every 1000ms or stops at feSplit
-        if (seconds>= feSplit){stop();}
-        }, 1000);
-      }
+      }    
+
+
 
 // UPDATE THE RT DISPLAY      
    function update() {
@@ -320,8 +406,8 @@ function showReadyAll() {
     document.getElementById("Ergset").style.display = "none";
     }
 
-  function showRow() { 
-    currentBlock = document.getElementById("Row"); 
+  function showRow() {  
+    currentBlock = document.getElementById("Row");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
@@ -334,7 +420,6 @@ function showReadyAll() {
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "block";
     }
-  
 
 /*
 Calculate TT does all the work when Row(500) is tapped and percieved effort
