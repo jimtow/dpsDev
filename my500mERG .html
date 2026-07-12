@@ -35,7 +35,7 @@ save another test change
   value="105">
   500m split (seconds)
   <input id="feSplit" style="width:60px; height:30px;" type="number" 
-  value="24">
+  value="12">
   </h3>
   <h3>
      500m Sustainable Cadence (SC)
@@ -135,26 +135,45 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 <!--timer script (function)-->
   <script>
- // initialize function variables
-        // FOR TT 
+
+        // GLOBAL
+        //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
+        let userWatthrs = 0;
+        let pullForce = 0;
+        let dpsMtrs = 0;
+        let xdpsMtrs = 0;    
+        let watts;    
+
+        // TIMER ONLY
         let interval = null;
         let seconds = 0;
         let old = 0;
         let strokes = 0;
-        let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let strokesec = 5;
+
+        // TT ONLY
+        // STROKES FROM TIMER
+        // SECONDS FROM TIMER
+
+        // ROW ONLY
+        
         // FOR OTW WORKOUT 
         let otwDist = 0;
         let otwCadn = 0;
         let otwSpeed = 0;
         let otwDistance = 0;
-        let mechWatthrs = 0;
-        let userWatthrs = 0;
 
         let mechWatts = 0;                // per stroke
-        let xdpsMtrs = 0;                 // TT or pre-determined entry
-        let pullForce = 0;
- // FINAL METRICS 
+        let mechWatthrs = 0;
+       
+
+       
+                     
+       
+
+
+
+        // FINAL METRICS  
  function calculateTT() {
     //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
@@ -165,7 +184,7 @@ save another test change
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       const pullLength = Number(document.getElementById("pullLength").value);
 
-      let dpsMtrs, watts, pullForce;                                 
+       // let dpsMtrs,watts, pullForce;                               
       /*TT uses published demographics and timed trial with estimate of full
       effort on completion */ 
         dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
@@ -226,25 +245,25 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
+    //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
+    // INITIALIZE INPUT VALUES
     let split = Number(document.getElementById("feSplit").value); // strokes/min
     let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-    let watts = Number(document.getElementById("feWatts").value); // strokes/min 
-    //let otwDist = 0;
+    let fewatts = Number(document.getElementById("feWatts").value); // strokes/min 
+    // NOT INITIALIZE VARIABLES
+    //let otwDist = 3;
     //let otwCadn = cadn;
-    //let otwSpeed = 0;
-    //let mechWatthrs = 0;
+    //let otwSpeed = 4;
+    //let mechWatthrs = 5;
 
-    /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
-        let split = Number(document.getElementById("feSplit").value); // strokes/min
-        let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-        let watts = Number(document.getElementById("feWatts").value); // strokes/min
+    if (currentBlock.id = "Ready"){dpsMtrs=0;
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-      let otwDist = 0;
-      let otwCadn = cadn;
-      let otwSpeed = 0;
-      let mechWatthrs = 0;
+        otwDist = 3;
+        otwCadn = cadn;
+        otwSpeed = 4;
+        mechWatthrs = 5;
           }
-      */
+      
   /*    if (currentBlock.id = "Row"){dpsMtrs = 1;
         let woDist = Number(document.getElementById("otwDist").value); // strokes/min
         let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
@@ -268,8 +287,8 @@ save another test change
         // console.log(currentBlock.id);
         if (currentBlock.id === "Ready"){
           dpsMtrs=0;
-          otwCadn = cadn;
-          userWatthrs = watts * seconds / 3600;
+          //otwCadn = cadn;
+          userWatthrs = feWatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
 
