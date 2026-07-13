@@ -12,7 +12,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  7.10.08.07
+
  </p>
   <button onclick="showReady()">Ready</button>
   <button onclick="showRow()">Row!</button>
@@ -50,11 +50,8 @@ save another test change
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>  
-  
-  
   <h4 id="timer"></h4>
   
-
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
     Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
@@ -97,7 +94,7 @@ save another test change
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
-     type="number" value="500">  
+     type="number" value="100">  
 
   <p>07.12 performance w this machine and settings. </p>
   
@@ -161,7 +158,6 @@ save another test change
         let otwDist = 0;
         let otwCadn = 0;
         let otwSpeed = 0;
-        let otwDistance = 0;
 
         let mechWatts = 0;                // per stroke
         let mechWatthrs = 0;
@@ -198,11 +194,8 @@ save another test change
     function calculateRow(){
       //FOR OTW WORKOUT 
       let otwSeconds = 0;
-      let otwSpeed = 0;
       let mechWatthrs = 0;
       let userWatthrs = 0;
-      let pullForce = 0;
-      //let woDist = 0;
       let mechWatts = 0;
 
       const otwCadn = Number(document.getElementById("otwCadn").value); 
@@ -250,8 +243,7 @@ save another test change
       let otwDps = Number(document.getElementById("otwDps").value); // strokes/min
     // NOT INITIALIZE VARIABLES
     //let otwDist = 3;
-    //let otwCadn = cadn;
-    //let otwSpeed = 4;
+      otwSpeed = 4;
     //let mechWatthrs = 5;
 
       if (currentBlock.id = "Ready"){dpsMtrs=0;
