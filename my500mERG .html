@@ -135,47 +135,34 @@ save another test change
 <!--timer script (function)-->
   <script>
     // GLOBAL MAY NEED ANYWHERE ANYTIME
-      //TT ENTRYS
-      let split = Number(document.getElementById("feSplit").value);   //
-      let cadn = Number(document.getElementById("feCadn").value);     // 
-      let fewatts = Number(document.getElementById("feWatts").value); //  
+    //TT ENTRYS
+    let split = Number(document.getElementById("feSplit").value);   //
+    let cadn = Number(document.getElementById("feCadn").value);     // 
+    let fewatts = Number(document.getElementById("feWatts").value); //  
+    const pcFeff= Number(document.getElementById("pcFeff").value);
+    const dspMtrs = Number(document.getElementById("dspMtrs").value);     
+    const pullLength = Number(document.getElementById("pullLength").value);
+    let userWatthrs = 0;
+    let pullForce = 0;
+    let dpsMtrs = 0;  
+    let watts;    
+  
+    // "ROW" ENTRYS
+    let otwDist = Number(document.getElementById("otwDist").value); // 
+    let otwCadn = Number(document.getElementById("otwCadn").value); // 
+    let otwDps = Number(document.getElementById("otwDps").value);   // 
 
-      // ROW ENTRYS
-      let otwDist = Number(document.getElementById("otwDist").value); // 
-      let otwCadn = Number(document.getElementById("otwCadn").value); // 
-      let otwDps = Number(document.getElementById("otwDps").value);   // 
-
-    //  const feWatts = Number(document.getElementById("feWatts").value);
-    //  const feSplit = Number(document.getElementById("feSplit").value);
-    //  const feCadn = Number(document.getElementById("feCadn").value);
-
-      const pcFeff= Number(document.getElementById("pcFeff").value);
-      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      //const otwDps = Number(document.getElementById("otwDps").value);
-      const pullLength = Number(document.getElementById("pullLength").value);
-
-
-        //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
-        let userWatthrs = 0;
-        let pullForce = 0;
-        let dpsMtrs = 0;  
-        let watts;    
-        // TIMER ONLY
-        let interval = null;
-        let seconds = 0;
-        let old = 0;
-        let strokes = 0;
-        let strokesec = 5;
-        // TT ONLY
-        // STROKES FROM TIMER
-        // SECONDS FROM TIMER
+    // TIMER ONLY
+    let interval = null;
+    let seconds = 0;
+    let old = 0;
+    let strokes = 0;
+    let strokesec = 5;
         
-        // OTW WO ONLY
-        //let otwDist = 0;
-        //let otwCadn = 0;
-        let otwSpeed = 0;
-        let mechWatts = 0;                // per stroke
-        let mechWatthrs = 0;
+    // OTW WO ONLY
+    let otwSpeed = 0;
+    let mechWatts = 0;                // per stroke
+    let mechWatthrs = 0;
 
     // ---------------------------------------------------------------------------------
     function calculateTT() {                            
@@ -239,16 +226,13 @@ save another test change
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-    //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
-    // INITIALIZE INPUT VALUES
-      
-     
+
       otwSpeed = 4;
     
       if (currentBlock.id = "Ready"){dpsMtrs=0;
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
         otwSplit = feSplit;
-        otwCadn = feCadn;
+        otwCadn = cadn;
         otwSpeed = 4;
         mechWatthrs = 5;
           }
@@ -274,10 +258,11 @@ save another test change
           strokes++
         // RT CALCULATIONS GO HERE !!!
         // console.log(currentBlock.id);
+
         if (currentBlock.id === "Ready"){
           dpsMtrs=0;
           //otwCadn = cadn;
-          userWatthrs = feWatts * seconds / 3600;
+          userWatthrs = fewatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
 
