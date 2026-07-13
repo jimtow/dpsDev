@@ -227,23 +227,22 @@ save another test change
       */
       // FIXED VALUES HERE
       if (currentBlock.id = "Ready"){
-        dpsMtrs=0;
+        dpsMtrs = 0;
         otwDist = 0;
         otwCadn = cadn;
         otwSpeed = 0;
         mechWatthrs = 0;
           }
-      
-  /*    if (currentBlock.id = "Row"){dpsMtrs = 1;
-        
-       
-        otwDist = dpsMtrs * otwDps * strokes;
-        otwCadn = dpsMtrs * 5;            //tbd
-        otwSpeed =dpsMtrs * 6;            //tbd
-        mechWatthrs =dpsMtrs * 7;         //tbd
-      }
-      
-    */  
+
+        if (currentBlock.id = "Row"){
+        dpsMtrs = 1;
+        otwDist = 0;
+        otwCadn = cadn;
+        otwSpeed = 0;
+        mechWatthrs = 0;
+          }
+    
+   
       if (interval) return;
       // timer loop
         interval = setInterval(() => {
@@ -253,15 +252,13 @@ save another test change
       if (seconds-old >= strokesec) {
           strokes++
         // RT CALCULATIONS GO HERE !!!
-
         if (currentBlock.id === "Ready"){
-          dpsMtrs=0;
+          //dpsMtrs=0;
           userWatthrs = fewatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
-
         if (currentBlock.id === "Row"){
-          dpsMtrs = 1;
+          //dpsMtrs = 1;
           // IS THIS "FLAG" STILL NEEDED?
           otwDist = dpsMtrs * otwDps * strokes;
           otwCadn = dpsMtrs * otwCadn;
