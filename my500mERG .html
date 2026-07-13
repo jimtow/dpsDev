@@ -97,7 +97,7 @@ save another test change
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
      type="number" value="100">  
 
-  <p>07.12 performance w this machine and settings. </p>
+  <p>07.13 performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
   <button onclick="start()">StartWO</button>
@@ -135,9 +135,15 @@ save another test change
 <!--timer script (function)-->
   <script>
     // GLOBAL MAY NEED ANYWHERE ANYTIME
+      //TT ENTRYS
       let split = Number(document.getElementById("feSplit").value);   //
       let cadn = Number(document.getElementById("feCadn").value);     // 
       let fewatts = Number(document.getElementById("feWatts").value); //  
+
+      // ROW ENTRYS
+      let otwDist = Number(document.getElementById("otwDist").value); // 
+      let otwCadn = Number(document.getElementById("otwCadn").value); // 
+      let otwDps = Number(document.getElementById("otwDps").value);   // 
 
     //  const feWatts = Number(document.getElementById("feWatts").value);
     //  const feSplit = Number(document.getElementById("feSplit").value);
@@ -145,15 +151,14 @@ save another test change
 
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const otwDps = Number(document.getElementById("otwDps").value);
+      //const otwDps = Number(document.getElementById("otwDps").value);
       const pullLength = Number(document.getElementById("pullLength").value);
 
 
         //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let userWatthrs = 0;
         let pullForce = 0;
-        let dpsMtrs = 0;
-        //let otwDps = 0;    
+        let dpsMtrs = 0;  
         let watts;    
         // TIMER ONLY
         let interval = null;
@@ -166,8 +171,8 @@ save another test change
         // SECONDS FROM TIMER
         
         // OTW WO ONLY
-        let otwDist = 0;
-        let otwCadn = 0;
+        //let otwDist = 0;
+        //let otwCadn = 0;
         let otwSpeed = 0;
         let mechWatts = 0;                // per stroke
         let mechWatthrs = 0;
@@ -179,14 +184,14 @@ save another test change
       // USE GLOBALS HERE FOR SIMPLICITY       
       dpsMtrs = (pcFeff/100)*30000/(cadn * split);
       dpsMtrs = Number(dpsMtrs.toFixed(1));
+    //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn) 
       watts =  (pcFeff/100)*fewatts;  
-
-      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
+      watts = Number(watts.toFixed(1));     
+    //?? mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
+              
       pullForce = 60 * watts /(pullLength * cadn) 
       pullForce = Number(pullForce.toFixed(1));
-      //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-      watts = Number(watts.toFixed(1));
-        
+     
       // to show on documetn
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
@@ -237,10 +242,7 @@ save another test change
     //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
     // INITIALIZE INPUT VALUES
       
-      let otwDist = Number(document.getElementById("otwDist").value); // 
-      let otwCadn = Number(document.getElementById("otwCadn").value); // 
-      let otwDps = Number(document.getElementById("otwDps").value);   // 
-          
+     
       otwSpeed = 4;
     
       if (currentBlock.id = "Ready"){dpsMtrs=0;
