@@ -233,16 +233,14 @@ save another test change
         otwSpeed = 0;
         mechWatthrs = 0;
           }
-
-        if (currentBlock.id = "Row"){
+      if (currentBlock.id = "Row"){
         dpsMtrs = 1;
         otwDist = 0;
         otwCadn = cadn;
         otwSpeed = 0;
         mechWatthrs = 0;
           }
-    
-   
+      // BEGIN TIMER LOOP FOR TT OR OTW (ROW)   
       if (interval) return;
       // timer loop
         interval = setInterval(() => {
@@ -253,13 +251,10 @@ save another test change
           strokes++
         // RT CALCULATIONS GO HERE !!!
         if (currentBlock.id === "Ready"){
-          //dpsMtrs=0;
           userWatthrs = fewatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
         if (currentBlock.id === "Row"){
-          //dpsMtrs = 1;
-          // IS THIS "FLAG" STILL NEEDED?
           otwDist = dpsMtrs * otwDps * strokes;
           otwCadn = dpsMtrs * otwCadn;
           otwSpeed =dpsMtrs * 2;
