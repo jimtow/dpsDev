@@ -47,43 +47,48 @@ save another test change
   </h3>
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
-   <!--timer -->
-  <h4 id="timer"></h4>
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>  
-   
-  <h3> 
+  
+  
+  <h4 id="timer"></h4>
+  
+
+ <!--<p> Note ROWERS Perceived Effort</p>  -->
+   <h3> 
     Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" value="100">  
-
- <!--calculate and display resistance here. It is based on demographic
-  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
-  -->  
     <button style="width: 90px; height: 40px;
     " onclick="calculateTT('Row(500m)')">Enter</button> 
   </h3>
-
-  <h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+  <!--calculate and display resistance here. It is based on demographic
+  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
+  --> 
+  
+<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
         <br>  Watts:<span id="watts">    </span> 
         <br>  ERGpull(lbs):<span id = "pullForce">    </span>
-  </h3>
+</h3> 
+
+
   <button onclick="showReadyAll()">ReadyAll</button>
   <button onclick="showRow()">Row!</button>
   <button onclick="showErgset()">myErgset</button>
-  </div>
+</div>
 
-<!---------------------------ROW--------------------------------------->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
 <div id="Row" style ="display:none;">
   <!--row to a "stop" time using stopwatch timers 
   or manual stop at fe dps cadence.  
   Calculate distance based on time and feCadence !! -->
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
+
   <h3>
    <!--Start here without need for "Ready" calibrations step --> 
    Distance per Stroke (Estimated or Known)
-    <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
+    <input id="otwDps" style="width:100px; height: 30px;" type="number" 
     value="6">
   </h3>  
 
@@ -94,7 +99,7 @@ save another test change
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
      type="number" value="500">  
 
-  <p>This is your performance w this machine and settings. </p>
+  <p>07.12 performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
   <button onclick="start()">StartWO</button>
@@ -137,7 +142,7 @@ save another test change
         let userWatthrs = 0;
         let pullForce = 0;
         let dpsMtrs = 0;
-        let xdpsMtrs = 0;    
+        let otwDps = 0;    
         let watts;    
 
         // TIMER ONLY
@@ -177,7 +182,7 @@ save another test change
       const feCadn = Number(document.getElementById("feCadn").value);
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      const otwDps = Number(document.getElementById("otwDps").value);
       const pullLength = Number(document.getElementById("pullLength").value);
 
        // let dpsMtrs,watts, pullForce;                               
@@ -209,8 +214,8 @@ save another test change
       let mechWatts = 0;
 
       const otwCadn = Number(document.getElementById("otwCadn").value); 
-      // xdpsMtrs is entered here manually from pre-determined valuee 
-      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      // otwDps is entered here manually from pre-determined valuee 
+      const otwDps = Number(document.getElementById("otwDps").value);
       // row to time!! (or speed ??)
       const otwDist = Number(document.getElementById("otwDist").value);
   /*
@@ -246,6 +251,10 @@ save another test change
     let split = Number(document.getElementById("feSplit").value); // strokes/min
     let cadn = Number(document.getElementById("feCadn").value); // strokes/min
     let fewatts = Number(document.getElementById("feWatts").value); // strokes/min 
+
+    let woDist = Number(document.getElementById("otwDist").value); // strokes/min
+    let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
+    let otwDps = Number(document.getElementById("otwDps").value); // strokes/min
     // NOT INITIALIZE VARIABLES
     //let otwDist = 3;
     //let otwCadn = cadn;
@@ -264,7 +273,7 @@ save another test change
         let woDist = Number(document.getElementById("otwDist").value); // strokes/min
         let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
         let otwWatts = Number(document.getElementById("feWatts").value); // strokes/min
-        otwDist = dpsMtrs * xdpsMtrs * strokes;
+        otwDist = dpsMtrs * otwDps * strokes;
         otwCadn = dpsMtrs * 5;            //tbd
         otwSpeed =dpsMtrs * 6;            //tbd
         mechWatthrs =dpsMtrs * 7;         //tbd
@@ -309,10 +318,10 @@ save another test change
         
           // ROW VALUES BASED ON dpsMtrs (=0 if TT)
           /* obtain values from the Row html block. Make sure dpsMtrs always
-          is 0 in TT (sset as constant 0 in TT and constant 1 in Row (xdpsMtrs is
+          is 0 in TT (sset as constant 0 in TT and constant 1 in Row (otwDps is
           the input value))
           // MUST calculateRow TO OBTAIN VALUES !!!
-          otwDist = dpsMtrs * xdpsMtrs * strokes;
+          otwDist = dpsMtrs * otwDps * strokes;
           otwCadn = dpsMtrs * value;
           otwSpeed =dpsMtrs * value;
           mechWatthrs =dpsMtrs * value;        
