@@ -257,38 +257,23 @@ save another test change
       if (seconds-old >= strokesec) {
           strokes++
         // RT CALCULATIONS GO HERE !!!
-        // console.log(currentBlock.id);
 
         if (currentBlock.id === "Ready"){
           dpsMtrs=0;
-          //otwCadn = cadn;
           userWatthrs = fewatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
 
-
-        /*   if (currentBlock.id = "Ready"){dpsMtrs=0;
-        let split = Number(document.getElementById("feSplit").value); // strokes/min
-        let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-        let watts = Number(document.getElementById("feWatts").value); // strokes/min
-        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-      let otwDist = 0;
-      let otwCadn = cadn;
-      let otwSpeed = 0;
-      let mechWatthrs = 0;
-          }
-      */
-      // ROW VALUES BASED ON dpsMtrs (=0 if TT)
-          /* obtain values from the Row html block. Make sure dpsMtrs always
-          is 0 in TT (sset as constant 0 in TT and constant 1 in Row (otwDps is
-          the input value))
-          // MUST calculateRow TO OBTAIN VALUES !!!
+        if (currentBlock.id === "Row"){
+          dpsMtrs = 1;
           otwDist = dpsMtrs * otwDps * strokes;
           otwCadn = dpsMtrs * value;
           otwSpeed =dpsMtrs * value;
-          mechWatthrs =dpsMtrs * value;        
-          update();
-          */
+          mechWatthrs =dpsMtrs * value;           
+          userWatthrs = fewatts * seconds / 3600;
+          userWatthrs = Number(userWatthrs.toFixed(2));
+        }
+
           old = seconds;
           update();
           if (seconds>= split){stop();}
