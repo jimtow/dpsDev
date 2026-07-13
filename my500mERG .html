@@ -227,20 +227,22 @@ save another test change
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
 
-      otwSpeed = 4;
-    
+      /* update names currently: 
+      strokes, seconds, otwDist, otwCadn, otwSpeed, mechWatthrs, userWatthrs   
+      */
+      
+      // FIXED VALUES HERE
       if (currentBlock.id = "Ready"){dpsMtrs=0;
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        otwSplit = feSplit;
+        otwDist = 0;
         otwCadn = cadn;
-        otwSpeed = 4;
-        mechWatthrs = 5;
+        otwSpeed = 0;
+        mechWatthrs = 0;
           }
       
   /*    if (currentBlock.id = "Row"){dpsMtrs = 1;
-        let woDist = Number(document.getElementById("otwDist").value); // strokes/min
-        let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
-        let otwWatts = Number(document.getElementById("feWatts").value); // strokes/min
+        
+       
         otwDist = dpsMtrs * otwDps * strokes;
         otwCadn = dpsMtrs * 5;            //tbd
         otwSpeed =dpsMtrs * 6;            //tbd
@@ -266,10 +268,11 @@ save another test change
 
         if (currentBlock.id === "Row"){
           dpsMtrs = 1;
+          // IS THIS "FLAG" STILL NEEDED?
           otwDist = dpsMtrs * otwDps * strokes;
-          otwCadn = dpsMtrs * value;
-          otwSpeed =dpsMtrs * value;
-          mechWatthrs =dpsMtrs * value;           
+          otwCadn = dpsMtrs * otwCadn;
+          otwSpeed =dpsMtrs * 2;
+          mechWatthrs =dpsMtrs * 3;           
           userWatthrs = fewatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
