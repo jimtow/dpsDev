@@ -222,18 +222,12 @@ save another test change
 
   // --------------------------------------------------------------------------------
     function start() {
-      /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
-      NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
-      UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
-      */
-
       /* update names currently: 
       strokes, seconds, otwDist, otwCadn, otwSpeed, mechWatthrs, userWatthrs   
       */
-      
       // FIXED VALUES HERE
-      if (currentBlock.id = "Ready"){dpsMtrs=0;
-        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
+      if (currentBlock.id = "Ready"){
+        dpsMtrs=0;
         otwDist = 0;
         otwCadn = cadn;
         otwSpeed = 0;
@@ -276,13 +270,11 @@ save another test change
           userWatthrs = fewatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
         }
-
-          old = seconds;
-          update();
-          if (seconds>= split){stop();}
-        }
-        // executes every 1000ms or stops at feSplit    
-        }, 1000);
+        old = seconds;
+        update();
+        if (seconds>= split){stop();}
+        }                   // end timer loop      
+       }, 1000);            // executes every 1000ms or stops at feSplit   
       }
 
 // --------------------------------------------------------------------------------------  
