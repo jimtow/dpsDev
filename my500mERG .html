@@ -47,37 +47,33 @@ save another test change
   </h3>
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
+   <!--timer -->
+  <h4 id="timer"></h4>
   <button onclick="start()">Start</button>
   <button onclick="stop()">Stop</button>
   <button onclick="reset()">Reset</button>  
-  
-  
-  <h4 id="timer"></h4>
-  
-
- <!--<p> Note ROWERS Perceived Effort</p>  -->
-   <h3> 
+   
+  <h3> 
     Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" value="100">  
+
+ <!--calculate and display resistance here. It is based on demographic
+  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
+  -->  
     <button style="width: 90px; height: 40px;
     " onclick="calculateTT('Row(500m)')">Enter</button> 
   </h3>
-  <!--calculate and display resistance here. It is based on demographic
-  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
-  --> 
-  
-<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+
+  <h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
         <br>  Watts:<span id="watts">    </span> 
         <br>  ERGpull(lbs):<span id = "pullForce">    </span>
-</h3> 
-
-
+  </h3>
   <button onclick="showReadyAll()">ReadyAll</button>
   <button onclick="showRow()">Row!</button>
   <button onclick="showErgset()">myErgset</button>
-</div>
+  </div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
+<!---------------------------ROW--------------------------------------->
 <div id="Row" style ="display:none;">
   <!--row to a "stop" time using stopwatch timers 
   or manual stop at fe dps cadence.  
