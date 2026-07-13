@@ -136,7 +136,8 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 <!--timer script (function)-->
   <script>
-    // GLOBAL
+
+        // GLOBAL
         //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let userWatthrs = 0;
         let pullForce = 0;
@@ -165,9 +166,16 @@ save another test change
 
         let mechWatts = 0;                // per stroke
         let mechWatthrs = 0;
+       
 
-    // ---------------------------------------------------------------------------------
-    function calculateTT() {
+       
+                     
+       
+
+
+
+        // FINAL METRICS  
+ function calculateTT() {
     //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
       const feSplit = Number(document.getElementById("feSplit").value);
@@ -194,8 +202,8 @@ save another test change
         document.getElementById("watts").textContent = watts;
         document.getElementById("pullForce").textContent = pullForce;
       }  
-  // ----------------------------------------------------------------------------------  
-    function calculateRow(){
+// FINAL METRICS   
+   function calculateRow(){
       //FOR OTW WORKOUT 
       let otwSeconds = 0;
       let otwSpeed = 0;
@@ -232,29 +240,28 @@ save another test change
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
-
-  // --------------------------------------------------------------------------------
-    function start() {
+  // EITHER TT or WO  BY NAME (??)
+   function start() {
       /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
       NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
     //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
     // INITIALIZE INPUT VALUES
-      let split = Number(document.getElementById("feSplit").value); // strokes/min
-      let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-      let fewatts = Number(document.getElementById("feWatts").value); // strokes/min 
+    let split = Number(document.getElementById("feSplit").value); // strokes/min
+    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+    let fewatts = Number(document.getElementById("feWatts").value); // strokes/min 
 
-      let woDist = Number(document.getElementById("otwDist").value); // strokes/min
-      let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
-      let otwDps = Number(document.getElementById("otwDps").value); // strokes/min
+    let woDist = Number(document.getElementById("otwDist").value); // strokes/min
+    let otwCadn = Number(document.getElementById("otwCadn").value); // strokes/min
+    let otwDps = Number(document.getElementById("otwDps").value); // strokes/min
     // NOT INITIALIZE VARIABLES
     //let otwDist = 3;
     //let otwCadn = cadn;
     //let otwSpeed = 4;
     //let mechWatthrs = 5;
 
-      if (currentBlock.id = "Ready"){dpsMtrs=0;
+    if (currentBlock.id = "Ready"){dpsMtrs=0;
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
         otwDist = 3;
         otwCadn = cadn;
@@ -302,7 +309,14 @@ save another test change
       let mechWatthrs = 0;
           }
       */
-      // ROW VALUES BASED ON dpsMtrs (=0 if TT)
+
+
+
+
+
+
+        
+          // ROW VALUES BASED ON dpsMtrs (=0 if TT)
           /* obtain values from the Row html block. Make sure dpsMtrs always
           is 0 in TT (sset as constant 0 in TT and constant 1 in Row (otwDps is
           the input value))
@@ -321,8 +335,8 @@ save another test change
         }, 1000);
       }
 
-// --------------------------------------------------------------------------------------  
-    function update() {
+// UPDATE THE RT DISPLAY      
+   function update() {
       /* calculate rt stroke values (mechWatthrs, userWatthrs, etc) 
       all these in calculateTT and calculateRow functions independently
       so that updates work for either.
@@ -340,16 +354,13 @@ save another test change
       // show userWatthrs
         "userWatt-hrs: " + userWatthrs;
       }
-      
-//-------------------------------------------------------------------------------------
+
      function stop() {
 //      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       clearInterval(interval);
       interval = null;
       
     }
-
-//-------------------------------------------------------------------------------------    
     function reset() {
 //      let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
       stop();
@@ -359,7 +370,7 @@ save another test change
       // TT or WO?
       update();
     }
-//--------------------------------------------------------------------------------------   
+   
 function showReadyAll() {
     currentBlock = document.getElementById("ReadyAll");
     document.getElementById("ReadyAll").style.display = "block";
@@ -367,7 +378,7 @@ function showReadyAll() {
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
     }
-//---------------------------------------------------------------------------------------
+
   function showReady() {
     currentBlock = document.getElementById("Ready");
     document.getElementById("ReadyAll").style.display = "none";
@@ -375,7 +386,7 @@ function showReadyAll() {
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
     }
-//----------------------------------------------------------------------------------------
+
   function showRow() {  
     currentBlock = document.getElementById("Row");
     document.getElementById("ReadyAll").style.display = "none";
@@ -383,7 +394,7 @@ function showReadyAll() {
     document.getElementById("Row").style.display = "block";
     document.getElementById("Ergset").style.display = "none"; 
     }
-//-----------------------------------------------------------------------------------------
+
   function showErgset() {  
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
@@ -391,7 +402,11 @@ function showReadyAll() {
     document.getElementById("Ergset").style.display = "block";
     }
 
-//-------------------------------------------------------------------------------------------
+/*
+Calculate TT does all the work when Row(500) is tapped and percieved effort
+is estimated for the Timed Trial. dpsMtrs, pullForce
+*/
+   
 /*
    // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
    funtion ergSets() {}
