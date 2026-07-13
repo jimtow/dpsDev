@@ -34,7 +34,6 @@ save another test change
   <input id="feWatts" style="width:60px; height:30px;" type="number" 
   value="105">
 
-  // feSplit is the "TT" split is only used to calculate dpsMtrs
   500m split (seconds)
   <input id="feSplit" style="width:60px; height:30px;" type="number" 
   value="12">
@@ -136,10 +135,13 @@ save another test change
 <!--timer script (function)-->
   <script>
     // GLOBAL MAY NEED ANYWHERE ANYTIME
+      let split = Number(document.getElementById("feSplit").value);   //
+      let cadn = Number(document.getElementById("feCadn").value);     // 
+      let fewatts = Number(document.getElementById("feWatts").value); //  
 
-      const feWatts = Number(document.getElementById("feWatts").value);
-      const feSplit = Number(document.getElementById("feSplit").value);
-      const feCadn = Number(document.getElementById("feCadn").value);
+    //  const feWatts = Number(document.getElementById("feWatts").value);
+    //  const feSplit = Number(document.getElementById("feSplit").value);
+    //  const feCadn = Number(document.getElementById("feCadn").value);
 
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
@@ -174,19 +176,21 @@ save another test change
     function calculateTT() {                            
       /*TT uses published demographics and timed trial with estimate of full
       effort on completion */ 
-        dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
-        dpsMtrs = Number(dpsMtrs.toFixed(1));
-        watts =  (pcFeff/100)*feWatts;  
-        //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
-        pullForce = 60 * watts /(pullLength * feCadn) 
-        pullForce = Number(pullForce.toFixed(1));
-        //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-        watts = Number(watts.toFixed(1));
+      // USE GLOBALS HERE FOR SIMPLICITY       
+      dpsMtrs = (pcFeff/100)*30000/(cadn * split);
+      dpsMtrs = Number(dpsMtrs.toFixed(1));
+      watts =  (pcFeff/100)*fewatts;  
+
+      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
+      pullForce = 60 * watts /(pullLength * cadn) 
+      pullForce = Number(pullForce.toFixed(1));
+      //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
+      watts = Number(watts.toFixed(1));
         
-        // to show on documetn
-        document.getElementById("dpsMtrs").textContent = dpsMtrs;
-        document.getElementById("watts").textContent = watts;
-        document.getElementById("pullForce").textContent = pullForce;
+      // to show on documetn
+      document.getElementById("dpsMtrs").textContent = dpsMtrs;
+      document.getElementById("watts").textContent = watts;
+      document.getElementById("pullForce").textContent = pullForce;
       }  
   // ----------------------------------------------------------------------------------  
     function calculateRow(){
@@ -232,23 +236,17 @@ save another test change
       */
     //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
     // INITIALIZE INPUT VALUES
-      let split = Number(document.getElementById("feSplit").value);   //
-      let cadn = Number(document.getElementById("feCadn").value);     // 
-      let fewatts = Number(document.getElementById("feWatts").value); //  
-
+      
       let otwDist = Number(document.getElementById("otwDist").value); // 
       let otwCadn = Number(document.getElementById("otwCadn").value); // 
       let otwDps = Number(document.getElementById("otwDps").value);   // 
-
-    // NOT INITIALIZE VARIABLES
-    //let otwDist = 3;
+          
       otwSpeed = 4;
-    //let mechWatthrs = 5;
-
+    
       if (currentBlock.id = "Ready"){dpsMtrs=0;
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        
-
+        otwSplit = feSplit;
+        otwCadn = feCadn;
         otwSpeed = 4;
         mechWatthrs = 5;
           }
