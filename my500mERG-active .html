@@ -137,15 +137,16 @@ save another test change
   <script>
 
         // GLOBAL
-    let split = Number(document.getElementById("feSplit").value); // strokes/min
-    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-    let feWatts = Number(document.getElementById("feWatts").value); // strokes/min
-        //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
-        let userWatthrs = 0;
-        let pullForce = 0;
-        let dpsMtrs = 0;
-        let xdpsMtrs = 0;    
-        //let watts;    
+    const split = Number(document.getElementById("feSplit").value); // strokes/min
+    const cadn = Number(document.getElementById("feCadn").value); // strokes/min
+    const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
+    
+    
+    let userWatthrs = 0;
+    let pullForce = 0;
+    let dpsMtrs = 0;
+    let xdpsMtrs = 0;    
+    
 
         // TIMER ONLY
         let interval = null;
@@ -207,6 +208,12 @@ save another test change
 // FINAL METRICS   
    function calculateRow(){
       //FOR OTW WORKOUT 
+      const otwCadn = Number(document.getElementById("otwCadn").value); 
+      // xdpsMtrs is entered here manually from pre-determined valuee 
+      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      // row to time!! (or speed ??)
+      const otwDist = Number(document.getElementById("otwDist").value);
+
       let otwSeconds = 0;
       let otwSpeed = 0;
       let mechWatthrs = 0;
@@ -216,11 +223,7 @@ save another test change
       let mechWatts = 0;
       // 015.0833 check
 
-      const otwCadn = Number(document.getElementById("otwCadn").value); 
-      // xdpsMtrs is entered here manually from pre-determined valuee 
-      const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
-      // row to time!! (or speed ??)
-      const otwDist = Number(document.getElementById("otwDist").value);
+      
   /*
       CALCULATE RUNNING AND FINAL WORKOUT METRICS}                             
       07141627
