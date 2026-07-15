@@ -137,12 +137,15 @@ save another test change
   <script>
 
         // GLOBAL
+    let split = Number(document.getElementById("feSplit").value); // strokes/min
+    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
+    let feWatts = Number(document.getElementById("feWatts").value); // strokes/min
         //let feCadn = Number(document.getElementById("feCadn").value); // strokes/min
         let userWatthrs = 0;
         let pullForce = 0;
         let dpsMtrs = 0;
         let xdpsMtrs = 0;    
-        let watts;    
+        //let watts;    
 
         // TIMER ONLY
         let interval = null;
@@ -248,9 +251,7 @@ save another test change
       */
     //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
     // INITIALIZE INPUT VALUES
-    let split = Number(document.getElementById("feSplit").value); // strokes/min
-    let cadn = Number(document.getElementById("feCadn").value); // strokes/min
-    let fewatts = Number(document.getElementById("feWatts").value); // strokes/min 
+     
     // NOT INITIALIZE VARIABLES
     //let otwDist = 3;
     //let otwCadn = cadn;
