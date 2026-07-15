@@ -137,8 +137,8 @@ save another test change
   <script>
 
         // GLOBAL
-    const feSplit = Number(document.getElementById("feSplit").value); // strokes/min
-    const feCadn = Number(document.getElementById("feCadn").value); // strokes/min
+    const split = Number(document.getElementById("feSplit").value); // strokes/min
+    const cadn = Number(document.getElementById("feCadn").value); // strokes/min
     const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
     
     
@@ -181,8 +181,8 @@ save another test change
  function calculateTT() {
     //these are input values to be renamed  
       const feWatts = Number(document.getElementById("feWatts").value);
-      //const feSplit = Number(document.getElementById("feSplit").value);
-      //const feCadn = Number(document.getElementById("feCadn").value);
+      const feSplit = Number(document.getElementById("feSplit").value);
+      const feCadn = Number(document.getElementById("feCadn").value);
       const pcFeff= Number(document.getElementById("pcFeff").value);
       const dspMtrs = Number(document.getElementById("dspMtrs").value);     
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
@@ -255,8 +255,6 @@ save another test change
     //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
     // INITIALIZE INPUT VALUES
      
-    // FIX TO SELECT feCadn or otwCadn for Timer
-    cadn = feCadn;
     // NOT INITIALIZE VARIABLES
     //let otwDist = 3;
     //let otwCadn = cadn;
@@ -331,7 +329,7 @@ save another test change
           */
           old = seconds;
           update();
-          if (seconds>= feSplit){stop();}
+          if (seconds>= split){stop();}
         }
         // executes every 1000ms or stops at feSplit    
         }, 1000);
