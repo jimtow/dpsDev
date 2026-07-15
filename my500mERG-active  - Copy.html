@@ -141,7 +141,6 @@ save another test change
     const cadn = Number(document.getElementById("feCadn").value); // strokes/min
     const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
     
-    
     let userWatthrs = 0;
     let pullForce = 0;
     let dpsMtrs = 0;
@@ -281,6 +280,7 @@ save another test change
       
     */  
       if (interval) return;
+      // select feCadn or otwCadn here
       // timer loop
         interval = setInterval(() => {
         seconds++;
