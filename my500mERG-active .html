@@ -225,20 +225,23 @@ save another test change
         split = feSplit;      
         cadn = feCadn;
         dpsMtrs = 0;}
-      if (currentBlock.id === "Row"){
+    if (currentBlock.id === "Row"){
         split = otwSplit;
         cadn = otwCadn;
         dpsMtrs = 1;
       }
-
-    if (currentBlock.id = "Ready"){dpsMtrs=0;
+    if (currentBlock.id = "Ready"){
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        dpsMtrs = 0;
         otwSpeed = 4;
         mechWatthrs = 5;
           }
-        
-    if (interval) return;
+      /*  ???? HANGS UP if (currentBlock.id = "Row"){
+        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
+        otwSpeed = 6;
+        mechWatthrs = 7;
+          }
+      */
+      if (interval) return;
       // timer loop
         interval = setInterval(() => {
         seconds++;
