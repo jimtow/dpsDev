@@ -24,7 +24,8 @@
 based distance per stroke. Distance per stroke is fixed during a workout because we
 must assume fixed pull force as calculated in myErgsettings
 replaced paceholder with value for convenience
-save another test change 
+save another test change
+07.16.0910 
 -->
 <div id = "Ready" style ="display:none;">
   <h2>Ready</h2>
@@ -141,7 +142,13 @@ save another test change
     const feCadn = Number(document.getElementById("feCadn").value); // strokes/min
     const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
     
-    
+    const otwCadn = Number(document.getElementById("otwCadn").value); 
+      // xdpsMtrs is entered here manually from pre-determined valuee 
+    //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+      // row to time!! (or speed ??)
+    const otwDist = Number(document.getElementById("otwDist").value);
+
+
     let userWatthrs = 0;
     let pullForce = 0;
     let dpsMtrs = 0;
@@ -162,10 +169,10 @@ save another test change
         // ROW ONLY
         
         // FOR OTW WORKOUT 
-        let otwDist = 0;
-        let otwCadn = 0;
+        //let otwDist = 0;
+        //let otwCadn = 0;
         let otwSpeed = 0;
-        let otwDistance = 0;
+        //let otwDistance = 0;
 
         let mechWatts = 0;                // per stroke
         let mechWatthrs = 0;
@@ -208,11 +215,11 @@ save another test change
 // FINAL METRICS   
    function calculateRow(){
       //FOR OTW WORKOUT 
-      const otwCadn = Number(document.getElementById("otwCadn").value); 
+      //const otwCadn = Number(document.getElementById("otwCadn").value); 
       // xdpsMtrs is entered here manually from pre-determined valuee 
       const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
       // row to time!! (or speed ??)
-      const otwDist = Number(document.getElementById("otwDist").value);
+      //const otwDist = Number(document.getElementById("otwDist").value);
 
       let otwSeconds = 0;
       let otwSpeed = 0;
@@ -248,15 +255,23 @@ save another test change
       }  
   // EITHER TT or WO  BY NAME (??)
    function start() {
-      /* UPDATE ALL CLOCK VALUES HERE AT EACH STROKE. 
-      NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
+      /* UPDATE AT EACH STROKE.  NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
       */
-    //  LETS MUST BE AT START OF FUNCTIONS !! NOTE WELL !! 
-    // INITIALIZE INPUT VALUES
-     
+  
+      //
+      if (currentBlock.id === "Ready"){
+        split = feSplit;      
+        cadn = feCadn;}
+      if (currentBlock.id === "Row"){
+        split = otwSplit;
+        cadn = otwCadn;
+      }
+    
+
+    
     // SELECT feCadn or otwCadn for Timer
-    cadn = feCadn;
+    //cadn = feCadn;
     // NOT INITIALIZE VARIABLES
     //let otwDist = 3;
     //let otwCadn = cadn;
@@ -265,8 +280,8 @@ save another test change
 
     if (currentBlock.id = "Ready"){dpsMtrs=0;
         // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        otwDist = 3;
-        otwCadn = cadn;
+        //otwDist = 3;
+        //otwCadn = cadn;
         otwSpeed = 4;
         mechWatthrs = 5;
           }
