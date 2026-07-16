@@ -1,1 +1,7 @@
-aa
+Open dpsDev in Terminal
+
+git pull updates from GitHub
+
+
+
+
