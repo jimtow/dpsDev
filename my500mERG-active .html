@@ -216,7 +216,38 @@ save another test change
         //document.getElementById("watts").textContent = watts;
         //document.getElementById("pullForce").textContent = pullForce;
       }  
-//--------------------------------------------------------------------------------  
+/*
+let interval = null;
+let seconds = 0;
+function startTimer() {
+    if (interval) return;    // Prevent multiple timers
+// PUT CALCULATIONS IN updateDisplay ????
+    interval = setInterval(() => {
+        seconds++;
+        updateDisplay();
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(interval);
+    interval = null;
+}
+
+function resetTimer() {
+    stopTimer();
+    seconds = 0;
+    updateDisplay();
+}
+
+function restartTimer() {
+    resetTimer();
+    startTimer();
+}
+
+
+
+*/
+      //--------------------------------------------------------------------------------  
    function start() {
       /* UPDATE AT EACH STROKE.  NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
       UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
@@ -226,6 +257,7 @@ save another test change
         cadn = feCadn;
         dpsMtrs = 0;}
     if (currentBlock.id === "Row"){
+        restartTimer();
         split = otwSplit;
         cadn = otwCadn;
         dpsMtrs = 1;
@@ -292,9 +324,15 @@ save another test change
       seconds = 0;
       old = 0;
       strokes = 0;
-      // TT or WO?
       update();
     }
+
+//------------------------------------------------------------------------------    
+function restartTimer() {
+    resetTimer();
+    startTimer();
+}
+
 //------------------------------------------------------------------------------   
   function showReadyAll() {
     currentBlock = document.getElementById("ReadyAll");
