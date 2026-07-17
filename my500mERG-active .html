@@ -49,7 +49,7 @@ save another test change
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
   <button onclick="start()">Start</button>
-  <button onclick="stop()">Stop</button>
+  <button onclick="strokeStop()">Stop</button>
   <button onclick="reset()">Reset</button>  
   
   
@@ -103,7 +103,7 @@ save another test change
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
   <button onclick="start()">StartWO</button>
-  <button onclick="stop()">StopWO</button>
+  <button onclick="strokeStop()">StopWO</button>
   <button onclick="reset()">Reset</button>
 
   <h1 id="otwtimer"></h1>
@@ -260,7 +260,7 @@ save another test change
     
         old = seconds;
         update();
-        if (seconds>= feSplit){stop();}
+        if (seconds>= feSplit){strokeStop();}
           }
         // executes every 1000ms or stops at feSplit    
         }, 1000);
@@ -281,14 +281,14 @@ save another test change
         "userWatt-hrs: " + userWatthrs;
       }
 //----------------------------------------------------------------------------      
-  function stop() {
+  function strokeStop() {
       clearInterval(interval);
       interval = null;
       
     }
 //----------------------------------------------------------------------------
   function reset() {
-      stop();
+      strokeStop();
       seconds = 0;
       old = 0;
       strokes = 0;
