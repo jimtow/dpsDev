@@ -1,3 +1,6 @@
+Start and Reset the clock without updating. Update in separate Row or TT function ??
+
+
 Assume demographic 500m watts and split.
 
 Estimate effort and adjust to get DPS for this machine.
