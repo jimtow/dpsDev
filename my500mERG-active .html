@@ -266,12 +266,12 @@ function restartTimer() {
 */
       //--------------------------------------------------------------------------------  
    function start() {
+    // 07.18 SIGNIFICANT CLEANUP 
     // INTIALIZE
     if (currentBlock.id === "Ready"){
         split = feSplit;      
         cadn = feCadn;
         dpsMtrs = 0;    }
-
     if (currentBlock.id === "Row"){
         split = otwSplit;
         cadn = otwCadn;
@@ -279,8 +279,8 @@ function restartTimer() {
         otwSpeed = 4;
         mechWatthrs =5; }
 
+    // TIMER
     if (interval) return;
-      // timer loop
         interval = setInterval(() => {
         seconds++;
         strokesec = 60/cadn;
@@ -288,7 +288,7 @@ function restartTimer() {
       if (seconds-old >= strokesec) {
           strokes++;
         old = seconds;
-        // RT HERE
+      // RT HERE
         updateStrokes();
         if (seconds>= split){strokeStop();}
           }
@@ -296,10 +296,9 @@ function restartTimer() {
         }, 1000);
       }
 
-
 //------------------------------------------------------------------------------
 // UPDATE THE RT DISPLAY      
-   function update() {
+/*   function update() {
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
@@ -312,6 +311,7 @@ function restartTimer() {
       // show userWatthrs
         "userWatt-hrs: " + userWatthrs;
       }
+*/        
 //----------------------------------------------------------------------------      
   function strokeStop() {
       clearInterval(interval);
