@@ -48,9 +48,9 @@ save another test change
   </h3>
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
-  <button onclick="start()">Start</button>
-  <button onclick="strokeStop()">Stop</button>
-  <button onclick="reset()">Reset</button>  
+  <button onclick="startTimer()">Start</button>
+  <button onclick="stopTimer()">Stop</button>
+  <button onclick="resetTimer()">Reset</button>  
   
   
   <h4 id="timer"></h4>
@@ -102,9 +102,9 @@ save another test change
   <p>This is your performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
-  <button onclick="start()">StartWO</button>
-  <button onclick="strokeStop()">StopWO</button>
-  <button onclick="reset()">Reset</button>
+  <button onclick="startTimer()">StartWO</button>
+  <button onclick="stopTimer()">StopWO</button>
+  <button onclick="resetTimer()">Reset</button>
 
   <h1 id="otwtimer"></h1>
 
@@ -265,7 +265,7 @@ function restartTimer() {
     startTimer();
 */
       //--------------------------------------------------------------------------------  
-   function start() {
+   function startTimer() {
     // 07.18 SIGNIFICANT CLEANUP 
     // INTIALIZE
     if (currentBlock.id === "Ready"){
@@ -290,47 +290,25 @@ function restartTimer() {
         old = seconds;
       // RT HERE
         updateStrokes();
-        if (seconds>= split){strokeStop();}
+        if (seconds>= split){stopTimer();}
           }
         // executes every 1000ms or stops at feSplit    
         }, 1000);
       }
 
 //------------------------------------------------------------------------------
-// UPDATE THE RT DISPLAY      
-/*   function update() {
-      document.getElementById("timer").innerHTML =
-        "Strokes: " + strokes +
-        " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
-      // distance only after TT show cadence
-        "OTW Distance: " + otwDist +
-        " &nbsp;&nbsp; OTW Cadence: " + otwCadn + "<br>" +
-      // speed only after TT show mechWatthrs 
-        "  OTW Speed:  " + otwSpeed +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs + "<br>" +
-      // show userWatthrs
-        "userWatt-hrs: " + userWatthrs;
-      }
-*/        
-//----------------------------------------------------------------------------      
-  function strokeStop() {
+  function stopTimer() {
       clearInterval(interval);
       interval = null;
       
     }
-//----------------------------------------------------------------------------
-  function reset() {
-      strokeStop();
-      seconds = 0;
-      old = 0;
-      strokes = 0;
-      update();
-    }
-
 //------------------------------------------------------------------------------    
-function restartTimer() {
-    resetTimer();
-    startTimer();
+  function resetTimer() {
+    stopTimer();
+    seconds = 0;
+    old = 0;
+    strokes = 0;
+    //updateDisplay();
 }
 
 //------------------------------------------------------------------------------   
