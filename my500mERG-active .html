@@ -154,6 +154,7 @@ save another test change
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
+
     let old = 0;
     let strokes = 0;
     let strokesec = 5;
@@ -217,24 +218,13 @@ save another test change
         //document.getElementById("pullForce").textContent = pullForce;
       }  
   function updateStrokes(){
-  // INTIALIZE
+  
+    // RT UPDATES
     if (currentBlock.id === "Ready"){
-        split = feSplit;      
-        cadn = feCadn;
-        dpsMtrs = 0;    }
-    if (currentBlock.id === "Row"){
-        split = otwSplit;
-        cadn = otwCadn;
-        dpsMtrs = 1
-        otwSpeed = 4;
-        mechWatthrs =5; }
-  // RT UPDATES
-     if (currentBlock.id === "Ready"){
           userWatthrs = feWatts * seconds / 3600;
           userWatthrs = Number(userWatthrs.toFixed(2));
           }
-     if (currentBlock.id === "Row"){
-          // ROW-SPECIFIC UPDATES
+    if (currentBlock.id === "Row"){   
            }
   // DISPLAY RT VALUES
       document.getElementById("timer").innerHTML =
@@ -249,9 +239,6 @@ save another test change
       // show userWatthrs
         "userWatt-hrs: " + userWatthrs;
       }
-
-
-
 /*
 // 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
 let interval = null;
@@ -264,74 +251,52 @@ function startTimer() {
         updateStrokes();
     }, 1000);
 }
-
 function stopTimer() {
     clearInterval(interval);
     interval = null;
 }
-
 function resetTimer() {
     stopTimer();
     seconds = 0;
     updateDisplay();
 }
-
 function restartTimer() {
     resetTimer();
     startTimer();
-
-
 */
       //--------------------------------------------------------------------------------  
    function start() {
-      /* UPDATE AT EACH STROKE.  NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
-      UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
-      */
-      if (currentBlock.id === "Ready"){
+    // INTIALIZE
+    if (currentBlock.id === "Ready"){
         split = feSplit;      
         cadn = feCadn;
-        dpsMtrs = 0;}
+        dpsMtrs = 0;    }
+
     if (currentBlock.id === "Row"){
-        restartTimer();
         split = otwSplit;
         cadn = otwCadn;
-        dpsMtrs = 1;
-      }
-    if (currentBlock.id = "Ready"){
-        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
+        dpsMtrs = 1
         otwSpeed = 4;
-        mechWatthrs = 5;
-          }
-      /*  ???? HANGS UP if (currentBlock.id = "Row"){
-        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        otwSpeed = 6;
-        mechWatthrs = 7;
-          }
-      */
-      if (interval) return;
+        mechWatthrs =5; }
+
+    if (interval) return;
       // timer loop
         interval = setInterval(() => {
         seconds++;
         strokesec = 60/cadn;
       // update at each stroke  
       if (seconds-old >= strokesec) {
-          strokes++
-        // RT CALCULATIONS GO HERE !!!
-        if (currentBlock.id === "Ready"){
-          userWatthrs = feWatts * seconds / 3600;
-          userWatthrs = Number(userWatthrs.toFixed(2));
-          }
-        if (currentBlock.id === "Row"){
-          // ROW-SPECIFIC UPDATES
-           }
-    
+          strokes++;
         old = seconds;
-        update();
-        if (seconds>= feSplit){strokeStop();}
+        // RT HERE
+        updateStrokes();
+        if (seconds>= split){strokeStop();}
           }
         // executes every 1000ms or stops at feSplit    
         }, 1000);
       }
+
+
 //------------------------------------------------------------------------------
 // UPDATE THE RT DISPLAY      
    function update() {
