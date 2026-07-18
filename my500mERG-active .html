@@ -160,10 +160,11 @@ save another test change
     let strokesec = 5;
 
     // OTW ONLY (ALL MUST BE GLOBAL !!)
-    let otwSeconds = 0;
     let otwSpeed = 0;
     let mechWatthrs = 0;
     let mechWatts = 0;
+    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
+    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
      
   // FINAL METRICS  
@@ -191,7 +192,6 @@ save another test change
       }  
 // FINAL METRICS   
   function calculateRow(){
-      let otwSeconds = 0;
       let otwSpeed = 0;
       let mechWatthrs = 0;
       let userWatthrs = 0;
