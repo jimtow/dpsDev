@@ -93,7 +93,7 @@ save another test change
   </h3>  
 
   <h3>
-    <!--OTW Workout otwDist at otwCadn with dpsMtrs -->
+    <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
@@ -137,13 +137,14 @@ save another test change
 <!--timer script (function)-->
   <script>
     // GLOBAL
-    // FROM READY ELEMENT
+    // FROM READY BLOCK
     const feSplit = Number(document.getElementById("feSplit").value); // strokes/min
     const feCadn = Number(document.getElementById("feCadn").value); // strokes/min
     const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
     const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
     
-    // FROM ROW ELEMENT
+    // FROM ROW BLOCK
+    //const otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     const otwCadn = Number(document.getElementById("otwCadn").value); 
     const otwDist = Number(document.getElementById("otwDist").value);
 
@@ -215,6 +216,14 @@ function updateStrokes(){
           }
     if (dpsMtrs == 1){   
       // NEED VALUES HERE!!
+      userWatthrs = feWatts * seconds / 3600;
+      userWatthrs = Number(userWatthrs.toFixed(2));
+      otwDist = 1;
+      otwCadn = 2;
+      otwSpeed = 3;
+      mechWatthrs = 4;
+
+
            }
     // DISPLAY RT VALUES
       document.getElementById("timer").innerHTML =
