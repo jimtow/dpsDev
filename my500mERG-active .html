@@ -216,11 +216,11 @@ save another test change
 // UPDATE DISPLAY EVERY TIMER INTRVAL   
 function updateStrokes(){
     // RT UPDATES
-    if (dpsMtrs == 0){
+    if (currentBlock.id === "Ready"){
       userWatthrs = feWatts * seconds / 3600;
       userWatthrs = Number(userWatthrs.toFixed(2));
           }
-    if (dpsMtrs == 1){   
+    if (currentBlock.id === "Row"){   
       // NEED VALUES HERE!!
       userWatthrs = feWatts * seconds / 3600;
       userWatthrs = Number(userWatthrs.toFixed(2));
@@ -276,12 +276,12 @@ function restartTimer() {
     if (currentBlock.id === "Ready"){
         split = feSplit;      
         cadn = feCadn;
-        dpsMtrs = 0;   }
+        //dpsMtrs = 0;   }
 
     if (currentBlock.id === "Row"){
         split = feSplit;  // FIX THIS ASAP
         cadn = feCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
-        dpsMtrs = 1       // DISPLAY OR TIMER ??
+        //dpsMtrs = 1       // DISPLAY OR TIMER ??
         otwSpeed = 4;
         mechWatthrs =5; }
     // TIMER
