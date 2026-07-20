@@ -86,10 +86,16 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--Start here without need for "Ready" calibrations step --> 
+   <!--Start here without need for "Ready" calibrations step. PROBLEM
+   WHY IS THIS NEEDED TO RUN READY?? Ready calculates dpsMtrs. If we make this
+   otwDps it should be OK but isnt. dpsMtrs should be made the ONLY value from
+   the Ready screen using 100% effort if no calibration
+   
    Distance per Stroke (Estimated or Known)
     <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
     value="6">
+   --> 
+   
   </h3>  
 
   <h3>
@@ -138,10 +144,10 @@ save another test change
   <script>
     // GLOBAL
     // FROM READY BLOCK
-    const feSplit = Number(document.getElementById("feSplit").value); // strokes/min
-    const feCadn = Number(document.getElementById("feCadn").value); // strokes/min
-    const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
-    const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+    const feSplit = Number(document.getElementById("feSplit").value); // user split
+    const feCadn = Number(document.getElementById("feCadn").value); // user cadence
+    const feWatts = Number(document.getElementById("feWatts").value); // user watts
+    //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);//initial est dps
     
     // FROM ROW BLOCK
     //const otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
