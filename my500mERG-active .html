@@ -190,14 +190,8 @@ save another test change
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
       }  
-// FINAL METRICS   
-  function calculateRow(){
-      let otwSpeed = 0;
-      let mechWatthrs = 0;
-      let userWatthrs = 0;
-      let pullForce = 0;
-      let mechWatts = 0;
-  /*
+// FINAL METRICS 
+/* CALCULATE RT ROW VALUES NOW IN updateStrokes AND SAVE FINAL VALUES 
       calculate and show real-time with timer updates (similar to TT)
         strokes, seconds, distance, cadence, speed, mechWatthrs, userWatthrs
           
@@ -205,26 +199,24 @@ save another test change
         userWatthrs = watts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         
-    show final metrics on Row html
-        distance, time, cadence, mechWatt-hrs,  
-
-      ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
+       ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
+      //document.getElementById("mechWatthrs").textContent = mechWatthrs;
+      //document.getElementById("watts").textContent = watts;
+      //document.getElementById("pullForce").textContent = pullForce;
+
     */
-        //document.getElementById("mechWatthrs").textContent = mechWatthrs;
-        //document.getElementById("watts").textContent = watts;
-        //document.getElementById("pullForce").textContent = pullForce;
-      }  
-  function updateStrokes(){
-  
+// UPDATE DISPLAY EVERY TIMER INTRVAL   
+function updateStrokes(){
     // RT UPDATES
-    if (currentBlock.id === "Ready"){
-          userWatthrs = feWatts * seconds / 3600;
-          userWatthrs = Number(userWatthrs.toFixed(2));
+    if (dpsMtrs == 0){
+      userWatthrs = feWatts * seconds / 3600;
+      userWatthrs = Number(userWatthrs.toFixed(2));
           }
-    if (currentBlock.id === "Row"){   
+    if (dpsMtrs == 1){   
+      // NEED VALUES HERE!!
            }
-  // DISPLAY RT VALUES
+    // DISPLAY RT VALUES
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
@@ -269,28 +261,29 @@ function restartTimer() {
     if (currentBlock.id === "Ready"){
         split = feSplit;      
         cadn = feCadn;
-        dpsMtrs = 0;    }
+        dpsMtrs = 0;   }
+
     if (currentBlock.id === "Row"){
         split = feSplit;  // FIX THIS ASAP
         cadn = feCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
         dpsMtrs = 1       // DISPLAY OR TIMER ??
         otwSpeed = 4;
         mechWatthrs =5; }
-
     // TIMER
     if (interval) return;
         interval = setInterval(() => {
         seconds++;
         strokesec = 60/cadn;
-      // update at each stroke  
+      // update when time > stroke interval 
       if (seconds-old >= strokesec) {
-          strokes++;
+        strokes++;
         old = seconds;
+       
       // RT HERE
         updateStrokes();
-        if (seconds>= split){stopTimer();}
+        if (seconds>= split){resetTimer();}
           }
-        // executes every 1000ms or stops at feSplit    
+        // executes every 1000ms or stops at split   
         }, 1000);
       }
 
@@ -298,15 +291,14 @@ function restartTimer() {
   function stopTimer() {
       clearInterval(interval);
       interval = null;
-      
     }
 //------------------------------------------------------------------------------    
   function resetTimer() {
-    stopTimer();
+    clearInterval(interval);
+    interval = null;
     seconds = 0;
     old = 0;
     strokes = 0;
-    //updateDisplay();
 }
 
 //------------------------------------------------------------------------------   
@@ -363,3 +355,11 @@ is estimated for the Timed Trial. dpsMtrs, pullForce
 </html>
 
 
+<!--//function calculateRow(){   // NOT USED YET
+    //  let otwSpeed = 0;
+    //  let mechWatthrs = 0;
+    //  let userWatthrs = 0;
+    //  let pullForce = 0;
+    //  let mechWatts = 0;
+       
+-->
