@@ -86,13 +86,11 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--Start here without need for "Ready" calibrations step. PROBLEM
-   WHY IS THIS NEEDED TO RUN READY?? Ready calculates dpsMtrs. If we make this
-   otwDps it should be OK but isnt. dpsMtrs should be made the ONLY value from
-   the Ready screen using 100% effort if no calibration
+   <!--dpsMtrs is either default entry (8) or result of TT calculation. It could
+   be entered here but why?
    
    Distance per Stroke (Estimated or Known)
-    <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
+    <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
     value="6">
    --> 
    
@@ -112,7 +110,7 @@ save another test change
   <button onclick="stopTimer()">StopWO</button>
   <button onclick="resetTimer()">Reset</button>
 
-  <h1 id="otwtimer"></h1>
+  <!--<h1 id="otwtimer"></h1> -->
 
    <p> Well Rowed !!</p> 
   
@@ -156,7 +154,7 @@ save another test change
 
     let userWatthrs = 0;
     let pullForce = 0;
-    let dpsMtrs = 8;                          // DEFAULT VALUE
+    let dpsMtrs = 8;                // USE IF TT IS NOT RUN FOR ACTUAL dpsMtrs
 
     // TIMER ONLY
     let interval = null;
@@ -170,6 +168,7 @@ save another test change
     let otwSpeed = 0;
     let mechWatthrs = 0;
     let mechWatts = 0;
+    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
     let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
      
@@ -179,7 +178,8 @@ save another test change
      effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
     //INPUT VALUES 
       const pcFeff= Number(document.getElementById("pcFeff").value);
-      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
+      // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
+      dspMtrs = Number(document.getElementById("dspMtrs").value);     
       const pullLength = Number(document.getElementById("pullLength").value);
                              
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
@@ -213,13 +213,21 @@ save another test change
 
     */
 // UPDATE DISPLAY EVERY TIMER INTRVAL   
-// REMEMBER TO SAVE LOCAL CHANGES BEFORE RUNNING AS CHROME APP 
 function updateStrokes(){
+    // RT UPDATES (dpsMtrs is default entry until TT is run to calculate)
+    if (currentBlock.id === "Ready"){
       userWatthrs = feWatts * seconds / 3600;
       userWatthrs = Number(userWatthrs.toFixed(2));
-      //SPEED = METERS PER STROKE * STROKES PER MIN
-      otwSpeed = dpsMtrs*otwCadn;
+          }
+    if (currentBlock.id === "Row"){   
+      // NEED VALUES HERE!!
+      userWatthrs = feWatts * seconds / 3600;
+      userWatthrs = Number(userWatthrs.toFixed(2));
+      otwDist = seconds;
+      otwCadn = seconds;
+      otwSpeed = 3;
       mechWatthrs = 4;
+           }
     // DISPLAY RT VALUES
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
@@ -228,12 +236,11 @@ function updateStrokes(){
         "OTW Distance: " + otwDist +
         " &nbsp;&nbsp; OTW Cadence: " + otwCadn + "<br>" +
       // speed only after TT show mechWatthrs 
-        "OTW Speed:  " + otwSpeed +
+        "  OTW Speed:  " + otwSpeed +
         " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs + "<br>" +
       // show userWatthrs
         "userWatt-hrs: " + userWatthrs;
       }
-
 /*
 // 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
 let interval = null;
@@ -262,17 +269,16 @@ function restartTimer() {
       //--------------------------------------------------------------------------------  
    function startTimer() {
     // 07.18 SIGNIFICANT CLEANUP 
-    // INTIALIZE
+    //dpsMtrs = 8;                     // DOES NOT WORK
     if (currentBlock.id === "Ready"){
         split = feSplit;      
         cadn = feCadn;
-        // FIX THIS FLAG !!
-        //dpsMtrs = 0;   }
+        dpsMtrs = 8;   }
 
     if (currentBlock.id === "Row"){
         split = feSplit;  // FIX THIS ASAP
         cadn = feCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
-        dpsMtrs = 1       // DISPLAY OR TIMER ??
+        dpsMtrs = 8       // DISPLAY OR TIMER ??
         otwSpeed = 4;
         mechWatthrs =5; }
     // TIMER
