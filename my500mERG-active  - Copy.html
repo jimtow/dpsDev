@@ -48,9 +48,9 @@ save another test change
   </h3>
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
-  <button onclick="start()">Start</button>
-  <button onclick="stop()">Stop</button>
-  <button onclick="reset()">Reset</button>  
+  <button onclick="startTimer()">Start</button>
+  <button onclick="stopTimer()">Stop</button>
+  <button onclick="resetTimer()">Reset</button>  
   
   
   <h4 id="timer"></h4>
@@ -86,14 +86,18 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--Start here without need for "Ready" calibrations step --> 
+   <!--dpsMtrs is either default entry (8) or result of TT calculation. It could
+   be entered here but why?
+   
    Distance per Stroke (Estimated or Known)
-    <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
+    <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
     value="6">
+   --> 
+   
   </h3>  
 
   <h3>
-    <!--OTW Workout otwDist at otwCadn with dpsMtrs -->
+    <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
@@ -102,11 +106,11 @@ save another test change
   <p>This is your performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
-  <button onclick="start()">StartWO</button>
-  <button onclick="stop()">StopWO</button>
-  <button onclick="reset()">Reset</button>
+  <button onclick="startTimer()">StartWO</button>
+  <button onclick="stopTimer()">StopWO</button>
+  <button onclick="resetTimer()">Reset</button>
 
-  <h1 id="otwtimer"></h1>
+  <!--<h1 id="otwtimer"></h1> -->
 
    <p> Well Rowed !!</p> 
   
@@ -137,43 +141,45 @@ save another test change
 <!--timer script (function)-->
   <script>
     // GLOBAL
-    // FROM READY ELEMENT
-    const feSplit = Number(document.getElementById("feSplit").value); // strokes/min
-    const feCadn = Number(document.getElementById("feCadn").value); // strokes/min
-    const feWatts = Number(document.getElementById("feWatts").value); // strokes/min
-    const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);
+    // FROM READY BLOCK
+    const feSplit = Number(document.getElementById("feSplit").value); // user split
+    const feCadn = Number(document.getElementById("feCadn").value); // user cadence
+    const feWatts = Number(document.getElementById("feWatts").value); // user watts
+    //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);//initial est dps
     
-    // FROM ROW ELEMENT
-    const otwCadn = Number(document.getElementById("otwCadn").value); 
-    const otwDist = Number(document.getElementById("otwDist").value);
+    // FROM ROW BLOCK
+    //const otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
+    otwCadn = Number(document.getElementById("otwCadn").value); 
+    otwDist = Number(document.getElementById("otwDist").value);
 
     let userWatthrs = 0;
     let pullForce = 0;
-    let dpsMtrs = 0; 
+    let dpsMtrs = 8;                // USE IF TT IS NOT RUN FOR ACTUAL dpsMtrs
 
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
+
     let old = 0;
     let strokes = 0;
     let strokesec = 5;
 
-    // TT ONLY
-      // STROKES FROM TIMER
-      // SECONDS FROM TIMER
-
-    // ROW OTW ONLY
+    // OTW ONLY (ALL MUST BE GLOBAL !!)
     let otwSpeed = 0;
-    let mechWatts = 0;                // per stroke
     let mechWatthrs = 0;
-  
+    let mechWatts = 0;
+    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
+    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+
+     
   // FINAL METRICS  
     function calculateTT() {
     /*TT uses published demographics and timed trial with estimate of full
      effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
     //INPUT VALUES 
       const pcFeff= Number(document.getElementById("pcFeff").value);
-      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
+      // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
+      dspMtrs = Number(document.getElementById("dspMtrs").value);     
       const pullLength = Number(document.getElementById("pullLength").value);
                              
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
@@ -190,15 +196,8 @@ save another test change
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
       }  
-// FINAL METRICS   
-   function calculateRow(){
-      let otwSeconds = 0;
-      let otwSpeed = 0;
-      let mechWatthrs = 0;
-      let userWatthrs = 0;
-      let pullForce = 0;
-      let mechWatts = 0;
-  /*
+// FINAL METRICS 
+/* CALCULATE RT ROW VALUES NOW IN updateStrokes AND SAVE FINAL VALUES 
       calculate and show real-time with timer updates (similar to TT)
         strokes, seconds, distance, cadence, speed, mechWatthrs, userWatthrs
           
@@ -206,65 +205,30 @@ save another test change
         userWatthrs = watts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         
-    show final metrics on Row html
-        distance, time, cadence, mechWatt-hrs,  
-
-      ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
+       ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
-    */
-        //document.getElementById("mechWatthrs").textContent = mechWatthrs;
-        //document.getElementById("watts").textContent = watts;
-        //document.getElementById("pullForce").textContent = pullForce;
-      }  
-//--------------------------------------------------------------------------------  
-   function start() {
-      /* UPDATE AT EACH STROKE.  NEED TO SELECT BETWEEN TT OR ROW FOR VALUES HERE !!
-      UPDATE FINAL VALUES IN TT AND ROW AT CLOCK STOP!!
-      */
-      if (currentBlock.id === "Ready"){
-        split = feSplit;      
-        cadn = feCadn;
-        dpsMtrs = 0;}
-      if (currentBlock.id === "Row"){
-        split = otwSplit;
-        cadn = otwCadn;
-        dpsMtrs = 1;
-      }
+      //document.getElementById("mechWatthrs").textContent = mechWatthrs;
+      //document.getElementById("watts").textContent = watts;
+      //document.getElementById("pullForce").textContent = pullForce;
 
-    if (currentBlock.id = "Ready"){dpsMtrs=0;
-        // strokes, seconds, dist, cadene, speed, mechWatts, userWatts
-        dpsMtrs = 0;
-        otwSpeed = 4;
-        mechWatthrs = 5;
+    */
+// UPDATE DISPLAY EVERY TIMER INTRVAL   
+function updateStrokes(){
+    // RT UPDATES (dpsMtrs is default entry until TT is run to calculate)
+    if (currentBlock.id === "Ready"){
+      userWatthrs = feWatts * seconds / 3600;
+      userWatthrs = Number(userWatthrs.toFixed(2));
           }
-        
-    if (interval) return;
-      // timer loop
-        interval = setInterval(() => {
-        seconds++;
-        strokesec = 60/cadn;
-      // update at each stroke  
-      if (seconds-old >= strokesec) {
-          strokes++
-        // RT CALCULATIONS GO HERE !!!
-        if (currentBlock.id === "Ready"){
-          userWatthrs = feWatts * seconds / 3600;
-          userWatthrs = Number(userWatthrs.toFixed(2));
-          }
-        if (currentBlock.id === "Row"){
-          // ROW-SPECIFIC UPDATES
+    if (currentBlock.id === "Row"){   
+      // NEED VALUES HERE!!
+      userWatthrs = feWatts * seconds / 3600;
+      userWatthrs = Number(userWatthrs.toFixed(2));
+      otwDist = seconds;
+      otwCadn = seconds;
+      otwSpeed = 3;
+      mechWatthrs = 4;
            }
-    
-        old = seconds;
-        update();
-        if (seconds>= feSplit){stop();}
-          }
-        // executes every 1000ms or stops at feSplit    
-        }, 1000);
-      }
-//------------------------------------------------------------------------------
-// UPDATE THE RT DISPLAY      
-   function update() {
+    // DISPLAY RT VALUES
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
@@ -277,21 +241,78 @@ save another test change
       // show userWatthrs
         "userWatt-hrs: " + userWatthrs;
       }
-//----------------------------------------------------------------------------      
-  function stop() {
+/*
+// 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
+let interval = null;
+let seconds = 0;
+function startTimer() {
+    if (interval) return;    // Prevent multiple timers
+    interval = setInterval(() => {
+        seconds++;
+        // Calculations Here
+        updateStrokes();
+    }, 1000);
+}
+function stopTimer() {
+    clearInterval(interval);
+    interval = null;
+}
+function resetTimer() {
+    stopTimer();
+    seconds = 0;
+    updateDisplay();
+}
+function restartTimer() {
+    resetTimer();
+    startTimer();
+*/
+      //--------------------------------------------------------------------------------  
+   function startTimer() {
+    // 07.18 SIGNIFICANT CLEANUP 
+    //dpsMtrs = 8;                     // DOES NOT WORK
+    if (currentBlock.id === "Ready"){
+        split = feSplit;      
+        cadn = feCadn;
+        dpsMtrs = 8;   }
+
+    if (currentBlock.id === "Row"){
+        split = feSplit;  // FIX THIS ASAP
+        cadn = feCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
+        dpsMtrs = 8       // DISPLAY OR TIMER ??
+        otwSpeed = 4;
+        mechWatthrs =5; }
+    // TIMER
+    if (interval) return;
+        interval = setInterval(() => {
+        seconds++;
+        strokesec = 60/cadn;
+      // update when time > stroke interval 
+      if (seconds-old >= strokesec) {
+        strokes++;
+        old = seconds;
+       
+      // RT HERE
+        updateStrokes();
+        if (seconds>= split){resetTimer();}
+          }
+        // executes every 1000ms or stops at split   
+        }, 1000);
+      }
+
+//------------------------------------------------------------------------------
+  function stopTimer() {
       clearInterval(interval);
       interval = null;
-      
     }
-//----------------------------------------------------------------------------
-  function reset() {
-      stop();
-      seconds = 0;
-      old = 0;
-      strokes = 0;
-      // TT or WO?
-      update();
-    }
+//------------------------------------------------------------------------------    
+  function resetTimer() {
+    clearInterval(interval);
+    interval = null;
+    seconds = 0;
+    old = 0;
+    strokes = 0;
+}
+
 //------------------------------------------------------------------------------   
   function showReadyAll() {
     currentBlock = document.getElementById("ReadyAll");
@@ -346,3 +367,11 @@ is estimated for the Timed Trial. dpsMtrs, pullForce
 </html>
 
 
+<!--//function calculateRow(){   // NOT USED YET
+    //  let otwSpeed = 0;
+    //  let mechWatthrs = 0;
+    //  let userWatthrs = 0;
+    //  let pullForce = 0;
+    //  let mechWatts = 0;
+       
+-->
