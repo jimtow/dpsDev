@@ -227,7 +227,8 @@ function updateStrokes(){
       otwSpeed = 3;
       mechWatthrs = 4;
            }
-    // DISPLAY RT VALUES
+    // DISPLAY RT VALUES 
+    // WHERE ARE THEY DISPLAYYED
       document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
@@ -240,6 +241,32 @@ function updateStrokes(){
       // show userWatthrs
         "userWatt-hrs: " + userWatthrs;
       }
+/*
+let html =
+    "Strokes: " + strokes +
+    " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
+
+if (currentBlock.id === "Ready") {
+    html +=
+        "OTW Cadence: " + otwCadn.toFixed(1) +
+        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
+} else if (currentBlock.id === "Row") {
+    html +=
+        "OTW Distance: " + otwDist.toFixed(1) +
+        " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
+}
+
+html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+
+document.getElementById("timer").innerHTML = html;
+
+This approach is cleaner if you want the information displayed to change based on the current page/block.
+
+
+*/
+
+
+
 /*
 // 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
 let interval = null;
