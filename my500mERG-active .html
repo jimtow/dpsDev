@@ -167,69 +167,65 @@ save another test change
     //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
     let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
-     
-  // FINAL METRICS  
-    function calculateTT() {
-    /*TT uses published demographics and timed trial with estimate of full
+  
+  // CALLED FROM READY BLOCK ONLY  
+    /* Uses published demographics and timed trial with estimate of full
      effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
-    //INPUT VALUES 
+    function calculateTT() { 
       const pcFeff= Number(document.getElementById("pcFeff").value);
       // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const pullLength = Number(document.getElementById("pullLength").value);
-                             
+      const pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
       //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
       pullForce = 60 * watts /(pullLength * feCadn) 
       //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-         
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
-      // to show on documetn
+      // to show on documeNT
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
-      }  
-
-// UPDATE DISPLAY ON TIMER INTERVALS   
-function updateStrokes(){
-    // RT UPDATES (dpsMtrs is default entry until TT is run to calculate)
-    if (currentBlock.id === "Ready"){
-      userWatthrs = feWatts * seconds / 3600;
-      userWatthrs = Number(userWatthrs.toFixed(2));
-          }
-    if (currentBlock.id === "Row"){   
-      // NEED VALUES HERE!!
-      userWatthrs = feWatts * seconds / 3600;
-      userWatthrs = Number(userWatthrs.toFixed(2));
-     
-      otwDist = otwdpsMtrs*strokes;   
-      otwCadn = otwCadn;    // otwCadn
-      otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
-      mechWatthrs = .7356*pullForce*pullLength*otwCadn/60;  
-      mechWatthrs = Number(mechWatthrs.toFixed(1));  
-           }
-    // cleaned display code 07.22 for readyTimer and rowTimer
-    let html =
-      "Strokes: " + strokes +
-      " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
-    if (currentBlock.id === "Ready") {
-      html +=
-        "Cadence: " + feCadn.toFixed(1) +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
-        html += "User Watt-hrs: " + userWatthrs.toFixed(2);
-        document.getElementById("readyTimer").innerHTML = html;
       } 
-    else if (currentBlock.id === "Row") {
+
+  // UPDATE DISPLAY ON TIMER INTERVALS   
+    function updateStrokes(){
+      if (currentBlock.id === "Ready"){
+        userWatthrs = feWatts * seconds / 3600;
+        userWatthrs = Number(userWatthrs.toFixed(2));
+        // MECH WATT HRS
+          }
+      if (currentBlock.id === "Row"){   
+      // NEED VALUES HERE!!
+        userWatthrs = feWatts * seconds / 3600;
+        userWatthrs = Number(userWatthrs.toFixed(2));
+        otwDist = otwdpsMtrs*strokes;   
+        otwCadn = otwCadn;    // otwCadn
+        otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
+        mechWatthrs = .7356*pullForce*pullLength*otwCadn/60;  
+        mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        }
+    // cleaned display code 07.22 for readyTimer and rowTimer
+      let html =
+        "Strokes: " + strokes +
+        " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
+      if (currentBlock.id === "Ready") {
+        html +=
+          "Cadence: " + feCadn.toFixed(1) +
+          " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
+          html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+          document.getElementById("readyTimer").innerHTML = html;
+        } 
+      else if (currentBlock.id === "Row") {
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
+        }
       }
-    }
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
