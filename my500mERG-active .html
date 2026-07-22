@@ -227,90 +227,26 @@ function updateStrokes(){
       otwSpeed = 3;
       mechWatthrs = 4;
            }
-    // DISPLAY RT VALUES 07.22 chatGPT suggesteed 
-    // WHERE ARE THEY DISPLAYYED
+    // DISPLAY RT VALUES 07.22 chatGPT suggesteed cleaner
+    // WHERE ARE THEY DISPLAYED ?
     let html =
       "Strokes: " + strokes +
       " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
-
     if (currentBlock.id === "Ready") {
       html +=
         "OTW Cadence: " + otwCadn.toFixed(1) +
         " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
-      } else if (currentBlock.id === "Row") {
+      } 
+    else if (currentBlock.id === "Row") {
         html +=
         "OTW Distance: " + otwDist.toFixed(1) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
       }
-
     html += "User Watt-hrs: " + userWatthrs.toFixed(2);
-
     document.getElementById("timer").innerHTML = html;
-    // old 
-    /*document.getElementById("timer").innerHTML =
-        "Strokes: " + strokes +
-        " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
-      // distance only after TT show cadence
-        "OTW Distance: " + otwDist +
-        " &nbsp;&nbsp; OTW Cadence: " + otwCadn + "<br>" +
-      // speed only after TT show mechWatthrs 
-        "  OTW Speed:  " + otwSpeed +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs + "<br>" +
-      // show userWatthrs
-        "userWatt-hrs: " + userWatthrs; */
-      }
-/* from chatGPT:
-let html =
-    "Strokes: " + strokes +
-    " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
+     }
 
-if (currentBlock.id === "Ready") {
-    html +=
-        "OTW Cadence: " + otwCadn.toFixed(1) +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
-} else if (currentBlock.id === "Row") {
-    html +=
-        "OTW Distance: " + otwDist.toFixed(1) +
-        " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-}
-
-html += "User Watt-hrs: " + userWatthrs.toFixed(2);
-
-document.getElementById("timer").innerHTML = html;
-
-This approach is cleaner if you want the information displayed to change based on the current page/block.
-
-
-*/
-
-
-
-/*
-// 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
-let interval = null;
-let seconds = 0;
-function startTimer() {
-    if (interval) return;    // Prevent multiple timers
-    interval = setInterval(() => {
-        seconds++;
-        // Calculations Here
-        updateStrokes();
-    }, 1000);
-}
-function stopTimer() {
-    clearInterval(interval);
-    interval = null;
-}
-function resetTimer() {
-    stopTimer();
-    seconds = 0;
-    updateDisplay();
-}
-function restartTimer() {
-    resetTimer();
-    startTimer();
-*/
-      //--------------------------------------------------------------------------------  
+  //--------------------------------------------------------------------------------  
    function startTimer() {
     // 07.18 SIGNIFICANT CLEANUP 
     //dpsMtrs = 8;                     // DOES NOT WORK
