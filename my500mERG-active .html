@@ -52,7 +52,7 @@ save another test change
   <button onclick="stopTimer()">Stop</button>
   <button onclick="resetTimer()">Reset</button>  
     
-  <h4 id="timer"></h4>
+  <div id="readyTimer"></div>
   
 
  <!--<p> Note ROWERS Perceived Effort</p>  -->
@@ -103,7 +103,8 @@ save another test change
      type="number" value="500">  
 
   <p>Your performance w this machine and settings. </p>
-  
+   <div id="rowTimer"></div>
+
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
   <button onclick="startTimer()">StartWO</button>
   <button onclick="stopTimer()">StopWO</button>
@@ -236,15 +237,18 @@ function updateStrokes(){
       html +=
         "OTW Cadence: " + otwCadn.toFixed(1) +
         " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
+        html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+        document.getElementById("readyTimer").innerHTML = html;
+
       } 
     else if (currentBlock.id === "Row") {
         html +=
         "OTW Distance: " + otwDist.toFixed(1) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
+         html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+        document.getElementById("rowTimer").innerHTML = html;
       }
-    html += "User Watt-hrs: " + userWatthrs.toFixed(2);
-    document.getElementById("timer").innerHTML = html;
-     }
+    }
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
