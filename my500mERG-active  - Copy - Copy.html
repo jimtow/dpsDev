@@ -51,7 +51,8 @@ save another test change
   <button onclick="startTimer()">Start</button>
   <button onclick="stopTimer()">Stop</button>
   <button onclick="resetTimer()">Reset</button>  
-    
+  
+  
   <h4 id="timer"></h4>
   
 
@@ -102,14 +103,14 @@ save another test change
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
      type="number" value="500">  
 
-  <p>Your performance w this machine and settings. </p>
+  <p>This is your performance w this machine and settings. </p>
   
   <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
   <button onclick="startTimer()">StartWO</button>
   <button onclick="stopTimer()">StopWO</button>
   <button onclick="resetTimer()">Reset</button>
 
-  <h1 id="otwtimer"></h1>
+  <!--<h1 id="otwtimer"></h1> -->
 
    <p> Well Rowed !!</p> 
   
@@ -227,27 +228,8 @@ function updateStrokes(){
       otwSpeed = 3;
       mechWatthrs = 4;
            }
-    // DISPLAY RT VALUES 07.22 chatGPT suggesteed 
-    // WHERE ARE THEY DISPLAYYED
-    let html =
-      "Strokes: " + strokes +
-      " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
-
-    if (currentBlock.id === "Ready") {
-      html +=
-        "OTW Cadence: " + otwCadn.toFixed(1) +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
-      } else if (currentBlock.id === "Row") {
-        html +=
-        "OTW Distance: " + otwDist.toFixed(1) +
-        " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-      }
-
-    html += "User Watt-hrs: " + userWatthrs.toFixed(2);
-
-    document.getElementById("timer").innerHTML = html;
-    // old 
-    /*document.getElementById("timer").innerHTML =
+    // DISPLAY RT VALUES
+      document.getElementById("timer").innerHTML =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
       // distance only after TT show cadence
@@ -257,34 +239,8 @@ function updateStrokes(){
         "  OTW Speed:  " + otwSpeed +
         " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs + "<br>" +
       // show userWatthrs
-        "userWatt-hrs: " + userWatthrs; */
+        "userWatt-hrs: " + userWatthrs;
       }
-/* from chatGPT:
-let html =
-    "Strokes: " + strokes +
-    " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
-
-if (currentBlock.id === "Ready") {
-    html +=
-        "OTW Cadence: " + otwCadn.toFixed(1) +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
-} else if (currentBlock.id === "Row") {
-    html +=
-        "OTW Distance: " + otwDist.toFixed(1) +
-        " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-}
-
-html += "User Watt-hrs: " + userWatthrs.toFixed(2);
-
-document.getElementById("timer").innerHTML = html;
-
-This approach is cleaner if you want the information displayed to change based on the current page/block.
-
-
-*/
-
-
-
 /*
 // 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
 let interval = null;
