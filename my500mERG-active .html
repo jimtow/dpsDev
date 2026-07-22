@@ -12,7 +12,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0714.1630
+  0722.0938
  </p>
   <button onclick="showReady()">Ready</button>
   <button onclick="showRow()">Row!</button>
@@ -22,10 +22,8 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ready xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <!--500m "timed trial" to determine rowing machine and settings based on-the-water
 based distance per stroke. Distance per stroke is fixed during a workout because we
-must assume fixed pull force as calculated in myErgsettings
-replaced paceholder with value for convenience
-save another test change
-07.16.0910 
+must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
+save another test change 
 -->
 <div id = "Ready" style ="display:none;">
   <h2>Ready</h2>
@@ -86,7 +84,7 @@ save another test change
   <p> Row at any cadence</p>
   <h3>
    <!--dpsMtrs is either default entry (8) or result of TT calculation. It could
-   be entered here but why?
+   be entered here to avoid TimedTrial if already known.
    
    Distance per Stroke (Estimated or Known)
     <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
@@ -100,21 +98,19 @@ save another test change
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
-     type="number" value="500">  
+     type="number" value="500">
+     DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
+     type="number" value="8">  
 
   <p>Your performance w this machine and settings. </p>
-   <div id="rowTimer"></div>
-
-  <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
-  <button onclick="startTimer()">StartWO</button>
-  <button onclick="stopTimer()">StopWO</button>
-  <button onclick="resetTimer()">Reset</button>
+    <div id="rowTimer"></div>
+    <button onclick="startTimer()">StartWO</button>
+    <button onclick="stopTimer()">StopWO</button>
+    <button onclick="resetTimer()">Reset</button>
 
   <h1 id="otwtimer"></h1>
 
-   <p> Well Rowed !!</p> 
-  
-  </h3>
+  <p> Well Rowed !!</p>  </h3>
   
  <h3> <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
@@ -148,7 +144,7 @@ save another test change
     //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);//initial est dps
     
     // FROM ROW BLOCK
-    //const otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
+    const otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     otwCadn = Number(document.getElementById("otwCadn").value); 
     otwDist = Number(document.getElementById("otwDist").value);
 
@@ -196,23 +192,8 @@ save another test change
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
       }  
-// FINAL METRICS 
-/* CALCULATE RT ROW VALUES NOW IN updateStrokes AND SAVE FINAL VALUES 
-      calculate and show real-time with timer updates (similar to TT)
-        strokes, seconds, distance, cadence, speed, mechWatthrs, userWatthrs
-          
-        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
-        userWatthrs = watts * seconds / 3600;
-        userWatthrs = Number(userWatthrs.toFixed(2));
-        
-       ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
-       mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
-      //document.getElementById("mechWatthrs").textContent = mechWatthrs;
-      //document.getElementById("watts").textContent = watts;
-      //document.getElementById("pullForce").textContent = pullForce;
 
-    */
-// UPDATE DISPLAY EVERY TIMER INTRVAL   
+// UPDATE DISPLAY ON TIMER INTERVALS   
 function updateStrokes(){
     // RT UPDATES (dpsMtrs is default entry until TT is run to calculate)
     if (currentBlock.id === "Ready"){
@@ -223,29 +204,29 @@ function updateStrokes(){
       // NEED VALUES HERE!!
       userWatthrs = feWatts * seconds / 3600;
       userWatthrs = Number(userWatthrs.toFixed(2));
-      otwDist = seconds;
-      otwCadn = seconds;
-      otwSpeed = 3;
-      mechWatthrs = 4;
+     
+      otwDist = otwdpsMtrs*strokes;   
+      otwCadn = otwCadn;    // otwCadn
+      otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
+      mechWatthrs = .7356*pullForce*pullLength*otwCadn/60;  
+      mechWatthrs = Number(mechWatthrs.toFixed(1));  
            }
-    // DISPLAY RT VALUES 07.22 chatGPT suggesteed cleaner
-    // WHERE ARE THEY DISPLAYED ?
+    // cleaned display code 07.22 for readyTimer and rowTimer
     let html =
       "Strokes: " + strokes +
       " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
     if (currentBlock.id === "Ready") {
       html +=
-        "OTW Cadence: " + otwCadn.toFixed(1) +
+        "Cadence: " + feCadn.toFixed(1) +
         " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
         html += "User Watt-hrs: " + userWatthrs.toFixed(2);
         document.getElementById("readyTimer").innerHTML = html;
-
       } 
     else if (currentBlock.id === "Row") {
         html +=
-        "OTW Distance: " + otwDist.toFixed(1) +
+        "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-         html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
       }
     }
@@ -262,9 +243,9 @@ function updateStrokes(){
     if (currentBlock.id === "Row"){
         split = feSplit;  // FIX THIS ASAP
         cadn = feCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
-        dpsMtrs = 8       // DISPLAY OR TIMER ??
-        otwSpeed = 4;
-        mechWatthrs =5; }
+        dpsMtrs = 8       // IS THIS USED OR JUST TEMP
+        //otwSpeed = 0;
+        mechWatthrs =0; }
     // TIMER
     if (interval) return;
         interval = setInterval(() => {
