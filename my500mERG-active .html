@@ -6,13 +6,13 @@
 <div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
   
-  my500mERG provides On-the-Water (otw3) equivalent metrics for any Erg and settings based 
+  my500mERG provides On-the-Water equivalent metrics for any Erg and settings based 
   on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
   FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0714.1630
+  0722.0938
  </p>
   <button onclick="showReady()">Ready</button>
   <button onclick="showRow()">Row!</button>
@@ -22,10 +22,8 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ready xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <!--500m "timed trial" to determine rowing machine and settings based on-the-water
 based distance per stroke. Distance per stroke is fixed during a workout because we
-must assume fixed pull force as calculated in myErgsettings
-replaced paceholder with value for convenience
-save another test change
-07.16.0910 
+must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
+save another test change 
 -->
 <div id = "Ready" style ="display:none;">
   <h2>Ready</h2>
@@ -51,9 +49,8 @@ save another test change
   <button onclick="startTimer()">Start</button>
   <button onclick="stopTimer()">Stop</button>
   <button onclick="resetTimer()">Reset</button>  
-  
-  
-  <h4 id="timer"></h4>
+    
+  <div id="readyTimer"></div>
   
 
  <!--<p> Note ROWERS Perceived Effort</p>  -->
@@ -61,7 +58,7 @@ save another test change
     Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" value="100">  
     <button style="width: 90px; height: 40px;
-    " onclick="calculateTT('Row(500m)')">Enter</button> 
+    " onclick="tt500('Row(500m)')">Enter</button> 
   </h3>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
@@ -86,13 +83,11 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--Start here without need for "Ready" calibrations step. PROBLEM
-   WHY IS THIS NEEDED TO RUN READY?? Ready calculates dpsMtrs. If we make this
-   otwDps it should be OK but isnt. dpsMtrs should be made the ONLY value from
-   the Ready screen using 100% effort if no calibration
+   <!--dpsMtrs is either default entry (8) or result of TT calculation. It could
+   be entered here to avoid TimedTrial if already known.
    
    Distance per Stroke (Estimated or Known)
-    <input id="xdpsMtrs" style="width:100px; height: 30px;" type="number" 
+    <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
     value="6">
    --> 
    
@@ -103,20 +98,19 @@ save another test change
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
      Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
-     type="number" value="500">  
+     type="number" value="500">
+     DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
+     type="number" value="8">  
 
-  <p>This is your performance w this machine and settings. </p>
-  
-  <p> Strokes: Elapsed Time: Distance: Cadence: Speed: mechWatthrs: userWatthrs:</p> 
-  <button onclick="startTimer()">StartWO</button>
-  <button onclick="stopTimer()">StopWO</button>
-  <button onclick="resetTimer()">Reset</button>
+  <p>Your performance w this machine and settings. </p>
+    <div id="rowTimer"></div>
+    <button onclick="startTimer()">StartWO</button>
+    <button onclick="stopTimer()">StopWO</button>
+    <button onclick="resetTimer()">Reset</button>
 
   <h1 id="otwtimer"></h1>
 
-   <p> Well Rowed !!</p> 
-  
-  </h3>
+  <p> Well Rowed !!</p>  </h3>
   
  <h3> <button onclick="showReady()">Ready</button>
   <button onclick="showReadyAll()">ReadyAll</button>
@@ -143,154 +137,154 @@ save another test change
 <!--timer script (function)-->
   <script>
     // GLOBAL
-    // FROM READY BLOCK
-    const feSplit = Number(document.getElementById("feSplit").value); // user split
-    const feCadn = Number(document.getElementById("feCadn").value); // user cadence
-    const feWatts = Number(document.getElementById("feWatts").value); // user watts
-    //const xdpsMtrs = Number(document.getElementById("xdpsMtrs").value);//initial est dps
-    
-    // FROM ROW BLOCK
-    //const otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
-    otwCadn = Number(document.getElementById("otwCadn").value); 
-    otwDist = Number(document.getElementById("otwDist").value);
-
     let userWatthrs = 0;
     let pullForce = 0;
-    let dpsMtrs = 8;                          // DEFAULT VALUE
+    let dpsMtrs = 8;                // DEFAULT VALUE ONLY
 
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
-
-    let old = 0;
+    
+    let old = 0;  
+    let elapsed = 0;
+    let lastStroke = 0;
+    
+    //let old = 0;
     let strokes = 0;
-    let strokesec = 5;
+    //let strokesec = 5;
 
     // OTW ONLY (ALL MUST BE GLOBAL !!)
     let otwSpeed = 0;
     let mechWatthrs = 0;
     let mechWatts = 0;
+    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
     let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
-     
-  // FINAL METRICS  
-    function calculateTT() {
-    /*TT uses published demographics and timed trial with estimate of full
+    // INITIALIZE ENTRY BLOCKS
+    let feSplit = 0;
+    let feCadn = 0;
+    let feWatts = 0;
+    let otwCadn = 0;
+    let otwDist = 0;
+
+    // FROM READY BLOCK
+    /* PROBLEM: VALUES ARE AS INITIALIZED BY HTML UNTIL TT500 IS RUN !! 
+    TRY PUTTING AT START OF ROWTIMER !! */
+    
+    // FROM ROW BLOCK
+    //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
+    otwCadn = Number(document.getElementById("otwCadn").value); 
+    otwDist = Number(document.getElementById("otwDist").value);
+  
+  // CALLED FROM READY BLOCK ONLY  
+    /* Uses published demographics and timed trial with estimate of full
      effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
-    //INPUT VALUES 
+    function tt500() { 
+      // USE DEFAULT VALUES IF NOT TIMED TRIAL
+      feSplit = Number(document.getElementById("feSplit").value); // user split
+      feCadn = Number(document.getElementById("feCadn").value); // user cadence
+      feWatts = Number(document.getElementById("feWatts").value); // user watts
+    
       const pcFeff= Number(document.getElementById("pcFeff").value);
-      const dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const pullLength = Number(document.getElementById("pullLength").value);
-                             
+      // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
+      dspMtrs = Number(document.getElementById("dspMtrs").value);     
+      const pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
       //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
       pullForce = 60 * watts /(pullLength * feCadn) 
       //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
-         
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
-      // to show on documetn
+      // to show on documeNT
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
-      }  
-// FINAL METRICS 
-/* CALCULATE RT ROW VALUES NOW IN updateStrokes AND SAVE FINAL VALUES 
-      calculate and show real-time with timer updates (similar to TT)
-        strokes, seconds, distance, cadence, speed, mechWatthrs, userWatthrs
-          
-        mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
-        userWatthrs = watts * seconds / 3600;
-        userWatthrs = Number(userWatthrs.toFixed(2));
-        
-       ?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)    
-       mechWatts = .7356 * pullForce * pullLength * feCadn / 60;  
-      //document.getElementById("mechWatthrs").textContent = mechWatthrs;
-      //document.getElementById("watts").textContent = watts;
-      //document.getElementById("pullForce").textContent = pullForce;
+      } 
 
-    */
-// UPDATE DISPLAY EVERY TIMER INTRVAL   
-// REMEMBER TO SAVE LOCAL CHANGES BEFORE RUNNING AS CHROME APP 
-function updateStrokes(){
-      userWatthrs = feWatts * seconds / 3600;
-      userWatthrs = Number(userWatthrs.toFixed(2));
-      //SPEED = METERS PER STROKE * STROKES PER MIN
-      otwSpeed = dpsMtrs*otwCadn;
-      mechWatthrs = 4;
-    // DISPLAY RT VALUES
-      document.getElementById("timer").innerHTML =
+  // UPDATE DISPLAY ON TIMER INTERVALS   
+    function updateStrokes(){
+      if (currentBlock.id === "Ready"){
+        userWatthrs = feWatts * seconds / 3600;
+        userWatthrs = Number(userWatthrs.toFixed(2));
+        // MECH WATT HRS
+          }
+      if (currentBlock.id === "Row"){   
+      // NEED VALUES HERE!!
+        userWatthrs = feWatts * seconds / 3600;
+        userWatthrs = Number(userWatthrs.toFixed(2));
+
+        otwDist = otwdpsMtrs*strokes;   
+        otwCadn = otwCadn;    // otwCadn
+        otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
+        mechWatthrs = .7356*pullForce*pullLength*otwCadn/60;  
+        mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        }
+    // cleaned display code 07.22 for readyTimer and rowTimer
+      let html =
         "Strokes: " + strokes +
-        " &nbsp;&nbsp; Seconds: " + seconds + "<br>" +
-      // distance only after TT show cadence
-        "OTW Distance: " + otwDist +
-        " &nbsp;&nbsp; OTW Cadence: " + otwCadn + "<br>" +
-      // speed only after TT show mechWatthrs 
-        "OTW Speed:  " + otwSpeed +
-        " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs + "<br>" +
-      // show userWatthrs
-        "userWatt-hrs: " + userWatthrs;
+        " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
+      if (currentBlock.id === "Ready") {
+        html +=
+          "Cadence: " + feCadn.toFixed(1) +
+          " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
+          html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+          document.getElementById("readyTimer").innerHTML = html;
+        } 
+      else if (currentBlock.id === "Row") {
+        html +=
+        "OTW Distance: " + otwDist.toFixed(0) +
+        " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
+        document.getElementById("rowTimer").innerHTML = html;
+        }
       }
 
-/*
-// 0717.1003 HOW DO WE ACTUALLY USE THIS STOPWATCH TIMES TO UPDATE STROKES
-let interval = null;
-let seconds = 0;
-function startTimer() {
-    if (interval) return;    // Prevent multiple timers
-    interval = setInterval(() => {
-        seconds++;
-        // Calculations Here
-        updateStrokes();
-    }, 1000);
-}
-function stopTimer() {
-    clearInterval(interval);
-    interval = null;
-}
-function resetTimer() {
-    stopTimer();
-    seconds = 0;
-    updateDisplay();
-}
-function restartTimer() {
-    resetTimer();
-    startTimer();
-*/
-      //--------------------------------------------------------------------------------  
+  //--------------------------------------------------------------------------------  
    function startTimer() {
-    // 07.18 SIGNIFICANT CLEANUP 
-    // INTIALIZE
+      // 07.23 INITIALIZE
+      feSplit = Number(document.getElementById("feSplit").value); // user split
+      feCadn = Number(document.getElementById("feCadn").value); // user cadence
+      feWatts = Number(document.getElementById("feWatts").value); // user watts
+    
+      split = feSplit;      
+      cadn = feCadn;
+      otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
+   
     if (currentBlock.id === "Ready"){
-        split = feSplit;      
-        cadn = feCadn;
-        // FIX THIS FLAG !!
-        //dpsMtrs = 0;   }
+        //split = feSplit;      
+        //cadn = feCadn;
+        dpsMtrs = 8;   }
 
     if (currentBlock.id === "Row"){
-        split = feSplit;  // FIX THIS ASAP
-        cadn = feCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
-        dpsMtrs = 1       // DISPLAY OR TIMER ??
-        otwSpeed = 4;
-        mechWatthrs =5; }
-    // TIMER
+        //split = feSplit;  // FIX THIS ASAP WITH WO DISTANCE
+        cadn = otwCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
+        //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
+        //otwSpeed = 0;
+        mechWatthrs =0; }
+  
     if (interval) return;
         interval = setInterval(() => {
-        seconds++;
-        strokesec = 60/cadn;
-      // update when time > stroke interval 
-      if (seconds-old >= strokesec) {
-        strokes++;
+        // elapsed =seconds++; BETTER START
+        elapsed += 50;
+        // ROUNDING ISSUE HERE(FRACTIONAL 28 LOOKS LIKE 20 BECAUSE 1 SEC UPDATES)
+        //strokesec = 60/cadn;
+        let strokeInterval = 60000 / cadn;   // ms per stroke
+        // update when time > stroke interval 
+        if (elapsed - lastStroke >= strokeInterval) {
+            strokes++;
+            //beep();
+            lastStroke += strokeInterval;    // Better than lastStroke = elapsed
+        }
+        seconds = strokeInterval*strokes/1000;
+        //seconds = seconds.toFixed(1);
+        updateStrokes();        // LINE 194      
         old = seconds;
-       
-      // RT HERE
-        updateStrokes();
-        if (seconds>= split){resetTimer();}
+        if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   
-        }, 1000);
+        }, 50);
       }
 
 //------------------------------------------------------------------------------
