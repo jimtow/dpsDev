@@ -271,29 +271,42 @@ function start() {
         let strokeInterval = 60000 / cadn;   // ms per stroke
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
-            beep();
+            beep();s
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
         }
         update();
     }, 20);
 }
 */
+  let interval = null;
+  let old = 0;  
+  let elapsed = 0;
+  let lastStroke = 0;
     if (interval) return;
         interval = setInterval(() => {
-        seconds++;
+        // elapsed =seconds++;
+        elapsed += 50;
         // ROUNDING ISSUE HERE(FRACTIONAL 28 LOOKS LIKE 20 BECAUSE 1 SEC UPDATES)
-        strokesec = 60/cadn;
-      // update when time > stroke interval 
+        //strokesec = 60/cadn;
+        let strokeInterval = 60000 / cadn;   // ms per stroke
+        // update when time > stroke interval 
+        if (elapsed - lastStroke >= strokeInterval) {
+            strokes++;
+            //beep();
+            lastStroke += strokeInterval;    // Better than lastStroke = elapsed
+        }
+        seconds = strokeInterval*strokes/1000;
+        seconds = seconds.toFixed(1);
+        updateStrokes();
       if (seconds-old >= strokesec) {
-        strokes++;
-        // TICKS HERE? SEE NOTES FOR DETAILS. HEADSET IF IN POCKET !
+        //strokes++;
         old = seconds;
       // RT HERE
-        updateStrokes();                          //@ LINE 194
+        //updateStrokes();                          //@ LINE 194
         if (seconds>= split){resetTimer();}
           }
         // executes every 1000ms or stops at split   
-        }, 1000);
+        }, 50);
       }
 
 //------------------------------------------------------------------------------
