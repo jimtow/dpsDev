@@ -243,8 +243,7 @@ save another test change
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
-    
-    // 07.23 INITIALIZE
+      // 07.23 INITIALIZE
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
       feWatts = Number(document.getElementById("feWatts").value); // user watts
@@ -252,12 +251,8 @@ save another test change
       split = feSplit;      
       cadn = feCadn;
       otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
-  
-    // TIMER
-    //let interval = null;
    
-  
-      if (currentBlock.id === "Ready"){
+    if (currentBlock.id === "Ready"){
         //split = feSplit;      
         //cadn = feCadn;
         dpsMtrs = 8;   }
@@ -271,7 +266,7 @@ save another test change
   
     if (interval) return;
         interval = setInterval(() => {
-        // elapsed =seconds++;
+        // elapsed =seconds++; BETTER START
         elapsed += 50;
         // ROUNDING ISSUE HERE(FRACTIONAL 28 LOOKS LIKE 20 BECAUSE 1 SEC UPDATES)
         //strokesec = 60/cadn;
@@ -283,14 +278,10 @@ save another test change
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
         }
         seconds = strokeInterval*strokes/1000;
-        seconds = seconds.toFixed(1);
-        updateStrokes();
-      if (seconds-old >= strokesec) {
-        //strokes++;
+        //seconds = seconds.toFixed(1);
+        updateStrokes();        // LINE 194      
         old = seconds;
-      // RT HERE
-        //updateStrokes();                          //@ LINE 194
-        if (seconds>= split){resetTimer();}
+        if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   
         }, 50);
