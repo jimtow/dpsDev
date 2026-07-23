@@ -1,3 +1,86 @@
+Option 1: Generate a beep with the Web Audio API (recommended)
+
+This doesn't require an audio file.
+
+let audioContext;
+
+function beep(frequency = 800, duration = 100) {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.frequency.value = frequency;
+    oscillator.type = "sine";
+
+    oscillator.start();
+
+    setTimeout(() => {
+        oscillator.stop();
+    }, duration);
+}
+
+Call it whenever a stroke occurs:
+
+if (seconds - old >= strokesec) {
+    strokes++;
+    old = seconds;
+
+    beep();   // 800 Hz for 100 ms
+}
+
+Or specify the tone:
+
+beep(1000, 75);   // 1000 Hz, 75 ms
+Option 2: Play a sound file
+
+If you have a WAV or MP3 file:
+
+const click = new Audio("click.wav");
+
+function strokeBeat() {
+    click.currentTime = 0;
+    click.play();
+}
+Important browser requirement
+
+Browsers won't let a page play sounds until the user has interacted with it (for example, by clicking Start).
+
+A good pattern is:
+
+function start() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContext.resume();
+    }
+
+    // Start your timer here...
+}
+
+Once the user has clicked Start, your timer can play beeps automatically.
+
+For ErgMate
+
+For a rowing cadence metronome, I'd recommend:
+
+Frequency: 800–1000 Hz
+Duration: 40–75 ms
+One beep at the catch (each stroke)
+
+This produces a crisp "tick" that's easy to follow without becoming annoying. You could also add a setting to let the user adjust the beep frequency, volume, or turn it on/off.
+
+
+
+
+
+
+
+
 07.21: MAJOR BUG: Clock and updates show in "Ready" screen when starting from 
 "Row" screen !! SEEMS LIKE AN HTML ISSUE, NOT JAVASCRIPT.
 
