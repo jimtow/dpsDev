@@ -144,10 +144,14 @@ save another test change
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
-
-    let old = 0;
+    
+    let old = 0;  
+    let elapsed = 0;
+    let lastStroke = 0;
+    
+    //let old = 0;
     let strokes = 0;
-    let strokesec = 5;
+    //let strokesec = 5;
 
     // OTW ONLY (ALL MUST BE GLOBAL !!)
     let otwSpeed = 0;
@@ -239,6 +243,7 @@ save another test change
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
+    
     // 07.23 INITIALIZE
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
@@ -247,7 +252,11 @@ save another test change
       split = feSplit;      
       cadn = feCadn;
       otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
-    
+  
+    // TIMER
+    //let interval = null;
+   
+  
       if (currentBlock.id === "Ready"){
         //split = feSplit;      
         //cadn = feCadn;
@@ -259,29 +268,7 @@ save another test change
         //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
         //otwSpeed = 0;
         mechWatthrs =0; }
-    // TIMER
-/* FOLD THIS IN CAREFULLY, ESPECIALLY HOW TO EXIT ON >SPIT
-let interval = null;
-let elapsed = 0;
-let lastStroke = 0;
-function start() {
-    if (interval) return;
-    interval = setInterval(() => {
-        elapsed += 20;              // Timer tick (20 ms)
-        let strokeInterval = 60000 / cadn;   // ms per stroke
-        if (elapsed - lastStroke >= strokeInterval) {
-            strokes++;
-            beep();s
-            lastStroke += strokeInterval;    // Better than lastStroke = elapsed
-        }
-        update();
-    }, 20);
-}
-*/
-  let interval = null;
-  let old = 0;  
-  let elapsed = 0;
-  let lastStroke = 0;
+  
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++;
