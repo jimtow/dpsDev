@@ -97,7 +97,7 @@ save another test change
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
-     Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
+     Distance(m) <input id="pieceDist" style="width:100px; height: 30px;"
      type="number" value="500">
      DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
      type="number" value="8">  
@@ -158,8 +158,8 @@ save another test change
     let mechWatthrs = 0;
 
     let mechWatts = 0;
-    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
-    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+    //let otwSplit = 0;           // using feSplit for tests. replace with otwDist
+    let otwTime = 0;              // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
     // INITIALIZE ENTRY BLOCKS
     let feSplit = 0;
@@ -167,6 +167,7 @@ save another test change
     let feWatts = 0;
     let otwCadn = 0;
     let otwDist = 0;
+    let pieceDist = 0;            // not needed because of getElement??
 
     // FROM READY BLOCK
     /* PROBLEM: VALUES ARE AS INITIALIZED BY HTML UNTIL TT500 IS RUN !! 
@@ -175,7 +176,7 @@ save another test change
     // FROM ROW BLOCK
     //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     otwCadn = Number(document.getElementById("otwCadn").value); 
-    otwDist = Number(document.getElementById("otwDist").value);
+    pieceDist = Number(document.getElementById("pieceDist").value);
   
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
@@ -222,7 +223,7 @@ save another test change
         tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-
+        seconds = seconds.toFixed(1);
         otwDist = otwdpsMtrs*strokes;   
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
@@ -264,12 +265,9 @@ save another test change
       otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
    
     if (currentBlock.id === "Ready"){
-        //split = feSplit;      
-        //cadn = feCadn;
         dpsMtrs = 8;   }
 
     if (currentBlock.id === "Row"){
-        //split = feSplit;  // FIX THIS ASAP WITH WO DISTANCE
         cadn = otwCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
         //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
         //otwSpeed = 0;
@@ -292,6 +290,21 @@ save another test change
         //seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
+
+    // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
+     /*
+      if (currentBlock.id === "Ready"){
+        if (seconds>= split){resetTimer();
+          }
+      else if (currentBlock.id === "Row"){
+        if (otwDist >= pieceDist){resetTimer();
+          }
+      else {
+        // console.log("Unknown block:", currentBlock.id);
+          }    
+        }, 50);
+    }
+    */
         if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   
