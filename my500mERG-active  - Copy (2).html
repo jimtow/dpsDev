@@ -278,7 +278,7 @@ save another test change
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
         }
         seconds = strokeInterval*strokes/1000;
-        //seconds = seconds.toFixed(1);
+        seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
         if (seconds>= split){resetTimer();
