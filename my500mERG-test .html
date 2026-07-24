@@ -214,14 +214,16 @@ save another test change
           }
       if (currentBlock.id === "Row"){   
       // NEED VALUES HERE!!
+        tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
         otwDist = otwdpsMtrs*strokes;   
         otwCadn = otwCadn;    // otwCadn
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
-      // CALCULATTE PULLFORCE HERE !!
-        mechWatthrs = .7356*pullLength*otwCadn/60;  
+        // (ft-lbs/sec)*pullTime
+        // pullTime = .5*(min/stroke)*strokes = .5*strokes/cadence
+        mechWatthrs = .7356*pullForce*pullLength*otwCadn/60;    
         mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
     // cleaned display code 07.22 for readyTimer and rowTimer
