@@ -97,7 +97,7 @@ save another test change
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
-     Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
+     Distance(m) <input id="pieceDist" style="width:100px; height: 30px;"
      type="number" value="500">
      DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
      type="number" value="8">  
@@ -156,9 +156,10 @@ save another test change
     // OTW ONLY (ALL MUST BE GLOBAL !!)
     let otwSpeed = 0;
     let mechWatthrs = 0;
+
     let mechWatts = 0;
-    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
-    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+    //let otwSplit = 0;           // using feSplit for tests. replace with otwDist
+    let otwTime = 0;              // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
     // INITIALIZE ENTRY BLOCKS
     let feSplit = 0;
@@ -166,6 +167,7 @@ save another test change
     let feWatts = 0;
     let otwCadn = 0;
     let otwDist = 0;
+    let pieceDist = 0;            // not needed because of getElement??
 
     // FROM READY BLOCK
     /* PROBLEM: VALUES ARE AS INITIALIZED BY HTML UNTIL TT500 IS RUN !! 
@@ -174,11 +176,13 @@ save another test change
     // FROM ROW BLOCK
     //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     otwCadn = Number(document.getElementById("otwCadn").value); 
-    otwDist = Number(document.getElementById("otwDist").value);
+    pieceDist = Number(document.getElementById("pieceDist").value);
   
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
-     effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
+     effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */
+     
+    // tt500 runs on tap 
     function tt500() { 
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
       feSplit = Number(document.getElementById("feSplit").value); // user split
@@ -188,12 +192,15 @@ save another test change
       const pcFeff= Number(document.getElementById("pcFeff").value);
       // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      const pullLength = Number(document.getElementById("pullLength").value);                       
+      pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
       //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
-      pullForce = 60 * watts /(pullLength * feCadn) 
-      //mechWatts = .7356 * pullForce * pullLength * feCadn / 60;
+      pullForce = 60 * watts /(pullLength * feCadn) ;
+      // per stroke factor
+      mechWatts = .7356 * pullForce * pullLength;    
+      
+      // for display
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
@@ -205,21 +212,26 @@ save another test change
 
   // UPDATE DISPLAY ON TIMER INTERVALS   
     function updateStrokes(){
+      let pullTime = 0;
       if (currentBlock.id === "Ready"){
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-        // MECH WATT HRS
+      
           }
       if (currentBlock.id === "Row"){   
       // NEED VALUES HERE!!
+        tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-
+        seconds = seconds.toFixed(1);
         otwDist = otwdpsMtrs*strokes;   
-        otwCadn = otwCadn;    // otwCadn
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
-        mechWatthrs = .7356*pullForce*pullLength*otwCadn/60;  
-        mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        // (ft-lbs/sec)*pullTime = mechWatts*pullTime
+        // problem with pullTime here doesnt update
+        pullTime = .5*60/otwCadn;
+        mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
+        mechWatthrs = mechWatts*strokes/3600;    
+        //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
     // cleaned display code 07.22 for readyTimer and rowTimer
       let html =
@@ -253,12 +265,9 @@ save another test change
       otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
    
     if (currentBlock.id === "Ready"){
-        //split = feSplit;      
-        //cadn = feCadn;
         dpsMtrs = 8;   }
 
     if (currentBlock.id === "Row"){
-        //split = feSplit;  // FIX THIS ASAP WITH WO DISTANCE
         cadn = otwCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
         //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
         //otwSpeed = 0;
@@ -278,9 +287,24 @@ save another test change
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
         }
         seconds = strokeInterval*strokes/1000;
-        seconds = seconds.toFixed(1);
+        //seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
+
+    // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
+     /*
+      if (currentBlock.id === "Ready"){
+        if (seconds>= split){resetTimer();
+          }
+      else if (currentBlock.id === "Row"){
+        if (otwDist >= pieceDist){resetTimer();
+          }
+      else {
+        // console.log("Unknown block:", currentBlock.id);
+          }    
+        }, 50);
+    }
+    */
         if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   
