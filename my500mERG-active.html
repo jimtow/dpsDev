@@ -86,8 +86,8 @@ save another test change
     type="number" value="100">  
     </h3>
     (100% if no Timed Trial)
-    <h3> </h3><button style="width: 90px; height: 40px;
-    " onclick="tt500('Row(500m)')">Go!</button> 
+    <h3> </h3><button style="width: 100px; height: 50px;
+    " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
   </h3>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
@@ -133,25 +133,25 @@ save another test change
 
   <h3>
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
-    @cadence<input id="otwCadn" style="width:100px; height: 30px;"
+    @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
-     Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
+     Distance(m) <input id="otwDist" style="width:100px; height: 40px;"
      type="number" value="500">
-     DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
+     DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 40px;"
      type="number" value="8">  
 
   <p>Your performance w this machine and settings. </p>
     <div id="rowTimer"></div>
-    <button onclick="startTimer()">StartWO</button>
-    <button onclick="stopTimer()">StopWO</button>
+    <button onclick="startTimer()"style="width: 100px; height: 50px;">StartWO</button>
+    <button onclick="stopTimer()"style="width: 100px; height: 50px;">StopWO</button>
     <button onclick="resetTimer()">Reset</button>
 
   <h1 id="otwtimer"></h1>
 
   <p> Well Rowed !!</p>  </h3>
   
- <h3> <button onclick="showReady()">Ready</button>
-  <button onclick="showReadyAll()">ReadyAll</button>
+ <h3> <button onclick="showReady()"style="width: 100px; height: 50px;">Ready</button>
+  <button onclick="showReadyAll()"style="width: 100px; height: 50px;">ReadyAll</button>
 
   </h3>
   
