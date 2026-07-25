@@ -2,6 +2,7 @@
 <!--pull and push this 6/30.15.20.B-->
 <html>   
 <body>
+  
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
@@ -58,24 +59,31 @@ save another test change
     Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" value="100">  
     <button style="width: 90px; height: 40px;
-    " onclick="tt500('Row(500m)')">Enter</button> 
+    " onclick="tt500()">Go</button> 
   </h3>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
   --> 
 
-  <style>
+<style>
 .row {
     display: flex;
     align-items: center;
     gap: 25px;      /* spacing between items */
 }
 </style>
+
 <div class="row">
     <span>Mtrs/Stroke: <span id="dpsMtrs"></span></span>
     <span>Watts: <span id="watts"></span></span>
-    <span>ERG Pull (lbs): <span id="pullForce"></span></span>
+    <span>ERG Pull (lbs): <span id="ergPull"></span></span>
 </div>
+
+<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+        <br>  Watts:<span id="watts">    </span> 
+        <br>  ERGpull(lbs):<span id = "pullForce">    </span>
+</h3>
+
 
   <button onclick="showReadyAll()">ReadyAll</button>
   <button onclick="showRow()">Row!</button>
@@ -104,7 +112,7 @@ save another test change
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 30px;"
      type="number" value="28"> 
-     Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
+     Distance(m) <input id="pieceDist" style="width:100px; height: 30px;"
      type="number" value="500">
      DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
      type="number" value="8">  
@@ -165,8 +173,8 @@ save another test change
     let mechWatthrs = 0;
 
     let mechWatts = 0;
-    //let otwSplit = 0;     // using feSplit for tests. replace with otwDist
-    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+    //let otwSplit = 0;           // using feSplit for tests. replace with otwDist
+    let otwTime = 0;              // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
 
     // INITIALIZE ENTRY BLOCKS
     let feSplit = 0;
@@ -174,6 +182,7 @@ save another test change
     let feWatts = 0;
     let otwCadn = 0;
     let otwDist = 0;
+    let pieceDist = 0;            // not needed because of getElement??
 
     // FROM READY BLOCK
     /* PROBLEM: VALUES ARE AS INITIALIZED BY HTML UNTIL TT500 IS RUN !! 
@@ -182,7 +191,7 @@ save another test change
     // FROM ROW BLOCK
     //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     otwCadn = Number(document.getElementById("otwCadn").value); 
-    otwDist = Number(document.getElementById("otwDist").value);
+    pieceDist = Number(document.getElementById("pieceDist").value);
   
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
@@ -211,9 +220,15 @@ save another test change
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
       // to show on documeNT
+
+   
+
+ /*
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
+
+*/       
       } 
 
   // UPDATE DISPLAY ON TIMER INTERVALS   
@@ -229,7 +244,7 @@ save another test change
         tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-
+        seconds = seconds.toFixed(1);
         otwDist = otwdpsMtrs*strokes;   
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
@@ -239,6 +254,7 @@ save another test change
         mechWatthrs = mechWatts*strokes/3600;    
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
+    // cleaned display code 07.22 for readyTimer and rowTimer
       let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
@@ -270,12 +286,9 @@ save another test change
       otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
    
     if (currentBlock.id === "Ready"){
-        //split = feSplit;      
-        //cadn = feCadn;
         dpsMtrs = 8;   }
 
     if (currentBlock.id === "Row"){
-        //split = feSplit;  // FIX THIS ASAP WITH WO DISTANCE
         cadn = otwCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
         //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
         //otwSpeed = 0;
@@ -295,9 +308,24 @@ save another test change
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
         }
         seconds = strokeInterval*strokes/1000;
-        seconds = seconds.toFixed(1);
+        //seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
+
+    // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
+     /*
+      if (currentBlock.id === "Ready"){
+        if (seconds>= split){resetTimer();
+          }
+      else if (currentBlock.id === "Row"){
+        if (otwDist >= pieceDist){resetTimer();
+          }
+      else {
+        // console.log("Unknown block:", currentBlock.id);
+          }    
+        }, 50);
+    }
+    */
         if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   

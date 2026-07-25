@@ -26,53 +26,66 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 save another test change 
 -->
 <div id = "Ready" style ="display:none;">
-  <h2>Ready</h2>
+  <style>
+    body {
+      line-height: 1.0;
+      }
+</style>
+
+  <h3>Ready</h3>
  <!-- <p>Determine full effort distance per stroke (dps) and ERG resistance</p>   --> 
-  <h3>
+  <h4>
   User Watts
-  <input id="feWatts" style="width:60px; height:30px;" type="number" 
+  <input id="feWatts" style="width:60px; height:20px;" type="number" 
   value="105">
   500m split (seconds)
-  <input id="feSplit" style="width:60px; height:30px;" type="number" 
+  <input id="feSplit" style="width:60px; height:20px;" type="number" 
   value="12">
-  </h3>
-  <h3>
+  </h4>
+  <h4>
      500m Sustainable Cadence (SC)
-      <input id="feCadn" style="width:60px; height: 30px;" type="number"
+      <input id="feCadn" style="width:60px; height: 20px;" type="number"
       value="28">
      Stroke Length (ft) 
-      <input id="pullLength" style="width:60px; height: 30px;" type="number"
+      <input id="pullLength" style="width:60px; height: 20px;" type="number"
       value="4">
-  </h3>
-  <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
+  </h4>
+  <h4 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h4>
   
   <button onclick="startTimer()">Start</button>
   <button onclick="stopTimer()">Stop</button>
   <button onclick="resetTimer()">Reset</button>  
-    
   <div id="readyTimer"></div>
-  
-
- <!--<p> Note ROWERS Perceived Effort</p>  -->
-   <h3> 
-    Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
+   <h4> 
+    % Full Effort (?) <input id="pcFeff" style="width:100px; height: 20px;"  
     type="number" value="100">  
-    <button style="width: 90px; height: 40px;
-    " onclick="tt500('Row(500m)')">Enter</button> 
-  </h3>
+    <button style="width: 90px; height: 30px;"
+     onclick="tt500()">Go</button> 
+  </h4>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
   --> 
-  
-<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-        <br>  Watts:<span id="watts">    </span> 
-        <br>  ERGpull(lbs):<span id = "pullForce">    </span>
-</h3> 
+ <style>
+.row {
+    display: flex;
+    align-items: center;
+    gap: 25px;      /* spacing between items */
+}
+</style>
+<div class="row">
+    <span>Mtrs/Stroke: <span id="dpsMtrs"></span></span>
+    <span>Watts: <span id="watts"></span></span>
+    <span>ERG Pull (lbs): <span id="pullForce"></span></span>
+</div>
 
-
+<br>
   <button onclick="showReadyAll()">ReadyAll</button>
-  <button onclick="showRow()">Row!</button>
-  <button onclick="showErgset()">myErgset</button>
+
+  <button style= "width: 90px; height: 40px;"
+
+    onclick="showRow()">Row!</button>
+  
+    <button onclick="showErgset()">myErgset</button>
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
@@ -216,7 +229,6 @@ save another test change
       if (currentBlock.id === "Ready"){
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-      
           }
       if (currentBlock.id === "Row"){   
       // NEED VALUES HERE!!
@@ -233,7 +245,6 @@ save another test change
         mechWatthrs = mechWatts*strokes/3600;    
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-    // cleaned display code 07.22 for readyTimer and rowTimer
       let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
@@ -287,7 +298,7 @@ save another test change
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
         }
         seconds = strokeInterval*strokes/1000;
-        //seconds = seconds.toFixed(1);
+        seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
 
