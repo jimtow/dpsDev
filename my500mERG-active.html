@@ -138,7 +138,7 @@ save another test change
     <div id="rowTimer"></div>
     <button onclick="startTimer()"style="width: 100px; height: 50px;">StartWO</button>
     <button onclick="stopTimer()"style="width: 100px; height: 50px;">StopWO</button>
-    <button onclick="stopTimer()"style="width: 100px; height: 80px;">Pacer</button>
+    <button onclick="showPace()"style="width: 100px; height: 80px;">Pace</button>
     <button onclick="resetTimer()">Reset</button>
     
   <h1 id="otwtimer"></h1>
@@ -147,17 +147,22 @@ save another test change
   
  <h3> <button onclick="showReady()"style="width: 100px; height: 50px;">Ready</button>
   <button onclick="showReadyAll()"style="width: 100px; height: 50px;">ReadyAll</button>
-
+ 
   </h3>
   
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "Ergset"  style = "display:none;">
+<div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
-  <p>Only enter value for machine pull length here to avoid
-  changing previous constants </p> 
+  <p>STROKES and Min/500 </p> 
+
 <!--big STROKES and min/500m running avg per 100m?-->
+
+ <h3> <button onclick="showReady()"style="width: 100px; height: 50px;">Ready</button>
+  <button onclick="showReadyAll()"style="width: 100px; height: 50px;">ReadyAll</button>
+ 
+  </h3>
 
 </div>
 
@@ -374,6 +379,7 @@ save another test change
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showReady() {
@@ -382,6 +388,7 @@ save another test change
     document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showRow() {  
@@ -390,6 +397,7 @@ save another test change
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
     document.getElementById("Ergset").style.display = "none"; 
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showErgset() {  
@@ -397,7 +405,16 @@ save another test change
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "block";
+    document.getElementById("Pace").style.display = "none";
     }
+  //------------------------------------------------------------------------------
+  function showPace() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "block";
+    }  
 
 
       
