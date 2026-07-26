@@ -113,8 +113,8 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--dpsMtrs is either default entry (8) or result of TT calculation. It could
-   be entered here to avoid TimedTrial if already known.
+   <!--dpsMtrs is the result of TT calculation. pullForce (and pullLength) are also
+   used to update mechWatt-hrs
    
    Distance per Stroke (Estimated or Known)
     <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
@@ -127,17 +127,20 @@ save another test change
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
-     Distance(m) <input id="otwDist" style="width:100px; height: 40px;"
+     <!-- change this to woDist to distinuish from rt otwDist-->
+     Distance(m) <input id="woDist" style="width:100px; height: 40px;"
      type="number" value="500">
-     DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 40px;"
-     type="number" value="8">  
 
-  <p>Your performance w this machine and settings. </p>
+    <!-- DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 40px;"
+     type="number" value="8"> -->
+
+  <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
     <button onclick="startTimer()"style="width: 100px; height: 50px;">StartWO</button>
     <button onclick="stopTimer()"style="width: 100px; height: 50px;">StopWO</button>
+    <button onclick="stopTimer()"style="width: 100px; height: 80px;">Pacer</button>
     <button onclick="resetTimer()">Reset</button>
-
+    
   <h1 id="otwtimer"></h1>
 
   <p> Well Rowed !!</p>  </h3>
@@ -149,7 +152,16 @@ save another test change
   
 </div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "Ergset"  style = "display:none;">
+  <h2>Pace</h2> 
+  <p>Only enter value for machine pull length here to avoid
+  changing previous constants </p> 
+<!--big STROKES and min/500m running avg per 100m?-->
+
+</div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Ergset"  style = "display:none;">
   <h2>myErgset</h2> 
   <p> Only enter value for machine pull length here to avoid
@@ -253,7 +265,7 @@ save another test change
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
-        otwDist = otwdpsMtrs*strokes;   
+        otwDist = dpsMtrs*strokes;   
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
         // problem with pullTime here doesnt update
@@ -290,7 +302,7 @@ save another test change
     
       split = feSplit;      
       cadn = feCadn;
-      otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
+      //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
    
     if (currentBlock.id === "Ready"){
         //split = feSplit;      
