@@ -2,6 +2,26 @@
 <!--pull and push this 6/30.15.20.B-->
 <html>   
 <body>
+ <style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    }
+    h3 {
+    margin-bottom: 12px;
+      }
+    p {
+    margin-bottom: 16px;
+      }
+    .row {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      }
+  </style> 
+
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
@@ -14,9 +34,11 @@
   and accessible
   0722.0938
  </p>
-  <button onclick="showReady()">Ready</button>
-  <button onclick="showRow()">Row!</button>
+
+  <button onclick="showReady()"style="width: 100px; height: 50px;">Ready</button>
+  <!--<button onclick="showRow()"style="width: 100px; height: 50px;">Row!</button>-->
   <button onclick="showErgset()">myErgset</button>
+
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ready xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
@@ -26,6 +48,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 save another test change 
 -->
 <div id = "Ready" style ="display:none;">
+
   <h2>Ready</h2>
  <!-- <p>Determine full effort distance per stroke (dps) and ERG resistance</p>   --> 
   <h3>
@@ -44,42 +67,42 @@ save another test change
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
   </h3>
+  500m Timed Trial
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
-  <button onclick="startTimer()">Start</button>
-  <button onclick="stopTimer()">Stop</button>
+  <button onclick="startTimer()" style="width: 100px; height: 50px;">
+        Start
+    </button>
+  <button onclick="stopTimer()" style="width: 100px; height: 50px;">
+        Stop
+    </button>
   <button onclick="resetTimer()">Reset</button>  
     
   <div id="readyTimer"></div>
   
-
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
-    Note % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
+    Note TT % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
     type="number" value="100">  
-    <button style="width: 90px; height: 40px;
-    " onclick="tt500('Row(500m)')">Enter</button> 
+    </h3>
+    (100% if no Timed Trial)
+    <h3> </h3><button style="width: 100px; height: 50px;
+    " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
   </h3>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
   --> 
+  
+<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+        <br>  Watts:<span id="watts">    </span> 
+        <br>  ERGpull(lbs):<span id = "pullForce">    </span>
+</h3> 
 
-  <style>
-.row {
-    display: flex;
-    align-items: center;
-    gap: 25px;      /* spacing between items */
-}
-</style>
-<div class="row">
-    <span>Mtrs/Stroke: <span id="dpsMtrs"></span></span>
-    <span>Watts: <span id="watts"></span></span>
-    <span>ERG Pull (lbs): <span id="pullForce"></span></span>
-</div>
 
-  <button onclick="showReadyAll()">ReadyAll</button>
-  <button onclick="showRow()">Row!</button>
+  <button onclick="showReadyAll()"style="width: 100px; height: 50px;">ReadyAll</button>
+  <button onclick="showRow()"style="width: 100px; height: 50px;">Row!</button>
   <button onclick="showErgset()">myErgset</button>
+
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
@@ -90,8 +113,8 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--dpsMtrs is either default entry (8) or result of TT calculation. It could
-   be entered here to avoid TimedTrial if already known.
+   <!--dpsMtrs is the result of TT calculation. pullForce (and pullLength) are also
+   used to update mechWatt-hrs
    
    Distance per Stroke (Estimated or Known)
     <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
@@ -102,31 +125,50 @@ save another test change
 
   <h3>
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
-    @cadence<input id="otwCadn" style="width:100px; height: 30px;"
+    @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
-     Distance(m) <input id="otwDist" style="width:100px; height: 30px;"
+     <!-- change this to woDist to distinuish from rt otwDist-->
+     Distance(m) <input id="woDist" style="width:100px; height: 40px;"
      type="number" value="500">
-     DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 30px;"
-     type="number" value="8">  
 
-  <p>Your performance w this machine and settings. </p>
+    <!-- DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 40px;"
+     type="number" value="8"> -->
+
+  <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
-    <button onclick="startTimer()">StartWO</button>
-    <button onclick="stopTimer()">StopWO</button>
+    <button onclick="startTimer()"style="width: 100px; height: 50px;">StartWO</button>
+    <button onclick="stopTimer()"style="width: 100px; height: 50px;">StopWO</button>
+    <button onclick="showPace()"style="width: 100px; height: 80px;">Pace</button>
     <button onclick="resetTimer()">Reset</button>
-
+    
   <h1 id="otwtimer"></h1>
 
   <p> Well Rowed !!</p>  </h3>
   
- <h3> <button onclick="showReady()">Ready</button>
-  <button onclick="showReadyAll()">ReadyAll</button>
-
+ <h3> <button onclick="showReady()"style="width: 100px; height: 50px;">Ready</button>
+  <button onclick="showReadyAll()"style="width: 100px; height: 50px;">ReadyAll</button>
+ 
   </h3>
   
 </div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  mrErgset  ---------------------------------------------------------------->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "Pace"  style = "display:none;">
+  <h2>Pace</h2> 
+  <p>STROKES and Min/500 </p> 
+  <span id="strokes"></span>
+
+
+<!--big STROKES and min/500m running avg per 100m?-->
+
+ <h3> <button onclick="showReady()"style="width: 100px; height: 50px;">Ready</button>
+  <button onclick="showReadyAll()"style="width: 100px; height: 50px;">ReadyAll</button>
+ 
+  </h3>
+
+</div>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Ergset"  style = "display:none;">
   <h2>myErgset</h2> 
   <p> Only enter value for machine pull length here to avoid
@@ -230,7 +272,7 @@ save another test change
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
-        otwDist = otwdpsMtrs*strokes;   
+        otwDist = dpsMtrs*strokes;   
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
         // problem with pullTime here doesnt update
@@ -255,7 +297,13 @@ save another test change
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
+        document.getElementById("strokes").textContent = strokes;
+  
         }
+
+      else if (currentBlock.id ==="Pace") {
+        document.getElementById("strokes").textContent = strokes;
+      }
       }
 
   //--------------------------------------------------------------------------------  
@@ -267,7 +315,7 @@ save another test change
     
       split = feSplit;      
       cadn = feCadn;
-      otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
+      //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
    
     if (currentBlock.id === "Ready"){
         //split = feSplit;      
@@ -285,8 +333,6 @@ save another test change
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
         elapsed += 50;
-        // ROUNDING ISSUE HERE(FRACTIONAL 28 LOOKS LIKE 20 BECAUSE 1 SEC UPDATES)
-        //strokesec = 60/cadn;
         let strokeInterval = 60000 / cadn;   // ms per stroke
         // update when time > stroke interval 
         if (elapsed - lastStroke >= strokeInterval) {
@@ -298,6 +344,22 @@ save another test change
         seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
+  
+     // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
+     /*
+      if (currentBlock.id === "Ready"){
+        if (seconds>= split){resetTimer();
+          }
+      else if (currentBlock.id === "Row"){
+        if (otwDist >= pieceDist){resetTimer();
+          }
+      else {
+        // console.log("Unknown block:", currentBlock.id);
+          }    
+        }, 50);
+    }
+    */
+
         if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   
@@ -325,6 +387,7 @@ save another test change
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showReady() {
@@ -333,6 +396,7 @@ save another test change
     document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showRow() {  
@@ -341,6 +405,7 @@ save another test change
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
     document.getElementById("Ergset").style.display = "none"; 
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showErgset() {  
@@ -348,35 +413,21 @@ save another test change
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "block";
+    document.getElementById("Pace").style.display = "none";
     }
+  //------------------------------------------------------------------------------
+  function showPace() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "block";
+    }  
 
-/*
-Calculate TT does all the work when Row(500) is tapped and percieved effort
-is estimated for the Timed Trial. dpsMtrs, pullForce
-*/
-   
-/*
-   // NOT USED FINISHED rtRow does not display pullForce or mechWatts YET  
-   funtion ergSets() {}
-      07.02.14.20
-      use: feCadn, pull Length
-      to calculatte: pullForce, mechWatts
 
-        pullForce = feWatts * 60 / (.7356 * feCadn * pullLength)
-        Is this circular?
-        mechWatts = .7356 * pullForce * pullLength * feCadn / 60
-   */ 
       
 </script>
 
 </html>
 
 
-<!--//function calculateRow(){   // NOT USED YET
-    //  let otwSpeed = 0;
-    //  let mechWatthrs = 0;
-    //  let userWatthrs = 0;
-    //  let pullForce = 0;
-    //  let mechWatts = 0;
-       
--->
