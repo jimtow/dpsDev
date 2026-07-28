@@ -341,7 +341,7 @@ save another test change
           }
         seconds = strokeInterval*strokes/1000;
         seconds = seconds.toFixed(1);
-        updateStrokes();        // LINE 194      
+        updateStrokes();        // LINE 194  
         old = seconds;
   
      // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
@@ -351,7 +351,8 @@ save another test change
         }}
   
       else if (currentBlock.id === "Row"){
-        // otwDist ?? pieceDist??
+      
+        otwDist = strokes*dpsMtrs;
         if (otwDist >= pieceDist){resetTimer();
           }}
         else {
