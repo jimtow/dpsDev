@@ -217,21 +217,19 @@ save another test change
     let otwDist = 0;
     let pieceDist = 1;
     
-    // FROM ROW BLOCK
-    otwCadn = Number(document.getElementById("otwCadn").value); 
-    pieceDist = Number(document.getElementById("pieceDist").value);
+   
   
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
-     effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */
-     
-    // tt500 runs on tap 
+     effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
     function tt500() { 
-      // USE DEFAULT VALUES IF NOT TIMED TRIAL
+      // FROM ROW BLOCK 
+      otwCadn = Number(document.getElementById("otwCadn").value); 
+      pieceDist = Number(document.getElementById("pieceDist").value);
+
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
       feWatts = Number(document.getElementById("feWatts").value); // user watts
-    
       const pcFeff= Number(document.getElementById("pcFeff").value);
       // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
