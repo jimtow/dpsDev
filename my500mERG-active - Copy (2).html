@@ -215,13 +215,9 @@ save another test change
     let feWatts = 0;
     let otwCadn = 0;
     let otwDist = 0;
-
-    // FROM READY BLOCK
-    /* PROBLEM: VALUES ARE AS INITIALIZED BY HTML UNTIL TT500 IS RUN !! 
-    TRY PUTTING AT START OF ROWTIMER !! */
+    let pieceDist = 1;
     
     // FROM ROW BLOCK
-    //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     otwCadn = Number(document.getElementById("otwCadn").value); 
     pieceDist = Number(document.getElementById("pieceDist").value);
   
@@ -350,10 +346,10 @@ save another test change
         }}
   
       else if (currentBlock.id === "Row"){
+        if (otwDist>= pieceDist){resetTimer();
+        }}
         
-        if (otwDist >= pieceDist){resetTimer();
-          }}
-        else {
+      else {
         // console.log("Unknown block:", currentBlock.id);
           }    
       }, 50);
