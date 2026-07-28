@@ -217,15 +217,12 @@ save another test change
     let otwDist = 0;
     let pieceDist = 1;
     
-   
-  
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
      effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */ 
     function tt500() { 
       // FROM ROW BLOCK 
-      otwCadn = Number(document.getElementById("otwCadn").value); 
-      pieceDist = Number(document.getElementById("pieceDist").value);
+      
 
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
@@ -260,7 +257,14 @@ save another test change
       
           }
       if (currentBlock.id === "Row"){   
+
       // NEED VALUES HERE!!
+    otwCadn = Number(document.getElementById("otwCadn").value); 
+    pieceDist = Number(document.getElementById("pieceDist").value);
+   
+
+
+
         tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
