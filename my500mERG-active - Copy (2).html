@@ -324,8 +324,6 @@ save another test change
     if (currentBlock.id === "Row"){
         //split = feSplit;  // FIX THIS ASAP WITH WO DISTANCE
         cadn = otwCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
-        //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
-        //otwSpeed = 0;
         mechWatthrs =0; }
   
     if (interval) return;
@@ -336,6 +334,7 @@ save another test change
         // update when time > stroke interval 
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
+            otwDist = strokes*dpsMtrs;
             //beep();
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
           }
@@ -351,7 +350,7 @@ save another test change
         }}
   
       else if (currentBlock.id === "Row"){
-        otwDist = strokes*dpsMtrs;
+        
         if (otwDist >= pieceDist){resetTimer();
           }}
         else {
