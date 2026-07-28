@@ -249,7 +249,7 @@ save another test change
       
       // for display
       pullForce = Number(pullForce.toFixed(1));
-      dpsMtrs = Number(dpsMtrs.toFixed(1));
+      //dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
       // to show on documeNT
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
@@ -351,7 +351,6 @@ save another test change
         }}
   
       else if (currentBlock.id === "Row"){
-      
         otwDist = strokes*dpsMtrs;
         if (otwDist >= pieceDist){resetTimer();
           }}
