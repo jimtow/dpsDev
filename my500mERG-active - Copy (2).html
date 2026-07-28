@@ -25,7 +25,6 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
-  
   my500mERG provides On-the-Water equivalent metrics for any Erg and settings based 
   on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
   FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
@@ -86,7 +85,7 @@ save another test change
     type="number" value="100">  
     </h3>
     (100% if no Timed Trial)
-    <h3> </h3><button style="width: 100px; height: 50px;
+    <h3><button style="width: 100px; height: 50px;
     " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
   </h3>
   <!--calculate and display resistance here. It is based on demographic
@@ -130,7 +129,7 @@ save another test change
      <!-- change this to woDist to distinuish from rt otwDist-->
      Distance(m) <input id="woDist" style="width:100px; height: 40px;"
      type="number" value="500">
-
+  </h3>
     <!-- DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 40px;"
      type="number" value="8"> -->
 
@@ -138,21 +137,35 @@ save another test change
     <div id="rowTimer"></div>
     <button onclick="startTimer()" style="width: 100px; height: 50px;">StartWO</button>
     <button onclick="stopTimer()" style="width: 100px; height: 50px;">StopWO</button>
-    <button onclick="stopTimer()" style="width: 100px; height: 80px;">Pacer</button>
+    <button onclick="showPace()" style="width: 100px; height: 80px;">Pace</button>
     <button onclick="resetTimer()">Reset</button>
     
   <h1 id="otwtimer"></h1>
 
-  <p> Well Rowed !!</p>  </h3>
+  <p> Well Rowed !!</p>  
   
  <h3> <button onclick="showReady()" style="width: 100px; height: 50px;">Ready</button>
   <button onclick="showReadyAll()" style="width: 100px; height: 50px;">ReadyAll</button>
-
+ 
   </h3>
   
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id = "Pace"  style = "display:none;">
+  <h2>Pace</h2> 
+  <p>STROKES and Min/500 </p> 
+ <h1> <span id="strokes"></span> </h1>
+
+
+<!--big STROKES and min/500m running avg per 100m?-->
+
+ <h3> <button onclick="showReady()" style="width: 100px; height: 50px;">Ready</button>
+  <button onclick="showReadyAll()" style="width: 100px; height: 50px;">ReadyAll</button>
+ 
+  </h3>
+
+</div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Ergset"  style = "display:none;">
@@ -210,7 +223,7 @@ save another test change
     // FROM ROW BLOCK
     //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
     otwCadn = Number(document.getElementById("otwCadn").value); 
-    otwDist = Number(document.getElementById("otwDist").value);
+    pieceDist = Number(document.getElementById("pieceDist").value);
   
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
@@ -283,7 +296,13 @@ save another test change
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
+        document.getElementById("strokes").textContent = strokes;
+  
         }
+
+      else if (currentBlock.id ==="Pace") {
+        document.getElementById("strokes").textContent = strokes;
+      }
       }
 
   //--------------------------------------------------------------------------------  
@@ -319,33 +338,35 @@ save another test change
             strokes++;
             //beep();
             lastStroke += strokeInterval;    // Better than lastStroke = elapsed
-        }
+          }
         seconds = strokeInterval*strokes/1000;
         seconds = seconds.toFixed(1);
         updateStrokes();        // LINE 194      
         old = seconds;
   
      // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
-     /*
+     
       if (currentBlock.id === "Ready"){
         if (seconds>= split){resetTimer();
-          }
+        }}
+  
       else if (currentBlock.id === "Row"){
+        // otwDist ?? pieceDist??
         if (otwDist >= pieceDist){resetTimer();
-          }
-      else {
+          }}
+        else {
         // console.log("Unknown block:", currentBlock.id);
           }    
-        }, 50);
+      }, 50);
     }
-    */
-
+    
+      /*
         if (seconds>= split){resetTimer();
           }
         // executes every 1000ms or stops at split   
         }, 50);
       }
-
+      */
 //------------------------------------------------------------------------------
   function stopTimer() {
       clearInterval(interval);
@@ -367,6 +388,7 @@ save another test change
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showReady() {
@@ -375,6 +397,7 @@ save another test change
     document.getElementById("Ready").style.display = "block";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showRow() {  
@@ -383,6 +406,7 @@ save another test change
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
     document.getElementById("Ergset").style.display = "none"; 
+    document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
   function showErgset() {  
@@ -390,7 +414,16 @@ save another test change
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "block";
+    document.getElementById("Pace").style.display = "none";
     }
+  //------------------------------------------------------------------------------
+  function showPace() {  
+    document.getElementById("ReadyAll").style.display = "none";
+    document.getElementById("Ready").style.display = "none";
+    document.getElementById("Row").style.display = "none";
+    document.getElementById("Ergset").style.display = "none";
+    document.getElementById("Pace").style.display = "block";
+    }  
 
 
       
