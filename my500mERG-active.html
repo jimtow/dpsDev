@@ -220,8 +220,8 @@ save another test change
     
     // FROM ROW BLOCK
     //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
-    otwCadn = Number(document.getElementById("otwCadn").value); 
-    otwDist = Number(document.getElementById("otwDist").value);
+    //otwCadn = Number(document.getElementById("otwCadn").value); 
+    //otwDist = Number(document.getElementById("otwDist").value);
   
   // CALLED FROM READY BLOCK ONLY  
     /* Uses published demographics and timed trial with estimate of full
@@ -263,8 +263,7 @@ save another test change
       
           }
       if (currentBlock.id === "Row"){   
-      // NEED VALUES HERE!!
-        tt500();
+        tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
@@ -325,7 +324,7 @@ save another test change
     if (currentBlock.id === "Row"){
         cadn = otwCadn;    
         mechWatthrs =0;
-        pieceDist = 400; // NEED TO SET PIECE DISTANCE FROM SCREEN !!
+        //pieceDist = 400; // NEED TO SET PIECE DISTANCE FROM SCREEN !!
       }
   
     if (interval) return;
