@@ -314,19 +314,19 @@ save another test change
     
       split = feSplit;      
       cadn = feCadn;
-      // set pieceDist here ??
+      //otwdpsMtrs = Number(document.getElementById("otwdpsMtrs").value);
    
     if (currentBlock.id === "Ready"){
         //split = feSplit;      
         //cadn = feCadn;
-        dpsMtrs = 8;   
-      }
+        dpsMtrs = 8;   }
 
     if (currentBlock.id === "Row"){
-        cadn = otwCadn;    
-        mechWatthrs =0;
-        pieceDist = 400; // NEED TO SET PIECE DISTANCE FROM SCREEN !!
-      }
+        //split = feSplit;  // FIX THIS ASAP WITH WO DISTANCE
+        cadn = otwCadn;    // SOMETHING ELSE WRONG WITH ROW FUNCTIONALITY
+        //otwdpsMtrs = 8       // IS THIS USED OR JUST TEMP
+        //otwSpeed = 0;
+        mechWatthrs =0; }
   
     if (interval) return;
         interval = setInterval(() => {
@@ -344,19 +344,26 @@ save another test change
         updateStrokes();        // LINE 194      
         old = seconds;
   
-      // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
-        if (currentBlock.id === "Ready"){
-          if (seconds>= split){resetTimer();
-          }}
-        else if (currentBlock.id === "Row"){
-          if (otwDist >= pieceDist){resetTimer();
-          }}
-        else {
+     // NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR OTWDIST  
+     /*
+      if (currentBlock.id === "Ready"){
+        if (seconds>= split){resetTimer();
+          }
+      else if (currentBlock.id === "Row"){
+        if (otwDist >= pieceDist){resetTimer();
+          }
+      else {
         // console.log("Unknown block:", currentBlock.id);
           }    
         }, 50);
+    }
+    */
+
+        if (seconds>= split){resetTimer();
+          }
+        // executes every 1000ms or stops at split   
+        }, 50);
       }
-    
 
 //------------------------------------------------------------------------------
   function stopTimer() {
