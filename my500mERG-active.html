@@ -127,11 +127,9 @@ save another test change
     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
      <!-- change this to woDist to distinuish from rt otwDist-->
-     Distance(m) <input id="woDist" style="width:100px; height: 40px;"
+     Distance(m) <input id="pieceDist" style="width:100px; height: 40px;"
      type="number" value="500">
   </h3>
-    <!-- DPS(m) <input id="otwdpsMtrs" style="width:100px; height: 40px;"
-     type="number" value="8"> -->
 
   <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
@@ -229,7 +227,6 @@ save another test change
     /* Uses published demographics and timed trial with estimate of full
      effort on completion TO CALCULATE DISTANCE PER STROKE (dps) */
      
-    // tt500 runs on tap 
     function tt500() { 
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
       feSplit = Number(document.getElementById("feSplit").value); // user split
@@ -307,14 +304,17 @@ save another test change
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
-      // 07.23 INITIALIZE
-      feSplit = Number(document.getElementById("feSplit").value); // user split
-      feCadn = Number(document.getElementById("feCadn").value); // user cadence
-      feWatts = Number(document.getElementById("feWatts").value); // user watts
+      // 07.29 INITIALIZE WITH LET NEEDED !!
+    let feSplit = Number(document.getElementById("feSplit").value); // user split
+    let feCadn = Number(document.getElementById("feCadn").value); // user cadence
+    let feWatts = Number(document.getElementById("feWatts").value); // user watts
     
-      split = feSplit;      
-      cadn = feCadn;
-      // set pieceDist here ??
+    let otwCadn = Number(document.getElementById("otwCadn").value); 
+    let pieceDist = Number(document.getElementById("pieceDist").value);
+  
+    split = feSplit;      
+    cadn = feCadn;
+    // set pieceDist here ??
    
     if (currentBlock.id === "Ready"){
         //split = feSplit;      
