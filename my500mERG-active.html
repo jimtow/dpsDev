@@ -30,7 +30,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0729.0938
+  0729.0938//0730.1218
  </p>
 
   <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -219,7 +219,9 @@ save another test change
       pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
-      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
+      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn) 
+      /* complicated to compute erg work to otw work !! 1 watt = .7356 ft-lbs/sec
+      */    
       pullForce = 60 * watts /(pullLength * feCadn) ;
       // per stroke factor
       mechWatts = .7356 * pullForce * pullLength;    
