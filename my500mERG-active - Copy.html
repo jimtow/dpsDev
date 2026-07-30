@@ -242,20 +242,19 @@ save another test change
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         }
-      if (currentBlock.id === "Row"){
-        // otwCadn?   
-        tt500();
+      if (currentBlock.id === "Row"){   
+        tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-        otwDist = dpsMtrs*strokes;  
-        // otwCadn = 0 here !! 
-        otwSpeed = otwDist/seconds;         // otwDist/minutes CHANGE TO MIN/500M !!
+
+        otwDist = dpsMtrs*strokes;   
+        otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
-        // pullForce ??
-  
-        pullTime = .5*60/otwCadn;         
+        // problem with pullTime here doesnt update
+        pullTime = .5*60/otwCadn;
         mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
         mechWatthrs = mechWatts*strokes/3600;    
+
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
 
@@ -272,7 +271,7 @@ save another test change
       else if (currentBlock.id === "Row") {
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
-        " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
+        " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
