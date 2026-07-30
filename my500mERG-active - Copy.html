@@ -222,9 +222,14 @@ save another test change
       /*this is really complicated. Obviously the pull force at the handle is not the
       only work that is being done on the erg. Easy to oversimplify. Also, the published
       watts are not simple. Yes, the only thing the erg sees is the handle force an
-      distance */
+      distance
 
-      pullForce = 60 * (watts) /(pullLength * feCadn) ;   //??
+      See notes in Gdrive. Its a guess but if the demographic chart is showing human
+      effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
+      
+      */
+
+      pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
       // per stroke factor ??
       mechWatts = .7356 * pullForce * pullLength;    
       
