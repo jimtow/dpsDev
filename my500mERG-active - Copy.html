@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--pull and push this 6/30.15.20.B-->
 <html>   
 <body>
  <style>
@@ -31,12 +30,12 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0729.copy
+  0729.0938
  </p>
 
-  <button onclick="showReady()" style="width: 100px; height: 50px;">Ready</button>
+  <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
   <!--<button onclick="showRow()"style="width: 100px; height: 50px;">Row!</button>-->
-  <button onclick="showErgset()">myErgset</button>
+  <!--<button onclick="showErgset()">myErgset</button>-->
 
   </div>
 
@@ -69,15 +68,16 @@ save another test change
   500m Timed Trial
   <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
   
-  <button onclick="startTimer()" style="width: 100px; height: 50px;">
+  <button onclick="startTimer()" style="width: 100px; height: 60px;">
         Start
     </button>
-  <button onclick="stopTimer()" style="width: 100px; height: 50px;">
+  <button onclick="stopTimer()" style="width: 100px; height: 60px;">
         Stop
     </button>
-  <button onclick="resetTimer()">Reset</button>  
+  <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  
     
   <div id="readyTimer"></div>
+
   
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
@@ -85,22 +85,25 @@ save another test change
     type="number" value="100">  
     </h3>
     (100% if no Timed Trial)
-    <h3><button style="width: 100px; height: 50px;
-    " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
-  </h3>
-  <!--calculate and display resistance here. It is based on demographic
-  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
-  --> 
-  
+
 <h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
         <br>  Watts:<span id="watts">    </span> 
         <br>  ERGpull(lbs):<span id = "pullForce">    </span>
 </h3> 
 
 
-  <button onclick="showReadyAll()" style="width: 100px; height: 50px;">ReadyAll</button>
-  <button onclick="showRow()" style="width: 100px; height: 50px;">Row!</button>
-  <button onclick="showErgset()">myErgset</button>
+<h3><button style="width: 100px; height: 60px;
+    " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
+  </h3>
+  <!--calculate and display resistance here. It is based on demographic
+  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
+  --> 
+  
+
+
+  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
+  <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
+  <!--<button onclick="showErgset()">myErgset</button>-->
 
 </div>
 
@@ -133,17 +136,17 @@ save another test change
 
   <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
-    <button onclick="startTimer()" style="width: 100px; height: 50px;">StartWO</button>
-    <button onclick="stopTimer()" style="width: 100px; height: 50px;">StopWO</button>
-    <button onclick="showPace()" style="width: 100px; height: 80px;">Pace</button>
-    <button onclick="resetTimer()">Reset</button>
+    <button onclick="startTimer()" style="width: 100px; height: 60px;">StartWO</button>
+    <button onclick="stopTimer()" style="width: 100px; height: 60px;">StopWO</button>
+    <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
+    <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
     
   <h1 id="otwtimer"></h1>
 
   <p> Well Rowed !!</p>  
   
- <h3> <button onclick="showReady()" style="width: 100px; height: 50px;">Ready</button>
-  <button onclick="showReadyAll()" style="width: 100px; height: 50px;">ReadyAll</button>
+ <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
+  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
  
   </h3>
   
@@ -158,8 +161,8 @@ save another test change
 
 <!--big STROKES and min/500m running avg per 100m?-->
 
- <h3> <button onclick="showReady()" style="width: 100px; height: 50px;">Ready</button>
-  <button onclick="showReadyAll()" style="width: 100px; height: 50px;">ReadyAll</button>
+ <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
+  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
  
   </h3>
 
@@ -235,6 +238,7 @@ save another test change
     function updateStrokes(){
       let pullTime = 0;
       if (currentBlock.id === "Ready"){
+        tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         }
