@@ -300,10 +300,14 @@ save another test change
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+
         }
 
       else if (currentBlock.id ==="Pace") {
         document.getElementById("strokes").textContent = strokes;
+        document.getElementById("dpsMtrs").textContent = dpsMtrs;
+        document.getElementById("watts").textContent = watts;
+        document.getElementById("pullForce").textContent = pullForce;
       }
       }
 
