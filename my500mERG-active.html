@@ -30,7 +30,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0729.0938
+  0729.0938//0730.1218
  </p>
 
   <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -219,8 +219,22 @@ save another test change
       pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
-      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
-      pullForce = 60 * watts /(pullLength * feCadn) ;
+      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn) 
+      /* complicated to compute erg work to otw work !! 1 watt = .7356 ft-lbs/sec
+      */   
+      //1 watt= .7356*(ft x lbs / sec) .. lbs = watts * sec / ft  (sec = 60 / cadn)  
+      /*this is really complicated. Obviously the pull force at the handle is not the
+      only work that is being done on the erg. Easy to oversimplify. Also, the published
+      watts are not simple. Yes, the only thing the erg sees is the handle force an
+      distance
+
+      See notes in Gdrive. Its a guess but if the demographic chart is showing human
+      effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
+      
+      */
+
+      pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
+      
       // per stroke factor
       mechWatts = .7356 * pullForce * pullLength;    
       

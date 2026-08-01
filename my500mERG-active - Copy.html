@@ -212,16 +212,25 @@ save another test change
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
       feWatts = Number(document.getElementById("feWatts").value); // user watts
-    
-      const pcFeff= Number(document.getElementById("pcFeff").value);
-      // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
+      pcFeff= Number(document.getElementById("pcFeff").value);
+      // initial default value set in Ergset block. Not used anymore?
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
       pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
-      //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn)     
-      pullForce = 60 * watts /(pullLength * feCadn) ;
-      // per stroke factor
+      //1 watt= .7356*(ft x lbs / sec) .. lbs = watts * sec / ft  (sec = 60 / cadn)  
+      /*this is really complicated. Obviously the pull force at the handle is not the
+      only work that is being done on the erg. Easy to oversimplify. Also, the published
+      watts are not simple. Yes, the only thing the erg sees is the handle force an
+      distance
+
+      See notes in Gdrive. Its a guess but if the demographic chart is showing human
+      effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
+      
+      */
+
+      pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
+      // per stroke factor ??
       mechWatts = .7356 * pullForce * pullLength;    
       
       // for display
