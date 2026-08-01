@@ -30,7 +30,7 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0729.0938//0730.1218
+  0729.0938//0730.1218/08.01,0948
  </p>
 
   <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -154,17 +154,15 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
-  <h1> <span id="strokes"></span> </h1>
- <div id="paceTimer"></div>
-
-
+  <h1> <span id="strokes">0</span> </h1>   
+    
+  <h3>Mechanical Watts: <span id="mechWatts">0</span></h3>
+  <h3>Mech Watt-Hours: <span id="mechWattHrs">0</span></h3>
+  <h3>OTW Cadence: <span id="otwCadn">0</span></h3>
   <p>STROKES and Min/500 </p> 
- 
   <p>strokes (metronome) @ cadence</p>
   <p>Minutes @ pace 3.5min per 500 </p>
-  <p>Date and Time</p>
-  <p>mechWatts (at stop)</p>
-  <p>maxWattHrs (500m)</p> 
+  <p>Date and Time</p> 
   
 
  <h3> 
@@ -184,7 +182,7 @@ save another test change
 <!--  Distance per Stroke (revised or known)
     <input id="dspMtrs" style="width:100px; height: 30px;" type="number" 
     placeholder="???">
-  </h3>    -->  <h3>
+  </h3>    -->  
   
 </div>
 </body>
@@ -256,6 +254,7 @@ save another test change
 //------------------------------------------------------------------------------
   // UPDATE DISPLAY ON TIMER INTERVALS   
     function updateStrokes(){
+      /* update and set document here for pace display too */
       let pullTime = 0;
       if (currentBlock.id === "Ready"){
         tt500();
@@ -268,20 +267,22 @@ save another test change
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         otwDist = dpsMtrs*strokes;  
-        // otwCadn = 0 here !! 
+        
         otwSpeed = otwDist/seconds;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
-        // pullForce ??
-  
+        
+        
+        // pullForce ?? STILL 0 
+
         pullTime = .5*60/otwCadn;         
         mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
         mechWatthrs = mechWatts*strokes/3600;    
-        //mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
+
       if (currentBlock.id === "Ready") {
         html +=
           "Cadence: " + feCadn.toFixed(1) +
@@ -295,23 +296,13 @@ save another test change
         " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
-
         document.getElementById("strokes").textContent = strokes;
-
         }
-
-      else if (currentBlock.id ==="Pace") {
-        html +=
-          "OTW Distance: " + otwDist.toFixed(0) +
-          " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
-          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
-          document.getElementById("paceTimer").innerHTML = html;
-          }
-
-        document.getElementById("strokes").textContent = strokes;
-        document.getElementById("dpsMtrs").textContent = dpsMtrs;
-        document.getElementById("watts").textContent = watts;
-        document.getElementById("pullForce").textContent = pullForce;
+      else if (currentBlock.id ==="Pace") {       
+          document.getElementById("strokes").textContent = strokes;
+          document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
+          //document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
+          }    
       }
       
 
@@ -359,7 +350,12 @@ save another test change
           }}
         else if (currentBlock.id === "Row"){
           if (otwDist >= pieceDist){resetTimer();
-          }}
+          
+          }
+          document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
+          document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
+          document.getElementById("otwCadn").textContent = otwCadn;  
+            }
         else {
         // console.log("Unknown block:", currentBlock.id);
           }    
