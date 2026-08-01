@@ -157,11 +157,21 @@ save another test change
   <h2>Pace</h2> 
   <p>STROKES and Min/500 </p> 
  <h1> <span id="strokes"></span> </h1>
+  <p>strokes (metronome) @ cadence</p>
+  <p>Minutes @ pace 3.5min per 500 </p>
+  <p>Date and Time</p>
+  <p>mechWatts (at stop)</p>
+  <p>maxWattHrs (500m)</p> 
+  <h4>    
+          Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+    <br>  mechWatts:<span id="watts">    </span> 
+    <br>  ERGpull(lbs):<span id = "pullForce">    </span>
+  </h4> 
 
+  
 
-<!--big STROKES and min/500m running avg per 100m?-->
-
- <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
+ <h3> 
+  <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
   <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
  
   </h3>
@@ -290,10 +300,14 @@ save another test change
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+
         }
 
       else if (currentBlock.id ==="Pace") {
         document.getElementById("strokes").textContent = strokes;
+        document.getElementById("dpsMtrs").textContent = dpsMtrs;
+        document.getElementById("watts").textContent = watts;
+        document.getElementById("pullForce").textContent = pullForce;
       }
       }
 
