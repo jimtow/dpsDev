@@ -155,19 +155,15 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
+
   <p>STROKES and Min/500 </p> 
  <h1> <span id="strokes"></span> </h1>
+ <h1> <span id="watts"></span> </h1>
   <p>strokes (metronome) @ cadence</p>
   <p>Minutes @ pace 3.5min per 500 </p>
   <p>Date and Time</p>
   <p>mechWatts (at stop)</p>
   <p>maxWattHrs (500m)</p> 
-  <h4>    
-          Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-    <br>  mechWatts:<span id="watts">    </span> 
-    <br>  ERGpull(lbs):<span id = "pullForce">    </span>
-  </h4> 
-
   
 
  <h3> 
@@ -184,11 +180,11 @@ save another test change
   <p> Only enter value for machine pull length here to avoid
   changing previous constants </p>
 
-  <h3>
-   Distance per Stroke (revised or known)
+<!--  Distance per Stroke (revised or known)
     <input id="dspMtrs" style="width:100px; height: 30px;" type="number" 
     placeholder="???">
-  </h3>  
+  </h3>    -->  <h3>
+  
 </div>
 </body>
 
@@ -199,7 +195,6 @@ save another test change
     let userWatthrs = 0;
     let pullForce = 0;
     let dpsMtrs = 8;                // DEFAULT VALUE ONLY
-
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
@@ -225,7 +220,7 @@ save another test change
     
       const pcFeff= Number(document.getElementById("pcFeff").value);
       // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
-      dspMtrs = Number(document.getElementById("dspMtrs").value);     
+      //dspMtrs = Number(document.getElementById("dspMtrs").value);     
       pullLength = Number(document.getElementById("pullLength").value);                       
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
