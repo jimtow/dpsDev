@@ -122,7 +122,6 @@ save another test change
     <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
     value="6">
    --> 
-   
   </h3>  
 
   <h3>
@@ -136,13 +135,13 @@ save another test change
 
   <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
+    
     <button onclick="startTimer()" style="width: 100px; height: 60px;">StartWO</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">StopWO</button>
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
     <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
     
-  <h1 id="otwtimer"></h1>
-
+ 
   <p> Well Rowed !!</p>  
   
  <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -155,10 +154,12 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
+  <h1> <span id="strokes"></span> </h1>
+ <div id="paceTimer"></div>
+
 
   <p>STROKES and Min/500 </p> 
- <h1> <span id="strokes"></span> </h1>
- <h1> <span id="watts"></span> </h1>
+ 
   <p>strokes (metronome) @ cadence</p>
   <p>Minutes @ pace 3.5min per 500 </p>
   <p>Date and Time</p>
@@ -294,17 +295,25 @@ save another test change
         " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
+
         document.getElementById("strokes").textContent = strokes;
 
         }
 
       else if (currentBlock.id ==="Pace") {
+        html +=
+          "OTW Distance: " + otwDist.toFixed(0) +
+          " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
+          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
+          document.getElementById("paceTimer").innerHTML = html;
+          }
+
         document.getElementById("strokes").textContent = strokes;
         document.getElementById("dpsMtrs").textContent = dpsMtrs;
         document.getElementById("watts").textContent = watts;
         document.getElementById("pullForce").textContent = pullForce;
       }
-      }
+      
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
