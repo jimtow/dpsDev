@@ -30,13 +30,11 @@
   equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
   also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
   and accessible
-  0729.0938//0730.1218/08.01,0948
+  0729.0938//0730.1218/08.01,0948/08.03.0955
  </p>
 
   <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
-  <!--<button onclick="showRow()"style="width: 100px; height: 50px;">Row!</button>-->
-  <!--<button onclick="showErgset()">myErgset</button>-->
-
+  
   </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ready xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
@@ -114,21 +112,12 @@ save another test change
   Calculate distance based on time and feCadence !! -->
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
-  <h3>
-   <!--dpsMtrs is the result of TT calculation. pullForce (and pullLength) are also
-   used to update mechWatt-hrs
-   
-   Distance per Stroke (Estimated or Known)
-    <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
-    value="6">
-   --> 
-  </h3>  
-
+  
   <h3>
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
-     <!-- change this to woDist to distinuish from rt otwDist-->
+   
      Distance(m) <input id="pieceDist" style="width:100px; height: 40px;"
      type="number" value="500">
   </h3>
@@ -141,7 +130,6 @@ save another test change
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
     <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
     
- 
   <p> Well Rowed !!</p>  
   
  <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -194,6 +182,9 @@ save another test change
     let userWatthrs = 1;
     let pullForce = 0;
     let dpsMtrs = 8;                // DEFAULT VALUE ONLY
+    let pullTime = .5;
+    let pullLength = 4;
+    let watts = 0;
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
@@ -204,12 +195,16 @@ save another test change
     let otwSpeed = 0;
     let mechWatthrs = 0;
     let mechWatts = 0;
-    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+   
+    
     let feSplit = 0;
     let feCadn = 0;
     let feWatts = 0;
+    
     let otwCadn = 0;
     let otwDist = 0;
+    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+
 //-----------------------------------------------------------------------------
     function tt500() { 
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
@@ -246,25 +241,28 @@ save another test change
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
-      // FOR HTML DOCUMENT
+      // FOR HTML READY DOCUMENT
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
       } 
 //------------------------------------------------------------------------------
-  // UPDATE DISPLAY ON TIMER INTERVALS   
+  // UPDATE ENTIRE HTML ON TIMER INTERVALS 
     function updateStrokes(){
       /* update and set document here for pace display too */
-      let pullTime = 0;
+      //let pullTime = 0;
+
       userWatthrs = feWatts * seconds / 3600;
       userWatthrs = Number(userWatthrs.toFixed(2));
-
+      tt500();
       if (currentBlock.id === "Ready"){
-        tt500();
+        //tt500();
           }
+      
+      // APPLIES TO ROW AND PACE BLOCKS    
       if (currentBlock.id === "Row"){
         // otwCadn?   
-        tt500();
+        //tt500();
         otwDist = dpsMtrs*strokes;  
         otwSpeed = otwDist/seconds;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
@@ -286,7 +284,8 @@ save another test change
           html += "User Watt-hrs: " + userWatthrs.toFixed(2);
           document.getElementById("readyTimer").innerHTML = html;
         } 
-      else if (currentBlock.id === "Row") {
+        
+      else if ((currentBlock.id === "Row") ||(currentBlock.id === "Pace")) {
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
@@ -294,12 +293,8 @@ save another test change
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
         }
-      else if (currentBlock.id ==="Pace") { 
-          // AS NEEDED BY HTML PACE BLOCK FORMAT
-            }    
+     
       }
-      
-
   //--------------------------------------------------------------------------------  
    function startTimer() {
       // 07.29 INITIALIZE WITH LET NEEDED !!
@@ -348,9 +343,10 @@ save another test change
           if (otwDist >= pieceDist){resetTimer();
           
           }
-          document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
-          document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
-          document.getElementById("otwCadn").textContent = otwCadn;  
+
+        document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
+        document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
+        document.getElementById("otwCadn").textContent = otwCadn;  
             }
         else {
         // console.log("Unknown block:", currentBlock.id);
