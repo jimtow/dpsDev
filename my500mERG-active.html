@@ -181,7 +181,7 @@ save another test change
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
     let otwCadn = Number(document.getElementById("otwCadn").value); 
-    let pieceDist = Number(document.getElementById("pieceDist").value);
+    //let pieceDist = Number(document.getElementById("pieceDist").value);
 
     let userWatthrs = 1;            // WHERE UPDATED??
     let pullForce = 0;
@@ -196,6 +196,7 @@ save another test change
     let elapsed = 0;
     let lastStroke = 0;
     let strokes = 0;
+    let strokeInterval = 10;
     let otwSpeed = 0;
     let mechWatthrs = 0;
     let mechWatts = 0;
@@ -252,7 +253,7 @@ save another test change
       // APPLIES TO ROW AND PACE BLOCKS    
       if (currentBlock.id === "Row"){
         userWatthrs = feWatts * seconds / 3600;
-        otwDist = dpsMtrs*strokes;  
+        //otwDist = dpsMtrs*strokes;  
         otwSpeed = otwDist/seconds;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
         // pullForce ?? STILL 0 
@@ -289,9 +290,10 @@ save another test change
        }
   //--------------------------------------------------------------------------------  
    function startTimer() {
-      //pieceDist = Number(document.getElementById("pieceDist").value); 
+      pieceDist = Number(document.getElementById("pieceDist").value); 
       //otwCadn = Number(document.getElementById("otwCadn").value); // user watts 
-      split = feSplit;      
+      split = feSplit; 
+
       //cadn = feCadn; 
       if (currentBlock.id === "Ready"){
         dpsMtrs = 8;   // PRE-TT VALUE 
@@ -302,31 +304,42 @@ save another test change
         }
   /* Note: the timer runs continuously regardless of "Row" or "Pace" blockid */ 
     if (interval) return;
+        strokeInterval = 60000 / cadn;   // ms per stroke
         interval = setInterval(() => {
-        // elapsed =seconds++; BETTER START
+      
         elapsed += 50;
-        let strokeInterval = 60000 / cadn;   // ms per stroke
-        // update when time > stroke interval 
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
             //beep();
             lastStroke += strokeInterval; 
         }
-        seconds = strokeInterval*strokes/1000;
-        seconds = seconds.toFixed(1);
+        otwDist = dpsMtrs*strokes;
+        seconds = old + elapsed;
+        //seconds = strokeInterval*strokes/1000;
+        //seconds = seconds.toFixed(1);
         // PROBLEM HERE. STOPS AT SPLIT BUT NO STOP AT PIECEDIST
-        updateStrokes();       
+        updateStrokes();    
+        
+        if (seconds>= split){resetTimer();
+          }
+        
+        else if (otwDist >= pieceDist){resetTimer();
+          }
+     
+        }, 50);
+        
         // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
-        if (currentBlock.id === "Ready"){
+        /*if (currentBlock.id === "Ready"){
           if (seconds>= split){resetTimer();
           }}
         else if (currentBlock.id === "Row"){
-          if (otwDist >= pieceDist){resetTimer();
+          if (otwDist >= 300){resetTimer();
           }}
      
-        }, 50);
+        }, 50); */
+
+        old = seconds;
                 
-        old = seconds;  
         // END OF TIMER LOOP
         }
     
