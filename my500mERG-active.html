@@ -332,7 +332,7 @@ save another test change
 
         updateStrokes();        // LINE 194      
         old = seconds;
-        
+
       // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
         if (currentBlock.id === "Ready"){
           if (seconds>= split){resetTimer();
@@ -401,6 +401,7 @@ save another test change
     }
   //------------------------------------------------------------------------------
   function showPace() {  
+    currentBlock = document.getElementById("Pace");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
