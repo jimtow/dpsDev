@@ -75,7 +75,6 @@ save another test change
   <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  
     
   <div id="readyTimer"></div>
-
   
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
@@ -97,8 +96,6 @@ save another test change
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
   --> 
   
-
-
   <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
   <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
   <!--<button onclick="showErgset()">myErgset</button>-->
@@ -210,17 +207,14 @@ save another test change
         now.toLocaleString();
 
 */
-
-
-
 //-----------------------------------------------------------------------------
     function tt500() { 
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
       feWatts = Number(document.getElementById("feWatts").value); // user watts
-      pieceDist = Number(document.getElementById("pieceDist").value); // user watts
-      otwCadn = Number(document.getElementById("otwCadn").value); // user watts 
+     
+      
 
       const pcFeff= Number(document.getElementById("pcFeff").value);
       // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
@@ -229,24 +223,17 @@ save another test change
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
       watts =  (pcFeff/100)*feWatts;  
       //?? watts = ft x lbs / sec .. lbs = watts * sec / ft  (sec = 60 / cadn) 
-      /* complicated to compute erg work to otw work !! 1 watt = .7356 ft-lbs/sec
-      */   
-      //1 watt= .7356*(ft x lbs / sec) .. lbs = watts * sec / ft  (sec = 60 / cadn)  
+      /*   
+      1 watt= .7356*(ft x lbs / sec) .. lbs = watts * sec / ft  (sec = 60 / cadn)  
       /*this is really complicated. Obviously the pull force at the handle is not the
       only work that is being done on the erg. Easy to oversimplify. Also, the published
       watts are not simple. Yes, the only thing the erg sees is the handle force an
-      distance
-
-      See notes in Gdrive. Its a guess but if the demographic chart is showing human
+      distance. See notes in Gdrive. Its a guess but if the demographic chart is showing human
       effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
-      
-      */
-
-      pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
-      
+       */
+       pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
       // per stroke factor
       mechWatts = .7356 * pullForce * pullLength;    
-      
       // for display
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
@@ -288,7 +275,7 @@ save another test change
         } 
       else if ((currentBlock.id === "Row") ||(currentBlock.id === "Pace")) {
         html +=
-        "OTW Distance: " + otwDist.toFixed(0) +
+        "OTW Distance: " + otwDist +
         " &nbsp;&nbsp; OTW Speed(m/s): " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2)+
          " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
@@ -302,20 +289,18 @@ save another test change
        }
   //--------------------------------------------------------------------------------  
    function startTimer() {
-      // 07.29 INITIALIZE WITH LET NEEDED !!
+      //pieceDist = Number(document.getElementById("pieceDist").value); 
+      //otwCadn = Number(document.getElementById("otwCadn").value); // user watts 
       split = feSplit;      
-      cadn = feCadn;
-
-  /* initialize before timer start ??? */   
-    if (currentBlock.id === "Ready"){
+      //cadn = feCadn; 
+      if (currentBlock.id === "Ready"){
         dpsMtrs = 8;   // PRE-TT VALUE 
-      }
+        }
     if ((currentBlock.id === "Row") || currentBlock.id ==="Pace"){
         cadn = otwCadn;    
         mechWatthrs =0;
-      }
+        }
   /* Note: the timer runs continuously regardless of "Row" or "Pace" blockid */ 
-
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
@@ -329,25 +314,21 @@ save another test change
         }
         seconds = strokeInterval*strokes/1000;
         seconds = seconds.toFixed(1);
-
-        updateStrokes();        // LINE 194      
-        old = seconds;
-
-      // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
+        // PROBLEM HERE. STOPS AT SPLIT BUT NO STOP AT PIECEDIST
+        updateStrokes();       
+        // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
         if (currentBlock.id === "Ready"){
           if (seconds>= split){resetTimer();
           }}
-
         else if (currentBlock.id === "Row"){
           if (otwDist >= pieceDist){resetTimer();
           }}
-
-
-        else {
-        console.log("Unknown block:", currentBlock.id);
-          }    
+     
         }, 50);
-      }
+                
+        old = seconds;  
+        // END OF TIMER LOOP
+        }
     
 
 //------------------------------------------------------------------------------
@@ -393,6 +374,7 @@ save another test change
     }
 //------------------------------------------------------------------------------
   function showErgset() {  
+    currentBlock = document.getElementById("Ergset");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
