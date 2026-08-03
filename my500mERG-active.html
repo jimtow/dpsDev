@@ -286,9 +286,10 @@ save another test change
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2)+
          " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
 
-         
+        // THIS IS WHERE HTML IS PREPARED 
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+        document.getElementById("userWatthrs").textContent=userWatthrs.toFixed(2);
         }
      
       }
