@@ -114,8 +114,7 @@ save another test change
   <p> Row at any cadence</p>
   
   <h3>
-    <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
-    @cadence<input id="otwCadn" style="width:100px; height: 40px;"
+     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
    
      Distance(m) <input id="pieceDist" style="width:100px; height: 40px;"
@@ -145,8 +144,9 @@ save another test change
   <h1> <span id="strokes">0</span> </h1>   
 
   <h3>Mech Watt-Hours: <span id="mechWattHrs">0</span></h3>
-
   <h3>User Watt-Hours: <span id="userWatthrs">0</span></h3>
+  <p id="dateTime"></p>
+
 
   <p>STROKES and Min/500 </p> 
   <p>strokes (metronome) @ cadence</p>
@@ -183,6 +183,8 @@ save another test change
     let feSplit = Number(document.getElementById("feSplit").value); // user split
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
+    let otwCadn = Number(document.getElementById("otwCadn").value); 
+    let pieceDist = Number(document.getElementById("pieceDist").value);
 
     let userWatthrs = 1;            // WHERE UPDATED??
     let pullForce = 0;
@@ -201,10 +203,15 @@ save another test change
     let mechWatthrs = 0;
     let mechWatts = 0;
    
-    let otwCadn = Number(document.getElementById("otwCadn").value); 
-    let pieceDist = Number(document.getElementById("pieceDist").value);
-    let otwDist = 0;
-    let otwTime = 0;        // THIS WILL BE THE TIME TO ROW TARGET DISTANCE
+    let otwTime = 0;
+/*
+    const now = new Date();
+    document.getElementById("dateTime").textContent =
+        now.toLocaleString();
+
+*/
+
+
 
 //-----------------------------------------------------------------------------
     function tt500() { 
@@ -212,7 +219,9 @@ save another test change
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
       feWatts = Number(document.getElementById("feWatts").value); // user watts
-    
+      pieceDist = Number(document.getElementById("pieceDist").value); // user watts
+      otwCadn = Number(document.getElementById("otwCadn").value); // user watts 
+
       const pcFeff= Number(document.getElementById("pcFeff").value);
       // USE INTIAL DEFAULT IF TT IS NOT RUN FOR PERCEIVED EFFORT
       //dspMtrs = Number(document.getElementById("dspMtrs").value);     
@@ -255,7 +264,6 @@ save another test change
       tt500();                              // calc meters per stroke 
       // APPLIES TO ROW AND PACE BLOCKS    
       if (currentBlock.id === "Row"){
-
         userWatthrs = feWatts * seconds / 3600;
         otwDist = dpsMtrs*strokes;  
         otwSpeed = otwDist/seconds;         // otwDist/minutes CHANGE TO MIN/500M !!
@@ -265,7 +273,7 @@ save another test change
         pullTime = .5*60/otwCadn;         
         mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
         mechWatthrs = mechWatts*strokes/3600;    
-        mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        mechWatthrs = Number(mechWatthrs.toFixed(2));  
         }
         let html =
         "Strokes: " + strokes +
@@ -278,7 +286,6 @@ save another test change
           html += "User Watt-hrs: " + userWatthrs.toFixed(2);
           document.getElementById("readyTimer").innerHTML = html;
         } 
-        
       else if ((currentBlock.id === "Row") ||(currentBlock.id === "Pace")) {
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
@@ -286,20 +293,18 @@ save another test change
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2)+
          " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
 
-        // THIS IS WHERE HTML IS PREPARED 
+        // THIS IS WHERE THE HTML DOCUMENT IS PREPARED (FOR ALL BLOCKS !!)
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
         document.getElementById("userWatthrs").textContent=userWatthrs.toFixed(2);
+        document.getElementById("mechWatthrs").textContent=mechWatthrs.toFixed(2);
         }
-     
-      }
+       }
   //--------------------------------------------------------------------------------  
    function startTimer() {
       // 07.29 INITIALIZE WITH LET NEEDED !!
-   
-  
-    split = feSplit;      
-    cadn = feCadn;
+      split = feSplit;      
+      cadn = feCadn;
 
   /* initialize before timer start ??? */   
     if (currentBlock.id === "Ready"){
@@ -309,8 +314,7 @@ save another test change
         cadn = otwCadn;    
         mechWatthrs =0;
       }
-
-/* Note: timer runs continuously regardless of "Row" or "Pace" blockid */ 
+  /* Note: the timer runs continuously regardless of "Row" or "Pace" blockid */ 
 
     if (interval) return;
         interval = setInterval(() => {
@@ -325,24 +329,22 @@ save another test change
         }
         seconds = strokeInterval*strokes/1000;
         seconds = seconds.toFixed(1);
+
         updateStrokes();        // LINE 194      
         old = seconds;
-  
+        
       // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
         if (currentBlock.id === "Ready"){
           if (seconds>= split){resetTimer();
           }}
+
         else if (currentBlock.id === "Row"){
           if (otwDist >= pieceDist){resetTimer();
-          
-          }
+          }}
 
-        document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
-        document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
-        document.getElementById("otwCadn").textContent = otwCadn;  
-            }
+
         else {
-        // console.log("Unknown block:", currentBlock.id);
+        console.log("Unknown block:", currentBlock.id);
           }    
         }, 50);
       }
