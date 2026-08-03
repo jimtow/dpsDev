@@ -246,7 +246,7 @@ save another test change
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
-      // to show on documeNT
+      // FOR HTML DOCUMENT
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
@@ -312,16 +312,18 @@ save another test change
   
     split = feSplit;      
     cadn = feCadn;
-   
+
+  /* initialize before start timer??? */   
     if (currentBlock.id === "Ready"){
         dpsMtrs = 8;   // PRE-TT VALUE 
       }
-
-    if (currentBlock.id === "Row"){
+    if ((currentBlock.id === "Row") || currentBlock.id ==="Pace"){
         cadn = otwCadn;    
         mechWatthrs =0;
       }
-  
+
+/* Note: timer runs continuously regardless of "Row" or "Pace" blockid */ 
+
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
