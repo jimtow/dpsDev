@@ -155,10 +155,8 @@ save another test change
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
   <h1> <span id="strokes">0</span> </h1>   
-    
-  <h3>Mechanical Watts: <span id="mechWatts">0</span></h3>
   <h3>Mech Watt-Hours: <span id="mechWattHrs">0</span></h3>
-  <h3>OTW Cadence: <span id="otwCadn">0</span></h3>
+  <h3>User Watt-Hours: <span id="userWatthrs">0</span></h3>
   <p>STROKES and Min/500 </p> 
   <p>strokes (metronome) @ cadence</p>
   <p>Minutes @ pace 3.5min per 500 </p>
@@ -256,22 +254,20 @@ save another test change
     function updateStrokes(){
       /* update and set document here for pace display too */
       let pullTime = 0;
+      userWatthrs = feWatts * seconds / 3600;
+      userWatthrs = Number(userWatthrs.toFixed(2));
+
       if (currentBlock.id === "Ready"){
         tt500();
-        userWatthrs = feWatts * seconds / 3600;
-        userWatthrs = Number(userWatthrs.toFixed(2));
-        }
+          }
       if (currentBlock.id === "Row"){
         // otwCadn?   
         tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         otwDist = dpsMtrs*strokes;  
-        
         otwSpeed = otwDist/seconds;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
-        
-        
         // pullForce ?? STILL 0 
 
         pullTime = .5*60/otwCadn;         
@@ -298,10 +294,11 @@ save another test change
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
         }
-      else if (currentBlock.id ==="Pace") {       
+      else if (currentBlock.id ==="Pace") { 
+        // FOR HTML ONLY      
           document.getElementById("strokes").textContent = strokes;
           document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
-          //document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
+          document.getElementById("userWatthrs").textContent = userWatthrs;
           }    
       }
       
