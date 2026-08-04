@@ -159,7 +159,6 @@ save another test change
  <h1> <span id="strokes"></span> </h1>
 
 
-
 <!--big STROKES and min/500m running avg per 100m?-->
 
  <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -282,17 +281,15 @@ save another test change
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2)+
-          " &nbsp;&nbsp; UserWatt-hrs: " + userWatthrs.toFixed(2) + "<br>" 
-         ;
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
-        //document.getElementById("otwDist").textContent = otwDist.toFixed(0);
-        //document.getElementById("userWatthrs").textContent = userWatthrs.toFixed(2);
         }
 
       else if (currentBlock.id ==="Pace") {
         document.getElementById("strokes").textContent = strokes;
+        document.getElementById("watts").textContent = watts;
+
       }
       }
 
@@ -399,7 +396,6 @@ save another test change
     }
   //------------------------------------------------------------------------------
   function showPace() {  
-   currentBlock = document.getElementById("Pace");
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
