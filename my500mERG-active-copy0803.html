@@ -341,19 +341,22 @@ save another test change
         old = seconds;
   
       // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
-        if (currentBlock.id === "Ready"){
+      //  console.log(old);
+      
+      
+      if (currentBlock.id === "Ready"){
           if (seconds>= split){resetTimer();
           }}
         else if (currentBlock.id === "Row"){
           if (otwDist >= pieceDist){resetTimer();
           
           }
-          document.getElementById("mechWatts").textContent = mechWatts.toFixed(0);
-          document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
-          document.getElementById("otwCadn").textContent = otwCadn;  
+          //document.getElementById("mechWatts").textContent = mechWatts.toFixed(2);
+          //document.getElementById("maxWattHrs").textContent = maxWattHrs.toFixed(2);
+          //document.getElementById("otwCadn").textContent = otwCadn;  
             }
         else {
-        // console.log("Unknown block:", currentBlock.id);
+        //console.log(otwDist, pieceDist);
           }    
         }, 50);
       }
