@@ -289,8 +289,8 @@ save another test change
          ;
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
-        document.getElementById("otwDist").textContent = otwDist.toFixed(0);
-        document.getElementById("userWatthrs").textContent = userWatthrs.toFixed(2);
+        document.getElementById("otwDist").textContent = otwDist;
+        document.getElementById("userWatthrs").textContent = userWatthrs;
         }
 
       else if (currentBlock.id ==="Pace") {
@@ -323,6 +323,12 @@ save another test change
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
+         console.log(
+              "id:", currentBlock.id,
+              "seconds:", seconds,
+              "split:", split,
+              "otwDist:", otwDist
+      );      
         elapsed += 50;
         let strokeInterval = 60000 / cadn;   // ms per stroke
         // update when time > stroke interval 
@@ -343,8 +349,12 @@ save another test change
         else if (currentBlock.id === "Row"){
           if (otwDist >= pieceDist){resetTimer();
           }}
-        else {
-        // console.log("Unknown block:", currentBlock.id);
+        else { console.log(
+              "id:", currentBlock.id,
+              "seconds:", seconds,
+              "split:", split,
+              "otwDist:", otwDist
+      );      
           }    
         }, 50);
       }
