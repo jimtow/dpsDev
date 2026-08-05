@@ -115,6 +115,17 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
+   <!--dpsMtrs is the result of TT calculation. pullForce (and pullLength) are also
+   used to update mechWatt-hrs
+   
+   Distance per Stroke (Estimated or Known)
+    <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
+    value="6">
+   --> 
+   
+  </h3>  
+
+  <h3>
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
@@ -197,6 +208,7 @@ save another test change
     let otwDist = 0;
 //-----------------------------------------------------------------------------
     function tt500() { 
+    //ok 0805.0735
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
@@ -255,7 +267,7 @@ save another test change
 
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-        // html IS AN OBJECT TO BE PLACED AS "readyTimer" OR "rowTimer"
+
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
@@ -270,20 +282,15 @@ save another test change
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2) +
-         " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
-
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
-       
         document.getElementById("strokes").textContent = strokes;
-
-        // add "paceTimer" xhtml here
-        document.getElementById("paceTimer").innerHTML = html;
-
         }
+
       else if (currentBlock.id ==="Pace") {
-        //document.getElementById("paceTimer").innerHTML = html;
-        //document.getElementById("strokes").textContent = strokes;        
+        document.getElementById("strokes").textContent = strokes;
+        document.getElementById("watts").textContent = watts;
+
       }
       }
 
