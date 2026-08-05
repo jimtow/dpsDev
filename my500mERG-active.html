@@ -48,25 +48,27 @@ save another test change
 <div id = "Ready" style ="display:none;">
 
   <h2>Ready</h2>
- <!-- <p>Determine full effort distance per stroke (dps) and ERG resistance</p>   --> 
+  500m Timed Trial
+ <!--Determine full effort distance per stroke (dps) and ERG resistance by controlled
+ row at maximum sustainable cadence on this machine  --> 
   <h3>
   User Watts
   <input id="feWatts" style="width:60px; height:30px;" type="number" 
   value="105">
   500m split (seconds)
-  <input id="feSplit" style="width:60px; height:30px;" type="number" 
+  <input id="feSplit" style="width:60px; height:30px;" type="number"                            
   value="12">
   </h3>
   <h3>
-     500m Sustainable Cadence (SC)
-      <input id="feCadn" style="width:60px; height: 30px;" type="number"
-      value="28">
+    <span>Est. Maximum Sustainable Cadence (@ this ERG settings)</span> <br>
+    <span>Cadence <input id="feCadn" style="width:60px; height: 30px;" type="number"
+      value="28"> </span>
      Stroke Length (ft) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
   </h3>
-  500m Timed Trial
-  <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
+ 
+  <h3 style="color: black;">Row @ SC to the 500m Split (seconds)   </h3>
   
   <button onclick="startTimer()" style="width: 100px; height: 60px;">
         Start
@@ -77,19 +79,18 @@ save another test change
   <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  
     
   <div id="readyTimer"></div>
-
   
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
-    Note TT % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" value="100">  
+    <span><input id="pcFeff" style="width:100px; height: 40px;"  
+    type="number" value="100">  </span> % Effort
     </h3>
-    (100% if no Timed Trial)
+    
 
-<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-        <br>  Watts:<span id="watts">    </span> 
-        <br>  ERGpull(lbs):<span id = "pullForce">    </span>
-</h3> 
+    <h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+          Watts:<span id="watts">    </span> 
+          ERGpull(lbs):<span id = "pullForce">    </span>
+    </h3> 
 
 
 <h3><button style="width: 100px; height: 60px;
