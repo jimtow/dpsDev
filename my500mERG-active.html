@@ -48,6 +48,7 @@ save another test change
 <div id = "Ready" style ="display:none;">
 
   <h2>Ready</h2>
+ 
   500m Timed Trial
  <!--Determine full effort distance per stroke (dps) and ERG resistance by controlled
  row at maximum sustainable cadence on this machine  --> 
@@ -82,7 +83,7 @@ save another test change
   
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
-    <span><input id="pcFeff" style="width:100px; height: 40px;"  
+    <span><input id="pcFeff" style="width:60px; height: 30px;"  
     type="number" value="100">  </span> % Effort (100% if no Timed Trial)
     </h3>
     
@@ -93,8 +94,7 @@ save another test change
     </h3> 
 
 
-<h3><button style="width: 100px; height: 60px;
-    " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
+<h3>
   </h3>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
@@ -102,7 +102,8 @@ save another test change
   
 
 
-  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
+  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">Return</button>
+  <button onclick="tt500()" style="width: 100px; height: 60px;">Go(thenRow)</button> 
   <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
   <!--<button onclick="showErgset()">myErgset</button>-->
 
