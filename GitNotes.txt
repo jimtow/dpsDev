@@ -1,0 +1,10 @@
+Laptop shows "Commit and Sync" from local dpsDev folder is possible.
+
+
+Open dpsDev in Terminal
+
+git pull updates from GitHub
+
+
+
+
