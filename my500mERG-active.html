@@ -136,7 +136,7 @@ save another test change
 
   <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
-    
+
     <button onclick="startTimer()" style="width: 100px; height: 60px;">StartWO</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">StopWO</button>
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
@@ -157,10 +157,8 @@ save another test change
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
   <p>STROKES and Min/500 </p> 
- <h1> <span id="strokes"></span> </h1>
-
-
-<!--big STROKES and min/500m running avg per 100m?-->
+  <h1> <span id="strokes"></span> </h1>
+  <h2> <span id="paceTimer"></span> </h2>
 
  <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
   <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
@@ -283,16 +281,15 @@ save another test change
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2)+
+         " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
+
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+        document.getElementById("paceTimer").innerHTML = html;
         }
 
-      else if (currentBlock.id ==="Pace") {
-        document.getElementById("strokes").textContent = strokes;
-        document.getElementById("watts").textContent = watts;
-
-      }
+   
       }
 
   //--------------------------------------------------------------------------------  
