@@ -157,6 +157,7 @@ save another test change
   <h2>Pace</h2> 
   <p>STROKES and Min/500 </p> 
  <h1> <span id="strokes"></span> </h1>
+ <h1> <span id="paceTimer"></span> </h1>
 
 
 <!--big STROKES and min/500m running avg per 100m?-->
@@ -266,7 +267,7 @@ save another test change
 
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-
+        // html IS AN OBJECT TO BE PLACED AS "readyTimer" OR "rowTimer"
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
@@ -285,11 +286,9 @@ save another test change
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
         }
-
       else if (currentBlock.id ==="Pace") {
-        document.getElementById("strokes").textContent = strokes;
-        document.getElementById("watts").textContent = watts;
-
+        document.getElementById("paceTimer").innerHTML = html;
+        //document.getElementById("strokes").textContent = strokes;        
       }
       }
 
