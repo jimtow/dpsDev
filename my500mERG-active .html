@@ -284,10 +284,12 @@ save another test change
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
+        document.getElementById("paceTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+
         }
       else if (currentBlock.id ==="Pace") {
-        document.getElementById("paceTimer").innerHTML = html;
+        //document.getElementById("paceTimer").innerHTML = html;
         //document.getElementById("strokes").textContent = strokes;        
       }
       }
