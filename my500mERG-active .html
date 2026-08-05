@@ -115,17 +115,6 @@ save another test change
   <h2>Row!</h2> 
   <p> Row at any cadence</p>
   <h3>
-   <!--dpsMtrs is the result of TT calculation. pullForce (and pullLength) are also
-   used to update mechWatt-hrs
-   
-   Distance per Stroke (Estimated or Known)
-    <input id="dpsMtrs" style="width:100px; height: 30px;" type="number" 
-    value="6">
-   --> 
-   
-  </h3>  
-
-  <h3>
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
      type="number" value="28"> 
@@ -157,9 +146,7 @@ save another test change
   <h2>Pace</h2> 
   <p>STROKES and Min/500 </p> 
  <h1> <span id="strokes"></span> </h1>
-
-
-<!--big STROKES and min/500m running avg per 100m?-->
+ <h3> <span id="paceTimer"></span> </h3>
 
  <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
   <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
@@ -266,7 +253,7 @@ save another test change
 
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-
+        // html IS AN OBJECT TO BE PLACED AS "readyTimer" OR "rowTimer"
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
@@ -281,15 +268,19 @@ save another test change
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2) +
+         " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
+
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+
+        // add "paceTimer" xhtml here
+        document.getElementById("paceTimer").innerHTML = html;
+
         }
-
       else if (currentBlock.id ==="Pace") {
-        document.getElementById("strokes").textContent = strokes;
-        document.getElementById("watts").textContent = watts;
-
+        //document.getElementById("paceTimer").innerHTML = html;
+        //document.getElementById("strokes").textContent = strokes;        
       }
       }
 
