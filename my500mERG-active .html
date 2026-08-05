@@ -157,7 +157,7 @@ save another test change
   <h2>Pace</h2> 
   <p>STROKES and Min/500 </p> 
  <h1> <span id="strokes"></span> </h1>
- <h1> <span id="paceTimer"></span> </h1>
+ <h3> <span id="paceTimer"></span> </h3>
 
 
 <!--big STROKES and min/500m running avg per 100m?-->
@@ -284,8 +284,11 @@ save another test change
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
          html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
         document.getElementById("rowTimer").innerHTML = html;
-        document.getElementById("paceTimer").innerHTML = html;
+       
         document.getElementById("strokes").textContent = strokes;
+
+        // add "paceTimer" xhtml here
+        document.getElementById("paceTimer").innerHTML = html;
 
         }
       else if (currentBlock.id ==="Pace") {
