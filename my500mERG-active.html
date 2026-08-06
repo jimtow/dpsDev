@@ -229,14 +229,12 @@ save another test change
     let feWatts = 0;
     let otwCadn = 0;
     let otwDist = 0;
+    //GLOBALS !!
     feCadn = Number(document.getElementById("feCadn").value); // user cadence
     feWatts = Number(document.getElementById("feWatts").value); // user watts
+    feSplit = Number(document.getElementById("feSplit").value); // user split
 //-----------------------------------------------------------------------------
     function tt500() { 
-      // USE DEFAULT VALUES IF NOT TIMED TRIAL
-      feSplit = Number(document.getElementById("feSplit").value); // user split
-      
-     
       pcFeff= Number(document.getElementById("pcFeff").value);
       // initial default value set in Ergset block. Not used anymore?
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
