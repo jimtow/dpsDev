@@ -251,9 +251,8 @@ save another test change
       
       */
       pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
-      // per stroke factor ??
+      // ASSUMED BODY WATTS 4XFT-LBS
       mechWatts = .7356 * pullForce * pullLength;    
-      
       // for display
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
@@ -267,7 +266,6 @@ save another test change
   // UPDATE DISPLAY ON TIMER INTERVALS   
     function updateStrokes(){
       if (currentBlock.id === "Ready"){
-
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
@@ -282,7 +280,8 @@ save another test change
         // pulltime???? otwCadn???
         pullTime = .5*60/otwCadn;
         mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
-        mechWatthrs = mechWatts*strokes/3600;    
+        // ASSUME HUMAN WATTS 4XMECHWATTS
+        mechWatthrs = 4*mechWatts*strokes/3600;    
         mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
         let html =
