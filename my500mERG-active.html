@@ -2,6 +2,13 @@
 <html>   
 <body>
  <style>
+   .fixed-paragraph {
+            width: 50%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
   body {
     font-family: Arial, sans-serif;
     line-height: 1.5;
@@ -146,14 +153,18 @@ save another test change
      Distance(m) <input id="pieceDist" style="width:100px; height: 40px;"
      type="number" value="500">
   </h3>
+  
 
   <p>Your WORKOUT w this machine and settings. </p>
-    <div id="rowTimer"></div>
+  
 
     <button onclick="startTimer()" style="width: 100px; height: 60px;">Start</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
     <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
+      <div id="rowTimer"></div>
+    
+    
     <p> Well Rowed !!</p>  
     <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
     <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ErgMate</button>
