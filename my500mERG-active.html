@@ -23,15 +23,21 @@
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "ReadyAll">
-<p class = "fixed-paragraph" style = "width:50%;">
-  my500mERG provides On-the-Water equivalent metrics for any Erg and settings based 
-  on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
-  FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
-  equivalent distance per stroke and watts for a workout with any cadence and duration. my 500mErg 
-  also includes a timer for tracking the cadence and workout duration. my500mErg is designed to be user-friendly 
-  and accessible
-  0729.0938
- </p>
+<div class = "fixed-paragraph" style = "height:100; width:100%;">
+  <h1>ErgMate </h1>
+  <h4>ErgMate provides On-the-Water equivalent metrics for any Erg and settings based 
+  on the concept of a rower's sustainable full-effort (FE) and cadence (SC). </h4>
+  
+  <h4>The rower's estimated FE watts, 500m split time, and sustainable cadence are used
+  to calculate On-the-Water equivalent distance per stroke and watts for a workout
+  with any cadence and duration. ErgMate also includes a timer for tracking the 
+  cadence and workout duration. </h4>
+
+  <h4>Note: Ergmate Mechancial Watts are adjusted using 25% human efficiency.<br>
+  
+  ErgMate is designed to be user-friendly and accessible</h4>
+  08.06
+  </div>
 
   <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
   <!--<button onclick="showRow()"style="width: 100px; height: 50px;">Row!</button>-->
@@ -88,11 +94,11 @@ save another test change
     </h3>
     
 
-    <h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+  <!-- <h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
           Watts:<span id="watts">    </span> 
           ERGpull(lbs):<span id = "pullForce">    </span>
     </h3> 
-
+   -->  
 
 <h3>
   </h3>
@@ -102,8 +108,10 @@ save another test change
   
 
 
-  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">Return</button>
-  <button onclick="tt500()" style="width: 100px; height: 60px;">Go(thenRow)</button> 
+<!--  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">Return</button>
+  <button onclick="tt500()" style="width: 100px; height: 60px;">Go(thenRow)</button> -->
+
+
   <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
   <!--<button onclick="showErgset()">myErgset</button>-->
 
@@ -126,7 +134,10 @@ save another test change
    --> 
    
   </h3>  
-
+<h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+          Watts:<span id="watts">    </span> 
+          ERGpull(lbs):<span id = "pullForce">    </span>
+    </h3>
   <h3>
     <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
     @cadence<input id="otwCadn" style="width:100px; height: 40px;"
@@ -139,17 +150,13 @@ save another test change
   <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
 
-    <button onclick="startTimer()" style="width: 100px; height: 60px;">StartWO</button>
-    <button onclick="stopTimer()" style="width: 100px; height: 60px;">StopWO</button>
+    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start</button>
+    <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
     <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
-    
- 
-
-  <p> Well Rowed !!</p>  
-  
- <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
-  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
+    <p> Well Rowed !!</p>  
+    <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
+    <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
  
   </h3>
   
@@ -248,13 +255,14 @@ save another test change
   // UPDATE DISPLAY ON TIMER INTERVALS   
     function updateStrokes(){
       let pullTime = 0;
+      //tt500();
       if (currentBlock.id === "Ready"){
-        tt500();
+        //tt500();
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
         }
       if (currentBlock.id === "Row"){   
-        tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
+        //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
@@ -381,6 +389,7 @@ save another test change
 //------------------------------------------------------------------------------
   function showRow() {  
     currentBlock = document.getElementById("Row");
+    tt500();
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
