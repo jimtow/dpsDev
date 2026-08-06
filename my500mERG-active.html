@@ -3,16 +3,15 @@
 <body>
  <style>
   .fixed-display {
-  position: fixed;
-  overflow: hidden;
+    position: fixed;
+    overflow: hidden;
 }
-   .fixed-paragraph {
-            
-            width: 50%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 15px;
-            border: 1px solid #ccc;
+  .fixed-paragraph {            
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 5px;
+      border: 1px solid #ccc;
         }
   body {
     font-family: Arial, sans-serif;
@@ -38,10 +37,10 @@
 <div class = "fixed-paragraph" style = "height:100; width:70%;">
   <h1>ErgMate </h1>
   <h4>ErgMate provides On-the-Water equivalent metrics for any Erg and settings based 
-  on the concept of a rower's sustainable full-effort (FE) and cadence (SC). </h4>
+  on an extimate of a rower's sustainable full-effort (FE) and cadence (SC). </h4>
   
-  <h4>The rower's estimated FE watts, 500m split time, and sustainable cadence are used
-  to calculate On-the-Water equivalent distance per stroke and watts for a workout
+  <h4>The rower's FE watts, 500m split time, and sustainable cadence (SC) are used
+  to calculate an On-the-Water equivalent distance per stroke and watts for a workout
   with any cadence and duration. ErgMate also includes a timer for tracking the 
   cadence and workout duration. </h4>
 
@@ -270,7 +269,7 @@ save another test change
 //------------------------------------------------------------------------------
   // UPDATE DISPLAY ON TIMER INTERVALS   
     function updateStrokes(){
-      let pullTime = 0;
+      //let pullTime = 0;
       //tt500();
       if (currentBlock.id === "Ready"){
         //tt500();
@@ -281,16 +280,14 @@ save another test change
         //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-
         otwDist = dpsMtrs*strokes;   
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
-        // problem with pullTime here doesnt update
+        // pulltime???? otwCadn???
         pullTime = .5*60/otwCadn;
         mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
         mechWatthrs = mechWatts*strokes/3600;    
-
-        //mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
 
         let html =
@@ -314,8 +311,6 @@ save another test change
         document.getElementById("strokes").textContent = strokes;
         document.getElementById("paceTimer").innerHTML = html;
         }
-
-   
       }
 
   //--------------------------------------------------------------------------------  
@@ -324,8 +319,7 @@ save another test change
     let feSplit = Number(document.getElementById("feSplit").value); // user split
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
-    
-    let otwCadn = Number(document.getElementById("otwCadn").value); 
+    otwCadn = Number(document.getElementById("otwCadn").value); 
     let pieceDist = Number(document.getElementById("pieceDist").value);
   
     split = feSplit;      
@@ -334,17 +328,15 @@ save another test change
     if (currentBlock.id === "Ready"){
         dpsMtrs = 8;   // PRE-TT VALUE 
       }
-
     if (currentBlock.id === "Row"){
         cadn = otwCadn;    
-        mechWatthrs =0;
       }
   
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
         elapsed += 50;
-        let strokeInterval = 60000 / cadn;   // ms per stroke
+        let strokeInterval = 60000 /cadn;   // ms per stroke
         // update when time > stroke interval 
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
