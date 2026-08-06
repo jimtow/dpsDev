@@ -229,13 +229,14 @@ save another test change
     let feWatts = 0;
     let otwCadn = 0;
     let otwDist = 0;
+    feCadn = Number(document.getElementById("feCadn").value); // user cadence
+    feWatts = Number(document.getElementById("feWatts").value); // user watts
 //-----------------------------------------------------------------------------
     function tt500() { 
-    //ok 0805.0735
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
       feSplit = Number(document.getElementById("feSplit").value); // user split
-      feCadn = Number(document.getElementById("feCadn").value); // user cadence
-      feWatts = Number(document.getElementById("feWatts").value); // user watts
+      
+     
       pcFeff= Number(document.getElementById("pcFeff").value);
       // initial default value set in Ergset block. Not used anymore?
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
@@ -247,12 +248,10 @@ save another test change
       only work that is being done on the erg. Easy to oversimplify. Also, the published
       watts are not simple. Yes, the only thing the erg sees is the handle force an
       distance
-
       See notes in Gdrive. Its a guess but if the demographic chart is showing human
       effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
       
       */
-
       pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
       // per stroke factor ??
       mechWatts = .7356 * pullForce * pullLength;    
@@ -269,12 +268,11 @@ save another test change
 //------------------------------------------------------------------------------
   // UPDATE DISPLAY ON TIMER INTERVALS   
     function updateStrokes(){
-      //let pullTime = 0;
-      //tt500();
       if (currentBlock.id === "Ready"){
-        //tt500();
+
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
+
         }
       if (currentBlock.id === "Row"){   
         //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
@@ -289,15 +287,14 @@ save another test change
         mechWatthrs = mechWatts*strokes/3600;    
         mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
-      if (currentBlock.id === "Ready") {
+
+        if (currentBlock.id === "Ready") {
         html +=
-          "Cadence: " + feCadn.toFixed(1) +
-          " &nbsp;&nbsp; Mech Watt-hrs: " + mechWatthrs.toFixed(2) + "<br>";
-          html += "User Watt-hrs: " + userWatthrs.toFixed(2);
+          "Cadence: " + feCadn + 
+          " &nbsp;&nbsp; UserWatt-hrs: " + userWatthrs.toFixed(2) ;
           document.getElementById("readyTimer").innerHTML = html;
         } 
       else if (currentBlock.id === "Row") {
@@ -331,7 +328,6 @@ save another test change
     if (currentBlock.id === "Row"){
         cadn = otwCadn;    
       }
-  
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
