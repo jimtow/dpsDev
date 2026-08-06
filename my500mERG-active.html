@@ -24,7 +24,6 @@
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "ReadyAll">
 <p class = "fixed-paragraph" style = "width:50%;">
-  ErgMate
   my500mERG provides On-the-Water equivalent metrics for any Erg and settings based 
   on the concept of a rower's sustainable full-effort (FE) and cadence (SC). The rower estimates 
   FE watts, 500m split time, and sustainable cadence. my500mErg then computes the On-the-Water 
@@ -49,25 +48,28 @@ save another test change
 <div id = "Ready" style ="display:none;">
 
   <h2>Ready</h2>
- <!-- <p>Determine full effort distance per stroke (dps) and ERG resistance</p>   --> 
+ 
+  500m Timed Trial
+ <!--Determine full effort distance per stroke (dps) and ERG resistance by controlled
+ row at maximum sustainable cadence on this machine  --> 
   <h3>
   User Watts
   <input id="feWatts" style="width:60px; height:30px;" type="number" 
   value="105">
-  500m split (seconds)
-  <input id="feSplit" style="width:60px; height:30px;" type="number" 
+    500m split (seconds)
+  <input id="feSplit" style="width:60px; height:30px;" type="number"                            
   value="12">
   </h3>
   <h3>
-     500m Sustainable Cadence (SC)
-      <input id="feCadn" style="width:60px; height: 30px;" type="number"
-      value="28">
-     Stroke Length (ft) 
+    <span>Est. Maximum Sustainable Cadence (SC)</span> <br>
+    <span>@ this Erg/setings<input id="feCadn" style="width:60px; height: 30px;" type="number"
+      value="28"> </span>
+     Pull Length (ft) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
   </h3>
-  500m Timed Trial
-  <h3 style="color: black;">Row Full-Effort SC to the 500m Split (seconds)   </h3>
+ 
+  <h3 style="color: black;">Row @ SC to the 500m Split (seconds)   </h3>
   
   <button onclick="startTimer()" style="width: 100px; height: 60px;">
         Start
@@ -78,23 +80,21 @@ save another test change
   <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  
     
   <div id="readyTimer"></div>
-
   
  <!--<p> Note ROWERS Perceived Effort</p>  -->
    <h3> 
-    Note TT % full effort <input id="pcFeff" style="width:100px; height: 30px;"  
-    type="number" value="100">  
+    <span><input id="pcFeff" style="width:60px; height: 30px;"  
+    type="number" value="100">  </span> % Effort (100% if no Timed Trial)
     </h3>
-    (100% if no Timed Trial)
+    
 
-<h3>    Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-        <br>  Watts:<span id="watts">    </span> 
-        <br>  ERGpull(lbs):<span id = "pullForce">    </span>
-</h3> 
+    <h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
+          Watts:<span id="watts">    </span> 
+          ERGpull(lbs):<span id = "pullForce">    </span>
+    </h3> 
 
 
-<h3><button style="width: 100px; height: 60px;
-    " onclick="tt500('Row(500m)')">GO (then Row!)</button> 
+<h3>
   </h3>
   <!--calculate and display resistance here. It is based on demographic
   parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
@@ -102,7 +102,8 @@ save another test change
   
 
 
-  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
+  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">Return</button>
+  <button onclick="tt500()" style="width: 100px; height: 60px;">Go(thenRow)</button> 
   <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
   <!--<button onclick="showErgset()">myErgset</button>-->
 
@@ -137,12 +138,13 @@ save another test change
 
   <p>Your WORKOUT w this machine and settings. </p>
     <div id="rowTimer"></div>
+
     <button onclick="startTimer()" style="width: 100px; height: 60px;">StartWO</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">StopWO</button>
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
     <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
     
-  <h1 id="otwtimer"></h1>
+ 
 
   <p> Well Rowed !!</p>  
   
@@ -157,11 +159,8 @@ save another test change
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
   <p>STROKES and Min/500 </p> 
- <h1> <span id="strokes"></span> </h1>
- <h3> <span id="paceTimer"></span> </h3>
-
-
-<!--big STROKES and min/500m running avg per 100m?-->
+  <h1> <span id="strokes"></span> </h1>
+  <h2> <span id="paceTimer"></span> </h2>
 
  <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
   <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
@@ -210,6 +209,7 @@ save another test change
     let otwDist = 0;
 //-----------------------------------------------------------------------------
     function tt500() { 
+    //ok 0805.0735
       // USE DEFAULT VALUES IF NOT TIMED TRIAL
       feSplit = Number(document.getElementById("feSplit").value); // user split
       feCadn = Number(document.getElementById("feCadn").value); // user cadence
@@ -268,7 +268,7 @@ save another test change
 
         //mechWatthrs = Number(mechWatthrs.toFixed(1));  
         }
-        // html IS AN OBJECT TO BE PLACED AS "readyTimer" OR "rowTimer"
+
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
@@ -283,19 +283,15 @@ save another test change
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
-         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2);
+         html += "Mech Watt-hrs: " + mechWatthrs.toFixed(2)+
+         " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
+
         document.getElementById("rowTimer").innerHTML = html;
-       
         document.getElementById("strokes").textContent = strokes;
-
-        // add "paceTimer" xhtml here
         document.getElementById("paceTimer").innerHTML = html;
-
         }
-      else if (currentBlock.id ==="Pace") {
-        //document.getElementById("paceTimer").innerHTML = html;
-        //document.getElementById("strokes").textContent = strokes;        
-      }
+
+   
       }
 
   //--------------------------------------------------------------------------------  
