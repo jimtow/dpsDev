@@ -2,25 +2,22 @@
 Netlify/GitHub Team name: 500Dev
 
 Push file changes to Github
- or Clone local folder changes to GitHub.
+or Clone local folder changes to GitHub.
+
+BE VERY CAREFUL. GITHUB IS NOT MEANT FOR ONE DEVELOPER TWO COMPUTERS !!
+ALWAYS DOWNLOAD FROM GITHUB BEFORE A SESSION AND COMMIT PUSH AFTER A SESSION
+
 
 Clone from GitHub
-
-Clone the repository: Open local folder then 
-git clone https://github.com/jimtow/dpsDev.git
-
-
-Work in VS Code GitHub Explorer whenever online??
 
 Simulates two different users on different computers.
 
 Commit and Save changes when finished.
 
-This folder was created by cloning from GitHub as follows:
+FROM CHATGPT (HOW DO CLONE A FOLDER FROM GITHUB TO MY DESKTOP) EMERGENCY !!
 
-how do i copy a github folder to my desktop
-
-If by "GitHub folder" you mean a repository that already exists on GitHub, the best way is to clone it directly to your Desktop.
+If by "GitHub folder" you mean a repository that already exists on GitHub, 
+the best way is to clone it directly to your Desktop.
 
 Option 1: Clone the repository to your Desktop (recommended)
 Open VS Code or a terminal.
