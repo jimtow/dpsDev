@@ -117,7 +117,7 @@ save another test change
 
 <h3>
   </h3>
-  <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
+  <button onclick="showRow()" style="width: 100px; height: 60px;">Workout</button>
   <button onclick="showReadyAll()" style="width:100px; height: 60px;">Return</button>
 
 </div>
@@ -156,12 +156,15 @@ save another test change
   <p>Your WORKOUT w this machine and settings. </p>
   
 
-    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start</button>
+    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start/Resume</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
+    
+  
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
+    
     <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
       <div id="rowTimer"></div>
-    
+  
     
     <p> Well Rowed !!</p>  
     <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -303,6 +306,7 @@ save another test change
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
+    showPace();
       // 07.29 INITIALIZE WITH LET NEEDED !!
     let feSplit = Number(document.getElementById("feSplit").value); // user split
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
