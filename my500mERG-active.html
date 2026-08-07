@@ -37,9 +37,9 @@
 <div class = "fixed-paragraph" style = "height:100; width:70%;">
   <h1>ErgMate </h1>
   <h4>ErgMate provides On-the-Water equivalent metrics for any Erg and settings based 
-  on an extimate of a rower's sustainable full-effort (FE) and cadence (SC). </h4>
+  on an estimate of a rower's sustainable full-effort (FE) and cadence (SC). </h4>
   
-  <h4>The rower's FE watts, 500m split time, and sustainable cadence (SC) are used
+  <h4> ErgMate uses the rower's FE watts, 500m split time, and sustainable cadence (SC) to
   to calculate an On-the-Water equivalent distance per stroke and watts for a workout
   with any cadence and duration. ErgMate also includes a timer for tracking the 
   cadence and workout duration. </h4>
@@ -47,13 +47,13 @@
   <h4>Quick steps to "calibration": Enter your demographics (watts, 500m split), 
   strap in, row a few strokes and estimate the maximum cadence that you can maintain 
   for a 3-4 minute row with this erg and settings. Row to your 500m demographic split time
-  and estimate % of full "race" effort.
+  and estimate your % of full ("race") effort.
   </h4>
 
-  <h4>Note: Ergmate Mechancial Watts are adjusted using 25% human efficiency.<br>
+  <h4>Notes: Ergmate mechancial watts are adjusted using 25% human efficiency.<br>
   
   ErgMate is designed to be user-friendly and accessible</h4>
-  08.06
+  08.07
   </div>
 
   <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -72,27 +72,25 @@ save another test change
 
   <h2>Ready</h2>
  
-  <h3> 500m Split (calibrate my Erg)  </h3>
- <!--Determine full effort distance per stroke (dps) and ERG resistance by controlled
- row at maximum sustainable cadence on this machine  --> 
+  <h3> "Calibrate" your ERG/settings with a 500m timed split  </h3>
   <h3>
-  Watts
+  Your FE Watts
   <input id="feWatts" style="width:60px; height:30px;" type="number" 
   value="105">
-  Split (seconds)
+  500m Split (seconds)
   <input id="feSplit" style="width:60px; height:30px;" type="number"                            
   value="12">
   </h3>
   <h3>
-    <span>Est. Maximum Sustainable Cadence (SC)</span> <br>
-    <span>@ this Erg/setings<input id="feCadn" style="width:60px; height: 30px;" type="number"
+    <span>Estimate your maximum Sustainable Cadence (SC)</span> <br>
+    <span>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
       value="28"> </span>
      Pull Length (ft) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
   </h3>
  
-  <h3 style="color: black;">Row @ SC to the 500m Split (seconds)   </h3>
+  <h3 style="color: black;">Row @ SC to the 500m split (seconds)   </h3>
   
   <button onclick="startTimer()" style="width: 100px; height: 60px;">
         Start
@@ -119,18 +117,8 @@ save another test change
 
 <h3>
   </h3>
-  <!--calculate and display resistance here. It is based on demographic
-  parameters and percieved effort AND IS MACHINE / ROWER // TT SPECIFIC
-  --> 
-  
-
-
-<!--  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">Return</button>
-  <button onclick="tt500()" style="width: 100px; height: 60px;">Go(thenRow)</button> -->
-
-
   <button onclick="showRow()" style="width: 100px; height: 60px;">Row!</button>
-  <!--<button onclick="showErgset()">myErgset</button>-->
+  <button onclick="showReadyAll()" style="width:100px; height: 60px;">Return</button>
 
 </div>
 
