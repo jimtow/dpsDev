@@ -84,10 +84,10 @@ save another test change
   value="12">
   </h3>
   <h3>
-    <span>Estimate your maximum Sustainable Cadence (SC)</span> <br>
+    <span>Your 500m maximum Sustainable Cadence (SC)</span> <br>
     <span>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
       value="28"> </span>
-     Pull Length (ft) 
+     Handle Pull (ft) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
   </h3>
@@ -230,9 +230,10 @@ save another test change
     //GLOBALS !!
     feCadn = Number(document.getElementById("feCadn").value); // user cadence
     feWatts = Number(document.getElementById("feWatts").value); // user watts
-    feSplit = Number(document.getElementById("feSplit").value); // user split
+    //feSplit = Number(document.getElementById("feSplit").value); // user split
 //-----------------------------------------------------------------------------
     function tt500() { 
+      feSplit = Number(document.getElementById("feSplit").value); // user split
       pcFeff= Number(document.getElementById("pcFeff").value);
       // initial default value set in Ergset block. Not used anymore?
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
