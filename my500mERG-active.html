@@ -82,26 +82,25 @@ save another test change
   500m Split (seconds)
   <input id="feSplit" style="width:60px; height:30px;" type="number"                            
   value="12">
-
-  </h4>
-
-  <h4>
-    Your maximum sustainable cadence (500m): </h4>
-
-   <h4>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
-      value="28">
-     Handle Pull (ft) 
+  </h3>
+  <h3>
+    <span>Estimate your maximum Sustainable Cadence (SC)</span> <br>
+    <span>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
+      value="28"> </span>
+     Pull Length (ft) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
   </h4>
  
   <h4 style="color: black;">Row @ max sustainable cadence to the 500m split (seconds)   </h4>
   
-  <button onclick="startTimer()" style="width: 100px; height: 60px;">Start/reStart</button>
-
-  <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
-
-
+  <button onclick="startTimer()" style="width: 100px; height: 60px;">
+        Start
+    </button>
+  <button onclick="stopTimer()" style="width: 100px; height: 60px;">
+        Stop
+    </button>
+  <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  
     
   <div id="readyTimer"></div>
   
