@@ -42,12 +42,14 @@
   <h4> ErgMate uses the rower's FE watts, 500m split time, and sustainable cadence (SC) to
   to calculate an On-the-Water equivalent distance per stroke and watts for a workout
   with any cadence and duration. ErgMate also includes a timer for tracking the 
-  cadence and workout duration. </h4>
+  cadence and workout duration and a virtual "cox" to keep you on-cadence. </h4>
 
   <h4>Quick steps to "calibration": Enter your demographics (watts, 500m split), 
   strap in, row a few strokes and estimate the maximum cadence that you can maintain 
   for a 3-4 minute row with this erg and settings. Row to your 500m demographic split time
   and estimate your % of full ("race") effort.
+
+  You are now good to go any cadence any distance on this rowing machine and settings.
   </h4>
 
   <h4>Notes: Ergmate mechancial watts are adjusted using 25% human efficiency.<br>
@@ -72,33 +74,34 @@ save another test change
 
   <h2>Ready</h2>
  
-  <h3> "Calibrate" your ERG/settings with a 500m timed split  </h3>
-  <h3>
+  <h4> Calibrate your ERG/settings with a 500m timed split:  </h4>
+  <h4>
   Your FE Watts
   <input id="feWatts" style="width:60px; height:30px;" type="number" 
   value="105">
   500m Split (seconds)
   <input id="feSplit" style="width:60px; height:30px;" type="number"                            
   value="12">
-  </h3>
-  <h3>
-    <span>Estimate your maximum Sustainable Cadence (SC)</span> <br>
-    <span>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
-      value="28"> </span>
-     Pull Length (ft) 
+
+  </h4>
+
+  <h4>
+    Your maximum sustainable cadence (500m): </h4>
+
+   <h4>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
+      value="28">
+     Handle Pull (ft) 
       <input id="pullLength" style="width:60px; height: 30px;" type="number"
       value="4">
-  </h3>
+  </h4>
  
-  <h3 style="color: black;">Row @ SC to the 500m split (seconds)   </h3>
+  <h4 style="color: black;">Row @ max sustainable cadence to the 500m split (seconds)   </h4>
   
-  <button onclick="startTimer()" style="width: 100px; height: 60px;">
-        Start
-    </button>
-  <button onclick="stopTimer()" style="width: 100px; height: 60px;">
-        Stop
-    </button>
-  <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  
+  <button onclick="startTimer()" style="width: 100px; height: 60px;">Start/reStart</button>
+
+  <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
+
+
     
   <div id="readyTimer"></div>
   
@@ -107,16 +110,7 @@ save another test change
     <span><input id="pcFeff" style="width:60px; height: 30px;"  
     type="number" value="100">  </span> % Effort (100% if no Timed Trial)
     </h3>
-    
 
-  <!-- <h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-          Watts:<span id="watts">    </span> 
-          ERGpull(lbs):<span id = "pullForce">    </span>
-    </h3> 
-   -->  
-
-<h3>
-  </h3>
   <button onclick="showRow()" style="width: 100px; height: 60px;">Workout</button>
   <button onclick="showReadyAll()" style="width:100px; height: 60px;">Return</button>
 
@@ -156,15 +150,14 @@ save another test change
   <p>Your WORKOUT w this machine and settings. </p>
   
 
-    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start/Resume</button>
+    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
     
   
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
-  
-    <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
+<!--   <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button> -->
       <div id="rowTimer"></div>
-  
+    
     
     <p> Well Rowed !!</p>  
     <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
@@ -181,10 +174,12 @@ save another test change
   <p>Min/500 </p> 
   <h4> <span id="paceTimer"></span> </h4>
 
- <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
-  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
+<h3> 
+  <button onclick="showReady()" style="width: 100px; height: 60px;">Return</button>
+<!-- <button onclick="showReady()" style="width: 100px; height: 60px;">Return</button> -->
  
-  </h3>
+
+</h3>
 
 </div>
 
@@ -229,9 +224,10 @@ save another test change
     //GLOBALS !!
     feCadn = Number(document.getElementById("feCadn").value); // user cadence
     feWatts = Number(document.getElementById("feWatts").value); // user watts
-    feSplit = Number(document.getElementById("feSplit").value); // user split
+    //feSplit = Number(document.getElementById("feSplit").value); // user split
 //-----------------------------------------------------------------------------
     function tt500() { 
+      feSplit = Number(document.getElementById("feSplit").value); // user split
       pcFeff= Number(document.getElementById("pcFeff").value);
       // initial default value set in Ergset block. Not used anymore?
       dspMtrs = Number(document.getElementById("dspMtrs").value);     
@@ -292,6 +288,7 @@ save another test change
           document.getElementById("readyTimer").innerHTML = html;
         } 
       else if (currentBlock.id === "Row") {
+        // ADD THESE TO html element
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
@@ -306,7 +303,6 @@ save another test change
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
-    //showPace();
       // 07.29 INITIALIZE WITH LET NEEDED !!
     let feSplit = Number(document.getElementById("feSplit").value); // user split
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
@@ -316,12 +312,13 @@ save another test change
   
     split = feSplit;      
     cadn = feCadn;
-   
+
     if (currentBlock.id === "Ready"){
         dpsMtrs = 8;   // PRE-TT VALUE 
       }
     if (currentBlock.id === "Row"){
-        cadn = otwCadn;    
+        cadn = otwCadn; 
+        showPace(); 
       }
     if (interval) return;
         interval = setInterval(() => {
@@ -357,6 +354,9 @@ save another test change
   function stopTimer() {
       clearInterval(interval);
       interval = null;
+      seconds = 0;
+      old = 0;
+      strokes = 0;
     }
 //------------------------------------------------------------------------------    
   function resetTimer() {
