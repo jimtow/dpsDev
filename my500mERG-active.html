@@ -149,15 +149,21 @@ save another test change
      Distance(m) <input id="pieceDist" style="width:100px; height: 40px;"
      type="number" value="500">
   </h3>
-   <p>Your WORKOUT w this machine and settings. </p>
-    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start/reStart</button>
+  
+
+  <p>Your WORKOUT w this machine and settings. </p>
+  
+
+    <button onclick="startTimer()" style="width: 100px; height: 60px;">Start</button>
     <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
+    
+  
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
-  
- <!-- <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button> -->
-  <div id="rowTimer"></div>
-  
-  <p> Well Rowed !!</p>  
+    <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
+      <div id="rowTimer"></div>
+    
+    
+    <p> Well Rowed !!</p>  
     <h3> <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
     <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ErgMate</button>
  
@@ -297,7 +303,7 @@ save another test change
 
   //--------------------------------------------------------------------------------  
    function startTimer() {
-    // 07.29 INITIALIZE WITH LET NEEDED !!
+      // 07.29 INITIALIZE WITH LET NEEDED !!
     let feSplit = Number(document.getElementById("feSplit").value); // user split
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
