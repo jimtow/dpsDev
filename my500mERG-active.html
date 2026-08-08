@@ -169,7 +169,12 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id = "Pace"  style = "display:none;">
   <h2>Pace</h2> 
+  // replace "strokes" here with a timed metronome element from row document "o"
   <h1> <span id="strokes"></span> </h1>
+    <!--   setTimeout(() => {
+          document.getElementById("metrnm").style.display = "none";
+          }, 500); // 3000 ms = 3 seconds
+    -->
   <p>Min/500 </p> 
   <h4> <span id="paceTimer"></span> </h4>
 
@@ -288,6 +293,7 @@ save another test change
         } 
       else if (currentBlock.id === "Row") {
         // ADD THESE TO html element
+
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
@@ -296,6 +302,8 @@ save another test change
 
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+        
+
         document.getElementById("paceTimer").innerHTML = html;
         }
       }
@@ -317,6 +325,12 @@ save another test change
       }
     if (currentBlock.id === "Row"){
         cadn = otwCadn; 
+        /*
+        setTimeout(() => {
+          document.getElementById("strokes").style.display = "none";
+          }, 500); // 3000 ms = 3 seconds
+        */
+
         showPace(); 
       }
     if (interval) return;
