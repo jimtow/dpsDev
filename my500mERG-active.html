@@ -159,7 +159,7 @@ save another test change
     
   
     <button onclick="showPace()" style="width: 100px; height: 60px;">Pace</button>
-    <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>
+<!--   <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button> -->
       <div id="rowTimer"></div>
     
     
@@ -178,10 +178,12 @@ save another test change
   <p>Min/500 </p> 
   <h4> <span id="paceTimer"></span> </h4>
 
- <h3> 
-  <button onclick="showReady()" style="width: 100px; height: 60px;">Ready</button>
-  <button onclick="showReadyAll()" style="width: 100px; height: 60px;">ReadyAll</button>
- </h3>
+<h3> 
+  <button onclick="showReady()" style="width: 100px; height: 60px;">Return</button>
+<!-- <button onclick="showReady()" style="width: 100px; height: 60px;">Return</button> -->
+ 
+
+</h3>
 
 </div>
 
@@ -317,7 +319,8 @@ save another test change
         dpsMtrs = 8;   // PRE-TT VALUE 
       }
     if (currentBlock.id === "Row"){
-        cadn = otwCadn;  
+        cadn = otwCadn; 
+        showPace(); 
       }
     if (interval) return;
         interval = setInterval(() => {
