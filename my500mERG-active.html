@@ -11,7 +11,7 @@
 }
   .fixed-paragraph {            
       width: 70%;
-      height: 300px;
+      height: 400px;
       overflow-y: auto;
       padding: 5px;
       border: 1px solid #ccc;
@@ -42,7 +42,7 @@
       }
     .input-sm {
       width: 60px;
-      height: 30px;
+      height: 25px;
       }
     .input-md {
       width: 100px;
@@ -82,7 +82,7 @@
   <h4>Notes: Ergmate mechancial watts are adjusted using 25% human efficiency.<br>
   
   ErgMate is designed to be user-friendly and accessible</h4>
-  08.07
+  08.11 Claude
   </div>
 
   <button onclick="showReady()" class="btn">Ready</button>
@@ -101,21 +101,20 @@ save another test change
 
   <h2>Ready</h2>
  
-  <h4> Calibrate your ERG/settings with a 500m timed split:  </h4>
+  <!-- <h4> Calibrate your ERG/settings with a 500m timed split:  </h4> -->
   <h3>
   Your FE Watts
   <input id="feWatts" class="input-sm" type="number" 
-  value="105">
+    value="105">
   500m Split (seconds)
   <input id="feSplit" class="input-sm" type="number"
-  value="12">
-  </h3>
-  <h3>
-    <span>Your 500m maximum Sustainable Cadence (SC)</span> <br>
-    <span>@ this Erg/settings<input id="feCadn" class="input-sm" type="number"
-      value="28"> </span>
-     Handle Pull (ft) 
-      <input id="pullLength" class="input-sm" type="number"
+    value="12">
+ <br> and 500m maximum Sustainable
+ <br> Cadence (SC):
+    <input id="feCadn" class="input-sm" type="number"
+      value="28">
+    Handle Pull (ft):
+    <input id="pullLength" class="input-sm" type="number"
       value="4">
   </h3>
  
