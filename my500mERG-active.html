@@ -52,6 +52,9 @@
       width: 100px;
       height: 40px;
       }
+    .text-black {
+      color: black;
+      }
   </style>
 </head>
 <body>
@@ -109,18 +112,18 @@ save another test change
   </h3>
   <h3>
     <span>Your 500m maximum Sustainable Cadence (SC)</span> <br>
-    <span>@ this Erg/settings<input id="feCadn" style="width:60px; height: 30px;" type="number"
+    <span>@ this Erg/settings<input id="feCadn" class="input-sm" type="number"
       value="28"> </span>
      Handle Pull (ft) 
-      <input id="pullLength" style="width:60px; height: 30px;" type="number"
+      <input id="pullLength" class="input-sm" type="number"
       value="4">
-  </h4>
+  </h3>
  
-  <h3 style="color: black;">Row @ SC to the 500m split (seconds)   </h3>
+  <h3 class="text-black">Row @ SC to the 500m split (seconds)   </h3>
   
-  <button onclick="startTimer()" style="width: 100px; height: 60px;">Start/reStart</button>
+  <button onclick="startTimer()" class="btn">Start/reStart</button>
 
-  <button onclick="stopTimer()" style="width: 100px; height: 60px;">Stop</button>
+  <button onclick="stopTimer()" class="btn">Stop</button>
 
 <!---  <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  -->
     
@@ -141,8 +144,8 @@ save another test change
 
 <h3>
   </h3>
-  <button onclick="showRow()" style="width: 100px; height: 60px;">Workout</button>
-  <button onclick="showReadyAll()" style="width:100px; height: 60px;">Return</button>
+  <button onclick="showRow()" class="btn">Workout</button>
+  <button onclick="showReadyAll()" class="btn">Return</button>
 
 </div>
 
