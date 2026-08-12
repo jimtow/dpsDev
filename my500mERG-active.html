@@ -55,6 +55,15 @@
     .text-black {
       color: black;
       }
+    #strokes-display {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      transition: background-color 0.1s ease;
+      }
+    #strokes-display.flash {
+      background-color: yellow;
+      }
   </style>
 </head>
 <body>
@@ -202,20 +211,13 @@ save another test change
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="Pace" class="hidden">
   <h2>Pace</h2> 
-  // replace "strokes" here with a timed metronome element from row document "o"
-  <h1> <span id="strokes"></span> </h1>
-    <!--   setTimeout(() => {
-          document.getElementById("metrnm").style.display = "none";
-          }, 500); // 3000 ms = 3 seconds
-    -->
+  <h1><span id="strokes-display">0</span></h1>
+
   <p>Min/500 </p> 
   <h4> <span id="paceTimer"></span> </h4>
 
 <h3> 
   <button onclick="showReady()" class="btn">Return</button>
-<!-- <button onclick="showReady()" style="width: 100px; height: 60px;">Return</button> -->
- 
-
 </h3>
 
 </div>
@@ -298,7 +300,6 @@ save another test change
       if (currentBlock.id === "Ready"){
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-
         }
       if (currentBlock.id === "Row"){   
         //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
@@ -317,7 +318,6 @@ save another test change
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
-
         if (currentBlock.id === "Ready") {
         html +=
           "Cadence: " + feCadn + 
@@ -325,8 +325,6 @@ save another test change
           document.getElementById("readyTimer").innerHTML = html;
         } 
       else if (currentBlock.id === "Row") {
-        // ADD THESE TO html element
-
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
@@ -334,10 +332,8 @@ save another test change
          " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
 
         document.getElementById("rowTimer").innerHTML = html;
-        document.getElementById("strokes").textContent = strokes;
-        
-
-        document.getElementById("paceTimer").innerHTML = html;
+        document.getElementById("strokes-display").textContent = strokes;
+        document.getElementById("paceTimer").innerHTML = html;    
         }
       }
 
@@ -349,7 +345,9 @@ save another test change
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
     otwCadn = Number(document.getElementById("otwCadn").value); 
     let pieceDist = Number(document.getElementById("pieceDist").value);
-  
+    
+    const el = document.getElementById('strokes-display');
+      
     split = feSplit;      
     cadn = feCadn;
 
@@ -358,12 +356,6 @@ save another test change
       }
     if (currentBlock.id === "Row"){
         cadn = otwCadn; 
-        /*
-        setTimeout(() => {
-          document.getElementById("strokes").style.display = "none";
-          }, 500); // 3000 ms = 3 seconds
-        */
-
         showPace(); 
       }
     if (interval) return;
@@ -374,7 +366,19 @@ save another test change
         // update when time > stroke interval 
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
-            //beep();
+            //beep() or flash strokes here with Claude 
+        
+        el.textContent = strokes;
+
+        // trigger the flash
+        el.classList.add('flash');
+        setTimeout(() => {
+          el.classList.remove('flash');
+          }, 500);
+
+
+
+
             lastStroke += strokeInterval; 
         }
         seconds = strokeInterval*strokes/1000;
