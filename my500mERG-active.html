@@ -6,16 +6,16 @@
   <title>ErgMate - My 500m ERG</title>
   <style>
     :root {
-      --bg: #0b1e2d;
-      --surface: #12293b;
-      --surface-2: #17324a;
-      --border: #24435c;
-      --text: #e9f3f7;
-      --text-muted: #9db2c1;
-      --primary: #2dd4bf;
-      --primary-dark: #17b8a3;
-      --accent: #f97316;
-      --danger: #ef4444;
+      --bg: #000000;
+      --surface: #111111;
+      --surface-2: #1c1c1c;
+      --border: #3a3a3a;
+      --text: #ffffff;
+      --text-muted: #a3a3a3;
+      --primary: #ffffff;
+      --primary-dark: #cccccc;
+      --accent: #ffffff;
+      --danger: #ffffff;
       --radius: 14px;
       --radius-sm: 8px;
     }
@@ -28,7 +28,7 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      background: radial-gradient(circle at top, #123449 0%, var(--bg) 60%);
+      background: radial-gradient(circle at top, #1a1a1a 0%, var(--bg) 60%);
       color: var(--text);
       min-height: 100vh;
       padding: 24px 16px 60px;
@@ -52,11 +52,11 @@
       height: 56px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #06201c;
+      color: #000000;
       font-weight: 700;
       font-size: 22px;
       margin-bottom: 10px;
-      box-shadow: 0 8px 24px rgba(45, 212, 191, 0.35);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
     }
 
     .brand h1 {
@@ -164,7 +164,7 @@
     input[type="number"]:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
     }
 
     .row {
@@ -204,16 +204,16 @@
 
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #06201c;
+      color: #000000;
       border: none;
-      box-shadow: 0 6px 18px rgba(45, 212, 191, 0.3);
+      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
     }
 
     .btn-stop {
-      background: linear-gradient(135deg, #f87171, var(--danger));
-      color: #2b0a0a;
-      border: none;
-      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.28);
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      box-shadow: none;
     }
 
     .btn-ghost {
