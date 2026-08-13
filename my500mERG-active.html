@@ -5,233 +5,488 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ErgMate - My 500m ERG</title>
   <style>
-  .fixed-display {
-    position: fixed;
-    overflow: hidden;
-}
-  .fixed-paragraph {            
-      width: 70%;
-      height: 400px;
-      overflow-y: auto;
-      padding: 5px;
-      border: 1px solid #ccc;
-        }
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
+    :root {
+      --bg: #0b1e2d;
+      --surface: #12293b;
+      --surface-2: #17324a;
+      --border: #24435c;
+      --text: #e9f3f7;
+      --text-muted: #9db2c1;
+      --primary: #2dd4bf;
+      --primary-dark: #17b8a3;
+      --accent: #f97316;
+      --danger: #ef4444;
+      --radius: 14px;
+      --radius-sm: 8px;
     }
-    h3 {
-    margin-bottom: 12px;
-      }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      background: radial-gradient(circle at top, #123449 0%, var(--bg) 60%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+    }
+
+    .app {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand .mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #06201c;
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 24px rgba(45, 212, 191, 0.35);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand .tagline {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .card .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .fixed-paragraph {
+      max-height: 360px;
+      overflow-y: auto;
+      padding: 4px 4px 4px 0;
+      border: none;
+    }
+
+    .fixed-paragraph::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .fixed-paragraph::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .intro-block {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .intro-block strong {
+      color: var(--text);
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--text);
+    }
+
     p {
-    margin-bottom: 16px;
-      }
+      color: var(--text-muted);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+    }
+
+    input[type="number"] {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 16px;
+      height: 44px;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+    }
+
     .row {
       display: flex;
-      gap: 25px;
+      flex-wrap: wrap;
+      gap: 12px;
       align-items: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      }
+      margin: 18px 0;
+    }
+
     .hidden {
       display: none;
-      }
+    }
+
     .btn {
-      width: 100px;
-      height: 60px;
-      }
-    .input-sm {
-      width: 60px;
-      height: 25px;
-      }
-    .input-md {
-      width: 100px;
-      height: 30px;
-      }
-    .input-lg {
-      width: 100px;
-      height: 40px;
-      }
+      min-width: 110px;
+      height: 52px;
+      padding: 0 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.08s ease, background 0.15s ease, box-shadow 0.15s ease;
+      border: 1px solid var(--border);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #06201c;
+      border: none;
+      box-shadow: 0 6px 18px rgba(45, 212, 191, 0.3);
+    }
+
+    .btn-stop {
+      background: linear-gradient(135deg, #f87171, var(--danger));
+      color: #2b0a0a;
+      border: none;
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.28);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+    }
+
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .stat {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .stat .value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    .effort-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .effort-field input {
+      width: 80px;
+    }
+
+    .timer-display {
+      background: #06161f;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      margin: 16px 0;
+      text-align: center;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 17px;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      min-height: 28px;
+    }
+
+    .big-number {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin: 8px 0;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .pace-label {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
     .text-black {
-      color: black;
-      }
+      color: var(--text);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
+<div class="app">
+
+  <div class="brand">
+    <div class="mark">EM</div>
+    <h1>ErgMate</h1>
+    <div class="tagline">On-the-water equivalent metrics for any erg</div>
+  </div>
+
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  ReadyAll xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id = "ReadyAll">
-<div class="fixed-paragraph">
-  <h1>ErgMate </h1>
-  <h4>ErgMate provides On-the-Water equivalent metrics for any Erg and settings based 
-  on an estimate of a rower's sustainable full-effort (FE) and cadence (SC). </h4>
-  
-  <h4> ErgMate uses the rower's FE watts, 500m split time, and sustainable cadence (SC) to
-  to calculate an On-the-Water equivalent distance per stroke and watts for a workout
-  with any cadence and duration. ErgMate also includes a timer for tracking the 
-  cadence and workout duration and a virtual "cox" to keep you on-cadence. </h4>
+<div id="ReadyAll">
+  <div class="card">
+    <div class="fixed-paragraph">
+      <div class="intro-block">
+        <strong>ErgMate</strong> provides on-the-water equivalent metrics for any erg and settings,
+        based on an estimate of a rower's sustainable full-effort (FE) and cadence (SC).
+      </div>
 
-  <h4>Quick steps to "calibration": Enter your demographics (watts, 500m split), 
-  strap in, row a few strokes and estimate the maximum cadence that you can maintain 
-  for a 3-4 minute row with this erg and settings. Row to your 500m demographic split time
-  and estimate your % of full ("race") effort.
+      <div class="intro-block">
+        ErgMate uses your FE watts, 500m split time, and sustainable cadence (SC) to calculate an
+        on-the-water equivalent distance per stroke and watts for a workout at any cadence and
+        duration. It also includes a timer for tracking cadence and workout duration, plus a
+        virtual "cox" to help keep you on-cadence.
+      </div>
 
-  You are now good to go any cadence any distance on this rowing machine and settings.
-  </h4>
+      <div class="intro-block">
+        <strong>Quick steps to "calibration":</strong> Enter your demographics (watts, 500m split),
+        strap in, row a few strokes, and estimate the maximum cadence you can maintain for a
+        3-4 minute row on this erg and settings. Row to your 500m demographic split time and
+        estimate your % of full ("race") effort.
+        <br><br>
+        You're now good to go — any cadence, any distance, on this rowing machine and settings.
+      </div>
 
-  <h4>Notes: Ergmate mechancial watts are adjusted using 25% human efficiency.<br>
-  
-  ErgMate is designed to be user-friendly and accessible</h4>
-  08.11 Claude
+      <div class="intro-block">
+        <strong>Notes:</strong> ErgMate mechanical watts are adjusted using 25% human efficiency.
+        ErgMate is designed to be user-friendly and accessible.
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button onclick="showReady()" class="btn btn-primary">Ready</button>
+      <!--<button onclick="showRow()" class="btn">Row!</button>-->
+      <!--<button onclick="showErgset()" class="btn">myErgset</button>-->
+    </div>
   </div>
-
-  <button onclick="showReady()" class="btn">Ready</button>
-  <!--<button onclick="showRow()"style="width: 100px; height: 50px;">Row!</button>-->
-  <!--<button onclick="showErgset()">myErgset</button>-->
-
-  </div>
+</div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ready xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <!--500m "timed trial" to determine rowing machine and settings based on-the-water
 based distance per stroke. Distance per stroke is fixed during a workout because we
 must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
-save another test change 
 -->
 <div id="Ready" class="hidden">
+  <div class="card">
+    <h2>Ready</h2>
+    <div class="subtitle">Calibrate your erg and settings with a 500m timed split</div>
 
-  <h2>Ready</h2>
- 
-  <!-- <h4> Calibrate your ERG/settings with a 500m timed split:  </h4> -->
-  <h3>
-  Your FE Watts
-  <input id="feWatts" class="input-sm" type="number" 
-    value="105">
-  500m Split (seconds)
-  <input id="feSplit" class="input-sm" type="number"
-    value="12">
- <br> and 500m maximum Sustainable
- <br> Cadence (SC):
-    <input id="feCadn" class="input-sm" type="number"
-      value="28">
-    Handle Pull (ft):
-    <input id="pullLength" class="input-sm" type="number"
-      value="4">
-  </h3>
- 
-  <h3 class="text-black">Row @ SC to the 500m split (seconds)   </h3>
-  
-  <button onclick="startTimer()" class="btn">Start/reStart</button>
+    <div class="field-grid">
+      <div class="field">
+        <label for="feWatts">FE Watts</label>
+        <input id="feWatts" type="number" value="105">
+      </div>
+      <div class="field">
+        <label for="feSplit">500m Split (sec)</label>
+        <input id="feSplit" type="number" value="12">
+      </div>
+      <div class="field">
+        <label for="feCadn">Sustainable Cadence (SC)</label>
+        <input id="feCadn" type="number" value="28">
+      </div>
+      <div class="field">
+        <label for="pullLength">Handle Pull (ft)</label>
+        <input id="pullLength" type="number" value="4">
+      </div>
+    </div>
 
-  <button onclick="stopTimer()" class="btn">Stop</button>
+    <h3 class="text-black">Row @ SC to the 500m split (seconds)</h3>
 
-<!---  <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button>  -->
-    
-  <div id="readyTimer"></div>
-  
- <!--<p> Note ROWERS Perceived Effort</p>  -->
-   <h3> 
-    <span><input id="pcFeff" class="input-sm"
-    type="number" value="100">  </span> % Effort (100% if no Timed Trial)
-    </h3>
-    
+    <div class="row">
+      <button onclick="startTimer()" class="btn btn-primary">Start / reStart</button>
+      <button onclick="stopTimer()" class="btn btn-stop">Stop</button>
+    </div>
 
-  <!-- <h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-          Watts:<span id="watts">    </span> 
-          ERGpull(lbs):<span id = "pullForce">    </span>
-    </h3> 
-   -->  
+    <div id="readyTimer" class="timer-display"></div>
 
-<h3>
-  </h3>
-  <button onclick="showRow()" class="btn">Workout</button>
-  <button onclick="showReadyAll()" class="btn">Return</button>
+    <div class="effort-field">
+      <input id="pcFeff" type="number" value="100">
+      <span>% Effort (100% if no Timed Trial)</span>
+    </div>
 
+    <div class="btn-row">
+      <button onclick="showRow()" class="btn btn-primary">Workout</button>
+      <button onclick="showReadyAll()" class="btn btn-ghost">Return</button>
+    </div>
+  </div>
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Row  ---------------------------------------------------------------->
 <div id="Row" class="hidden">
-  <!--row to a "stop" time using stopwatch timers 
-  or manual stop at fe dps cadence.  
-  Calculate distance based on time and feCadence !! -->
-  <h2>Row!</h2> 
-  <p> Row at any cadence</p>
-  <h3>
-   <!--dpsMtrs is the result of TT calculation. pullForce (and pullLength) are also
-   used to update mechWatt-hrs
-   
-   Distance per Stroke (Estimated or Known)
-    <input id="dpsMtrs" class="input-md" type="number" 
-    value="6">
-   --> 
-   
-  </h3>  
-<h3>  Mtrs/Stroke: <span id="dpsMtrs">    </span> 
-          Watts:<span id="watts">    </span> 
-          ERGpull(lbs):<span id = "pullForce">    </span>
-    </h3>
-  <h3>
-    <!--OTW Workout TO otwDist at otwCadn with dpsMtrs -->
-    @cadence<input id="otwCadn" class="input-lg"
-     type="number" value="28"> 
-     <!-- change this to woDist to distinuish from rt otwDist-->
-     Distance(m) <input id="pieceDist" class="input-lg"
-     type="number" value="500">
-  </h3>
-  
+  <div class="card">
+    <h2>Row!</h2>
+    <div class="subtitle">Row at any cadence</div>
 
-  <p>Your WORKOUT w this machine and settings. </p>
-  
+    <div class="stat-strip">
+      <div class="stat">
+        <div class="label">Mtrs/Stroke</div>
+        <div class="value" id="dpsMtrs"></div>
+      </div>
+      <div class="stat">
+        <div class="label">Watts</div>
+        <div class="value" id="watts"></div>
+      </div>
+      <div class="stat">
+        <div class="label">ERG Pull (lbs)</div>
+        <div class="value" id="pullForce"></div>
+      </div>
+    </div>
 
-    <button onclick="startTimer()" class="btn">Start</button>
-    <button onclick="stopTimer()" class="btn">Stop</button>
-    
-  
-    <button onclick="showPace()" class="btn">Pace</button>
-<!--   <button onclick="resetTimer()" style="width: 100px; height: 60px;">Reset</button> -->
-      <div id="rowTimer"></div>
-    
-    
-    <p> Well Rowed !!</p>  
-    <h3> <button onclick="showReady()" class="btn">Ready</button>
-    <button onclick="showReadyAll()" class="btn">ErgMate</button>
- 
-  </h3>
-  
+    <div class="field-grid">
+      <div class="field">
+        <label for="otwCadn">@ Cadence</label>
+        <input id="otwCadn" type="number" value="28">
+      </div>
+      <div class="field">
+        <label for="pieceDist">Distance (m)</label>
+        <input id="pieceDist" type="number" value="500">
+      </div>
+    </div>
+
+    <p>Your workout with this machine and settings.</p>
+
+    <div class="row">
+      <button onclick="startTimer()" class="btn btn-primary">Start</button>
+      <button onclick="stopTimer()" class="btn btn-stop">Stop</button>
+      <button onclick="showPace()" class="btn">Pace</button>
+    </div>
+
+    <div id="rowTimer" class="timer-display"></div>
+
+    <p>Well Rowed !!</p>
+
+    <div class="btn-row">
+      <button onclick="showReady()" class="btn btn-primary">Ready</button>
+      <button onclick="showReadyAll()" class="btn btn-ghost">ErgMate</button>
+    </div>
+  </div>
 </div>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="Pace" class="hidden">
-  <h2>Pace</h2> 
-  // replace "strokes" here with a timed metronome element from row document "o"
-  <h1> <span id="strokes"></span> </h1>
-    <!--   setTimeout(() => {
-          document.getElementById("metrnm").style.display = "none";
-          }, 500); // 3000 ms = 3 seconds
-    -->
-  <p>Min/500 </p> 
-  <h4> <span id="paceTimer"></span> </h4>
+  <div class="card">
+    <h2>Pace</h2>
+    <!-- replace "strokes" here with a timed metronome element from row document "o" -->
+    <div class="big-number"><span id="strokes"></span></div>
 
-<h3> 
-  <button onclick="showReady()" class="btn">Return</button>
-<!-- <button onclick="showReady()" style="width: 100px; height: 60px;">Return</button> -->
- 
+    <div class="pace-label">Min/500</div>
+    <div class="timer-display"><span id="paceTimer"></span></div>
 
-</h3>
-
+    <div class="btn-row">
+      <button onclick="showReady()" class="btn btn-ghost">Return</button>
+    </div>
+  </div>
 </div>
 
-<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="Ergset" class="hidden">
-  <h2>myErgset</h2> 
-  <p> Only enter value for machine pull length here to avoid
-  changing previous constants </p>
+  <div class="card">
+    <h2>myErgset</h2>
+    <p>Only enter a value for machine pull length here to avoid changing previous constants.</p>
 
-  <h3>
-   Distance per Stroke (revised or known)
-    <input id="dspMtrs" class="input-md" type="number" 
-    placeholder="???">
-  </h3>  
+    <div class="field">
+      <label for="dspMtrs">Distance per Stroke (revised or known)</label>
+      <input id="dspMtrs" type="number" placeholder="???">
+    </div>
+  </div>
 </div>
+
+</div>
+
 </body>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx scripts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
@@ -245,7 +500,7 @@ save another test change
     // TIMER ONLY
     let interval = null;
     let seconds = 0;
-    let old = 0;  
+    let old = 0;
     let elapsed = 0;
     let lastStroke = 0;
     let strokes = 0;
@@ -263,26 +518,26 @@ save another test change
     feWatts = Number(document.getElementById("feWatts").value); // user watts
     //feSplit = Number(document.getElementById("feSplit").value); // user split
 //-----------------------------------------------------------------------------
-    function tt500() { 
+    function tt500() {
       feSplit = Number(document.getElementById("feSplit").value); // user split
       pcFeff= Number(document.getElementById("pcFeff").value);
       // initial default value set in Ergset block. Not used anymore?
-      dspMtrs = Number(document.getElementById("dspMtrs").value);     
-      pullLength = Number(document.getElementById("pullLength").value);                       
+      dspMtrs = Number(document.getElementById("dspMtrs").value);
+      pullLength = Number(document.getElementById("pullLength").value);
       dpsMtrs = (pcFeff/100)*30000/(feCadn * feSplit);
-      watts =  (pcFeff/100)*feWatts;  
-      //1 watt= .7356*(ft x lbs / sec) .. lbs = watts * sec / ft  (sec = 60 / cadn)  
+      watts =  (pcFeff/100)*feWatts;
+      //1 watt= .7356*(ft x lbs / sec) .. lbs = watts * sec / ft  (sec = 60 / cadn)
       /*this is really complicated. Obviously the pull force at the handle is not the
       only work that is being done on the erg. Easy to oversimplify. Also, the published
       watts are not simple. Yes, the only thing the erg sees is the handle force an
       distance
       See notes in Gdrive. Its a guess but if the demographic chart is showing human
       effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
-      
+
       */
       pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
       // ASSUMED BODY WATTS 4XFT-LBS
-      mechWatts = .7356 * pullForce * pullLength;    
+      mechWatts = .7356 * pullForce * pullLength;
       // for display
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
@@ -291,28 +546,28 @@ save another test change
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
-      } 
+      }
 //------------------------------------------------------------------------------
-  // UPDATE DISPLAY ON TIMER INTERVALS   
+  // UPDATE DISPLAY ON TIMER INTERVALS
     function updateStrokes(){
       if (currentBlock.id === "Ready"){
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
 
         }
-      if (currentBlock.id === "Row"){   
+      if (currentBlock.id === "Row"){
         //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-        otwDist = dpsMtrs*strokes;   
+        otwDist = dpsMtrs*strokes;
         otwSpeed = 3;         // otwDist/minutes CHANGE TO MIN/500M !!
         // (ft-lbs/sec)*pullTime = mechWatts*pullTime
         // pulltime???? otwCadn???
         pullTime = .5*60/otwCadn;
         mechWatts = .7356*pullForce*pullLength/pullTime   //watts per stroke
         // ASSUME HUMAN WATTS 4XMECHWATTS
-        mechWatthrs = 4*mechWatts*strokes/3600;    
-        mechWatthrs = Number(mechWatthrs.toFixed(1));  
+        mechWatthrs = 4*mechWatts*strokes/3600;
+        mechWatthrs = Number(mechWatthrs.toFixed(1));
         }
         let html =
         "Strokes: " + strokes +
@@ -320,10 +575,10 @@ save another test change
 
         if (currentBlock.id === "Ready") {
         html +=
-          "Cadence: " + feCadn + 
+          "Cadence: " + feCadn +
           " &nbsp;&nbsp; UserWatt-hrs: " + userWatthrs.toFixed(2) ;
           document.getElementById("readyTimer").innerHTML = html;
-        } 
+        }
       else if (currentBlock.id === "Row") {
         // ADD THESE TO html element
 
@@ -335,54 +590,54 @@ save another test change
 
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
-        
+
 
         document.getElementById("paceTimer").innerHTML = html;
         }
       }
 
-  //--------------------------------------------------------------------------------  
+  //--------------------------------------------------------------------------------
    function startTimer() {
       // 07.29 INITIALIZE WITH LET NEEDED !!
     let feSplit = Number(document.getElementById("feSplit").value); // user split
     let feCadn = Number(document.getElementById("feCadn").value); // user cadence
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
-    otwCadn = Number(document.getElementById("otwCadn").value); 
+    otwCadn = Number(document.getElementById("otwCadn").value);
     let pieceDist = Number(document.getElementById("pieceDist").value);
-  
-    split = feSplit;      
+
+    split = feSplit;
     cadn = feCadn;
 
     if (currentBlock.id === "Ready"){
-        dpsMtrs = 8;   // PRE-TT VALUE 
+        dpsMtrs = 8;   // PRE-TT VALUE
       }
     if (currentBlock.id === "Row"){
-        cadn = otwCadn; 
+        cadn = otwCadn;
         /*
         setTimeout(() => {
           document.getElementById("strokes").style.display = "none";
           }, 500); // 3000 ms = 3 seconds
         */
 
-        showPace(); 
+        showPace();
       }
     if (interval) return;
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
         elapsed += 50;
         let strokeInterval = 60000 /cadn;   // ms per stroke
-        // update when time > stroke interval 
+        // update when time > stroke interval
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
             //beep();
-            lastStroke += strokeInterval; 
+            lastStroke += strokeInterval;
         }
         seconds = strokeInterval*strokes/1000;
         seconds = seconds.toFixed(1);
-        updateStrokes();        // LINE 194      
+        updateStrokes();        // LINE 194
         old = seconds;
-  
-      // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST  
+
+      // 0729: NEW STOP CONDITIONS: EXECUTE EVERY 50ms or STOP AT SPLIT OR PIECEDIST
         if (currentBlock.id === "Ready"){
           if (seconds>= split){resetTimer();
           }}
@@ -391,10 +646,10 @@ save another test change
           }}
         else {
         // console.log("Unknown block:", currentBlock.id);
-          }    
+          }
         }, 50);
       }
-    
+
 
 //------------------------------------------------------------------------------
   function stopTimer() {
@@ -404,7 +659,7 @@ save another test change
       old = 0;
       strokes = 0;
     }
-//------------------------------------------------------------------------------    
+//------------------------------------------------------------------------------
   function resetTimer() {
     clearInterval(interval);
     interval = null;
@@ -413,7 +668,7 @@ save another test change
     strokes = 0;
 }
 
-//------------------------------------------------------------------------------   
+//------------------------------------------------------------------------------
   function showReadyAll() {
     currentBlock = document.getElementById("ReadyAll");
     document.getElementById("ReadyAll").style.display = "block";
@@ -432,17 +687,17 @@ save another test change
     document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
-  function showRow() {  
+  function showRow() {
     currentBlock = document.getElementById("Row");
     tt500();
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "block";
-    document.getElementById("Ergset").style.display = "none"; 
+    document.getElementById("Ergset").style.display = "none";
     document.getElementById("Pace").style.display = "none";
     }
 //------------------------------------------------------------------------------
-  function showErgset() {  
+  function showErgset() {
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
@@ -450,18 +705,16 @@ save another test change
     document.getElementById("Pace").style.display = "none";
     }
   //------------------------------------------------------------------------------
-  function showPace() {  
+  function showPace() {
     document.getElementById("ReadyAll").style.display = "none";
     document.getElementById("Ready").style.display = "none";
     document.getElementById("Row").style.display = "none";
     document.getElementById("Ergset").style.display = "none";
     document.getElementById("Pace").style.display = "block";
-    }  
+    }
 
 
-      
+
 </script>
 
 </html>
-
-
