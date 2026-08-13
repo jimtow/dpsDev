@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
+Netlify/GitHub Team name: 500Dev // gitDivem0842#2
+=======
 Netlify/GitHub Team name: 500Dev /gitDivem0842#2
+>>>>>>> ab28b26f8d0937491742c9560e8354f868155592
 
 Push file changes to Github
 or Clone local folder changes to GitHub.
