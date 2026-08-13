@@ -295,7 +295,6 @@
     }
 
     .text-black {
-<<<<<<< HEAD
       color: var(--text);
     }
 
@@ -305,19 +304,6 @@
       gap: 12px;
       margin-top: 20px;
     }
-=======
-      color: black;
-      }
-    #strokes-display {
-      font-size: 2.5rem;
-      font-weight: bold;
-      padding: 2px 8px;
-      transition: background-color 0.1s ease;
-      }
-    #strokes-display.flash {
-      background-color: yellow;
-      }
->>>>>>> 19444e89911e822dbcfa7357f757842842f65b83
   </style>
 </head>
 <body>
@@ -472,7 +458,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxx PACE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="Pace" class="hidden">
-<<<<<<< HEAD
   <div class="card">
     <h2>Pace</h2>
     <!-- replace "strokes" here with a timed metronome element from row document "o" -->
@@ -480,17 +465,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 
     <div class="pace-label">Min/500</div>
     <div class="timer-display"><span id="paceTimer"></span></div>
-=======
-  <h2>Pace</h2> 
-  <h1><span id="strokes-display">0</span></h1>
-
-  <p>Min/500 </p> 
-  <h4> <span id="paceTimer"></span> </h4>
-
-<h3> 
-  <button onclick="showReady()" class="btn">Return</button>
-</h3>
->>>>>>> 19444e89911e822dbcfa7357f757842842f65b83
 
     <div class="btn-row">
       <button onclick="showReady()" class="btn btn-ghost">Return</button>
@@ -579,6 +553,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       if (currentBlock.id === "Ready"){
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
+
         }
       if (currentBlock.id === "Row"){
         //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
@@ -597,6 +572,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
         let html =
         "Strokes: " + strokes +
         " &nbsp;&nbsp; Seconds: " + seconds + "<br>";
+
         if (currentBlock.id === "Ready") {
         html +=
           "Cadence: " + feCadn +
@@ -604,6 +580,8 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
           document.getElementById("readyTimer").innerHTML = html;
         }
       else if (currentBlock.id === "Row") {
+        // ADD THESE TO html element
+
         html +=
         "OTW Distance: " + otwDist.toFixed(0) +
         " &nbsp;&nbsp; OTW Speed: " + otwSpeed.toFixed(2) + "<br>";
@@ -611,15 +589,10 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
          " &nbsp;&nbsp; User Watt-hrs: " + userWatthrs.toFixed(2);
 
         document.getElementById("rowTimer").innerHTML = html;
-<<<<<<< HEAD
         document.getElementById("strokes").textContent = strokes;
 
 
         document.getElementById("paceTimer").innerHTML = html;
-=======
-        document.getElementById("strokes-display").textContent = strokes;
-        document.getElementById("paceTimer").innerHTML = html;    
->>>>>>> 19444e89911e822dbcfa7357f757842842f65b83
         }
       }
 
@@ -631,22 +604,14 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
     let feWatts = Number(document.getElementById("feWatts").value); // user watts
     otwCadn = Number(document.getElementById("otwCadn").value);
     let pieceDist = Number(document.getElementById("pieceDist").value);
-<<<<<<< HEAD
 
     split = feSplit;
-=======
-    
-    const el = document.getElementById('strokes-display');
-      
-    split = feSplit;      
->>>>>>> 19444e89911e822dbcfa7357f757842842f65b83
     cadn = feCadn;
 
     if (currentBlock.id === "Ready"){
         dpsMtrs = 8;   // PRE-TT VALUE
       }
     if (currentBlock.id === "Row"){
-<<<<<<< HEAD
         cadn = otwCadn;
         /*
         setTimeout(() => {
@@ -655,10 +620,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
         */
 
         showPace();
-=======
-        cadn = otwCadn; 
-        showPace(); 
->>>>>>> 19444e89911e822dbcfa7357f757842842f65b83
       }
     if (interval) return;
         interval = setInterval(() => {
@@ -668,25 +629,8 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
         // update when time > stroke interval
         if (elapsed - lastStroke >= strokeInterval) {
             strokes++;
-<<<<<<< HEAD
             //beep();
             lastStroke += strokeInterval;
-=======
-            //beep() or flash strokes here with Claude 
-        
-        el.textContent = strokes;
-
-        // trigger the flash
-        el.classList.add('flash');
-        setTimeout(() => {
-          el.classList.remove('flash');
-          }, 500);
-
-
-
-
-            lastStroke += strokeInterval; 
->>>>>>> 19444e89911e822dbcfa7357f757842842f65b83
         }
         seconds = strokeInterval*strokes/1000;
         seconds = seconds.toFixed(1);
