@@ -1,3 +1,7 @@
+Drag and drop a single file (automatically renamed) or rename locally index.html
+
+Private access, waiting on Dave as a reviewer.
+
 
 <<<<<<< HEAD
 Netlify/GitHub Team name: 500Dev // gitDivem0842#2
