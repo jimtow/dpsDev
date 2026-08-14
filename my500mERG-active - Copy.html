@@ -452,7 +452,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
     <div class="btn-row">
       <button onclick="showReady()" class="btn btn-primary">Ready</button>
       <button onclick="showReadyAll()" class="btn btn-ghost">ErgMate</button>
-      <button onclick="showErgset()" class="btn btn-ghost">My Rows</button>
     </div>
   </div>
 </div>
@@ -476,14 +475,12 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="Ergset" class="hidden">
   <div class="card">
-    <h2>My Pieces (tbd)</h2>
-    <p>Curated Workouts by Distance and Cadence</p>
-<!--
-    <div class="field">
-      <input id="dspMtrs" type="number" placeholder="???">
-      <input id="dist1" type="number" placeholder="500">
-      <input id="cadn1" type="number" placeholder="28"> -->
+    <h2>myErgset</h2>
+    <p>Only enter a value for machine pull length here to avoid changing previous constants.</p>
 
+    <div class="field">
+      <label for="dspMtrs">Distance per Stroke (revised or known)</label>
+      <input id="dspMtrs" type="number" placeholder="???">
     </div>
   </div>
 </div>
