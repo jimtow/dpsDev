@@ -322,14 +322,14 @@
     <div class="fixed-paragraph">
       <div class="intro-block">
         <strong>ErgMate</strong> provides on-the-water equivalent metrics for any erg and settings,
-        based on an estimate of the rower's sustainable full-effort (FE) and cadence (SC).
+        based on an estimate of a rower's sustainable full-effort (FE) and cadence (SC).
       </div>
 
       <div class="intro-block">
         ErgMate uses your FE watts, 500m split time, and sustainable cadence (SC) to calculate an
-        on-the-water equivalent distance per stroke and watts for a workout with any cadence and
-        duration. It also includes a timer for tracking cadence and workout duration. A virtual
-        "cox" is in development to help the rower on a workout-specified cadence.
+        on-the-water equivalent distance per stroke and watts for a workout at any cadence and
+        duration. It also includes a timer for tracking cadence and workout duration, plus a
+        virtual "cox" to help keep you on-cadence.
       </div>
 
       <div class="intro-block">
@@ -342,12 +342,8 @@
       </div>
 
       <div class="intro-block">
-<<<<<<< HEAD
-        <strong>Notes:</strong> ErgMate mechanical watts are adjusted using 25% human efficiency.
-=======
         <strong>Notes:</strong> ErgMate mechanical watts are adjusted using 25% rower efficiency.
         
->>>>>>> 562688e06146edaf685a0d3e787e9a5ad0d27a07
       </div>
     </div>
 
@@ -456,7 +452,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
     <div class="btn-row">
       <button onclick="showReady()" class="btn btn-primary">Ready</button>
       <button onclick="showReadyAll()" class="btn btn-ghost">ErgMate</button>
-      <button onclick="showErgset()" class="btn btn-ghost">My Rows</button>
     </div>
   </div>
 </div>
@@ -480,14 +475,12 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 <!-- xxxxxxxxxxxxxxxxxxxxxxxx  Ergset  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="Ergset" class="hidden">
   <div class="card">
-    <h2>My Pieces (tbd)</h2>
-    <p>Curated Workouts by Distance and Cadence</p>
-<!--
-    <div class="field">
-      <input id="dspMtrs" type="number" placeholder="???">
-      <input id="dist1" type="number" placeholder="500">
-      <input id="cadn1" type="number" placeholder="28"> -->
+    <h2>myErgset</h2>
+    <p>Only enter a value for machine pull length here to avoid changing previous constants.</p>
 
+    <div class="field">
+      <label for="dspMtrs">Distance per Stroke (revised or known)</label>
+      <input id="dspMtrs" type="number" placeholder="???">
     </div>
   </div>
 </div>
