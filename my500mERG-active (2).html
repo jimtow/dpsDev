@@ -398,9 +398,8 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       <span>% Effort (100% if no Timed Trial)</span>
     </div>
 <!-- dpsMeters here -->
-    <div class="stat">
-      <div class="label">Mtrs/Stroke</div>
-      <div class="value" id="0"></div>
+    <div class="dps-field">
+      id = dpsMtrs;
     </div>
 
     <div class="btn-row">
@@ -538,6 +537,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       distance
       See notes in Gdrive. Its a guess but if the demographic chart is showing human
       effort watts, us factor of .25 from chart watts to handle pull (AND BACK !!)!!
+
       */
       pullForce = 60 * (.25*watts) /(pullLength * feCadn) ;   //??
       // ASSUMED BODY WATTS 4XFT-LBS
@@ -546,7 +546,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       pullForce = Number(pullForce.toFixed(1));
       dpsMtrs = Number(dpsMtrs.toFixed(1));
       watts = Number(watts.toFixed(1));
-      // to show on ALL(?) documents
+      // to show on documeNT
       document.getElementById("dpsMtrs").textContent = dpsMtrs;
       document.getElementById("watts").textContent = watts;
       document.getElementById("pullForce").textContent = pullForce;
@@ -680,7 +680,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
     }
 //------------------------------------------------------------------------------
   function showReady() {
-
     currentBlock = document.getElementById("Ready");
     tt500();
     document.getElementById("ReadyAll").style.display = "none";
