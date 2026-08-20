@@ -398,9 +398,10 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       <span>% Effort (100% if no Timed Trial)</span>
     </div>
 <!-- dpsMeters here -->
-    <div class="dps-field">
-      id = dpsMtrs;
-    </div>
+    <div class="stat">
+        <div class="label">Mtrs/Stroke</div>
+        <div class="value" id="dpsMtrs"></div>
+      </div>
 
     <div class="btn-row">
       <button onclick="showRow()" class="btn btn-primary">Workout</button>
@@ -418,7 +419,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
     <div class="stat-strip">
       <div class="stat">
         <div class="label">Mtrs/Stroke</div>
-        <div class="value" id="dpsMtrs"></div>
+        <div class="value" id="0"></div>
       </div>
       <div class="stat">
         <div class="label">Watts</div>
