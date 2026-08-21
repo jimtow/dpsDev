@@ -6,16 +6,16 @@
   <title>ErgMate - My 500m ERG</title>
   <style>
     :root {
-      --bg: #000000;
-      --surface: #111111;
-      --surface-2: #1c1c1c;
-      --border: #3a3a3a;
-      --text: #ffffff;
-      --text-muted: #a3a3a3;
-      --primary: #ffffff;
-      --primary-dark: #cccccc;
-      --accent: #ffffff;
-      --danger: #ffffff;
+      --bg: #0b1e2d;
+      --surface: #12293b;
+      --surface-2: #17324a;
+      --border: #24435c;
+      --text: #e9f3f7;
+      --text-muted: #9db2c1;
+      --primary: #2dd4bf;
+      --primary-dark: #17b8a3;
+      --accent: #f97316;
+      --danger: #ef4444;
       --radius: 14px;
       --radius-sm: 8px;
     }
@@ -28,7 +28,7 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      background: radial-gradient(circle at top, #1a1a1a 0%, var(--bg) 60%);
+      background: radial-gradient(circle at top, #123449 0%, var(--bg) 60%);
       color: var(--text);
       min-height: 100vh;
       padding: 24px 16px 60px;
@@ -52,11 +52,11 @@
       height: 56px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #000000;
+      color: #06201c;
       font-weight: 700;
       font-size: 22px;
       margin-bottom: 10px;
-      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(45, 212, 191, 0.35);
     }
 
     .brand h1 {
@@ -164,7 +164,7 @@
     input[type="number"]:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
     }
 
     .row {
@@ -204,16 +204,16 @@
 
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #000000;
+      color: #06201c;
       border: none;
-      box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 18px rgba(45, 212, 191, 0.3);
     }
 
     .btn-stop {
-      background: transparent;
-      color: #ffffff;
-      border: 2px solid #ffffff;
-      box-shadow: none;
+      background: linear-gradient(135deg, #f87171, var(--danger));
+      color: #2b0a0a;
+      border: none;
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.28);
     }
 
     .btn-ghost {
@@ -304,6 +304,20 @@
       gap: 12px;
       margin-top: 20px;
     }
+
+    .sensor-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+
+    .sensor-status {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -333,17 +347,17 @@
       </div>
 
       <div class="intro-block">
-        <strong>Quick steps to "calibration":</strong> Strap in, row a few strokes, and estimate 
-        the maximum cadence you can maintain for a 3-4 minute row with this erg and settings. Next,
-        enter your demographics (watts, 500m split) and row to the 500m demographic split time
-        while maintaining the maximum cadence and estimate the % of full ("race") effort you expended.
+        <strong>Quick steps to "calibration":</strong> Enter your demographics (watts, 500m split),
+        strap in, row a few strokes, and estimate the maximum cadence you can maintain for a
+        3-4 minute row on this erg and settings. Row to your 500m demographic split time and
+        estimate your % of full ("race") effort.
         <br><br>
         You're now good to go — any cadence, any distance, on this rowing machine and settings.
       </div>
 
       <div class="intro-block">
-        <strong>Notes:</strong> ErgMate mechanical watts are adjusted using 25% rower efficiency.
-        
+        <strong>Notes:</strong> ErgMate mechanical watts are adjusted using 25% human efficiency.
+        ErgMate is designed to be user-friendly and accessible.
       </div>
     </div>
 
@@ -375,7 +389,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
         <input id="feSplit" type="number" value="12">
       </div>
       <div class="field">
-        <label for="feCadn">Cadence (SC)</label>
+        <label for="feCadn">Sustainable Cadence (SC)</label>
         <input id="feCadn" type="number" value="28">
       </div>
       <div class="field">
@@ -397,10 +411,6 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       <input id="pcFeff" type="number" value="100">
       <span>% Effort (100% if no Timed Trial)</span>
     </div>
-<!-- dpsMeters here -->
-    <div class="dps-field">
-      id = dpsMtrs;
-    </div>
 
     <div class="btn-row">
       <button onclick="showRow()" class="btn btn-primary">Workout</button>
@@ -414,6 +424,15 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
   <div class="card">
     <h2>Row!</h2>
     <div class="subtitle">Row at any cadence</div>
+
+    <!-- ErgMate stroke-counter sensor: optional WitMotion BLE sensor. When connected, real
+         detected strokes drive the count/distance/cadence below instead of the simulated
+         cadence ticker. See witmotion.js + stroke-detector.js and the module script near the
+         bottom of this file. -->
+    <div class="sensor-row">
+      <button id="ergmateConnectBtn" class="btn btn-primary" type="button">Connect Sensor</button>
+      <p id="ergmateSensorStatus" class="sensor-status">No sensor connected — using simulated cadence</p>
+    </div>
 
     <div class="stat-strip">
       <div class="stat">
@@ -557,7 +576,8 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       if (currentBlock.id === "Ready"){
         userWatthrs = feWatts * seconds / 3600;
         userWatthrs = Number(userWatthrs.toFixed(2));
-         }
+
+        }
       if (currentBlock.id === "Row"){
         //tt500(); // NEED TO GO DIRECTLY TO ROW WITHOUT GO TAP RUN
         userWatthrs = feWatts * seconds / 3600;
@@ -593,6 +613,8 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 
         document.getElementById("rowTimer").innerHTML = html;
         document.getElementById("strokes").textContent = strokes;
+
+
         document.getElementById("paceTimer").innerHTML = html;
         }
       }
@@ -614,6 +636,9 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       }
     if (currentBlock.id === "Row"){
         cadn = otwCadn;
+        // Start every Row workout with a clean hardware stroke count, even if the sensor has
+        // been connected (and picking up motion) for a while before Start was pressed.
+        if (window.ergmateSensor) window.ergmateSensor.reset();
         /*
         setTimeout(() => {
           document.getElementById("strokes").style.display = "none";
@@ -626,15 +651,32 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
         interval = setInterval(() => {
         // elapsed =seconds++; BETTER START
         elapsed += 50;
-        let strokeInterval = 60000 /cadn;   // ms per stroke
-        // update when time > stroke interval
-        if (elapsed - lastStroke >= strokeInterval) {
-            strokes++;
-            //beep();
-            lastStroke += strokeInterval;
+
+        // ErgMate stroke-counter sensor: once a WitMotion sensor is connected during a Row
+        // workout, real detected strokes (and real measured cadence) drive everything below
+        // instead of the simulated fixed-interval ticker. Ready always uses the simulated
+        // ticker, and Row falls back to it too whenever no sensor is connected.
+        const sensorActive = currentBlock.id === "Row" && window.ergmateSensor && window.ergmateSensor.connected;
+
+        if (sensorActive) {
+          strokes = window.ergmateSensor.count;
+          if (window.ergmateSensor.rate > 0) {
+            otwCadn = window.ergmateSensor.rate; // live measured spm feeds the watts/pull-force math
+          }
+          seconds = elapsed / 1000; // real wall-clock time, since stroke timing is no longer assumed
+          seconds = seconds.toFixed(1);
+        } else {
+          let strokeInterval = 60000 /cadn;   // ms per stroke
+          // update when time > stroke interval
+          if (elapsed - lastStroke >= strokeInterval) {
+              strokes++;
+              //beep();
+              lastStroke += strokeInterval;
+          }
+          seconds = strokeInterval*strokes/1000;
+          seconds = seconds.toFixed(1);
         }
-        seconds = strokeInterval*strokes/1000;
-        seconds = seconds.toFixed(1);
+
         updateStrokes();        // LINE 194
         old = seconds;
 
@@ -659,6 +701,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
       seconds = 0;
       old = 0;
       strokes = 0;
+      if (window.ergmateSensor) window.ergmateSensor.reset();
     }
 //------------------------------------------------------------------------------
   function resetTimer() {
@@ -667,6 +710,7 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
     seconds = 0;
     old = 0;
     strokes = 0;
+    if (window.ergmateSensor) window.ergmateSensor.reset();
 }
 
 //------------------------------------------------------------------------------
@@ -716,6 +760,76 @@ must assume a fixed pull force. Use a default dpsMtrs (8) if no Timed Trial.
 
 
 
+</script>
+
+<!-- ErgMate stroke-counter sensor bridge: connects the WitMotion BLE sensor (witmotion.js) to the
+     PCA-based stroke detector (stroke-detector.js) and exposes the live count/rate on
+     window.ergmateSensor, since the classic script above (with its onclick="..." handlers) can't
+     import ES modules directly. Requires witmotion.js and stroke-detector.js alongside this file,
+     and the page served over http://localhost or https:// (Web Bluetooth doesn't work over
+     file://). -->
+<script type="module">
+  import { WitMotionSensor } from './witmotion.js';
+  import { StrokeDetector } from './stroke-detector.js';
+
+  const sensor = new WitMotionSensor();
+  const detector = new StrokeDetector();
+
+  window.ergmateSensor = {
+    connected: false,
+    count: 0,
+    rate: 0,
+    reset: () => detector.reset(),
+  };
+
+  const connectBtn = document.getElementById('ergmateConnectBtn');
+  const statusEl = document.getElementById('ergmateSensorStatus');
+
+  function setStatus(text, color) {
+    statusEl.textContent = text;
+    statusEl.style.color = color || '';
+  }
+
+  sensor.addEventListener('reading', (e) => {
+    detector.addSample(e.detail);
+    window.ergmateSensor.count = detector.getCount();
+    window.ergmateSensor.rate = detector.getRate();
+    if (window.ergmateSensor.connected) {
+      setStatus(
+        `Connected — ${detector.getCount()} strokes · ${detector.getRate().toFixed(1)} spm`,
+        '#2dd4bf'
+      );
+    }
+  });
+
+  connectBtn.addEventListener('click', async () => {
+    if (sensor.connected) {
+      await sensor.disconnect();
+      return;
+    }
+    try {
+      connectBtn.disabled = true;
+      setStatus('Requesting device…', '#2dd4bf');
+      await sensor.connect();
+    } catch (err) {
+      console.error(err);
+      setStatus(err.message || 'Connection failed', '#ef4444');
+    } finally {
+      connectBtn.disabled = false;
+    }
+  });
+
+  sensor.addEventListener('connected', (e) => {
+    window.ergmateSensor.connected = true;
+    setStatus(`Connected — ${e.detail.name || 'sensor'} (live strokes active)`, '#2dd4bf');
+    connectBtn.textContent = 'Disconnect';
+  });
+
+  sensor.addEventListener('disconnected', () => {
+    window.ergmateSensor.connected = false;
+    setStatus('No sensor connected — using simulated cadence', '');
+    connectBtn.textContent = 'Connect Sensor';
+  });
 </script>
 
 </html>
